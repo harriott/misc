@@ -16,11 +16,11 @@ mkdir "$currDirName"
 SAVEIFS=$IFS
 IFS=$(echo -en "\n\b")
 for afile in *; do
-    theExtension=${afile##*.}
-    if [ ${theExtension,,} = "wav" ] # case-insensitive test
-    then
-        oggenc $afile -q 6
+    if [ $afile != "$currDirName" ]; then
+        theExtension=${afile##*.}
+        if [ ${theExtension,,} = "wav" ] # case-insensitive test
+            then oggenc $afile -q 6; fi
+        mv $afile $currDirName
     fi
-    mv $afile $currDirName
 done
 IFS=$SAVEIFS
