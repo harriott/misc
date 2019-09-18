@@ -1,4 +1,4 @@
-# vim: set tw=0:
+# vim: set fdl=2 tw=0:
 
 # Joseph Harriott - http://momentary.eu/ - Tue 10 May 2016
 
