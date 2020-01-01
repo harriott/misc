@@ -1,8 +1,8 @@
 #!/usr/bin/perl
 
 # perl mysmsReOrder.pl
-# when you want to re-order a screen-scape from mysms into
-# a more naturally readable descending order
+# when you want to re-order a markdown screen-scape from mysms
+# into a more naturally readable descending order
 
 use strict;  use warnings;
 use Tie::File;
@@ -11,38 +11,29 @@ tie my @fileOrder, 'Tie::File', "$ARGV[0]" or die "Can't read file: $!\n";
 my @reOrdered = splice @fileOrder, 0, 3;
 
 my @SMS;
-my $SMS_senderLine = "no";
 my $SMS_dayLine = "no";
 my $lastWOline;
-my @day;
+my @day = ();
 while (@fileOrder) {
-  # print "$#fileOrder\n";
-  if ($#fileOrder == 85){
-    @fileOrder = @reOrdered;
-    exit;
-  }
+  # print "$#fileOrder\n"; # for debugging
   $lastWOline = pop @fileOrder;
-  # print "lastWOline = $lastWOline\n";
+  # print "lastWOline = $lastWOline\n"; # for debugging
   # watch out for what looks like a day line:
   unless ($lastWOline =~ /# .*?20/) {
     unshift @SMS, $lastWOline;
-    if ($lastWOline =~ /## .*?SMS/) {$SMS_senderLine = "yes"};
-    if ($SMS_senderLine eq "no") {
-      # print "SMS array:\n";
-      # print join ("\n", @SMS);
-      # print "\n";
-    } else {
+    # print "SMS array:\n"; print join ("\n", @SMS); print "\n"; # for debugging
+    if ($lastWOline =~ /## .*?SMS/) {
       # it's a full message, so push it to @day
       push @day, @SMS;
-      # print "day!\n";
-      # print "day = @day\n";
       @SMS = ();
-      $SMS_senderLine = "no";
     }
   } else {
     # it was a dayline, so push to reOrdered array:
     push @reOrdered, ($lastWOline, "", @day);
+    @day = ();
+    @SMS = ();
   }
 }
+@fileOrder = @reOrdered;
 untie @fileOrder;
 
