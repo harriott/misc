@@ -11,7 +11,7 @@ tie my @fileOrder, 'Tie::File', "$ARGV[0]" or die "Can't read file: $!\n";
 my @reOrdered = splice @fileOrder, 0, 3;
 
 my @SMS;
-my $SMS_dayLine = "no";
+# my $SMS_dayLine = "no";
 my $lastWOline;
 my @day = ();
 while (@fileOrder) {

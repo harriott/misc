@@ -46,7 +46,24 @@ while (@mysms) {
   $lineCR =~ s/^([A-Za-zÀ-ÿ]+):/## $1 $MStype ▀/;
   push @mysmsCR, $lineCR;
 }
-@mysms = @mysmsCR;
+
+# sort the compacted data into descending order
+# ---------------------------------------------
+my $lastSOline;
+my @dayMS;
+@mysms = ();
+while (@mysmsCR) {
+  $lastSOline = pop @mysmsCR;
+  # watch out for a date line:
+  unless ($lastSOline =~ /▶# .*/) {
+    # it's a message, so stack it temporarily in dayMS array:
+    push @dayMS, $lastSOline;
+  } else {
+    # it was a dayline, so push to mysms array:
+    push @mysms, ($lastSOline, @dayMS);
+    @dayMS = ();
+  }
+}
 
 # put the now nicely formatted lines back into the file:
 untie @mysms;
