@@ -8,9 +8,13 @@
 
 use strict;  use warnings;
 use Tie::File;
+use Data::Printer;
 
 # grab the lines of the screen-scrape file into an array:
 tie my @mysms, 'Tie::File', "$ARGV[0]" or die "Can't read file: $!\n";
+# print join("\n",@mysms),"\n";
+# p @mysms; # Data::Printer
+# exit;
 
 # get the day headings, and mark those lines
 # ------------------------------------------
@@ -19,37 +23,40 @@ foreach my $weekday ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sa
 
 # mark, and join up carriage returns in messages
 # ----------------------------------------------
-my $nextLine = shift @mysms;
+my $scrapeLine;
 my @mysmsCR;
 my $lineCR;
 my $MStype;
-while ($nextLine) {
-  # mark and store date lines:
-  if ( $nextLine =~ /^▶# .*/ ) {
-    push @mysmsCR, $nextLine;
-    $nextLine = shift @mysms;
+while (@mysms) {
+# do {
+  $scrapeLine = shift @mysms;
+  # mark and store a date line
+  if ( $scrapeLine =~ /^▶# .*/ ) {
+    push @mysmsCR, $scrapeLine;
+    $scrapeLine = shift @mysms;
   }
-  # prepare the message line:
   # mark and remove carriage returns
-  $lineCR = "$nextLine";
+  $lineCR = "$scrapeLine";
   until ( $lineCR =~ s/(\d*:\d\d [AP]M$)/▲$1/ ) {
-  # (until we've marked the timestamped last line of the message)
-    $nextLine = shift @mysms;
-    $lineCR .= "◙$nextLine";
+  # (until we've marked the timestamped last line of a message)
+    $scrapeLine = shift @mysms;
+    $lineCR .= "◙$scrapeLine";
   }
-  $nextLine = shift @mysms;
+  # print $lineCR, "\n";
+  # set type of MS
   $MStype = quotemeta("SMS");
-  # check for xMS
-  if ( $nextLine ) {
-    if ( $nextLine =~ /^$/ ) {
+  # check for MMS
+  if (@mysms) {
+    if ( @mysms[0] =~ /^$/ ) {
       # an image was sent
       $MStype = quotemeta("MMS");
-      $nextLine = shift @mysms;
+      $scrapeLine = shift @mysms;
     }
   }
   # now mark out the sender, with correct MS:
   $lineCR =~ s/^([A-Za-zÀ-ÿ()0-9 ]+):/## $1 $MStype ▀/;
   push @mysmsCR, $lineCR;
+# } while (@mysms);
 }
 
 # sort the compacted data into descending order
