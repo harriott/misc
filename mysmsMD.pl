@@ -4,6 +4,7 @@
 # perl mysmsMD.pl
 # when you want to convert screen-scape from mysms into markdown format
 # ---------------------------------------------------------------------
+#  needs adapting for Strawberry Perl on Windows 10
 
 use strict;  use warnings;
 use Tie::File;
@@ -18,32 +19,36 @@ foreach my $weekday ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sa
 
 # mark, and join up carriage returns in messages
 # ----------------------------------------------
-my @mysmsCR;
 my $nextLine = shift @mysms;
-while (@mysms) {
+my @mysmsCR;
+my $lineCR;
+my $MStype;
+while ($nextLine) {
   # mark and store date lines:
-  if ( $nextLine =~ /▶# .*/ ) {
+  if ( $nextLine =~ /^▶# .*/ ) {
     push @mysmsCR, $nextLine;
     $nextLine = shift @mysms;
   }
   # prepare the message line:
-  my $lineCR = "$nextLine";
-  # check for empty line where an image was included:
-  my $MStype = quotemeta("SMS");
-  if ( @mysms ) {
+  # mark and remove carriage returns
+  $lineCR = "$nextLine";
+  until ( $lineCR =~ s/(\d*:\d\d [AP]M$)/▲$1/ ) {
+  # (until we've marked the timestamped last line of the message)
     $nextLine = shift @mysms;
+    $lineCR .= "◙$nextLine";
+  }
+  $nextLine = shift @mysms;
+  $MStype = quotemeta("SMS");
+  # check for xMS
+  if ( $nextLine ) {
     if ( $nextLine =~ /^$/ ) {
+      # an image was sent
       $MStype = quotemeta("MMS");
       $nextLine = shift @mysms;
     }
   }
-  # mark and remove carriage returns
-  until ( $lineCR =~ s/(\d*:\d\d [AP]M$)/▲$1/ ) {
-    $lineCR .= "◙$nextLine";
-    $nextLine = shift @mysms;
-  }
   # now mark out the sender, with correct MS:
-  $lineCR =~ s/^([A-Za-zÀ-ÿ]+):/## $1 $MStype ▀/;
+  $lineCR =~ s/^([A-Za-zÀ-ÿ()0-9 ]+):/## $1 $MStype ▀/;
   push @mysmsCR, $lineCR;
 }
 
@@ -51,19 +56,30 @@ while (@mysms) {
 # ---------------------------------------------
 my $lastSOline;
 my @dayMS;
-@mysms = ();
+@mysms = ("---", "[//]: # ( vim: set fdm=expr:)", "");
 while (@mysmsCR) {
   $lastSOline = pop @mysmsCR;
   # watch out for a date line:
-  unless ($lastSOline =~ /▶# .*/) {
+  unless ($lastSOline =~ s/^▶//) {
     # it's a message, so stack it temporarily in dayMS array:
-    push @dayMS, $lastSOline;
+    push @dayMS, ($lastSOline, "");
   } else {
     # it was a dayline, so push to mysms array:
-    push @mysms, ($lastSOline, @dayMS);
+    push @mysms, ($lastSOline, "", @dayMS);
     @dayMS = ();
   }
 }
+
+# pull time back into sender line, with message underneath:
+s/▀(.+)▲(.+)/$2\n$1/ for @mysms;
+# clear undesired line endings:
+s/ $// for @mysms;
+s/◙$// for @mysms;
+## for some mysterious reason this replaces "◙" with "??":
+## s/[ d]$// for @mysms;
+
+# restore CRs in messages:
+s/◙/\n/g for @mysms;
 
 # put the now nicely formatted lines back into the file:
 untie @mysms;
