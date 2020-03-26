@@ -27,6 +27,7 @@ my $scrapeLine;
 my @mysmsCR;
 my $lineCR;
 my $MStype;
+my $timestamp;
 while (@mysms) {
 # do {
   $scrapeLine = shift @mysms;
@@ -42,28 +43,39 @@ while (@mysms) {
     $scrapeLine = shift @mysms;
     $lineCR .= "◙$scrapeLine";
   }
-  # print $lineCR, "\n";
   # set type of MS
   $MStype = quotemeta("SMS");
   # check for MMS
   if (@mysms) {
-    if ( @mysms[0] =~ /^$/ ) {
+    if ( $mysms[0] =~ /^$/ ) {
       # an image was sent
       $MStype = quotemeta("MMS");
       $scrapeLine = shift @mysms;
+    }
+    if ( $mysms[0] =~ /^.*\.pdf$/ ) {
+      # a PDF was sent
+      $MStype = quotemeta("MMS");
+      $scrapeLine = shift @mysms;
+      $scrapeLine = shift @mysms;
+      print "$lineCR\n";
+      ($lineCR, $timestamp) = split /▲/, $lineCR;
+      print "$lineCR $timestamp\n";
+      $lineCR .= "◙$scrapeLine";
+      $scrapeLine = shift @mysms;
+      $lineCR .= " $scrapeLine▲$timestamp";
+      print "$lineCR\n";
     }
   }
   # now mark out the sender, with correct MS:
   $lineCR =~ s/^([A-Za-zÀ-ÿ()0-9 ]+):/## $1 $MStype ▀/;
   push @mysmsCR, $lineCR;
-# } while (@mysms);
 }
 
 # sort the compacted data into descending order
 # ---------------------------------------------
 my $lastSOline;
 my @dayMS;
-@mysms = ("---", "[//]: # ( vim: set fdm=expr:)", "");
+@mysms = ("vim: set fdm=expr:", "");
 while (@mysmsCR) {
   $lastSOline = pop @mysmsCR;
   # watch out for a date line:
