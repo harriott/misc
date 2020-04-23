@@ -52,7 +52,7 @@ while (@mysms) {
       $MStype = quotemeta("MMS");
       $scrapeLine = shift @mysms;
     }
-    if ( $mysms[0] =~ /^.*\.pdf$/ ) {
+    if ( $mysms[0] =~ /^.*\.3gpp|pdf$/ ) {
       # a PDF was sent
       $MStype = quotemeta("MMS");
       $scrapeLine = shift @mysms;
