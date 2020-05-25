@@ -1,2 +1,2 @@
-# miscellaneous small tools that I use
+# miscellaneous configurations and small tools that I use
 nothing special
