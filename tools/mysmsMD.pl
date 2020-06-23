@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 # ---------------------------------------------------------------------
-# perl mysmsMD.pl
+# perl mysmsMD.pl <aMySMSscreenscrapefile>
 # when you want to convert screen-scape from mysms into markdown format
 # ---------------------------------------------------------------------
 #  needs adapting for Strawberry Perl on Windows 10
@@ -29,7 +29,6 @@ my $lineCR;
 my $MStype;
 my $timestamp;
 while (@mysms) {
-# do {
   $scrapeLine = shift @mysms;
   # mark and store a date line
   if ( $scrapeLine =~ /^▶# .*/ ) {
@@ -41,7 +40,7 @@ while (@mysms) {
   until ( $lineCR =~ s/(\d*:\d\d [AP]M$)/▲$1/ ) {
   # (until we've marked the timestamped last line of a message)
     $scrapeLine = shift @mysms;
-    $lineCR .= "◙$scrapeLine";
+    $lineCR .= "◙$scrapeLine";  # concatenate lines with ◙ marker between
   }
   # set type of MS
   $MStype = quotemeta("SMS");
