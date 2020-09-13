@@ -1,0 +1,16 @@
+vim: fdl=0 ft=build fdm=expr:
+
+# git
+git rev-parse --show-toplevel => print the top level directory of the current repository
+git version
+
+# imagey
+72 dpi = 18.3 dots per mm
+
+# LaTeX
+\noindent
+\textit{...}
+
+## font sizes
+\tiny \scriptsize \footnotesize \small \normalsize \large \Large \LARGE \huge \Huge
+
