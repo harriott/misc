@@ -1,0 +1,54 @@
+vim: ft=build fdm=expr:
+
+Sony Xperia 10 II: 1080x2520
+
+# 16:9 aspect ratio
+854x480
+1280x720 = 720p = "HD Ready"
+
+# ffmpeg
+-vf crop=iw:ih-80:0:0
+-vf crop=width:height:x:y (height=depth below y)
+
+# git
+git checkout-index -f <somefile> => overwrites from the index's copy
+git rev-parse --show-toplevel    => print the top level directory of the current repository
+git version
+
+## configurations
+find . -wholename '*.git/config' | wc -l
+grep -rl --include "config" harriott .
+
+### lf
+autocrlf = input => warning: CRLF will be replaced by LF
+eol = lf
+
+### settings for MSWin
+fgrep -rl --include "config" 'harriott' | xargs fgrep -rl 'symlinks'
+grep -rl --include "config" ignorecase . | wc -l
+grep -rl --include "config" symlinks . | wc -l
+
+## damaged index
+del .git\index
+git reset
+
+# imagey
+72 dpi = 18.3 dots per mm
+
+# LaTeX
+\noindent
+\textit{...}
+
+## font sizes
+\tiny \scriptsize \footnotesize \small \normalsize \large \Large \LARGE \huge \Huge
+
+# Stack Exchange Network
+@petersmith = Peter Smith
+CommonMark Implementations
+highlight.js
+
+# vim
+find . -type f -name tags
+gci -r tags -force | where { ! $_.PSIsContainer } | select -expandProperty fullname > tags-Win10.txt
+vim . # will open netrw on current directory
+

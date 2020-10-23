@@ -1,0 +1,244 @@
+vim: ft=build fdm=expr:
+
+commands here are generic, see also $ARCHBUILDS/QR.txt
+
+bc  # enters an arbitrary precision numeric processing language environment
+Ctrl+s  pause output to screen
+Ctrl+q  resume output to screen
+lsusb
+npm -g list
+rhash -a --bsd <somefile>
+rhash --list-hashes => list names of all supported hashes
+rhash --sha256 <file>
+sudo parted -l
+wcsf=$(wc -l <samplefile>); echo $wcsf
+xrandr
+
+# Bash
+!! # execute last command
+<somecommand> | xcol <keyword1> <keyword2> ... # for highlighting
+[ -s "filename" ]  # true if file not zero-size
+
+## substitute user identity
+su -  # login shell
+
+## Login shell?
+echo $0  # "-bash" = login shell, "bash" = non-login shell
+shopt login_shell
+
+# get at root on tty2
+Ctrl+Alt+F2 > root + pw
+
+# imagey
+colorpicker --one-shot --preview
+exiftool <image>
+Pinta can't send to printer...
+
+## Ghostscript convert pdf to png
+gs -dSAFER -sDEVICE=png16m -r400 -dFirstPage=1 -dLastPage=1 -o frais_20-09-harriott0.png frais_20-09-harriott.pdf
+gswin64c -dSAFER -sDEVICE=png16m -r400 -dFirstPage=1 -dLastPage=1 -o output.png input.pdf
+
+## ImageMagick
+composite -geometry +3700+2800 49q-low.png frais_20-09-harriott0.png frais_20-09-harriott1.jpg
+convert -flatten transparent.png white_background.png
+convert <people> -paint 9 <people-oil>
+for i in $(ls); do convert -resize 10% $i r$i; done
+for i in $(ls); do convert -resize 15% $i r$i; done
+for i in $(ls); do convert -resize 25% $i r$i; done
+for i in $(ls); do convert -resize 50% $i r$i; done
+
+### gravity
+-gravity northwest  -> the default
+convert -list gravity
+
+## Nomacs
+Alt+m  toggle menu
+f      toggles selected panes
+Alt > Alt A > Exposure > Gamma
+Alt > Alt A > Tiny Planet
+can only fill page for printing
+
+## scanimage
+scanimage -A  => --all-options => lists all available options
+scanimage -h
+scanimage -L  => --list-devices
+
+## sxiv
+can't send to printer
+sxiv -ft *  # opens directly to thumbnails, using fullscreen
+sxiv -r *
+
+## Vimiv
+O  switch focus
+o  toggle the library
+vimiv &
+w  write changes
+
+### tagged file list manipulation
+:tag_remove tagname
+:tag_write tagname
+cat ~/.local/share/vimiv/Tags/tagname | while read i; do mv $i .; done
+rm -r ~/.local/share/vimiv/Tags/tagname
+
+### thumbnails
++/-  size
+t    toggle
+
+# multimedia - cmus
+,        seek -1m
+.        seek +1m
+^C       echo Type :quit<enter> to exit cmus.
+^L       refresh
+^R       toggle repeat_current
+C        toggle continue
+P        win-mv-before
+b        player-next
+e        win-add-q
+h, left  seek -5
+l, right seek +5
+p        win-mv-after
+r        toggle repeat
+v        player-stop
+z        player-prev
+
+# multimedia - OpenShot
+- crossfades are created in overlaps
+- Ctrl+e  # Export
+
+## Nikon CoolPix P7700 VGA 640x480
+Target > AVI (mpeg4)
+Video Profile > VGA Widescreen NTSC (854x480)
+
+## Preferences
+Ctrl+Shift+p
+
+### Default Profile
+defaults to HD 720p 30 fps
+need to Restart OpenShot when changed
+
+# multimedia - mpv
+mpv av://v4l2:/dev/video0
+
+## interactive control
+f -> toggle fullscreen
+mouse wheel up/down -> seek forward/backward 10 seconds
+o/O -> show progress
+
+### playback speed
+BACKSPACE -> reset
+[ and ] -> decrease/increase by 10%
+{ and } -> halve/double
+
+### seeks
+left/right -> seek 5 seconds forward/backward
+shift left/right -> seek 1 seconds forward/backward
+up/down -> seek 1 minute forward/backward
+
+# networking
+ip l
+iwctl known-networks list
+sudo iptraf-ng
+sudo lshw -c network
+thunderbird -addressbook
+
+## devices
+ip link
+networkctl list
+
+## firewall-cmd
+sudo firewall-cmd --info-zone=home
+sudo firewall-cmd --info-zone=public
+sudo firewall-cmd --panic-on
+
+# PDFs
+pdfimages -h
+
+## C5 printing
+LibreOffice Writer gets it right
+Ubuntu's qpdfview gets it almost right
+
+### fails
+Firefox can't figure it's portrait
+Zathura prints as Print Page Setup default (normally A4)
+
+## pdftk
+pdftk in.pdf burst                # breaks into individual pages
+pdftk in*.pdf cat output out.pdf  # concatenate a sequence of PDFs
+
+## sizes
+1 PostScript point = 0.3528 mm
+pdfinfo <a_pdf_file>  # A5 = 420x595. See GSview for more sizes.
+
+# Plasma
+Ctrl+Alt+Shift+Del -> exit KDE without saving
+Ctrl+Alt+Del       -> logout screen
+Ctrl+Alt+T         -> Konsole
+Win+PageUp/Down    -> maximises or returns to normal a window
+
+# processes
+fcrontab -l
+lsof -i
+pkill zoom
+pgrep
+pstree
+sudo iotop -o
+
+# sound
+pulsemixer
+
+## ALSA
+alsamixer
+sudo alsactl store
+
+# storage
+7z x <pw'd_zip>
+cdrecord dev=/dev/sr0 -checkdrive
+
+## Dolphin
+F4        -> Konsole  attached below
+Shift+F4  -> Konsole  in a new window
+
+## file counts
+isutf8 **/* | wc -l  # non UTF-8 files (fails when too many)
+ls **/* | wc -l      # all of the files
+
+## non-optical
+blkid -o list
+df -h
+lsblk -f
+sudo parted -l
+
+## sizes
+diskonaut -h
+du -h --max-depth=1  # for a quick list of folder sizes
+dust
+ncdu
+
+# system
+whereis <executable>
+
+man hier     # description of the filesystem hierarchy
+systemctl    # list running Systemd units
+systemctl --no-pager
+uname -a     # unix name, includes linux version number
+w            # list users and load on system
+xset q       # shows a variety of IO settings
+
+## check graphics card
+lspci | grep -e VGA -e 3D
+
+## decode key-presses
+sudo showkey  # keycodes
+xev | awk -F'[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }'  # scancodes
+
+## monitoring
+bashtop
+glances
+gtop
+htop
+saidar -c
+
+## root storage sizes as root
+du -shx
+ncdu -x
+
