@@ -42,6 +42,19 @@ git reset
 ## font sizes
 \tiny \scriptsize \footnotesize \small \normalsize \large \Large \LARGE \huge \Huge
 
+# Python
+echo $WORKON_HOME
+pew ls
+
+## virtualenv
+cdvirtualenv  # goto the package directory
+deactivate
+lsvirtualenv  # lists the known environments
+
+### virtualenvwrapper
+mkvirtualenv <name>  # also activates it
+workon  # activate (or list all)
+
 # Stack Exchange Network
 @petersmith = Peter Smith
 CommonMark Implementations
@@ -50,5 +63,6 @@ highlight.js
 # vim
 find . -type f -name tags
 gci -r tags -force | where { ! $_.PSIsContainer } | select -expandProperty fullname > tags-Win10.txt
+gvim -O <textfile0> <textfile1>  # opens them in a vertical split
 vim . # will open netrw on current directory
 

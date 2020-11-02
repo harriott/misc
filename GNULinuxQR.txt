@@ -10,14 +10,29 @@ npm -g list
 rhash -a --bsd <somefile>
 rhash --list-hashes => list names of all supported hashes
 rhash --sha256 <file>
+sed '/pattern/q' <file>  # cat's  <file>  until  pattern
 sudo parted -l
 wcsf=$(wc -l <samplefile>); echo $wcsf
 xrandr
 
 # Bash
 !! # execute last command
+${#array[@]}  # length
 <somecommand> | xcol <keyword1> <keyword2> ... # for highlighting
 [ -s "filename" ]  # true if file not zero-size
+compgen -A alias | awk '{print}' ORS=' : '  # compact list
+env | grep SHELL
+
+## functions
+export -f <usefulfunction>  # allows it to be used in a script
+
+### lists
+compgen -A function | awk '{print}' ORS=' : '
+declare -F  # lists all declare -f possibilities
+
+### show code
+declare -f <function_name>  # shows its contents
+type <function_name>
 
 ## substitute user identity
 su -  # login shell
@@ -150,6 +165,11 @@ sudo firewall-cmd --info-zone=home
 sudo firewall-cmd --info-zone=public
 sudo firewall-cmd --panic-on
 
+# one-line of command output
+echo $(ls)
+ls | xargs
+xargs < <file>  # cat alternative
+
 # PDFs
 pdfimages -h
 
@@ -232,7 +252,6 @@ sudo showkey  # keycodes
 xev | awk -F'[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }'  # scancodes
 
 ## monitoring
-bashtop
 glances
 gtop
 htop
