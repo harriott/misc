@@ -63,6 +63,7 @@ highlight.js
 # vim
 find . -type f -name tags
 gci -r tags -force | where { ! $_.PSIsContainer } | select -expandProperty fullname > tags-Win10.txt
+gvim -geometry 200x55
 gvim -O <textfile0> <textfile1>  # opens them in a vertical split
 vim . # will open netrw on current directory
 

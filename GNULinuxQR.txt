@@ -5,6 +5,7 @@ commands here are generic, see also $ARCHBUILDS/QR.txt
 bc  # enters an arbitrary precision numeric processing language environment
 Ctrl+s  pause output to screen
 Ctrl+q  resume output to screen
+gpg --list-keys
 lsusb
 npm -g list
 rhash -a --bsd <somefile>
