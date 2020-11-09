@@ -2,6 +2,8 @@ vim: ft=build fdm=expr:
 
 Sony Xperia 10 II: 1080x2520
 
+"web colors"
+
 # 16:9 aspect ratio
 854x480
 1280x720 = 720p = "HD Ready"
@@ -10,10 +12,12 @@ Sony Xperia 10 II: 1080x2520
 -vf crop=iw:ih-80:0:0
 -vf crop=width:height:x:y (height=depth below y)
 
-# git
-git checkout-index -f <somefile> => overwrites from the index's copy
-git rev-parse --show-toplevel    => print the top level directory of the current repository
+# Git
+git checkout-index -f <somefile>  # overwrite from the index's copy
+git push origin +master  # force push to GitHub
+git rev-parse --show-toplevel  # print the top level directory of the current repository
 git version
+git reset HEAD~1  # throw away last commit, keeping your changes for a better one
 
 ## configurations
 find . -wholename '*.git/config' | wc -l
@@ -59,6 +63,22 @@ workon  # activate (or list all)
 @petersmith = Peter Smith
 CommonMark Implementations
 highlight.js
+
+# Thunderbird
+Alt+F > F => File > Compact Folders
+Alt+T > A (= Extensions)
+
+## tbkeys-lite Main key bindings
+    "j": "cmd:cmd_nextMsg",
+    "k": "cmd:cmd_previousMsg",
+    "o": "cmd:cmd_openMessage",
+    "f": "cmd:cmd_forward",
+    "#": "cmd:cmd_delete",
+    "r": "cmd:cmd_reply",
+    "a": "cmd:cmd_replyall",
+    "x": "cmd:cmd_archive",
+    "c": "func:MsgNewMessage",
+    "u": "tbkeys:closeMessageAndRefresh"
 
 # vim
 find . -type f -name tags

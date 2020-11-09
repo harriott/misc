@@ -5,7 +5,7 @@ commands here are generic, see also $ARCHBUILDS/QR.txt
 bc  # enters an arbitrary precision numeric processing language environment
 Ctrl+s  pause output to screen
 Ctrl+q  resume output to screen
-gpg --list-keys
+gpg -k  # --list-keys
 lsusb
 npm -g list
 rhash -a --bsd <somefile>
@@ -57,6 +57,7 @@ gswin64c -dSAFER -sDEVICE=png16m -r400 -dFirstPage=1 -dLastPage=1 -o output.png 
 ## ImageMagick
 composite -geometry +3700+2800 49q-low.png frais_20-09-harriott0.png frais_20-09-harriott1.jpg
 convert -flatten transparent.png white_background.png
+convert <colourimage> -colorspace Gray <grayimage>
 convert <people> -paint 9 <people-oil>
 for i in $(ls); do convert -resize 10% $i r$i; done
 for i in $(ls); do convert -resize 15% $i r$i; done
@@ -79,10 +80,13 @@ scanimage -A  => --all-options => lists all available options
 scanimage -h
 scanimage -L  => --list-devices
 
-## sxiv
-can't send to printer
+## sxiv command
 sxiv -ft *  # opens directly to thumbnails, using fullscreen
-sxiv -r *
+sxiv -r * &  # recursively opens all flat
+
+## sxiv commands
+can't send to printer
+Return => toggle thumbnails/image
 
 ## Vimiv
 O  switch focus
@@ -151,8 +155,7 @@ shift left/right -> seek 1 seconds forward/backward
 up/down -> seek 1 minute forward/backward
 
 # networking
-ip l
-iwctl known-networks list
+ip l  # lists ethernet devices
 sudo iptraf-ng
 sudo lshw -c network
 thunderbird -addressbook
@@ -161,10 +164,39 @@ thunderbird -addressbook
 ip link
 networkctl list
 
-## firewall-cmd
+## firewall
+sudo iptables -L
+
+### firewall-cmd
+b firewall-cmd
 sudo firewall-cmd --info-zone=home
 sudo firewall-cmd --info-zone=public
 sudo firewall-cmd --panic-on
+sudo firewall-cmd --state
+
+### temporarily stop/start during runtime session
+sudo systemctl stop firewalld
+sudo systemctl start firewalld
+
+## iwd
+b iwd
+sudo ls /var/lib/iwd
+
+### iwctl
+b iwctl
+iwctl device list
+iwctl known-networks list
+iwctl station wlan0 get-networks  # shows if  wlan0  is connected to one
+
+## NetworkManager
+nmcli device  # list of networking devices
+nmcli device wifi list | cat  # paged list of SSIDs, with those IN-USE starred
+nmcli device wifi connect <SSID> password <password>
+
+### saved connections
+nmcli connection delete <SSID>  # can help
+nmcli connection show | cat  # reports UUIDs and colourizes the active device
+nmcli connection up uuid <UUID>
 
 # one-line of command output
 echo $(ls)
@@ -227,6 +259,13 @@ ls **/* | wc -l      # all of the files
 blkid -o list
 df -h
 lsblk -f
+
+## parted
+can't set the volume-name
+sudo parted <device>
+
+### CL-mode
+-s => don't ask
 sudo parted -l
 
 ## sizes
@@ -236,14 +275,15 @@ dust
 ncdu
 
 # system
-whereis <executable>
-
-man hier     # description of the filesystem hierarchy
-systemctl    # list running Systemd units
+man hier  # description of the filesystem hierarchy
+passwd jo  # then re-login
+systemctl  # list running Systemd units
+systemctl list-timers
 systemctl --no-pager
-uname -a     # unix name, includes linux version number
-w            # list users and load on system
-xset q       # shows a variety of IO settings
+uname -a  # unix name, includes linux version number
+w  # list users and load on system
+whereis <executable>
+xset q  # shows a variety of IO settings
 
 ## check graphics card
 lspci | grep -e VGA -e 3D
