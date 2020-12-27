@@ -66,7 +66,7 @@ while (@mysms) {
     }
   }
   # now mark out the sender, with correct MS:
-  $lineCR =~ s/^([A-Za-zÀ-ÿ()0-9 ]+):/## $1 $MStype ▀/;
+  $lineCR =~ s/^([A-Za-zÀ-ÿ()0-9 -]+):/## $1 $MStype ▀/;
   push @mysmsCR, $lineCR;
 }
 
@@ -74,7 +74,7 @@ while (@mysms) {
 # ---------------------------------------------
 my $lastSOline;
 my @dayMS;
-@mysms = ("vim: set fdm=expr:", "");
+@mysms = ("");
 while (@mysmsCR) {
   $lastSOline = pop @mysmsCR;
   # watch out for a date line:

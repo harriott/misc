@@ -2,7 +2,8 @@ vim: ft=build fdm=expr:
 
 Sony Xperia 10 II: 1080x2520
 
-"web colors"
+- HP ENVY 5532 > Wireless Settings > Settings > Advanced > IP Settings > OK > Manual  -> allows tweaking of printer's address
+- "web colors"
 
 # 16:9 aspect ratio
 854x480
@@ -14,6 +15,7 @@ Sony Xperia 10 II: 1080x2520
 
 # Git
 git checkout-index -f <somefile>  # overwrite from the index's copy
+git init
 git push origin +master  # force push to GitHub
 git rev-parse --show-toplevel  # print the top level directory of the current repository
 git version
@@ -41,10 +43,31 @@ git reset
 
 # LaTeX
 \noindent
+\pagebreak
+\section*{ unnumbered section }
+\textbf{...}
 \textit{...}
+\usepackage{soul}  % Hyphenation for letterspacing, underlining, and more
 
 ## font sizes
-\tiny \scriptsize \footnotesize \small \normalsize \large \Large \LARGE \huge \Huge
+\tiny
+\scriptsize
+\footnotesize
+\small
+\normalsize
+\large
+\Large
+\LARGE
+\huge
+\Huge
+
+## Memoir
+\defaultlists
+\tightlists
+
+## MiKTeX
+after filename changes in  C:\Users\troin\AppData\Roaming\MiKTeX\tex\,  MiKTeX Console >
+  Tasks > Refresh file name database
 
 # Python
 echo $WORKON_HOME
@@ -67,6 +90,7 @@ highlight.js
 # Thunderbird
 Alt+F > F => File > Compact Folders
 Alt+T > A (= Extensions)
+Ctrl+Shft+B => Address Book
 
 ## tbkeys-lite Main key bindings
     "j": "cmd:cmd_nextMsg",
@@ -85,5 +109,6 @@ find . -type f -name tags
 gci -r tags -force | where { ! $_.PSIsContainer } | select -expandProperty fullname > tags-Win10.txt
 gvim -geometry 200x55
 gvim -O <textfile0> <textfile1>  # opens them in a vertical split
+gvim -S <savedSession>
 vim . # will open netrw on current directory
 

@@ -2,27 +2,35 @@ vim: ft=build fdm=expr:
 
 commands here are generic, see also $ARCHBUILDS/QR.txt
 
-bc  # enters an arbitrary precision numeric processing language environment
 Ctrl+s  pause output to screen
 Ctrl+q  resume output to screen
-gpg -k  # --list-keys
 lsusb
 npm -g list
 rhash -a --bsd <somefile>
 rhash --list-hashes => list names of all supported hashes
 rhash --sha256 <file>
-sed '/pattern/q' <file>  # cat's  <file>  until  pattern
 sudo parted -l
 wcsf=$(wc -l <samplefile>); echo $wcsf
-xrandr
+
+# bc
+bc  # enters an arbitrary precision numeric processing language environment
+command: scale=n  => results to n decimal places
 
 # Bash
 !! # execute last command
-${#array[@]}  # length
 <somecommand> | xcol <keyword1> <keyword2> ... # for highlighting
+<somecommand> 2>&1 | tee stdout+stderr.log
 [ -s "filename" ]  # true if file not zero-size
-compgen -A alias | awk '{print}' ORS=' : '  # compact list
 env | grep SHELL
+vi mode: v  => edit a command in $EDITOR
+
+## aliases
+alias
+compgen -A alias | awk '{print}' ORS=' : '  # compact list
+
+## arrays
+${#array[@]}  # length
+for i in "${array[*]}"; do echo "$i"; done
 
 ## functions
 export -f <usefulfunction>  # allows it to be used in a script
@@ -42,8 +50,33 @@ su -  # login shell
 echo $0  # "-bash" = login shell, "bash" = non-login shell
 shopt login_shell
 
+## loops
+for f in *; do echo $f; done
+start=0; end=5; for i in {$start..$end}; do echo $i; done
+
+## trap
+trap - debug  # turn off debug
+trap read debug  # puts a read request after each executable line
+
 # get at root on tty2
 Ctrl+Alt+F2 > root + pw
+
+# GNU Privacy Guard
+echo "...seems to be working..." | gpg -ase -r jo | gpg  # tests key ( makes empty file secret.out)
+gpg --import my_private_key.asc
+gpg --import my_public_key.asc
+gpg --send-keys key-id  # then can never be deleted from the keyserver
+
+## keybox
+gpg -k  # --list-keys
+kbxutil ~/.gnupg/pubring.kbx | moar  # for a more detailed exploration
+
+# graphics
+xrandr  # xrandr -q
+
+## check graphics card
+lspci -vnn | grep VGA -A 12
+lspci | grep -e VGA -e 3D  # gets just the name
 
 # imagey
 colorpicker --one-shot --preview
@@ -51,14 +84,15 @@ exiftool <image>
 Pinta can't send to printer...
 
 ## Ghostscript convert pdf to png
-gs -dSAFER -sDEVICE=png16m -r400 -dFirstPage=1 -dLastPage=1 -o frais_20-09-harriott0.png frais_20-09-harriott.pdf
+gs -dSAFER -sDEVICE=png16m -r400 -dFirstPage=1 -dLastPage=1 -o frais_20-11-harriott0.png frais_20-11-harriott.pdf
 gswin64c -dSAFER -sDEVICE=png16m -r400 -dFirstPage=1 -dLastPage=1 -o output.png input.pdf
 
 ## ImageMagick
-composite -geometry +3700+2800 49q-low.png frais_20-09-harriott0.png frais_20-09-harriott1.jpg
+composite -geometry +3700+2800 49q-low.png frais_20-11-harriott0.png frais_20-11-harriott1.jpg
 convert -flatten transparent.png white_background.png
 convert <colourimage> -colorspace Gray <grayimage>
 convert <people> -paint 9 <people-oil>
+convert <positive> -negate <negative>
 for i in $(ls); do convert -resize 10% $i r$i; done
 for i in $(ls); do convert -resize 15% $i r$i; done
 for i in $(ls); do convert -resize 25% $i r$i; done
@@ -69,11 +103,13 @@ for i in $(ls); do convert -resize 50% $i r$i; done
 convert -list gravity
 
 ## Nomacs
-Alt+m  toggle menu
-f      toggles selected panes
+Alt+m => toggle menu
+f => toggles selected panes
+F1 => credits
 Alt > Alt A > Exposure > Gamma
 Alt > Alt A > Tiny Planet
 can only fill page for printing
+only way to find keybindings is by studying the menu available via mouse right-click
 
 ## scanimage
 scanimage -A  => --all-options => lists all available options
@@ -81,10 +117,10 @@ scanimage -h
 scanimage -L  => --list-devices
 
 ## sxiv command
-sxiv -ft *  # opens directly to thumbnails, using fullscreen
-sxiv -r * &  # recursively opens all flat
+sxiv -frt * &  # using fullscreen, recursively open all flat
 
 ## sxiv commands
+b => toggle infobar
 can't send to printer
 Return => toggle thumbnails/image
 
@@ -104,12 +140,21 @@ rm -r ~/.local/share/vimiv/Tags/tagname
 +/-  size
 t    toggle
 
+# lsof
+"list open files"
+sudo lsof -i
+
 # multimedia - cmus
+"C* Music Player"
+sudo kill -9 "$(pidof cmus)"
+
+## commands
 ,        seek -1m
 .        seek +1m
 ^C       echo Type :quit<enter> to exit cmus.
 ^L       refresh
 ^R       toggle repeat_current
+space    win-toggle => for making selections
 C        toggle continue
 P        win-mv-before
 b        player-next
@@ -140,8 +185,8 @@ need to Restart OpenShot when changed
 mpv av://v4l2:/dev/video0
 
 ## interactive control
+Alt+0 -> halve video window size
 f -> toggle fullscreen
-mouse wheel up/down -> seek forward/backward 10 seconds
 o/O -> show progress
 
 ### playback speed
@@ -150,15 +195,20 @@ BACKSPACE -> reset
 { and } -> halve/double
 
 ### seeks
+./, -> step forward/backward one frame
 left/right -> seek 5 seconds forward/backward
+mouse wheel up/down -> seek forward/backward 10 seconds
 shift left/right -> seek 1 seconds forward/backward
+shift+pgup/pgdwn -> seek forward/backward by 10 minutes
 up/down -> seek 1 minute forward/backward
 
 # networking
-ip l  # lists ethernet devices
-sudo iptraf-ng
+sudo iptraf-ng  # ncurses network statistic monitoring utility
 sudo lshw -c network
+sudo lsof -i -P -n | grep LISTEN  # to see the listening ports
 thunderbird -addressbook
+youtube-dl -F <videoURL>
+youtube-dl -f best <videoURL>
 
 ## devices
 ip link
@@ -167,16 +217,33 @@ networkctl list
 ## firewall
 sudo iptables -L
 
-### firewall-cmd
-b firewall-cmd
+### Firewalld
+sudo systemctl restart firewalld
+sudo systemctl start firewalld
+sudo systemctl stop firewalld
+
+#### firewall-cmd
 sudo firewall-cmd --info-zone=home
 sudo firewall-cmd --info-zone=public
 sudo firewall-cmd --panic-on
 sudo firewall-cmd --state
 
+### iptables
+sudo iptables -nvL
+sudo systemctl status iptables.service
+
 ### temporarily stop/start during runtime session
 sudo systemctl stop firewalld
 sudo systemctl start firewalld
+
+## hostname
+hostname
+hostnamectl
+
+## ip
+ip a  # ip address show
+ip l  # lists ethernet devices
+ip r  # ip route show - compactly shows my internal ip address
 
 ## iwd
 b iwd
@@ -187,6 +254,23 @@ b iwctl
 iwctl device list
 iwctl known-networks list
 iwctl station wlan0 get-networks  # shows if  wlan0  is connected to one
+
+## ss
+bm ss
+ss --tcp --listening
+ss -tulw  # listening on TCP, UDP, RAW sockets
+
+## ssh
+ssh localhost
+sudo systemctl restart sshd.service
+sudo systemctl status sshd.service
+
+### session commands
+~? => supported escape sequences
+
+#### exit
+exit
+~.
 
 ## NetworkManager
 nmcli device  # list of networking devices
@@ -203,7 +287,14 @@ echo $(ls)
 ls | xargs
 xargs < <file>  # cat alternative
 
+# pass
+pass
+pass help
+pass ls
+pass(1)
+
 # PDFs
+"convert pdf to png"
 pdfimages -h
 
 ## C5 printing
@@ -232,20 +323,33 @@ Win+PageUp/Down    -> maximises or returns to normal a window
 fcrontab -l
 lsof -i
 pkill zoom
-pgrep
 pstree
 sudo iotop -o
+
+## pgrep
+bm pgrep
+pgrep <aprogram>  # reports it's process id
+
+# sed
+echo "don't forget that" | sed 's/\x27/\"/'
+sed '/pattern/q' <file>  # cat's  <file>  until  pattern
+sed -i '/<regex>/!d' <filetoreduce>  # removes lines that don't match
+sed -n '/<regex>/p' <file>  # prints the matching lines
+"stream editor"
 
 # sound
 pulsemixer
 
 ## ALSA
 alsamixer
+speaker-test -c 2
 sudo alsactl store
 
 # storage
 7z x <pw'd_zip>
 cdrecord dev=/dev/sr0 -checkdrive
+"install(1)"
+mkdir -p  # --parents = make parent directories as needed (no error if existing)
 
 ## Dolphin
 F4        -> Konsole  attached below
@@ -268,13 +372,36 @@ sudo parted <device>
 -s => don't ask
 sudo parted -l
 
+## rm + pv
+step 1: find <directory> | wc -l  # gets the <filecount>
+step 2: sudo rm -rv <directory> | pv -l -s <filecount> > /dev/null  # shows progress for rm
+
+## rsnapshot
+ncdu --exclude rsnapshot
+rsnapshot configtest
+sudo rsnapshot du  # can takes many hours...
+
 ## sizes
 diskonaut -h
 du -h --max-depth=1  # for a quick list of folder sizes
+du -sh  # gets size of current directory
+du -sh <glob>
+du(1)
 dust
 ncdu
 
+## stat
+"stat(1)"
+stat -c '%a %n' *  # show octal permissions
+
+## tree
+tree(1)
+tree -d
+tree -fi
+
 # system
+cat /etc/hostname
+halt -p
 man hier  # description of the filesystem hierarchy
 passwd jo  # then re-login
 systemctl  # list running Systemd units
@@ -284,9 +411,6 @@ uname -a  # unix name, includes linux version number
 w  # list users and load on system
 whereis <executable>
 xset q  # shows a variety of IO settings
-
-## check graphics card
-lspci | grep -e VGA -e 3D
 
 ## decode key-presses
 sudo showkey  # keycodes
@@ -301,4 +425,8 @@ saidar -c
 ## root storage sizes as root
 du -shx
 ncdu -x
+
+## users & groups
+groups jo
+who  # lists users active on terminals
 
