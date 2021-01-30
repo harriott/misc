@@ -22,6 +22,7 @@ command: scale=n  => results to n decimal places
 <somecommand> 2>&1 | tee stdout+stderr.log
 [ -s "filename" ]  # true if file not zero-size
 env | grep SHELL
+"String Tricks that Bash Knows"
 vi mode: v  => edit a command in $EDITOR
 
 ## aliases
@@ -80,27 +81,15 @@ lspci | grep -e VGA -e 3D  # gets just the name
 
 # imagey
 colorpicker --one-shot --preview
+for i in *.bmp; do convert $i ${i%.*}.jpg; done
 exiftool <image>
+exiftool -Orientation *
+exiv2 <image>
 Pinta can't send to printer...
 
 ## Ghostscript convert pdf to png
-gs -dSAFER -sDEVICE=png16m -r400 -dFirstPage=1 -dLastPage=1 -o frais_20-11-harriott0.png frais_20-11-harriott.pdf
+gs -dSAFER -sDEVICE=png16m -r400 -dFirstPage=1 -dLastPage=1 -o frais_20-12-harriott0.png frais_20-12-harriott.pdf
 gswin64c -dSAFER -sDEVICE=png16m -r400 -dFirstPage=1 -dLastPage=1 -o output.png input.pdf
-
-## ImageMagick
-composite -geometry +3700+2800 49q-low.png frais_20-11-harriott0.png frais_20-11-harriott1.jpg
-convert -flatten transparent.png white_background.png
-convert <colourimage> -colorspace Gray <grayimage>
-convert <people> -paint 9 <people-oil>
-convert <positive> -negate <negative>
-for i in $(ls); do convert -resize 10% $i r$i; done
-for i in $(ls); do convert -resize 15% $i r$i; done
-for i in $(ls); do convert -resize 25% $i r$i; done
-for i in $(ls); do convert -resize 50% $i r$i; done
-
-### gravity
--gravity northwest  -> the default
-convert -list gravity
 
 ## Nomacs
 Alt+m => toggle menu
@@ -185,9 +174,11 @@ need to Restart OpenShot when changed
 mpv av://v4l2:/dev/video0
 
 ## interactive control
-Alt+0 -> halve video window size
-f -> toggle fullscreen
-o/O -> show progress
+Alt+0 => halve video window size
+Ctrl +/- => +/-0.1 s audio delay
+f => toggle fullscreen
+i/I => statistics
+o/O => show progress
 
 ### playback speed
 BACKSPACE -> reset
@@ -195,12 +186,12 @@ BACKSPACE -> reset
 { and } -> halve/double
 
 ### seeks
-./, -> step forward/backward one frame
-left/right -> seek 5 seconds forward/backward
-mouse wheel up/down -> seek forward/backward 10 seconds
-shift left/right -> seek 1 seconds forward/backward
-shift+pgup/pgdwn -> seek forward/backward by 10 minutes
-up/down -> seek 1 minute forward/backward
+one frame   ./,
+1 seconds   shift left/right
+5 seconds   left/right (or shift up/down)
+10 seconds  mouse wheel up/down
+1 minute    up/down
+10 minutes  shift+pgup/pgdwn
 
 # networking
 sudo iptraf-ng  # ncurses network statistic monitoring utility
@@ -295,6 +286,8 @@ pass(1)
 
 # PDFs
 "convert pdf to png"
+Firefox shows Document Outline
+Outline could be the hyperref bookmarks that correspond to headings of a LaTeX document
 pdfimages -h
 
 ## C5 printing
@@ -309,9 +302,17 @@ Zathura prints as Print Page Setup default (normally A4)
 pdftk in.pdf burst                # breaks into individual pages
 pdftk in*.pdf cat output out.pdf  # concatenate a sequence of PDFs
 
+## qpdfview
+F6 = View > Docks > Outline (such as the headings of a LaTeX document)
+F8 = Thumnails
+
 ## sizes
 1 PostScript point = 0.3528 mm
 pdfinfo <a_pdf_file>  # A5 = 420x595. See GSview for more sizes.
+
+## Zathura
+<tab> toggles Outline view
+"zathura man page"
 
 # Plasma
 Ctrl+Alt+Shift+Del -> exit KDE without saving

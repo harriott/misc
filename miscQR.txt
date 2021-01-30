@@ -2,8 +2,9 @@ vim: ft=build fdm=expr:
 
 Sony Xperia 10 II: 1080x2520
 
+- finding characters
 - HP ENVY 5532 > Wireless Settings > Settings > Advanced > IP Settings > OK > Manual  -> allows tweaking of printer's address
-- "web colors"
+- web colors
 
 # 16:9 aspect ratio
 854x480
@@ -14,12 +15,14 @@ Sony Xperia 10 II: 1080x2520
 -vf crop=width:height:x:y (height=depth below y)
 
 # Git
+$MACHINE/jo/gitconfig
 git checkout-index -f <somefile>  # overwrite from the index's copy
 git init
-git push origin +master  # force push to GitHub
+git push origin +master  # force push to remote
 git rev-parse --show-toplevel  # print the top level directory of the current repository
 git version
 git reset HEAD~1  # throw away last commit, keeping your changes for a better one
+https://github.com/github/linguist/blob/master/lib/linguist/languages.yml
 
 ## configurations
 find . -wholename '*.git/config' | wc -l
@@ -40,6 +43,23 @@ git reset
 
 # imagey
 72 dpi = 18.3 dots per mm
+
+## ImageMagick
+composite -geometry +3700+2800 49q-low.png frais_20-12-harriott0.png frais_20-12-harriott1.jpg
+convert -flatten transparent.png white_background.png
+convert <colourimage> -colorspace Gray <grayimage>
+convert <people> -paint 9 <people-oil>
+convert <positive> -negate <negative>
+for i in $(ls); do convert -resize 10% $i r$i; done
+for i in $(ls); do convert -resize 15% $i r$i; done
+for i in $(ls); do convert -resize 25% $i r$i; done
+for i in $(ls); do convert -resize 50% $i r$i; done
+identify -format '%w %h %f \n' *  # images listed by size
+montage <left> <right> -geometry +9+9 -tile 2x1 <lr>
+
+### gravity
+-gravity northwest  -> the default
+convert -list gravity
 
 # LaTeX
 \noindent
@@ -105,6 +125,9 @@ Ctrl+Shft+B => Address Book
     "u": "tbkeys:closeMessageAndRefresh"
 
 # vim
+$HOME/.viminfo
+$HOME/_viminfo
+$ITstack/vimfiles/spell/fr.utf-8.add
 find . -type f -name tags
 gci -r tags -force | where { ! $_.PSIsContainer } | select -expandProperty fullname > tags-Win10.txt
 gvim -geometry 200x55
