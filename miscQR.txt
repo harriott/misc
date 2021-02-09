@@ -65,8 +65,12 @@ convert -list gravity
 \noindent
 \pagebreak
 \section*{ unnumbered section }
+\tableofcontents*  % ToC without itself listed therein
 \textbf{...}
 \textit{...}
+\textsubscript{}
+\textsuperscript{}
+\today
 \usepackage{soul}  % Hyphenation for letterspacing, underlining, and more
 
 ## font sizes

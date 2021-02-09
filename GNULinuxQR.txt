@@ -200,6 +200,7 @@ sudo lsof -i -P -n | grep LISTEN  # to see the listening ports
 thunderbird -addressbook
 youtube-dl -F <videoURL>
 youtube-dl -f best <videoURL>
+youtube-dl -f bestaudio <audioURL>
 
 ## devices
 ip link
@@ -364,6 +365,7 @@ ls **/* | wc -l      # all of the files
 blkid -o list
 df -h
 lsblk -f
+sudo fatlabel /dev/sdi1 [<newLabel>]
 
 ## parted
 can't set the volume-name
@@ -384,12 +386,16 @@ sudo rsnapshot du  # can takes many hours...
 
 ## sizes
 diskonaut -h
+dust
+ncdu
+
+### listed
+du -ah . | grep -v "/$" | sort -rh | head -44  # recursive list of largest 44 files
 du -h --max-depth=1  # for a quick list of folder sizes
 du -sh  # gets size of current directory
 du -sh <glob>
 du(1)
-dust
-ncdu
+ls -1Rhs | sed -e "s/^ *//" | grep "^[0-9]" | sort -hr | head -n50  # neat recursive list of largest
 
 ## stat
 "stat(1)"
