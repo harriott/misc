@@ -210,9 +210,10 @@ networkctl list
 sudo iptables -L
 
 ### Firewalld
-sudo systemctl restart firewalld
 sudo systemctl start firewalld
 sudo systemctl stop firewalld
+sudo systemctl status firewalld
+sudo systemctl restart firewalld
 
 #### firewall-cmd
 sudo firewall-cmd --info-zone=home
@@ -223,10 +224,6 @@ sudo firewall-cmd --state
 ### iptables
 sudo iptables -nvL
 sudo systemctl status iptables.service
-
-### temporarily stop/start during runtime session
-sudo systemctl stop firewalld
-sudo systemctl start firewalld
 
 ## hostname
 hostname
@@ -288,20 +285,19 @@ pass(1)
 # PDFs
 "convert pdf to png"
 Firefox shows Document Outline
-Outline could be the hyperref bookmarks that correspond to headings of a LaTeX document
+Outline = the hyperref bookmarks that correspond to headings of a LaTeX document
 pdfimages -h
 
 ## C5 printing
+Firefox can't figure it's portrait
 LibreOffice Writer gets it right
 Ubuntu's qpdfview gets it almost right
 
-### fails
-Firefox can't figure it's portrait
-Zathura prints as Print Page Setup default (normally A4)
-
 ## pdftk
-pdftk in.pdf burst                # breaks into individual pages
-pdftk in*.pdf cat output out.pdf  # concatenate a sequence of PDFs
+pdftk in.pdf burst  # breaks into individual pages
+in*.pdf cat output out.pdf  # concatenate a sequence of PDFs
+pdftk leftRotated.pdf cat 1-endeast output horizontal.pdf
+pdftk secure.pdf input_pw <password> output normal.pdf
 
 ## qpdfview
 F6 = View > Docks > Outline (such as the headings of a LaTeX document)
@@ -352,6 +348,7 @@ sudo alsactl store
 cdrecord dev=/dev/sr0 -checkdrive
 "install(1)"
 mkdir -p  # --parents = make parent directories as needed (no error if existing)
+rsync: -l = --links = copy symlinks as symlinks
 
 ## Dolphin
 F4        -> Konsole  attached below

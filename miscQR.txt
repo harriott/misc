@@ -25,8 +25,12 @@ git reset HEAD~1  # throw away last commit, keeping your changes for a better on
 https://github.com/github/linguist/blob/master/lib/linguist/languages.yml
 
 ## configurations
+find . -wholename '*.git/config' > gitconfig-all.txt
+find . -wholename '*.gitignore' > gitignore-all.txt
 find . -wholename '*.git/config' | wc -l
-grep -rl --include "config" harriott .
+gci -r .git | select fullname
+gci -r .gitignore | select fullname
+grep -rl --include "config" harriott . > gitconfig-harriott.txt
 
 ### lf
 autocrlf = input => warning: CRLF will be replaced by LF
