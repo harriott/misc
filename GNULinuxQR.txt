@@ -13,7 +13,8 @@ sudo parted -l
 wcsf=$(wc -l <samplefile>); echo $wcsf
 
 # bc
-bc  # enters an arbitrary precision numeric processing language environment
+an arbitrary precision calculator language
+bc -q
 command: scale=n  => results to n decimal places
 
 # Bash
@@ -21,7 +22,10 @@ command: scale=n  => results to n decimal places
 <somecommand> | xcol <keyword1> <keyword2> ... # for highlighting
 <somecommand> 2>&1 | tee stdout+stderr.log
 [ -s "filename" ]  # true if file not zero-size
+echo $?  # exit code of last command
 env | grep SHELL
+eval $Command
+exit 0  # to quit script
 "String Tricks that Bash Knows"
 vi mode: v  => edit a command in $EDITOR
 
@@ -331,8 +335,12 @@ pgrep <aprogram>  # reports it's process id
 # sed
 echo "don't forget that" | sed 's/\x27/\"/'
 sed '/pattern/q' <file>  # cat's  <file>  until  pattern
+sed 5q <file> print first 5 lines
+sed -e '' <file>  # mimics cat
 sed -i '/<regex>/!d' <filetoreduce>  # removes lines that don't match
 sed -n '/<regex>/p' <file>  # prints the matching lines
+sed -n '2,$p' <file>  # prints from the 2nd line
+sed G <file>  # outputs <file> with blank lines added
 "stream editor"
 
 # sound
