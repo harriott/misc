@@ -1,4 +1,4 @@
-vim: ft=build fdm=expr:
+vim: ft=build:
 
 commands here are generic, see also $ARCHBUILDS/QR.txt
 
@@ -23,9 +23,11 @@ command: scale=n  => results to n decimal places
 <somecommand> 2>&1 | tee stdout+stderr.log
 [ -s "filename" ]  # true if file not zero-size
 echo $?  # exit code of last command
+echo "$floatingpointnumber-$another" | bc  # FP math
 env | grep SHELL
 eval $Command
 exit 0  # to quit script
+read -p "hit Enter"
 "String Tricks that Bash Knows"
 vi mode: v  => edit a command in $EDITOR
 
@@ -83,6 +85,38 @@ xrandr  # xrandr -q
 lspci -vnn | grep VGA -A 12
 lspci | grep -e VGA -e 3D  # gets just the name
 
+# printing - CUPS
+"Command-Line Printing and Options" http://localhost:631/help/options.html
+lpadmin
+lpq  # show printer queue status
+lpstat -p -d  # show status of printers, including which is set as default
+lpstat -s  # status
+sudo systemctl status cups.service
+
+## cancel print jobs
+cancel -a
+lprm
+
+## lp
+lp -o fit-to-page <image>
+lp -o scaling=200 <image>  # prints divided across 4 pages
+
+### orientation
+automatically selects the best orientation for filling the page
+
+#### specify
+-o orientation-requested=3 - portrait orientation (no rotation)
+-o orientation-requested=4 - landscape orientation (90 degrees)
+-o orientation-requested=5 - reverse landscape or seascape orientation (270 degrees)
+-o orientation-requested=6 - reverse portrait or upside-down orientation (180 degrees)
+
+# printing - HPLIP
+hp-levels  # takes a little while to show the ink levels
+hp-printsettings  # dialog pop-up
+hp-setup -h
+hp-systray & disown  # HPLIP Status Service tray icon
+hp-toolbox  # HP Device Manager
+
 # imagey
 colorpicker --one-shot --preview
 for i in *.bmp; do convert $i ${i%.*}.jpg; done
@@ -92,7 +126,6 @@ exiv2 <image>
 Pinta can't send to printer...
 
 ## Ghostscript convert pdf to png
-gs -dSAFER -sDEVICE=png16m -r400 -dFirstPage=1 -dLastPage=1 -o frais_20-12-harriott0.png frais_20-12-harriott.pdf
 gswin64c -dSAFER -sDEVICE=png16m -r400 -dFirstPage=1 -dLastPage=1 -o output.png input.pdf
 
 ## Nomacs
@@ -137,13 +170,16 @@ t    toggle
 "list open files"
 sudo lsof -i
 
-# multimedia - cmus
-"C* Music Player"
-sudo kill -9 "$(pidof cmus)"
+# multimedia
+ffprobe -i <avfile> -show_format -v quiet | sed -n 's/duration=//p'  # fractional seconds
 
-## commands
+## cmus
+"C* Music Player"
+
+### commands
 ,        seek -1m
 .        seek +1m
+7        settings
 ^C       echo Type :quit<enter> to exit cmus.
 ^L       refresh
 ^R       toggle repeat_current
@@ -159,37 +195,48 @@ r        toggle repeat
 v        player-stop
 z        player-prev
 
-# multimedia - OpenShot
+### kill
+sudo kill -9 "$(pidof cmus)"
+
+#### manually
+get the PIDs  ps ax | grep cmus  then for each  sudo kill -9 PID
+
+## mediainfo
+mediainfo <avfile> | grep Encoded
+mediainfo --Output='General;%Duration%' <avfile>  # milliseconds
+
+## OpenShot
 - crossfades are created in overlaps
 - Ctrl+e  # Export
 
-## Nikon CoolPix P7700 VGA 640x480
+### Nikon CoolPix P7700 VGA 640x480
 Target > AVI (mpeg4)
 Video Profile > VGA Widescreen NTSC (854x480)
 
-## Preferences
+### Preferences
 Ctrl+Shift+p
 
-### Default Profile
+#### Default Profile
 defaults to HD 720p 30 fps
 need to Restart OpenShot when changed
 
-# multimedia - mpv
+## mpv
 mpv av://v4l2:/dev/video0
+mpv --start=-9 <avfile>  # starts 9 seconds from end
 
-## interactive control
+### interactive control
 Alt+0 => halve video window size
 Ctrl +/- => +/-0.1 s audio delay
 f => toggle fullscreen
 i/I => statistics
 o/O => show progress
 
-### playback speed
+#### playback speed
 BACKSPACE -> reset
 [ and ] -> decrease/increase by 10%
 { and } -> halve/double
 
-### seeks
+#### seeks
 one frame   ./,
 1 seconds   shift left/right
 5 seconds   left/right (or shift up/down)
@@ -322,7 +369,6 @@ Ctrl+Alt+T         -> Konsole
 Win+PageUp/Down    -> maximises or returns to normal a window
 
 # processes
-fcrontab -l
 lsof -i
 pkill zoom
 pstree
@@ -414,6 +460,7 @@ tree -fi
 # system
 cat /etc/hostname
 halt -p
+lsmod(8)  # show what kernel modules are currently loaded
 man hier  # description of the filesystem hierarchy
 passwd jo  # then re-login
 systemctl  # list running Systemd units
@@ -428,15 +475,15 @@ xset q  # shows a variety of IO settings
 sudo showkey  # keycodes
 xev | awk -F'[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }'  # scancodes
 
+## directory sizes as root
+du -shx
+ncdu -x
+
 ## monitoring
 glances
 gtop
 htop
 saidar -c
-
-## root storage sizes as root
-du -shx
-ncdu -x
 
 ## users & groups
 groups jo
