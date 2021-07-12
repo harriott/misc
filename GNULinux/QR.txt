@@ -4,12 +4,11 @@ commands here are generic, see also $ARCHBUILDS/QR.txt
 
 Ctrl+s  pause output to screen
 Ctrl+q  resume output to screen
-lsusb
 npm -g list
 rhash -a --bsd <somefile>
 rhash --list-hashes => list names of all supported hashes
 rhash --sha256 <file>
-sudo parted -l
+rhash --sha256 *  # to see if files are identical
 wcsf=$(wc -l <samplefile>); echo $wcsf
 
 # bc
@@ -18,26 +17,21 @@ bc -q
 command: scale=n  => results to n decimal places
 
 # Bash
-!! # execute last command
 <somecommand> | xcol <keyword1> <keyword2> ... # for highlighting
-<somecommand> 2>&1 | tee stdout+stderr.log
 [ -s "filename" ]  # true if file not zero-size
-echo $?  # exit code of last command
+cal -3    " all 3 months from now
+cal -n 18 " all 18 months from now
+cal -w    " week numbers
+cal -y    " year
 echo "$floatingpointnumber-$another" | bc  # FP math
 env | grep SHELL
-eval $Command
 exit 0  # to quit script
 read -p "hit Enter"
-"String Tricks that Bash Knows"
-vi mode: v  => edit a command in $EDITOR
+~/Arch/bash_history
 
 ## aliases
 alias
 compgen -A alias | awk '{print}' ORS=' : '  # compact list
-
-## arrays
-${#array[@]}  # length
-for i in "${array[*]}"; do echo "$i"; done
 
 ## functions
 export -f <usefulfunction>  # allows it to be used in a script
@@ -58,32 +52,55 @@ echo $0  # "-bash" = login shell, "bash" = non-login shell
 shopt login_shell
 
 ## loops
-for f in *; do echo $f; done
+for f in **/*; do echo $f; done
 start=0; end=5; for i in {$start..$end}; do echo $i; done
+
+## managing commands
+<somecommand> 2>&1 | tee stdout+stderr.log
+echo $?  # exit code of last command
+eval $Command
+vi mode: v  => edit a command in $EDITOR
+
+### execute last command
+!!
+sudo !!
 
 ## trap
 trap - debug  # turn off debug
 trap read debug  # puts a read request after each executable line
+
+## variables
+"String Tricks that Bash Knows"
+
+### arrays
+${#array[@]}  # length
+for i in "${array[*]}"; do echo "$i"; done
 
 # get at root on tty2
 Ctrl+Alt+F2 > root + pw
 
 # GNU Privacy Guard
 echo "...seems to be working..." | gpg -ase -r jo | gpg  # tests key ( makes empty file secret.out)
+gpg --delete-key <anID>
 gpg --import my_private_key.asc
 gpg --import my_public_key.asc
+gpg --list-keys
 gpg --send-keys key-id  # then can never be deleted from the keyserver
 
 ## keybox
 gpg -k  # --list-keys
 kbxutil ~/.gnupg/pubring.kbx | moar  # for a more detailed exploration
 
-# graphics
+# hw
+lsusb
+
+## graphics
 xrandr  # xrandr -q
 
-## check graphics card
-lspci -vnn | grep VGA -A 12
-lspci | grep -e VGA -e 3D  # gets just the name
+### query the card specs
+echo $(xrandr -q | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f1) $(xrandr -q | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f2)  # screen size
+GPU=$(lspci | grep VGA | cut -d ":" -f3);RAM=$(cardid=$(lspci | grep VGA |cut -d " " -f1);lspci -v -s $cardid | grep " prefetchable"| cut -d "=" -f2);echo $GPU $RAM
+lspci | grep -e VGA -e 3D  # gets just the graphics card name
 
 # printing - CUPS
 "Command-Line Printing and Options" http://localhost:631/help/options.html
@@ -98,6 +115,7 @@ cancel -a
 lprm
 
 ## lp
+lp *  # prints all images in a directory
 lp -o fit-to-page <image>
 lp -o scaling=200 <image>  # prints divided across 4 pages
 
@@ -114,16 +132,21 @@ automatically selects the best orientation for filling the page
 hp-levels  # takes a little while to show the ink levels
 hp-printsettings  # dialog pop-up
 hp-setup -h
-hp-systray & disown  # HPLIP Status Service tray icon
+hp-systray & disown  # HPLIP Status Service tray icon (double-click to get HP Device Manager)
 hp-toolbox  # HP Device Manager
 
 # imagey
 colorpicker --one-shot --preview
 for i in *.bmp; do convert $i ${i%.*}.jpg; done
+for i in *.jpeg; do convert $i jpg/${i%.*}.jpg; done  # gets them into subfolder jpg
+gphoto2 --auto-detect  # list detected cameras
+gphoto2 -DR  # delete all files in all folders
+gphoto2 -l  # list folders
+gphoto2 -L  # list files
+gphoto2 -P  # get all files
 exiftool <image>
 exiftool -Orientation *
 exiv2 <image>
-Pinta can't send to printer...
 
 ## Ghostscript convert pdf to png
 gswin64c -dSAFER -sDEVICE=png16m -r400 -dFirstPage=1 -dLastPage=1 -o output.png input.pdf
@@ -136,6 +159,10 @@ Alt > Alt A > Exposure > Gamma
 Alt > Alt A > Tiny Planet
 can only fill page for printing
 only way to find keybindings is by studying the menu available via mouse right-click
+
+## Pinta
+can't send to printer...
+shows precise cursor position in pixels
 
 ## scanimage
 scanimage -A  => --all-options => lists all available options
@@ -195,15 +222,19 @@ r        toggle repeat
 v        player-stop
 z        player-prev
 
-### kill
-sudo kill -9 "$(pidof cmus)"
+## gst123
+gst123 -Z .  # play random audio files recursively forever
 
-#### manually
-get the PIDs  ps ax | grep cmus  then for each  sudo kill -9 PID
-
-## mediainfo
-mediainfo <avfile> | grep Encoded
-mediainfo --Output='General;%Duration%' <avfile>  # milliseconds
+### control
+left/right -> seek 10 seconds
+down/up -> seek 1 minute
+PgDn/Up -> seek 10 minute
+space -> toggle pause
++/- -> change volume by 10%
+m -> toggle mute
+n -> next file
+q -> quit
+? -> help
 
 ## OpenShot
 - crossfades are created in overlaps
@@ -220,9 +251,14 @@ Ctrl+Shift+p
 defaults to HD 720p 30 fps
 need to Restart OpenShot when changed
 
+## mediainfo
+mediainfo <avfile> | grep Encoded
+mediainfo --Inform='Video;%FrameCount%' $the_file
+mediainfo --Output='General;%Duration%' <avfile>  # milliseconds
+
 ## mpv
 mpv av://v4l2:/dev/video0
-mpv --start=-9 <avfile>  # starts 9 seconds from end
+mpv --start=-2 <avfile>  # starts 2 seconds from end
 
 ### interactive control
 Alt+0 => halve video window size
@@ -295,6 +331,16 @@ iwctl device list
 iwctl known-networks list
 iwctl station wlan0 get-networks  # shows if  wlan0  is connected to one
 
+## NetworkManager
+nmcli device  # list of networking devices
+nmcli device wifi list | cat  # paged list of SSIDs, with those IN-USE starred
+nmcli device wifi connect <SSID> password <password>
+
+### saved connections
+nmcli connection delete <SSID>  # can help
+nmcli connection show | cat  # reports UUIDs and colourizes the active device
+nmcli connection up uuid <UUID>
+
 ## ss
 bm ss
 ss --tcp --listening
@@ -311,16 +357,6 @@ sudo systemctl status sshd.service
 #### exit
 exit
 ~.
-
-## NetworkManager
-nmcli device  # list of networking devices
-nmcli device wifi list | cat  # paged list of SSIDs, with those IN-USE starred
-nmcli device wifi connect <SSID> password <password>
-
-### saved connections
-nmcli connection delete <SSID>  # can help
-nmcli connection show | cat  # reports UUIDs and colourizes the active device
-nmcli connection up uuid <UUID>
 
 # one-line of command output
 echo $(ls)
@@ -384,7 +420,7 @@ sed '/pattern/q' <file>  # cat's  <file>  until  pattern
 sed 5q <file> print first 5 lines
 sed -e '' <file>  # mimics cat
 sed -i '/<regex>/!d' <filetoreduce>  # removes lines that don't match
-sed -n '/<regex>/p' <file>  # prints the matching lines
+sed -n '/<regex>/p' <file>  # prints only the matching lines
 sed -n '2,$p' <file>  # prints from the 2nd line
 sed G <file>  # outputs <file> with blank lines added
 "stream editor"
@@ -399,10 +435,11 @@ sudo alsactl store
 
 # storage
 7z x <pw'd_zip>
-cdrecord dev=/dev/sr0 -checkdrive
+cp -v
 "install(1)"
 mkdir -p  # --parents = make parent directories as needed (no error if existing)
 rsync: -l = --links = copy symlinks as symlinks
+sudo parted -l
 
 ## Dolphin
 F4        -> Konsole  attached below
@@ -418,11 +455,24 @@ df -h
 lsblk -f
 sudo fatlabel /dev/sdi1 [<newLabel>]
 
-## parted
+## optical
+cd-drive  # info
+cdrecord dev=/dev/sr0 -checkdrive
+
+### tray
+eject  # opens tray
+eject -h
+eject -t  # closes tray
+eject -T sr1  # toggles tray of sr1
+
+## partitioning
+gdisk(8)
+
+### parted
 can't set the volume-name
 sudo parted <device>
 
-### CL-mode
+#### CL-mode
 -s => don't ask
 sudo parted -l
 
@@ -431,7 +481,7 @@ step 1: find <directory> | wc -l  # gets the <filecount>
 step 2: sudo rm -rv <directory> | pv -l -s <filecount> > /dev/null  # shows progress for rm
 
 ## rsnapshot
-ncdu --exclude rsnapshot
+ncdu --exclude *rsnapshot
 rsnapshot configtest
 sudo rsnapshot du  # can takes many hours...
 
@@ -459,6 +509,7 @@ tree -fi
 
 # system
 cat /etc/hostname
+gtk-launch --version
 halt -p
 lsmod(8)  # show what kernel modules are currently loaded
 man hier  # description of the filesystem hierarchy
@@ -488,4 +539,11 @@ saidar -c
 ## users & groups
 groups jo
 who  # lists users active on terminals
+
+# tmux - sessions
+:choose-tree -> put a pane into tree mode, where a session, window or pane may be chosen interactively from a list (can then kill some)
+tmux a                  # attach
+tmux a -t myname        # attach to session myname
+tmux kill-server; tmux  # good for resetting
+tmux ls                 # list sessions
 

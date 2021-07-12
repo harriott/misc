@@ -3,8 +3,10 @@ vim: ft=build:
 HP ENVY 5532 > Wireless Settings > Settings > Advanced > IP Settings > OK > Manual  -> allows tweaking of printer's address
 
 # encoding - ffmpeg
+-t duration
 -vf crop=iw:ih-80:0:0
 -vf crop=width:height:x:y (height=depth below y)
+ffmpeg -i <video> -vframes 1 frame.jpg  # extracts a single frame
 
 # encoding - Git
 $MACHINE/jo/gitconfig
@@ -12,10 +14,12 @@ git checkout-index -f <somefile>  # overwrite from the index's copy
 git grep <caseSensitiveText>
 git grep Log $(git rev-list --all) -- '*.ps1'  # searches all  ps1  files in all commits
 git init
-git push origin +master  # force push to remote
+git push gh +master  # force push to remote
+git rm --cached -r .  # empties the index
 git rev-parse --show-toplevel  # print the top level directory of the current repository
+git reset HEAD~1  # throw away last commit, keeping changes for a better one
 git version
-git reset HEAD~1  # throw away last commit, keeping your changes for a better one
+GitLab Markdown
 https://github.com/github/linguist/blob/master/lib/linguist/languages.yml
 
 ## configurations
@@ -60,6 +64,18 @@ lsvirtualenv  # lists the known environments
 mkvirtualenv <name>  # also activates it
 workon  # activate (or list all)
 
+# gpg
+gpg --fingerprint
+gpg --list-keys
+gpg --list-sigs
+gpg --version
+
+## key servers
+https://keys.openpgp.org/
+https://keyserver.ubuntu.com
+https://keyserver.2ndquadrant.com/
+https://pgp.key-server.io/
+
 # imagey
 72 dpi = 18.3 dots per mm
 
@@ -83,9 +99,10 @@ convert -list gravity
 web colors
 
 ## Thunderbird
-Alt+F > F => File > Compact Folders
+Menu > File > Compact Folders
 Alt+T > A (= Extensions)
 Ctrl+Shft+B => Address Book
+right-click on folder > Properties > Repair Folder
 
 ### tbkeys-lite Main key bindings
     "j": "cmd:cmd_nextMsg",
@@ -100,6 +117,7 @@ Ctrl+Shft+B => Address Book
     "u": "tbkeys:closeMessageAndRefresh"
 
 # LaTeX
+$IT1/Cross-platform/TeX/LaTeX/dts-tex.txt  has tests
 \pagebreak
 \section*{ unnumbered section }
 \tableofcontents*  % ToC without itself listed therein
@@ -122,6 +140,10 @@ Ctrl+Shft+B => Address Book
 \huge
 \Huge
 
+## fonts - Indic
+FreeFont
+Lohit used by Wikipedia
+
 ## indents
 \noindent
 \setlength{\parindent}{0pt}
@@ -131,15 +153,36 @@ Ctrl+Shft+B => Address Book
 \tightlists
 
 ## MiKTeX
-after filename changes in  C:\Users\troin\AppData\Roaming\MiKTeX\tex\,  MiKTeX Console >
-  Tasks > Refresh file name database
+initexmf --report
+
+### FNDB
+after filename changes in  C:\Users\troin\AppData\Roaming\MiKTeX\tex\
+  initexmf --update-fndb
+  MiKTeX Console > Tasks > Refresh file name database
+
+### MiKTeX Package Manager
+mpm --list > "MiKTeX-packageDB-$(Get-Date -f yyMMdd-hhmm).txt"
+mpm --update  # all packages
+mpm --verify  # integrity of all installed packages
+mpm --version
+
+# LibreOffice
+- Alt+F12 (=Tools > Options)
+- Sheets: Ctrl+1 (= Format Cells) allows French
+
+## Export
+Alt+f (= File) > t (= Export)
+defaults to GIF in Draw
+defaults to JPEG in Calc
 
 # screens
-Sony Xperia 10 II: 1080x2520
+Sony Xperia 10 II: 1080x2520 = 21:9
 
-## 16:9 aspect ratio
+## widescreen 16:9
 854x480
 1280x720 = 720p = "HD Ready"
+1600x900
+1920x1080
 
 # Stack Exchange Network
 @petersmith = Peter Smith
@@ -163,8 +206,13 @@ $HOME/_viminfo
 $ITstack/vimfiles/spell/fr.utf-8.add
 find . -type f -name tags
 gci -r tags -force | where { ! $_.PSIsContainer } | select -expandProperty fullname > tags-Win10.txt
-gvim -geometry 200x55
+vim . # will open netrw on current directory
+
+### gVim
 gvim -O <textfile0> <textfile1>  # opens them in a vertical split
 gvim -S <savedSession>
-vim . # will open netrw on current directory
+
+#### window size
+gvim -geometry 200x55
+PS> gvim -c "set columns=217 lines=54"  # maximum on a 1600x900 screen with rhs taskbar
 
