@@ -4,7 +4,7 @@
 # perl mysmsMD.pl <aMySMSscreenscrapefile>
 # when you want to convert screen-scape from mysms into markdown format
 # ---------------------------------------------------------------------
-#  needs adapting for Strawberry Perl on Windows 10
+#  use in  $ITstack\onGitHub\vimfiles\ftplugin\md.vim
 
 use strict;  use warnings;
 use Tie::File;
@@ -30,6 +30,8 @@ my $MStype;
 my $timestamp;
 while (@mysms) {
   $scrapeLine = shift @mysms;
+  # p $scrapeLine;
+  # exit;
   # mark and store a date line
   if ( $scrapeLine =~ /^▶# .*/ ) {
     push @mysmsCR, $scrapeLine;

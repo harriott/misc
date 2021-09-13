@@ -2,8 +2,11 @@ vim: ft=build:
 
 commands here are generic, see also $ARCHBUILDS/QR.txt
 
+bat -A /etc/hosts
 Ctrl+s  pause output to screen
 Ctrl+q  resume output to screen
+date -R
+date -r <fileToRefer>
 npm -g list
 rhash -a --bsd <somefile>
 rhash --list-hashes => list names of all supported hashes
@@ -24,9 +27,11 @@ cal -n 18 " all 18 months from now
 cal -w    " week numbers
 cal -y    " year
 echo "$floatingpointnumber-$another" | bc  # FP math
+echo $PWD
 env | grep SHELL
 exit 0  # to quit script
 read -p "hit Enter"
+shopt
 ~/Arch/bash_history
 
 ## aliases
@@ -75,6 +80,18 @@ trap read debug  # puts a read request after each executable line
 ### arrays
 ${#array[@]}  # length
 for i in "${array[*]}"; do echo "$i"; done
+
+# datetime
+date +%y%m%d-%H%M
+date(1)
+watch -n1 "date '+%D%n%T'|figlet -k"
+
+# fcron
+systemctl status fcron.service
+
+## fcrontab
+fcrontab -l
+sudo cat /var/spool/fcron/jo.orig
 
 # get at root on tty2
 Ctrl+Alt+F2 > root + pw
@@ -202,6 +219,7 @@ ffprobe -i <avfile> -show_format -v quiet | sed -n 's/duration=//p'  # fractiona
 
 ## cmus
 "C* Music Player"
+cmus_notify -h
 
 ### commands
 ,        seek -1m
@@ -210,7 +228,7 @@ ffprobe -i <avfile> -show_format -v quiet | sed -n 's/duration=//p'  # fractiona
 ^C       echo Type :quit<enter> to exit cmus.
 ^L       refresh
 ^R       toggle repeat_current
-space    win-toggle => for making selections
+space    win-toggle => mark
 C        toggle continue
 P        win-mv-before
 b        player-next
@@ -261,11 +279,16 @@ mpv av://v4l2:/dev/video0
 mpv --start=-2 <avfile>  # starts 2 seconds from end
 
 ### interactive control
-Alt+0 => halve video window size
+hash     => cycle audio tracks
+Alt+0    => halve video window size
+Alt+1    => full video window size
 Ctrl +/- => +/-0.1 s audio delay
-f => toggle fullscreen
-i/I => statistics
-o/O => show progress
+f        => toggle fullscreen
+i/I      => statistics
+o/O      => show progress
+s        => screenshot
+v        => toggle subtitle
+j/J      => cycle subtitles tracks
 
 #### playback speed
 BACKSPACE -> reset
@@ -396,6 +419,7 @@ pdfinfo <a_pdf_file>  # A5 = 420x595. See GSview for more sizes.
 
 ## Zathura
 <tab> toggles Outline view
+r -> rotate by 90 degrees
 "zathura man page"
 
 # Plasma
@@ -435,10 +459,12 @@ sudo alsactl store
 
 # storage
 7z x <pw'd_zip>
-cp -v
+cp -r <sourceDir> .
+"GNU Grep Manual"
 "install(1)"
 mkdir -p  # --parents = make parent directories as needed (no error if existing)
-rsync: -l = --links = copy symlinks as symlinks
+rm(1)
+sort(1)
 sudo parted -l
 
 ## Dolphin
@@ -451,7 +477,7 @@ ls **/* | wc -l      # all of the files
 
 ## non-optical
 blkid -o list
-df -h
+df -h [<disk>]
 lsblk -f
 sudo fatlabel /dev/sdi1 [<newLabel>]
 
@@ -485,6 +511,11 @@ ncdu --exclude *rsnapshot
 rsnapshot configtest
 sudo rsnapshot du  # can takes many hours...
 
+## rsync
+"rsync manual"
+log: > = the item is received
+rsync: -l = --links = copy symlinks as symlinks
+
 ## sizes
 diskonaut -h
 dust
@@ -512,6 +543,7 @@ cat /etc/hostname
 gtk-launch --version
 halt -p
 lsmod(8)  # show what kernel modules are currently loaded
+maximum 255 bytes per filename & 4096 per path
 man hier  # description of the filesystem hierarchy
 passwd jo  # then re-login
 systemctl  # list running Systemd units
@@ -534,6 +566,7 @@ ncdu -x
 glances
 gtop
 htop
+last reboot
 saidar -c
 
 ## users & groups

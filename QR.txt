@@ -1,28 +1,40 @@
 vim: ft=build:
 
 HP ENVY 5532 > Wireless Settings > Settings > Advanced > IP Settings > OK > Manual  -> allows tweaking of printer's address
+regular expressions
 
-# encoding - ffmpeg
+# encoding
+http://daringfireball.net/projects/markdown/syntax
+perl -le '$,="\n"; print @INC'
+
+## ffmpeg
 -t duration
 -vf crop=iw:ih-80:0:0
 -vf crop=width:height:x:y (height=depth below y)
 ffmpeg -i <video> -vframes 1 frame.jpg  # extracts a single frame
 
-# encoding - Git
-$MACHINE/jo/gitconfig
+## Git
+git -P <command>  # --no-pager
 git checkout-index -f <somefile>  # overwrite from the index's copy
 git grep <caseSensitiveText>
 git grep Log $(git rev-list --all) -- '*.ps1'  # searches all  ps1  files in all commits
 git init
+git log -- *pdf  # shows if any PDF's have been inadvertently included
+git log --follow *Colette*
+git log -S <string>
+git ls-files
 git push gh +master  # force push to remote
 git rm --cached -r .  # empties the index
 git rev-parse --show-toplevel  # print the top level directory of the current repository
 git reset HEAD~1  # throw away last commit, keeping changes for a better one
+git show <pathToFile> highlights the changes
 git version
+gitk  # GUI showing files in each commit
 GitLab Markdown
 https://github.com/github/linguist/blob/master/lib/linguist/languages.yml
+https://ndpsoftware.com/git-cheatsheet.html
 
-## configurations
+### configurations
 find . -wholename '*.git/config' > gitconfig-all.txt
 find . -wholename '*.gitignore' > gitignore-all.txt
 find . -wholename '*.git/config' | wc -l
@@ -30,37 +42,42 @@ gci -r .git | select fullname
 gci -r .gitignore | select fullname
 grep -rl --include "config" harriott . > gitconfig-harriott.txt
 
-### lf
+#### lf
 autocrlf = input => warning: CRLF will be replaced by LF
 eol = lf
 
-### settings for MSWin
+#### settings for MSWin
 fgrep -rl --include "config" 'harriott' | xargs fgrep -rl 'symlinks'
 grep -rl --include "config" ignorecase . | wc -l
 grep -rl --include "config" symlinks . | wc -l
 
-## damaged index
+### damaged index
 del .git\index
 git reset
 
-# encoding - Pandoc
+### user's gitconfig
+$MACHINE/jo/gitconfig
+$machine\troin\gitconfig
+git lg
+
+## Pandoc
 --fail-if-warnings  -> exit with error status if there are any warnings
 
-## verbose
+### verbose
   [makePDF] Source:
   ...
   \end{document}
 
-# encoding - Python
+## Python
 echo $WORKON_HOME
 pew ls
 
-## virtualenv
+### virtualenv
 cdvirtualenv  # goto the package directory
 deactivate
 lsvirtualenv  # lists the known environments
 
-### virtualenvwrapper
+#### virtualenvwrapper
 mkvirtualenv <name>  # also activates it
 workon  # activate (or list all)
 
@@ -78,6 +95,7 @@ https://pgp.key-server.io/
 
 # imagey
 72 dpi = 18.3 dots per mm
+COLOR TOOLS  http://html-color-codes.info/
 
 ## ImageMagick
 convert -flatten transparent.png white_background.png
@@ -95,14 +113,24 @@ montage <left> <right> -geometry +9+9 -tile 2x1 <lr>
 -gravity northwest  -> the default
 convert -list gravity
 
+## VLC Player
+- -> slow down by .1x
++ -> speed up by .1x for each press
+= -> returns speed to normal
+A -> to Change Aspect ratio
+b -> to rotate through Audio tracks
+v -> to rotate through Subtitles
+
 # internetworking
 web colors
 
 ## Thunderbird
-Menu > File > Compact Folders
+$DROPBOX/JH/TP-default-release/compatibility.ini  for LastVersion
 Alt+T > A (= Extensions)
 Ctrl+Shft+B => Address Book
+Menu > File > Compact Folders
 right-click on folder > Properties > Repair Folder
+C:\MozillaThunderbird\thunderbird.exe -addressbook
 
 ### tbkeys-lite Main key bindings
     "j": "cmd:cmd_nextMsg",
@@ -125,8 +153,10 @@ $IT1/Cross-platform/TeX/LaTeX/dts-tex.txt  has tests
 \textit{...}
 \textsubscript{}
 \textsuperscript{}
+\the\length  % prints that length
 \today
 \usepackage{soul}  % Hyphenation for letterspacing, underlining, and more
+\vfill
 
 ## font sizes
 \tiny
@@ -143,6 +173,10 @@ $IT1/Cross-platform/TeX/LaTeX/dts-tex.txt  has tests
 ## fonts - Indic
 FreeFont
 Lohit used by Wikipedia
+
+## geometry
+hmargin={<left margin>,<right margin>}
+vmargin={<top margin>,<bottom margin>}
 
 ## indents
 \noindent
@@ -198,15 +232,17 @@ r              - reload
 z              - toggle zoom between Fit Page, Fit Width, Fit Content
 
 # text wrangling
+carriage return (U+000D) returns the cursor to the left of the line (usually just before line feed on MSWin)
 finding characters
 
 ## vim
 $HOME/.viminfo
 $HOME/_viminfo
 $ITstack/vimfiles/spell/fr.utf-8.add
+^M = carriage return
 find . -type f -name tags
 gci -r tags -force | where { ! $_.PSIsContainer } | select -expandProperty fullname > tags-Win10.txt
-vim . # will open netrw on current directory
+[g]vim .  # will open netrw on current directory
 
 ### gVim
 gvim -O <textfile0> <textfile1>  # opens them in a vertical split
