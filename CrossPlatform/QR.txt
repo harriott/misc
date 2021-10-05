@@ -81,6 +81,10 @@ lsvirtualenv  # lists the known environments
 mkvirtualenv <name>  # also activates it
 workon  # activate (or list all)
 
+# Ghostscript convert pdf to png
+gs
+gswin64c -dSAFER -sDEVICE=png16m -r400 -dFirstPage=1 -dLastPage=1 -o output.png input.pdf
+
 # gpg
 gpg --fingerprint
 gpg --list-keys

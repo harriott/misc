@@ -2,12 +2,10 @@ vim: ft=build:
 
 commands here are generic, see also $ARCHBUILDS/QR.txt
 
-bat -A /etc/hosts
-Ctrl+s  pause output to screen
-Ctrl+q  resume output to screen
 date -R
 date -r <fileToRefer>
 npm -g list
+"Pipe Viewer"
 rhash -a --bsd <somefile>
 rhash --list-hashes => list names of all supported hashes
 rhash --sha256 <file>
@@ -22,6 +20,7 @@ command: scale=n  => results to n decimal places
 # Bash
 <somecommand> | xcol <keyword1> <keyword2> ... # for highlighting
 [ -s "filename" ]  # true if file not zero-size
+bash --version
 cal -3    " all 3 months from now
 cal -n 18 " all 18 months from now
 cal -w    " week numbers
@@ -119,7 +118,7 @@ echo $(xrandr -q | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f1) $(xrandr
 GPU=$(lspci | grep VGA | cut -d ":" -f3);RAM=$(cardid=$(lspci | grep VGA |cut -d " " -f1);lspci -v -s $cardid | grep " prefetchable"| cut -d "=" -f2);echo $GPU $RAM
 lspci | grep -e VGA -e 3D  # gets just the graphics card name
 
-# printing - CUPS
+## printing - CUPS
 "Command-Line Printing and Options" http://localhost:631/help/options.html
 lpadmin
 lpq  # show printer queue status
@@ -127,30 +126,111 @@ lpstat -p -d  # show status of printers, including which is set as default
 lpstat -s  # status
 sudo systemctl status cups.service
 
-## cancel print jobs
+### cancel print jobs
 cancel -a
 lprm
 
-## lp
+### lp
 lp *  # prints all images in a directory
 lp -o fit-to-page <image>
 lp -o scaling=200 <image>  # prints divided across 4 pages
 
-### orientation
+#### orientation
 automatically selects the best orientation for filling the page
 
-#### specify
+##### specify
 -o orientation-requested=3 - portrait orientation (no rotation)
 -o orientation-requested=4 - landscape orientation (90 degrees)
 -o orientation-requested=5 - reverse landscape or seascape orientation (270 degrees)
 -o orientation-requested=6 - reverse portrait or upside-down orientation (180 degrees)
 
-# printing - HPLIP
+## printing - HPLIP
 hp-levels  # takes a little while to show the ink levels
 hp-printsettings  # dialog pop-up
 hp-setup -h
 hp-systray & disown  # HPLIP Status Service tray icon (double-click to get HP Device Manager)
 hp-toolbox  # HP Device Manager
+
+## storage
+7z x <pw'd_zip>
+cp -r <sourceDir> .
+"GNU Grep Manual"
+"install(1)"
+mkdir -p  # --parents = make parent directories as needed (no error if existing)
+rm(1)
+sort(1)
+sudo parted -l
+
+### Dolphin
+F4        -> Konsole  attached below
+Shift+F4  -> Konsole  in a new window
+
+### file counts
+isutf8 **/* | wc -l  # non UTF-8 files (fails when too many)
+ls **/* | wc -l      # all of the files
+
+### non-optical
+blkid -o list
+df -h [<disk>]
+lsblk -f
+sudo fatlabel /dev/sdi1 [<newLabel>]
+
+### optical
+cd-drive  # info
+cdrecord dev=/dev/sr0 -checkdrive
+
+#### tray
+eject  # opens tray
+eject -h
+eject -t  # closes tray
+eject -T sr1  # toggles tray of sr1
+
+### partitioning
+gdisk(8)
+
+#### parted
+can't set the volume-name
+sudo parted <device>
+
+##### CL-mode
+-s => don't ask
+sudo parted -l
+
+### rm + pv
+step 1: find <directory> | wc -l  # gets the <filecount>
+step 2: sudo rm -rv <directory> | pv -l -s <filecount> > /dev/null  # shows progress for rm
+
+### rsnapshot
+ncdu --exclude *rsnapshot
+rsnapshot configtest
+sudo rsnapshot du  # can takes many hours...
+
+### rsync
+"rsync manual"
+log: > = the item is received
+rsync: -l = --links = copy symlinks as symlinks
+
+### sizes
+diskonaut -h
+dust
+ncdu
+
+#### listed
+du -ah . | grep -v "/$" | sort -rh | head -44  # recursive list of largest 44 files
+du -h --max-depth=1  # for a quick list of folder sizes
+du -sh  # gets size of current directory
+du -sh <glob>
+du(1)
+ls -1Rhs | sed -e "s/^ *//" | grep "^[0-9]" | sort -hr | head -n50  # neat recursive list of largest
+
+### stat
+"stat(1)"
+stat -c '%a %n' *  # show octal permissions
+
+### tree
+tree(1)
+tree -d
+tree -fi
 
 # imagey
 colorpicker --one-shot --preview
@@ -164,9 +244,6 @@ gphoto2 -P  # get all files
 exiftool <image>
 exiftool -Orientation *
 exiv2 <image>
-
-## Ghostscript convert pdf to png
-gswin64c -dSAFER -sDEVICE=png16m -r400 -dFirstPage=1 -dLastPage=1 -o output.png input.pdf
 
 ## Nomacs
 Alt+m => toggle menu
@@ -280,9 +357,10 @@ mpv --start=-2 <avfile>  # starts 2 seconds from end
 
 ### interactive control
 hash     => cycle audio tracks
+A        => cycle aspect ratio
 Alt+0    => halve video window size
 Alt+1    => full video window size
-Ctrl +/- => +/-0.1 s audio delay
+Ctrl +/- => +/-100 ms audio delay
 f        => toggle fullscreen
 i/I      => statistics
 o/O      => show progress
@@ -350,9 +428,10 @@ sudo ls /var/lib/iwd
 
 ### iwctl
 b iwctl
-iwctl device list
+iwctl device list  # shows MAC address
 iwctl known-networks list
 iwctl station wlan0 get-networks  # shows if  wlan0  is connected to one
+requires a DHCP client to get an IP address
 
 ## NetworkManager
 nmcli device  # list of networking devices
@@ -393,7 +472,6 @@ pass ls
 pass(1)
 
 # PDFs
-"convert pdf to png"
 Firefox shows Document Outline
 Outline = the hyperref bookmarks that correspond to headings of a LaTeX document
 pdfimages -h
@@ -457,87 +535,6 @@ alsamixer
 speaker-test -c 2
 sudo alsactl store
 
-# storage
-7z x <pw'd_zip>
-cp -r <sourceDir> .
-"GNU Grep Manual"
-"install(1)"
-mkdir -p  # --parents = make parent directories as needed (no error if existing)
-rm(1)
-sort(1)
-sudo parted -l
-
-## Dolphin
-F4        -> Konsole  attached below
-Shift+F4  -> Konsole  in a new window
-
-## file counts
-isutf8 **/* | wc -l  # non UTF-8 files (fails when too many)
-ls **/* | wc -l      # all of the files
-
-## non-optical
-blkid -o list
-df -h [<disk>]
-lsblk -f
-sudo fatlabel /dev/sdi1 [<newLabel>]
-
-## optical
-cd-drive  # info
-cdrecord dev=/dev/sr0 -checkdrive
-
-### tray
-eject  # opens tray
-eject -h
-eject -t  # closes tray
-eject -T sr1  # toggles tray of sr1
-
-## partitioning
-gdisk(8)
-
-### parted
-can't set the volume-name
-sudo parted <device>
-
-#### CL-mode
--s => don't ask
-sudo parted -l
-
-## rm + pv
-step 1: find <directory> | wc -l  # gets the <filecount>
-step 2: sudo rm -rv <directory> | pv -l -s <filecount> > /dev/null  # shows progress for rm
-
-## rsnapshot
-ncdu --exclude *rsnapshot
-rsnapshot configtest
-sudo rsnapshot du  # can takes many hours...
-
-## rsync
-"rsync manual"
-log: > = the item is received
-rsync: -l = --links = copy symlinks as symlinks
-
-## sizes
-diskonaut -h
-dust
-ncdu
-
-### listed
-du -ah . | grep -v "/$" | sort -rh | head -44  # recursive list of largest 44 files
-du -h --max-depth=1  # for a quick list of folder sizes
-du -sh  # gets size of current directory
-du -sh <glob>
-du(1)
-ls -1Rhs | sed -e "s/^ *//" | grep "^[0-9]" | sort -hr | head -n50  # neat recursive list of largest
-
-## stat
-"stat(1)"
-stat -c '%a %n' *  # show octal permissions
-
-## tree
-tree(1)
-tree -d
-tree -fi
-
 # system
 cat /etc/hostname
 gtk-launch --version
@@ -562,6 +559,10 @@ xev | awk -F'[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $
 du -shx
 ncdu -x
 
+## groups
+/etc/group  # to see them all
+groups jo
+
 ## monitoring
 glances
 gtop
@@ -569,11 +570,18 @@ htop
 last reboot
 saidar -c
 
-## users & groups
-groups jo
+## users
 who  # lists users active on terminals
+id -u
+uname -n  # original user name
+whoami
 
-# tmux - sessions
+# term
+Ctrl+s  pause output to screen
+Ctrl+q  resume output to screen
+rxvt-unicode
+
+## tmux - sessions
 :choose-tree -> put a pane into tree mode, where a session, window or pane may be chosen interactively from a list (can then kill some)
 tmux a                  # attach
 tmux a -t myname        # attach to session myname
