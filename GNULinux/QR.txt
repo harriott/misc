@@ -5,6 +5,7 @@ commands here are generic, see also $ARCHBUILDS/QR.txt
 date -R
 date -r <fileToRefer>
 npm -g list
+openbox --reconfigure
 "Pipe Viewer"
 rhash -a --bsd <somefile>
 rhash --list-hashes => list names of all supported hashes
@@ -20,17 +21,22 @@ command: scale=n  => results to n decimal places
 # Bash
 <somecommand> | xcol <keyword1> <keyword2> ... # for highlighting
 [ -s "filename" ]  # true if file not zero-size
+[ true ] && echo y
 bash --version
 cal -3    " all 3 months from now
 cal -n 18 " all 18 months from now
 cal -w    " week numbers
 cal -y    " year
+date +%s; sleep 1; date +%s
 echo "$floatingpointnumber-$another" | bc  # FP math
 echo $PWD
+echo $SHELL
+echo $?  # 0 if command succeeded
 env | grep SHELL
 exit 0  # to quit script
 read -p "hit Enter"
 shopt
+shopt -u nullglob  # incase  t=$'\?'; echo $t
 ~/Arch/bash_history
 
 ## aliases
@@ -39,6 +45,7 @@ compgen -A alias | awk '{print}' ORS=' : '  # compact list
 
 ## functions
 export -f <usefulfunction>  # allows it to be used in a script
+unset -f <function>
 
 ### lists
 compgen -A function | awk '{print}' ORS=' : '
@@ -60,7 +67,6 @@ for f in **/*; do echo $f; done
 start=0; end=5; for i in {$start..$end}; do echo $i; done
 
 ## managing commands
-<somecommand> 2>&1 | tee stdout+stderr.log
 echo $?  # exit code of last command
 eval $Command
 vi mode: v  => edit a command in $EDITOR
@@ -69,21 +75,31 @@ vi mode: v  => edit a command in $EDITOR
 !!
 sudo !!
 
+### redirecting
+<somecommand> 2>&1 | tee stdout+stderr.log
+<somecommand> > /dev/null 2>&1
+
 ## trap
 trap - debug  # turn off debug
 trap read debug  # puts a read request after each executable line
 
-## variables
-"String Tricks that Bash Knows"
-
-### arrays
+## variables - arrays
 ${#array[@]}  # length
 for i in "${array[*]}"; do echo "$i"; done
 
+## variables - strings
+"String Tricks that Bash Knows"
+${string:position:length}
+[[ $t =~ (y|n) ]] && echo 'good answer'
+
+# CopyQ
+copyq tab  # lists them
+ctrl+home -> move_to_top
+
 # datetime
+date '+%Y-%m-%d %a %H:%M'
 date +%y%m%d-%H%M
 date(1)
-watch -n1 "date '+%D%n%T'|figlet -k"
 
 # fcron
 systemctl status fcron.service
@@ -92,23 +108,79 @@ systemctl status fcron.service
 fcrontab -l
 sudo cat /var/spool/fcron/jo.orig
 
+# file manage
+cp -r <sourceDir> .
+diff -qrN dir1/ dir2/
+"GNU Grep Manual"
+"install(1)"
+ls -l
+mkdir -p  # --parents = make parent directories as needed (no error if existing)
+rm(1)
+sort(1)
+
+## compressed
+7z x <pw'd_zip>
+tar -xvf tar.gz.tar
+
+## Dolphin
+F4        -> Konsole  attached below
+Shift+F4  -> Konsole  in a new window
+
+## file counts
+isutf8 **/* | wc -l  # non UTF-8 files (fails when too many)
+ls **/* | wc -l      # all of the files
+
+## rm + pv
+step 1: find <directory> | wc -l  # gets the <filecount>
+step 2: sudo rm -rv <directory> | pv -l -s <filecount> > /dev/null  # shows progress for rm
+
+## sizes
+diskonaut -h
+dust
+ncdu
+
+### listed
+du -ah . | grep -v "/$" | sort -rh | head -44  # recursive list of largest 44 files
+du -h --max-depth=1  # for a quick list of folder sizes
+du -sh  # gets size of current directory
+du -sh <glob>
+du(1)
+ls -1Rhs | sed -e "s/^ *//" | grep "^[0-9]" | sort -hr | head -n50  # neat recursive list of largest
+
+## stat
+"stat(1)"
+stat -c '%a %n' *  # show octal permissions
+
+## tree
+tree(1)
+tree -d
+tree -fi
+
 # get at root on tty2
 Ctrl+Alt+F2 > root + pw
 
 # GNU Privacy Guard
 echo "...seems to be working..." | gpg -ase -r jo | gpg  # tests key ( makes empty file secret.out)
+fingerprint: xxxx xxxx xxxx xxxx xxxx  xxxx xxxx xxxx xxxx xxxx
+gpg --send-keys key-id  # then can never be deleted from the keyserver
+gpg --full-gen-key
+
+## keybox
 gpg --delete-key <anID>
 gpg --import my_private_key.asc
 gpg --import my_public_key.asc
-gpg --list-keys
-gpg --send-keys key-id  # then can never be deleted from the keyserver
-
-## keybox
-gpg -k  # --list-keys
+gpg -ao private.asc --export-secret-keys jh
 kbxutil ~/.gnupg/pubring.kbx | moar  # for a more detailed exploration
 
 # hw
 lsusb
+uname -m  # machine hardare name
+
+## CPU
+cpupower frequency-info
+sudo cpupower frequency-set -u 3400Mhz
+sudo turbostat --interval 0.1 --num_iterations 1
+sudo turbostat --interval 2 --quiet
 
 ## graphics
 xrandr  # xrandr -q
@@ -145,48 +217,22 @@ automatically selects the best orientation for filling the page
 -o orientation-requested=6 - reverse portrait or upside-down orientation (180 degrees)
 
 ## printing - HPLIP
-hp-levels  # takes a little while to show the ink levels
+hp-levels  # takes a little while to show the ink levels (after "Using device : ...")
 hp-printsettings  # dialog pop-up
 hp-setup -h
 hp-systray & disown  # HPLIP Status Service tray icon (double-click to get HP Device Manager)
+hp-testpage
 hp-toolbox  # HP Device Manager
 
-## storage
-7z x <pw'd_zip>
-cp -r <sourceDir> .
-"GNU Grep Manual"
-"install(1)"
-mkdir -p  # --parents = make parent directories as needed (no error if existing)
-rm(1)
-sort(1)
-sudo parted -l
-
-### Dolphin
-F4        -> Konsole  attached below
-Shift+F4  -> Konsole  in a new window
-
-### file counts
-isutf8 **/* | wc -l  # non UTF-8 files (fails when too many)
-ls **/* | wc -l      # all of the files
-
-### non-optical
+## storage - non-optical
 blkid -o list
 df -h [<disk>]
 lsblk -f
 sudo fatlabel /dev/sdi1 [<newLabel>]
 
-### optical
-cd-drive  # info
-cdrecord dev=/dev/sr0 -checkdrive
-
-#### tray
-eject  # opens tray
-eject -h
-eject -t  # closes tray
-eject -T sr1  # toggles tray of sr1
-
-### partitioning
+### partitions
 gdisk(8)
+sudo parted -l
 
 #### parted
 can't set the volume-name
@@ -195,10 +241,6 @@ sudo parted <device>
 ##### CL-mode
 -s => don't ask
 sudo parted -l
-
-### rm + pv
-step 1: find <directory> | wc -l  # gets the <filecount>
-step 2: sudo rm -rv <directory> | pv -l -s <filecount> > /dev/null  # shows progress for rm
 
 ### rsnapshot
 ncdu --exclude *rsnapshot
@@ -210,27 +252,15 @@ sudo rsnapshot du  # can takes many hours...
 log: > = the item is received
 rsync: -l = --links = copy symlinks as symlinks
 
-### sizes
-diskonaut -h
-dust
-ncdu
+## storage - optical
+cd-drive  # info
+cdrecord dev=/dev/sr0 -checkdrive
 
-#### listed
-du -ah . | grep -v "/$" | sort -rh | head -44  # recursive list of largest 44 files
-du -h --max-depth=1  # for a quick list of folder sizes
-du -sh  # gets size of current directory
-du -sh <glob>
-du(1)
-ls -1Rhs | sed -e "s/^ *//" | grep "^[0-9]" | sort -hr | head -n50  # neat recursive list of largest
-
-### stat
-"stat(1)"
-stat -c '%a %n' *  # show octal permissions
-
-### tree
-tree(1)
-tree -d
-tree -fi
+### tray
+eject  # opens tray
+eject -h
+eject -t  # closes tray
+eject -T sr1  # toggles tray of sr1
 
 # imagey
 colorpicker --one-shot --preview
@@ -289,7 +319,7 @@ t    toggle
 
 # lsof
 "list open files"
-sudo lsof -i
+[sudo] lsof -i
 
 # multimedia
 ffprobe -i <avfile> -show_format -v quiet | sed -n 's/duration=//p'  # fractional seconds
@@ -386,9 +416,6 @@ sudo iptraf-ng  # ncurses network statistic monitoring utility
 sudo lshw -c network
 sudo lsof -i -P -n | grep LISTEN  # to see the listening ports
 thunderbird -addressbook
-youtube-dl -F <videoURL>
-youtube-dl -f best <videoURL>
-youtube-dl -f bestaudio <audioURL>
 
 ## devices
 ip link
@@ -416,6 +443,7 @@ sudo systemctl status iptables.service
 ## hostname
 hostname
 hostnamectl
+uname -n  # hostname
 
 ## ip
 ip a  # ip address show
@@ -425,6 +453,7 @@ ip r  # ip route show - compactly shows my internal ip address
 ## iwd
 b iwd
 sudo ls /var/lib/iwd
+systemctl status iwd.service
 
 ### iwctl
 b iwctl
@@ -497,7 +526,8 @@ pdfinfo <a_pdf_file>  # A5 = 420x595. See GSview for more sizes.
 
 ## Zathura
 <tab> toggles Outline view
-r -> rotate by 90 degrees
++/-/=  -> zoom in/out/original
+r  -> rotate by 90 degrees
 "zathura man page"
 
 # Plasma
@@ -517,15 +547,20 @@ bm pgrep
 pgrep <aprogram>  # reports it's process id
 
 # sed
+[[:alpha:]] = [[:lower:]] + [[:upper:]] = [A-Za-z]
+"stream editor"
+
+## make changes
 echo "don't forget that" | sed 's/\x27/\"/'
+sed -i '/<regex>/!d' <filetoreduce>  # removes lines that don't match
+sed G <file>  # outputs <file> with blank lines added
+
+## show file contents
 sed '/pattern/q' <file>  # cat's  <file>  until  pattern
 sed 5q <file> print first 5 lines
 sed -e '' <file>  # mimics cat
-sed -i '/<regex>/!d' <filetoreduce>  # removes lines that don't match
 sed -n '/<regex>/p' <file>  # prints only the matching lines
 sed -n '2,$p' <file>  # prints from the 2nd line
-sed G <file>  # outputs <file> with blank lines added
-"stream editor"
 
 # sound
 pulsemixer
@@ -571,20 +606,73 @@ last reboot
 saidar -c
 
 ## users
-who  # lists users active on terminals
 id -u
-uname -n  # original user name
+su -
+who  # lists users active on terminals
 whoami
 
 # term
 Ctrl+s  pause output to screen
 Ctrl+q  resume output to screen
-rxvt-unicode
+tput(1)
 
-## tmux - sessions
-:choose-tree -> put a pane into tree mode, where a session, window or pane may be chosen interactively from a list (can then kill some)
+## size
+stty size  # lines columns
+
+### set (not in tmux)
+printf '\033[8;40;100t'
+resize -s 90 150
+
+## tmux
+$TERM is set to 'screen-256color'
+bind      --> alias for  bind-key
+C-a z     --> toggle zoom
+C-a < / > --> display-menu
+C-a [     --> copy-mode
+C-a ]     --> paste-buffer -p
+pgrep tmux -l
+set synchronize-panes
+tmux kill-server
+tmux send ls enter  # ls  in the currently active pane
+tmux show-options -s
+
+### buffers
+C-a # --> list-buffers
+C-a = --> choose-buffer -Z
+
+### copy mode
+C-a e --> easycopy
+C-a P (C-p) --> quickopen (abspath, URL)
+Enter --> quits
+Pg Up/Dn
+S --> copytk mode
+s --> easymotion
+
+#### copytk mode
+j --> easymotion forward
+k --> easymotion backward
+n --> easymotion lines
+s --> easymotion
+
+### panes
+C-a q     --> display-panes
+C-a { / } --> swap-pane -U / -D
+
+### sessions
+:choose-tree -> put a pane into tree mode, can kill and select
+
 tmux a                  # attach
 tmux a -t myname        # attach to session myname
+tmux detach
 tmux kill-server; tmux  # good for resetting
 tmux ls                 # list sessions
+tmux lsk -Na            # includes my rebinds
+
+## urxvt
+$TERM is set to 'rxvt-unicode-256color'
+rxvt-unicode
+
+# tr
+tr '\n' ' ' < <in> [> <out>]  # replace newlines with spaces
+tr (Unix)
 

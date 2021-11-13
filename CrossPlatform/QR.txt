@@ -1,17 +1,18 @@
 vim: ft=build:
 
+espeak -v fr+f2 "Bonjour tout le monde"
 HP ENVY 5532 > Wireless Settings > Settings > Advanced > IP Settings > OK > Manual  -> allows tweaking of printer's address
 regular expressions
 
 # encoding
 http://daringfireball.net/projects/markdown/syntax
-perl -le '$,="\n"; print @INC'
 
 ## ffmpeg
 -t duration
 -vf crop=iw:ih-80:0:0
 -vf crop=width:height:x:y (height=depth below y)
 ffmpeg -i <video> -vframes 1 frame.jpg  # extracts a single frame
+ffmpeg -version
 
 ## Git
 git -P <command>  # --no-pager
@@ -40,6 +41,8 @@ find . -wholename '*.gitignore' > gitignore-all.txt
 find . -wholename '*.git/config' | wc -l
 gci -r .git | select fullname
 gci -r .gitignore | select fullname
+git config -l
+git remote rename origin gh
 grep -rl --include "config" harriott . > gitconfig-harriott.txt
 
 #### lf
@@ -68,6 +71,34 @@ git lg
   ...
   \end{document}
 
+## Perl
+echo "my_string" | perl -pe 's/my/your/g'
+echo 'hello  there' | perl -pe 's/ +/ /'
+echo hello | perl -nle 'print uc'
+for ...  # = foreach ...
+perl -e 'print reverse <>' <file_to_reverse>
+perl -le 'print a..z'
+
+### inform
+perl -h  # summary of options
+perl -le '$,="\n"; print @INC'
+perl -v
+perldoc -f <function>
+perldoc perldoc
+perldoc perlmodlib  # bundled modules
+perldoc perlrun
+where.exe perl
+
+### PS
+perl -e 'print \"Hello World\"'
+perl -e "print qq(Hello, world!)"
+perl -i -ne 'printf q(%04d %s), $., $_' <file_needing_linenumbers>
+perl -ne 'printf' <file_to_print>
+
+### say
+say scalar @array;  # number of elements
+use feature 'say';
+
 ## Python
 echo $WORKON_HOME
 pew ls
@@ -86,16 +117,19 @@ gs
 gswin64c -dSAFER -sDEVICE=png16m -r400 -dFirstPage=1 -dLastPage=1 -o output.png input.pdf
 
 # gpg
-gpg --fingerprint
-gpg --list-keys
-gpg --list-sigs
 gpg --version
 
 ## key servers
 https://keys.openpgp.org/
 https://keyserver.ubuntu.com
 https://keyserver.2ndquadrant.com/
-https://pgp.key-server.io/
+
+## show stuff
+gpg --export-ownertrust  # shows trust settings
+gpg --fingerprint jh  # neater fingerprint output
+gpg --list-sigs  # --list-keys --with-sig-list
+gpg -k  # --list-keys
+gpg -K  # --list-secret-keys
 
 # imagey
 72 dpi = 18.3 dots per mm
@@ -127,6 +161,10 @@ v -> to rotate through Subtitles
 
 # internetworking
 web colors
+youtube-dl -F <videoURL>
+youtube-dl -f best <videoURL>
+youtube-dl -f bestaudio <audioURL>
+youtube-dl --version
 
 ## Thunderbird
 $DROPBOX/JH/TP-default-release/compatibility.ini  for LastVersion

@@ -1,13 +1,13 @@
 #!/usr/bin/perl
 
-# ---------------------------------------------------------------------
-# perl mysmsMD.pl <aMySMSscreenscrapefile>
-# when you want to convert screen-scape from mysms into markdown format
-# ---------------------------------------------------------------------
-#  use in  $ITstack\onGitHub\vimfiles\ftplugin\md.vim
+# ----------------------------------------------------------------------
+# perl $ITstack\onGitHub\misc\PerlTools\mysmsMD.pl <aMySMSscreenscrapefile>
+# when you want to convert screen-scrape from mysms into markdown format
+# ----------------------------------------------------------------------
+#  used in  $vimfiles/ftplugin/md.vim
 
 use strict;  use warnings;
-use Tie::File;
+use Tie::File;  # on MSWin requires  fileformat=dos
 use Data::Printer;
 
 # grab the lines of the screen-scrape file into an array:
