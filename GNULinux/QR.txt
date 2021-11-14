@@ -4,6 +4,7 @@ commands here are generic, see also $ARCHBUILDS/QR.txt
 
 date -R
 date -r <fileToRefer>
+Make (software)
 npm -g list
 openbox --reconfigure
 "Pipe Viewer"
@@ -44,6 +45,7 @@ alias
 compgen -A alias | awk '{print}' ORS=' : '  # compact list
 
 ## functions
+"$@" = "$1" "$2" ...
 export -f <usefulfunction>  # allows it to be used in a script
 unset -f <function>
 

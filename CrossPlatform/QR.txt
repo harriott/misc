@@ -16,24 +16,23 @@ ffmpeg -version
 
 ## Git
 git -P <command>  # --no-pager
-git checkout-index -f <somefile>  # overwrite from the index's copy
 git grep <caseSensitiveText>
-git grep Log $(git rev-list --all) -- '*.ps1'  # searches all  ps1  files in all commits
 git init
-git log -- *pdf  # shows if any PDF's have been inadvertently included
-git log --follow *Colette*
-git log -S <string>
-git ls-files
 git push gh +master  # force push to remote
-git rm --cached -r .  # empties the index
 git rev-parse --show-toplevel  # print the top level directory of the current repository
-git reset HEAD~1  # throw away last commit, keeping changes for a better one
 git show <pathToFile> highlights the changes
 git version
-gitk  # GUI showing files in each commit
 GitLab Markdown
 https://github.com/github/linguist/blob/master/lib/linguist/languages.yml
 https://ndpsoftware.com/git-cheatsheet.html
+
+### commits
+git grep Log $(git rev-list --all) -- '*.ps1'  # searches all  ps1  files in all commits
+git log -- *pdf  # shows if any PDF's have been inadvertently included
+git log --follow *Colette*
+git log -S <string>
+git reset HEAD~1  # throw away last commit, keeping changes for a better one
+gitk  # GUI showing files in each commit
 
 ### configurations
 find . -wholename '*.git/config' > gitconfig-all.txt
@@ -54,7 +53,12 @@ fgrep -rl --include "config" 'harriott' | xargs fgrep -rl 'symlinks'
 grep -rl --include "config" ignorecase . | wc -l
 grep -rl --include "config" symlinks . | wc -l
 
-### damaged index
+### the index
+git checkout-index -f <somefile>  # overwrite from the index's copy
+git ls-files
+git rm --cached -r .  # empties the index
+
+#### damaged
 del .git\index
 git reset
 
