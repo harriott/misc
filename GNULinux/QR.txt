@@ -2,8 +2,6 @@ vim: ft=build:
 
 commands here are generic, see also $ARCHBUILDS/QR.txt
 
-date -R
-date -r <fileToRefer>
 Make (software)
 npm -g list
 openbox --reconfigure
@@ -24,19 +22,25 @@ command: scale=n  => results to n decimal places
 [ -s "filename" ]  # true if file not zero-size
 [ true ] && echo y
 bash --version
+cal       " this month, with today highlighted
 cal -3    " all 3 months from now
 cal -n 18 " all 18 months from now
 cal -w    " week numbers
 cal -y    " year
 date +%s; sleep 1; date +%s
+date -R
+date -r <fileToRefer>
 echo "$floatingpointnumber-$another" | bc  # FP math
 echo $PWD
 echo $SHELL
 echo $?  # 0 if command succeeded
+elif
 env | grep SHELL
 exit 0  # to quit script
 read -p "hit Enter"
+set -e  # terminate on a fail
 shopt
+shopt dotglob  # reports back its status
 shopt -u nullglob  # incase  t=$'\?'; echo $t
 ~/Arch/bash_history
 
@@ -81,13 +85,34 @@ sudo !!
 <somecommand> 2>&1 | tee stdout+stderr.log
 <somecommand> > /dev/null 2>&1
 
+#### key
+1 = stdout file descriptor
+2 = stderr file descriptor
+>& = redirect to a file descriptor
+1>&2 = 2>&1
+
 ## trap
 trap - debug  # turn off debug
 trap read debug  # puts a read request after each executable line
 
+## variables
+export  # lists environment variables
+set  # lists all variables
+unset $var
+
 ## variables - arrays
-${#array[@]}  # length
+echo ${#array[@]}  # length
+
+### list
+echo ${array[@]}
 for i in "${array[*]}"; do echo "$i"; done
+
+## variables - integer comparison
+if [ "$a" -ge "$b" ]
+if [ "$a" -gt "$b" ]
+if [ "$a" -le "$b" ]
+if [ "$a" -lt "$b" ]
+if [ "$a" -ne "$b" ]
 
 ## variables - strings
 "String Tricks that Bash Knows"
@@ -112,7 +137,6 @@ sudo cat /var/spool/fcron/jo.orig
 
 # file manage
 cp -r <sourceDir> .
-diff -qrN dir1/ dir2/
 "GNU Grep Manual"
 "install(1)"
 ls -l
@@ -128,20 +152,21 @@ tar -xvf tar.gz.tar
 F4        -> Konsole  attached below
 Shift+F4  -> Konsole  in a new window
 
-## file counts
+## investigations
+diff -qrN dir1/ dir2/
+echo `find . -type d | wc -l`-1 | bc  # counts all subdirectories
+find . -name '*.txt' ! -name 'build*'  # excluding build*
+
+### file counts
 isutf8 **/* | wc -l  # non UTF-8 files (fails when too many)
 ls **/* | wc -l      # all of the files
 
-## rm + pv
-step 1: find <directory> | wc -l  # gets the <filecount>
-step 2: sudo rm -rv <directory> | pv -l -s <filecount> > /dev/null  # shows progress for rm
-
-## sizes
+### sizes
 diskonaut -h
 dust
 ncdu
 
-### listed
+#### listed
 du -ah . | grep -v "/$" | sort -rh | head -44  # recursive list of largest 44 files
 du -h --max-depth=1  # for a quick list of folder sizes
 du -sh  # gets size of current directory
@@ -149,14 +174,29 @@ du -sh <glob>
 du(1)
 ls -1Rhs | sed -e "s/^ *//" | grep "^[0-9]" | sort -hr | head -n50  # neat recursive list of largest
 
-## stat
+### stat
 "stat(1)"
 stat -c '%a %n' *  # show octal permissions
 
-## tree
+### tree
 tree(1)
 tree -d
 tree -fi
+
+## rm + pv
+step 1: find <directory> | wc -l  # gets the <filecount>
+step 2: sudo rm -rv <directory> | pv -l -s <filecount> > /dev/null  # shows progress for rm
+
+## rsnapshot
+ncdu --exclude *rsnapshot
+rsnapshot configtest
+sudo rsnapshot du  # can takes many hours...
+systemctl list-unit-files | grep rsnapshot
+
+## rsync
+"rsync manual"
+log: > = the item is received
+rsync: -l = --links = copy symlinks as symlinks
 
 # get at root on tty2
 Ctrl+Alt+F2 > root + pw
@@ -176,7 +216,13 @@ kbxutil ~/.gnupg/pubring.kbx | moar  # for a more detailed exploration
 
 # hw
 lsusb
+mount | grep /dev/sd
 uname -m  # machine hardare name
+xbacklight -set 50
+
+## battery
+acpi -h
+batstat
 
 ## CPU
 cpupower frequency-info
@@ -227,32 +273,26 @@ hp-testpage
 hp-toolbox  # HP Device Manager
 
 ## storage - non-optical
-blkid -o list
+blkid -o list  # as root shows fs_type
 df -h [<disk>]
 lsblk -f
 sudo fatlabel /dev/sdi1 [<newLabel>]
 
 ### partitions
 gdisk(8)
-sudo parted -l
 
 #### parted
 can't set the volume-name
+mklabel <label>  # destroys existing partitions
 sudo parted <device>
+
+##### --list  all devices
+sudo parted -l | grep dev -B 1
+sudo parted -l | grep sdl -B 1 -A 6
 
 ##### CL-mode
 -s => don't ask
 sudo parted -l
-
-### rsnapshot
-ncdu --exclude *rsnapshot
-rsnapshot configtest
-sudo rsnapshot du  # can takes many hours...
-
-### rsync
-"rsync manual"
-log: > = the item is received
-rsync: -l = --links = copy symlinks as symlinks
 
 ## storage - optical
 cd-drive  # info
@@ -266,6 +306,8 @@ eject -T sr1  # toggles tray of sr1
 
 # imagey
 colorpicker --one-shot --preview
+feh -F  # fullscreen
+feh -l  # list image specifications
 for i in *.bmp; do convert $i ${i%.*}.jpg; done
 for i in *.jpeg; do convert $i jpg/${i%.*}.jpg; done  # gets them into subfolder jpg
 gphoto2 --auto-detect  # list detected cameras
@@ -427,6 +469,7 @@ networkctl list
 sudo iptables -L
 
 ### Firewalld
+sudo firewall-config
 sudo systemctl start firewalld
 sudo systemctl stop firewalld
 sudo systemctl status firewalld
@@ -532,14 +575,9 @@ pdfinfo <a_pdf_file>  # A5 = 420x595. See GSview for more sizes.
 r  -> rotate by 90 degrees
 "zathura man page"
 
-# Plasma
-Ctrl+Alt+Shift+Del -> exit KDE without saving
-Ctrl+Alt+Del       -> logout screen
-Ctrl+Alt+T         -> Konsole
-Win+PageUp/Down    -> maximises or returns to normal a window
-
 # processes
 lsof -i
+niceness: -19 = lowest priority, 20 = highest
 pkill zoom
 pstree
 sudo iotop -o
@@ -550,6 +588,7 @@ pgrep <aprogram>  # reports it's process id
 
 # sed
 [[:alpha:]] = [[:lower:]] + [[:upper:]] = [A-Za-z]
+"replace a string in multiple files"
 "stream editor"
 
 ## make changes
@@ -568,7 +607,7 @@ sed -n '2,$p' <file>  # prints from the 2nd line
 pulsemixer
 
 ## ALSA
-alsamixer
+alsamixer -V all
 speaker-test -c 2
 sudo alsactl store
 
@@ -580,9 +619,6 @@ lsmod(8)  # show what kernel modules are currently loaded
 maximum 255 bytes per filename & 4096 per path
 man hier  # description of the filesystem hierarchy
 passwd jo  # then re-login
-systemctl  # list running Systemd units
-systemctl list-timers
-systemctl --no-pager
 uname -a  # unix name, includes linux version number
 w  # list users and load on system
 whereis <executable>
@@ -596,6 +632,11 @@ xev | awk -F'[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $
 du -shx
 ncdu -x
 
+## Dunst
+dunstctl close-all
+dunstctl history-pop
+dunstify -u critical "Read this now!"
+
 ## groups
 /etc/group  # to see them all
 groups jo
@@ -606,6 +647,20 @@ gtop
 htop
 last reboot
 saidar -c
+
+## systemd
+systemctl halt
+systemctl reboot
+systemctl suspend
+
+### info
+systemctl  # list running Systemd units
+systemctl --failed
+systemctl --no-pager
+systemctl is-enabled <service>
+systemctl list-timers
+systemctl list-unit-files
+systemd-analyze blame  # time taken for boot processes
 
 ## users
 id -u
@@ -659,6 +714,7 @@ s --> easymotion
 ### panes
 C-a q     --> display-panes
 C-a { / } --> swap-pane -U / -D
+C-a Space --> cycle through 5 standard layouts
 
 ### sessions
 :choose-tree -> put a pane into tree mode, can kill and select
@@ -677,4 +733,13 @@ rxvt-unicode
 # tr
 tr '\n' ' ' < <in> [> <out>]  # replace newlines with spaces
 tr (Unix)
+
+# windows
+xrdb -query -all  # shows loaded X resources
+
+## Plasma
+Ctrl+Alt+Shift+Del -> exit KDE without saving
+Ctrl+Alt+Del       -> logout screen
+Ctrl+Alt+T         -> Konsole
+Win+PageUp/Down    -> maximises or returns to normal a window
 
