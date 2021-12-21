@@ -105,6 +105,8 @@ use feature 'say';
 ## Python
 echo $WORKON_HOME
 pew ls
+pipx run pycowsay moo
+python -m pip list --outdated
 
 ### virtualenv
 cdvirtualenv  # goto the package directory
@@ -147,6 +149,9 @@ can convert from WebP
 
 #### Bash
 convert -flatten transparent.png white_background.png
+convert -list
+convert -list color
+convert -list gravity
 convert <colourimage> -colorspace Gray <grayimage>
 convert <people> -paint 9 <people-oil>
 convert <positive> -negate <negative>
@@ -202,6 +207,7 @@ C:\MozillaThunderbird\thunderbird.exe -addressbook
 $IT1/Cross-platform/TeX/LaTeX/dts-tex.txt  has tests
 \pagebreak
 \section*{ unnumbered section }
+\stepcounter{section} % increase section number by 1
 \tableofcontents*  % ToC without itself listed therein
 \textbf{...}
 \textit{...}
@@ -210,6 +216,7 @@ $IT1/Cross-platform/TeX/LaTeX/dts-tex.txt  has tests
 \the\length  % prints that length
 \today
 \usepackage{soul}  % Hyphenation for letterspacing, underlining, and more
+\usepackage{titlesec}  % incompatible with memoir
 \vfill
 
 ## font sizes
@@ -238,6 +245,7 @@ vmargin={<top margin>,<bottom margin>}
 
 ## Memoir
 \defaultlists
+\setlength{\parindent}{0pt}
 \tightlists
 
 ## MiKTeX
@@ -261,6 +269,10 @@ mpm --version
 \begin{multicols}{3}
 ...
 \end{multicols}
+
+## pdfpages
+doesn't respect geometry margins, so  \includepdfset{offset=<fromInnerEdge> <fromTop>}
+\includepdf[options]{<pdf>}
 
 # LibreOffice
 - Alt+F12 (=Tools > Options)

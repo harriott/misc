@@ -265,9 +265,11 @@ automatically selects the best orientation for filling the page
 -o orientation-requested=6 - reverse portrait or upside-down orientation (180 degrees)
 
 ## printing - HPLIP
+hp-info
 hp-levels  # takes a little while to show the ink levels (after "Using device : ...")
 hp-printsettings  # dialog pop-up
 hp-setup -h
+hp-setup -r  # GUI to remove printer
 hp-systray & disown  # HPLIP Status Service tray icon (double-click to get HP Device Manager)
 hp-testpage
 hp-toolbox  # HP Device Manager
@@ -319,14 +321,22 @@ exiftool <image>
 exiftool -Orientation *
 exiv2 <image>
 
-## Nomacs
-Alt+m => toggle menu
+## nomacs
 f => toggles selected panes
 F1 => credits
-Alt > Alt A > Exposure > Gamma
-Alt > Alt A > Tiny Planet
 can only fill page for printing
-only way to find keybindings is by studying the menu available via mouse right-click
+
+### keybindings
+i -> File Info Panel
+mouse right-click to find them
+
+#### Alt
+Alt A > Exposure > Gamma
+Alt A > Tiny Planet
+
+#### after
+Ctrl+w => next tab
+Ctrl+w => close tab
 
 ## Pinta
 can't send to printer...
@@ -517,6 +527,17 @@ nmcli connection delete <SSID>  # can help
 nmcli connection show | cat  # reports UUIDs and colourizes the active device
 nmcli connection up uuid <UUID>
 
+## NordVPN
+nordvpn cities United_Kingdom
+nordvpn countries
+nordvpn settings
+nordvpn status
+
+### account
+nordvpn connect UK London
+nordvpn login
+nordvpn logout
+
 ## ss
 bm ss
 ss --tcp --listening
@@ -593,6 +614,7 @@ pgrep <aprogram>  # reports it's process id
 
 ## make changes
 echo "don't forget that" | sed 's/\x27/\"/'
+sed -i '0~2 a\\' <fileToAddBlankLineAfterEach2ndLine>
 sed -i '/<regex>/!d' <filetoreduce>  # removes lines that don't match
 sed G <file>  # outputs <file> with blank lines added
 
@@ -639,6 +661,7 @@ dunstify -u critical "Read this now!"
 
 ## groups
 /etc/group  # to see them all
+gpasswd
 groups jo
 
 ## monitoring
