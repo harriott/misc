@@ -705,11 +705,10 @@ resize -s 90 150
 
 ## tmux
 $TERM is set to 'screen-256color'
-bind      --> alias for  bind-key
-C-a z     --> toggle zoom
-C-a < / > --> display-menu
-C-a [     --> copy-mode
-C-a ]     --> paste-buffer -p
+bind  --> alias for  bind-key
+C-a z --> toggle zoom
+C-a < --> display-menu
+C-a > --> display-menu
 pgrep tmux -l
 set synchronize-panes
 tmux kill-server
@@ -717,10 +716,12 @@ tmux send ls enter  # ls  in the currently active pane
 tmux show-options -s
 
 ### buffers
+C-a ]     --> paste-buffer -p
 C-a # --> list-buffers
 C-a = --> choose-buffer -Z
 
 ### copy mode
+C-a [     --> copy-mode
 C-a e --> easycopy
 C-a P (C-p) --> quickopen (abspath, URL)
 Enter --> quits
@@ -752,6 +753,8 @@ tmux lsk -Na            # includes my rebinds
 ## urxvt
 $TERM is set to 'rxvt-unicode-256color'
 rxvt-unicode
+urxvt --help
+URxvt.url-launcher
 
 # tr
 tr '\n' ' ' < <in> [> <out>]  # replace newlines with spaces

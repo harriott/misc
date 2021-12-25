@@ -178,10 +178,10 @@ v -> to rotate through Subtitles
 
 # internetworking
 web colors
-youtube-dl -F <videoURL>
-youtube-dl -f best <videoURL>
-youtube-dl -f bestaudio <audioURL>
-youtube-dl --version
+yt-dlp -F <videoURL>
+yt-dlp -f best <videoURL>
+yt-dlp -f bestaudio <audioURL>
+yt-dlp --version
 
 ## Thunderbird
 $DROPBOX/JH/TP-default-release/compatibility.ini  for LastVersion
