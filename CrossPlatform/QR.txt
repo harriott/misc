@@ -5,9 +5,11 @@ regular expressions
 
 # encoding
 http://daringfireball.net/projects/markdown/syntax
+java -version
 
 ## ffmpeg
--t duration
+-filter:a afftdn=nr=90:nf=-20 removes white noise
+-t length of output
 -vf crop=iw:ih-80:0:0
 -vf crop=width:height:x:y (height=depth below y)
 ffmpeg -i <video> -vframes 1 frame.jpg  # extracts a single frame
@@ -34,6 +36,7 @@ git reset HEAD~1  # throw away last commit, keeping changes for a better one
 gitk  # GUI showing files in each commit
 
 ### configurations
+find . -wholename '*.git'
 find . -wholename '*.git/config' > gitconfig-all.txt
 find . -wholename '*.gitignore' > gitignore-all.txt
 find . -wholename '*.git/config' | wc -l
@@ -79,18 +82,32 @@ echo "my_string" | perl -pe 's/my/your/g'
 echo 'hello  there' | perl -pe 's/ +/ /'
 echo hello | perl -nle 'print uc'
 for ...  # = foreach ...
+perl -de 0  # debug
 perl -e 'print reverse <>' <file_to_reverse>
 perl -le 'print a..z'
 
+### Commant Prompt
+set TERM=dumb  # allows Perl stuff to run without Terminal Size warnings
+
 ### inform
 perl -h  # summary of options
-perl -le '$,="\n"; print @INC'
 perl -v
 perldoc -f <function>
 perldoc perldoc
 perldoc perlmodlib  # bundled modules
 perldoc perlrun
 where.exe perl
+
+#### @INC
+perl -e 'print join qq/\n/, @INC'
+perl -le '$,="\n"; print @INC'
+
+#### modules
+cpanm <moduleName>  # gets it
+
+##### list
+cpan -l > $machine\troin\cpanList.txt
+instmodsh  # followed by l
 
 ### PS
 perl -e 'print \"Hello World\"'
@@ -119,7 +136,7 @@ workon  # activate (or list all)
 
 # Ghostscript convert pdf to png
 gs
-gswin64c -dSAFER -sDEVICE=png16m -r400 -dFirstPage=1 -dLastPage=1 -o output.png input.pdf
+gswin64c -dSAFER -sDEVICE=png16m -r400 -dFirstPage=1 -dLastPage=22 -o output%02d.png input.pdf
 
 # gpg
 gpg --version
@@ -177,10 +194,12 @@ b -> to rotate through Audio tracks
 v -> to rotate through Subtitles
 
 # internetworking
+curl ifconfig.co/city
+curl ifconfig.co/country
 web colors
 yt-dlp -F <videoURL>
 yt-dlp -f best <videoURL>
-yt-dlp -f bestaudio <audioURL>
+yt-dlp -f ba <videoURL>  # bestaudio (= best*[vcodec=none])
 yt-dlp --version
 
 ## Thunderbird
@@ -202,6 +221,10 @@ C:\MozillaThunderbird\thunderbird.exe -addressbook
     "x": "cmd:cmd_archive",
     "c": "func:MsgNewMessage",
     "u": "tbkeys:closeMessageAndRefresh"
+
+## wttr.in
+curl wttr.in/London
+curl wttr.in/Newcastle
 
 # LaTeX
 $IT1/Cross-platform/TeX/LaTeX/dts-tex.txt  has tests

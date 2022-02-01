@@ -21,6 +21,7 @@ command: scale=n  => results to n decimal places
 <somecommand> | xcol <keyword1> <keyword2> ... # for highlighting
 [ -s "filename" ]  # true if file not zero-size
 [ true ] && echo y
+[ -z "$a" ] && echo zero_string; [ -n "$a" ] && echo string
 bash --version
 cal       " this month, with today highlighted
 cal -3    " all 3 months from now
@@ -163,6 +164,8 @@ ls **/* | wc -l      # all of the files
 
 ### sizes
 diskonaut -h
+du -sh  # size of current directory
+du --max-depth=1 -h <directory>
 dust
 ncdu
 
@@ -217,6 +220,7 @@ kbxutil ~/.gnupg/pubring.kbx | moar  # for a more detailed exploration
 # hw
 lsusb
 mount | grep /dev/sd
+solaar show
 uname -m  # machine hardare name
 xbacklight -set 50
 
@@ -308,8 +312,6 @@ eject -T sr1  # toggles tray of sr1
 
 # imagey
 colorpicker --one-shot --preview
-feh -F  # fullscreen
-feh -l  # list image specifications
 for i in *.bmp; do convert $i ${i%.*}.jpg; done
 for i in *.jpeg; do convert $i jpg/${i%.*}.jpg; done  # gets them into subfolder jpg
 gphoto2 --auto-detect  # list detected cameras
@@ -321,22 +323,39 @@ exiftool <image>
 exiftool -Orientation *
 exiv2 <image>
 
+## feh
+can open webp
+feh -F  # fullscreen
+feh -l  # list image specifications
+
+### in-image - size
+* => 100%
+/ => fit the window size
+up/down => zoom in/out
+
 ## nomacs
-f => toggles selected panes
-F1 => credits
 can only fill page for printing
+can't open webp
+Ctrl+k => keyboard Shortcuts
+Ctrl+Shift+p > Close on ESC
 
 ### keybindings
-i -> File Info Panel
-mouse right-click to find them
+Alt+m => Metadata Info
+f => toggles selected panes
+F1 => credits
+F10 => frameless
 
 #### Alt
 Alt A > Exposure > Gamma
 Alt A > Tiny Planet
 
-#### after
+#### not having cropped
 Ctrl+w => next tab
 Ctrl+w => close tab
+
+#### panels
+i => File Info Panel
+mouse right-click to find them
 
 ## Pinta
 can't send to printer...
@@ -466,6 +485,8 @@ one frame   ./,
 10 minutes  shift+pgup/pgdwn
 
 # networking
+notmuch search '"the Pennines"' # finds exactly that
+notmuch search tag:fm | wc -l
 sudo iptraf-ng  # ncurses network statistic monitoring utility
 sudo lshw -c network
 sudo lsof -i -P -n | grep LISTEN  # to see the listening ports
@@ -529,12 +550,16 @@ nmcli connection up uuid <UUID>
 
 ## NordVPN
 nordvpn cities United_Kingdom
+nordvpn cities United_States
 nordvpn countries
+nordvpn set technology nordlynx
 nordvpn settings
 nordvpn status
 
 ### account
 nordvpn connect UK London
+nordvpn connect US
+nordvpn disconnect
 nordvpn login
 nordvpn logout
 
@@ -663,6 +688,8 @@ dunstify -u critical "Read this now!"
 /etc/group  # to see them all
 gpasswd
 groups jo
+sudo groupadd <group>
+sudo groupdel <group>
 
 ## monitoring
 glances
