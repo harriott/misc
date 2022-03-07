@@ -12,11 +12,6 @@ rhash --sha256 <file>
 rhash --sha256 *  # to see if files are identical
 wcsf=$(wc -l <samplefile>); echo $wcsf
 
-# bc
-an arbitrary precision calculator language
-bc -q
-command: scale=n  => results to n decimal places
-
 # Bash
 <somecommand> | xcol <keyword1> <keyword2> ... # for highlighting
 [ -s "filename" ]  # true if file not zero-size
@@ -32,6 +27,7 @@ date +%s; sleep 1; date +%s
 date -R
 date -r <fileToRefer>
 echo "$floatingpointnumber-$another" | bc  # FP math
+echo "$PS1"
 echo $PWD
 echo $SHELL
 echo $?  # 0 if command succeeded
@@ -120,6 +116,11 @@ if [ "$a" -ne "$b" ]
 ${string:position:length}
 [[ $t =~ (y|n) ]] && echo 'good answer'
 
+# bc
+an arbitrary precision calculator language
+bc -q
+command: scale=n  => results to n decimal places
+
 # CopyQ
 copyq tab  # lists them
 ctrl+home -> move_to_top
@@ -157,6 +158,7 @@ Shift+F4  -> Konsole  in a new window
 diff -qrN dir1/ dir2/
 echo `find . -type d | wc -l`-1 | bc  # counts all subdirectories
 find . -name '*.txt' ! -name 'build*'  # excluding build*
+find . -type f  -exec du -h {} + | sort -r -h > sizes.txt
 
 ### file counts
 isutf8 **/* | wc -l  # non UTF-8 files (fails when too many)
@@ -276,7 +278,7 @@ hp-setup -h
 hp-setup -r  # GUI to remove printer
 hp-systray & disown  # HPLIP Status Service tray icon (double-click to get HP Device Manager)
 hp-testpage
-hp-toolbox  # HP Device Manager
+hp-toolbox &  # HP Device Manager
 
 ## storage - non-optical
 blkid -o list  # as root shows fs_type

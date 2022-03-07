@@ -5,7 +5,6 @@ regular expressions
 
 # encoding
 http://daringfireball.net/projects/markdown/syntax
-java -version
 
 ## ffmpeg
 -filter:a afftdn=nr=90:nf=-20 removes white noise
@@ -21,7 +20,7 @@ git grep <caseSensitiveText>
 git init
 git push gh +master  # force push to remote
 git rev-parse --show-toplevel  # print the top level directory of the current repository
-git show <pathToFile> highlights the changes
+git show <pathToFile>  # highlights the changes
 git version
 GitLab Markdown
 https://github.com/github/linguist/blob/master/lib/linguist/languages.yml
@@ -68,6 +67,20 @@ git reset
 $MACHINE/jo/gitconfig
 $machine\troin\gitconfig
 git lg
+
+## Java
+java -version
+PS> where.exe java
+
+## npm
+npm list
+npm prefix -g
+which npm
+
+### cspell
+cspell trace "colour"  # shows which dictionary it's in
+cspell check <filename>
+cspell lint --help
 
 ## Pandoc
 --fail-if-warnings  -> exit with error status if there are any warnings
@@ -125,6 +138,21 @@ pew ls
 pipx run pycowsay moo
 python -m pip list --outdated
 
+### MSWin
+C:\Windows\py.exe
+C:\Windows\pyw.exe
+
+#### versions
+PS> .'C:\Program Files\Python310\python.exe' --version
+PS> C:\Users\troin\AppData\Local\Programs\Python\Python310-32\python.exe  # reports "32 bit"
+PS> where.exe python
+
+### versions
+~\.pyenv
+pyenv rehash
+python  # reports "64 bit"
+python --version
+
 ### virtualenv
 cdvirtualenv  # goto the package directory
 deactivate
@@ -139,6 +167,7 @@ gs
 gswin64c -dSAFER -sDEVICE=png16m -r400 -dFirstPage=1 -dLastPage=22 -o output%02d.png input.pdf
 
 # gpg
+gpg --edit-key 13F327EF
 gpg --version
 
 ## key servers
@@ -151,6 +180,7 @@ gpg --export-ownertrust  # shows trust settings
 gpg --fingerprint jh  # neater fingerprint output
 gpg --list-sigs  # --list-keys --with-sig-list
 gpg -k  # --list-keys
+gpg -k | xcol 13F327EF expired expires jharr sprbMb
 gpg -K  # --list-secret-keys
 
 # imagey
@@ -306,6 +336,10 @@ Alt+f (= File) > t (= Export)
 defaults to GIF in Draw
 defaults to JPEG in Calc
 
+# The Platinum Searcher
+pt
+pt /version
+pt Solange .
 # screens
 Sony Xperia 10 II: 1080x2520 = 21:9
 
@@ -344,7 +378,6 @@ $HOME/.viminfo
 $HOME/_viminfo
 $ITstack/vimfiles/spell/fr.utf-8.add
 ^M = carriage return
-find . -type f -name tags
 gci -r tags -force | where { ! $_.PSIsContainer } | select -expandProperty fullname > tags-Win10.txt
 [g]vim .  # will open netrw on current directory
 
@@ -355,4 +388,9 @@ gvim -S <savedSession>
 #### window size
 gvim -geometry 200x55
 PS> gvim -c "set columns=217 lines=54"  # maximum on a 1600x900 screen with rhs taskbar
+
+### on GNU/Linux
+find . -type f -name tags
+e -la /usr/bin/vim
+file "$(command -v vim)"
 
