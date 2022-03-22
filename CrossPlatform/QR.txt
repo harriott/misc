@@ -135,8 +135,11 @@ use feature 'say';
 ## Python
 echo $WORKON_HOME
 pew ls
+pip --version
+pip list --outdated
 pipx run pycowsay moo
-python -m pip list --outdated
+python --version
+python "import sys; print (sys.path)"
 
 ### MSWin
 C:\Windows\py.exe

@@ -14,7 +14,7 @@ wcsf=$(wc -l <samplefile>); echo $wcsf
 
 # Bash
 <somecommand> | xcol <keyword1> <keyword2> ... # for highlighting
-[ -s "filename" ]  # true if file not zero-size
+[ -s "nohup.out" ] && echo non-zero file size
 [ true ] && echo y
 [ -z "$a" ] && echo zero_string; [ -n "$a" ] && echo string
 bash --version
@@ -258,7 +258,7 @@ lprm
 
 ### lp
 lp *  # prints all images in a directory
-lp -o fit-to-page <image>
+lp -n num-copies <image>
 lp -o scaling=200 <image>  # prints divided across 4 pages
 
 #### orientation
@@ -330,7 +330,10 @@ can open webp
 feh -F  # fullscreen
 feh -l  # list image specifications
 
-### in-image - size
+### in-image
+d => toggle_filenames
+
+#### size
 * => 100%
 / => fit the window size
 up/down => zoom in/out
