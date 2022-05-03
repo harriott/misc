@@ -57,6 +57,7 @@ grep -rl --include "config" symlinks . | wc -l
 ### the index
 git checkout-index -f <somefile>  # overwrite from the index's copy
 git ls-files
+git reset  # clears all staged files
 git rm --cached -r .  # empties the index
 
 #### damaged
@@ -196,6 +197,7 @@ montage <left> <right> -geometry +9+9 -tile 2x1 <lr>
 
 ### convert
 can convert from WebP
+convert -flatten img.png img-white.png
 
 #### Bash
 convert -flatten transparent.png white_background.png

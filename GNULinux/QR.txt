@@ -4,6 +4,7 @@ commands here are generic, see also $ARCHBUILDS/QR.txt
 
 Make (software)
 npm -g list
+npm config get prefix
 openbox --reconfigure
 "Pipe Viewer"
 rhash -a --bsd <somefile>
@@ -23,9 +24,6 @@ cal -3    " all 3 months from now
 cal -n 18 " all 18 months from now
 cal -w    " week numbers
 cal -y    " year
-date +%s; sleep 1; date +%s
-date -R
-date -r <fileToRefer>
 echo "$floatingpointnumber-$another" | bc  # FP math
 echo "$PS1"
 echo $PWD
@@ -34,8 +32,10 @@ echo $?  # 0 if command succeeded
 elif
 env | grep SHELL
 exit 0  # to quit script
+printf command
 read -p "hit Enter"
 set -e  # terminate on a fail
+set -x : show commands and arguments
 shopt
 shopt dotglob  # reports back its status
 shopt -u nullglob  # incase  t=$'\?'; echo $t
@@ -67,7 +67,7 @@ shopt login_shell
 
 ## loops
 for f in **/*; do echo $f; done
-start=0; end=5; for i in {$start..$end}; do echo $i; done
+for i in {0..2}; do echo $i; done
 
 ## managing commands
 echo $?  # exit code of last command
@@ -97,21 +97,22 @@ export  # lists environment variables
 set  # lists all variables
 unset $var
 
-## variables - arrays
+### arrays
+array=(element1 element2 element3)
 echo ${#array[@]}  # length
 
-### list
+#### list
 echo ${array[@]}
 for i in "${array[*]}"; do echo "$i"; done
 
-## variables - integer comparison
+### integer comparison
 if [ "$a" -ge "$b" ]
 if [ "$a" -gt "$b" ]
 if [ "$a" -le "$b" ]
 if [ "$a" -lt "$b" ]
 if [ "$a" -ne "$b" ]
 
-## variables - strings
+### strings
 "String Tricks that Bash Knows"
 ${string:position:length}
 [[ $t =~ (y|n) ]] && echo 'good answer'
@@ -126,8 +127,12 @@ copyq tab  # lists them
 ctrl+home -> move_to_top
 
 # datetime
-date '+%Y-%m-%d %a %H:%M'
+date '+%F %a %H:%M'
+date '+%Y%m%d%H%M'
+date +%s; sleep 1; date +%s
 date +%y%m%d-%H%M
+date -R
+date -r <fileToGetDateOf>
 date(1)
 
 # fcron
@@ -169,7 +174,6 @@ diskonaut -h
 du -sh  # size of current directory
 du --max-depth=1 -h <directory>
 dust
-ncdu
 
 #### listed
 du -ah . | grep -v "/$" | sort -rh | head -44  # recursive list of largest 44 files
@@ -178,6 +182,10 @@ du -sh  # gets size of current directory
 du -sh <glob>
 du(1)
 ls -1Rhs | sed -e "s/^ *//" | grep "^[0-9]" | sort -hr | head -n50  # neat recursive list of largest
+
+#### ncdu
+n -> order by name
+s -> order by size
 
 ### stat
 "stat(1)"
@@ -193,6 +201,7 @@ step 1: find <directory> | wc -l  # gets the <filecount>
 step 2: sudo rm -rv <directory> | pv -l -s <filecount> > /dev/null  # shows progress for rm
 
 ## rsnapshot
+"/usr/bin/rsnapshot sync: completed successfully"
 ncdu --exclude *rsnapshot
 rsnapshot configtest
 sudo rsnapshot du  # can takes many hours...
@@ -349,6 +358,7 @@ Alt+m => Metadata Info
 f => toggles selected panes
 F1 => credits
 F10 => frameless
+m => useful Exif info
 
 #### Alt
 Alt A > Exposure > Gamma
@@ -490,8 +500,8 @@ one frame   ./,
 10 minutes  shift+pgup/pgdwn
 
 # networking
+bluetoothctl -- devices
 notmuch search '"the Pennines"' # finds exactly that
-notmuch search tag:fm | wc -l
 sudo iptraf-ng  # ncurses network statistic monitoring utility
 sudo lshw -c network
 sudo lsof -i -P -n | grep LISTEN  # to see the listening ports
@@ -726,6 +736,7 @@ whoami
 # term
 Ctrl+s  pause output to screen
 Ctrl+q  resume output to screen
+sudo fgconsole
 tput(1)
 
 ## size
