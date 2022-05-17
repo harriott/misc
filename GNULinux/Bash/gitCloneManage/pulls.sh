@@ -6,7 +6,7 @@
 # Recursively find all *.git directories in the current directory,
 # for each one, execute a git pull in it's containing directory.
 # ----------------------------------------------------------------
-# bash $onGH/misc/GNULinux/Bash/gitPulls.sh
+# bash $onGH/misc/GNULinux/Bash/gitCloneManage/Pulls.sh
 
 specialCases () {
     if [[ $1 =~ BrodieRobertson ]]; then

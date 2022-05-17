@@ -171,13 +171,17 @@ Shift+F4  -> Konsole  in a new window
 ## investigations
 diff -qrN dir1/ dir2/
 echo `find . -type d | wc -l`-1 | bc  # counts all subdirectories
-find . -name '*.txt' ! -name 'build*'  # excluding build*
-find . -type f  -exec du -h {} + | sort -r -h > sizes.txt
-find . -newer oldFile
 
 ### file counts
 isutf8 **/* | wc -l  # non UTF-8 files (fails when too many)
 ls **/* | wc -l      # all of the files
+
+### find
+find(1)
+find . -name '*.txt' ! -name 'build*'  # excluding build*
+find . -newer oldFile
+find . -type f  -exec du -h {} + | sort -r -h > sizes.txt
+find . -type l -ls  # list all symlinks in a directory tree
 
 ### sizes
 diskonaut -h
@@ -368,7 +372,7 @@ Alt+m => Metadata Info
 f => toggles selected panes
 F1 => credits
 F10 => frameless
-m => useful Exif info
+m => useful Exif info, it it's there
 
 #### Alt
 Alt A > Exposure > Gamma
