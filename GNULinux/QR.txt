@@ -13,6 +13,14 @@ rhash --sha256 <file>
 rhash --sha256 *  # to see if files are identical
 wcsf=$(wc -l <samplefile>); echo $wcsf
 
+# awesome wm
+on top clients are indicated by a caret
+maximized (horizontally or vertically)
+  are indicated by (horizontal or vertical) double arrow, and break tiling
+modkey+left_mouse_drag = move
+modkey+right_mouse_drag = resize
+modkey+s = awful.hotkeys_popup
+
 # Bash
 <somecommand> | xcol <keyword1> <keyword2> ... # for highlighting
 [ -s "nohup.out" ] && echo non-zero file size
@@ -134,6 +142,7 @@ date +%y%m%d-%H%M
 date -R
 date -r <fileToGetDateOf>
 date(1)
+strftime
 
 # fcron
 systemctl status fcron.service
@@ -164,6 +173,7 @@ diff -qrN dir1/ dir2/
 echo `find . -type d | wc -l`-1 | bc  # counts all subdirectories
 find . -name '*.txt' ! -name 'build*'  # excluding build*
 find . -type f  -exec du -h {} + | sort -r -h > sizes.txt
+find . -newer oldFile
 
 ### file counts
 isutf8 **/* | wc -l  # non UTF-8 files (fails when too many)
@@ -680,6 +690,8 @@ halt -p
 lsmod(8)  # show what kernel modules are currently loaded
 maximum 255 bytes per filename & 4096 per path
 man hier  # description of the filesystem hierarchy
+notify-send -u critical "test of critical notification"
+notify-send -t 5000 -u low "Hello World"
 passwd jo  # then re-login
 uname -a  # unix name, includes linux version number
 w  # list users and load on system

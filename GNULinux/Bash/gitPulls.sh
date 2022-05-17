@@ -1,15 +1,30 @@
 #!/bin/bash
-# vim: set tw=0
+# vim: set fdl=1 tw=0:
 
-# Joseph Harriott http://momentary.eu/ Wed 18 Sep 2019
+# Joseph Harriott  Tue 17 May 2022
 
 # Recursively find all *.git directories in the current directory,
 # for each one, execute a git pull in it's containing directory.
 # ----------------------------------------------------------------
+# bash $onGH/misc/GNULinux/Bash/gitPulls.sh
 
+specialCases () {
+    if [[ $1 =~ BrodieRobertson ]]; then
+        find . -name "*\?*" -exec perl-rename -v 's|\?|_|g' {} \;
+    elif [[ $1 =~ Eredarion ]]; then
+        find . -name "*:*" -exec perl-rename -v 's|:|_|g' {} \;
+    fi
+}
+
+wd=$PWD
 dotgits=$(find . -name '*.git')
 for dotgit in $dotgits; do
 	repository=${dotgit%/*}
-	echo $repository
+	echo ${tpf3b}$repository${tpfn}
+	cd $repository
+    git pull
+    specialCases $repository
+    cd $wd
 done
+echo ${tpfn}
 

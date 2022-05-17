@@ -27,6 +27,8 @@ https://github.com/github/linguist/blob/master/lib/linguist/languages.yml
 https://ndpsoftware.com/git-cheatsheet.html
 
 ### commits
+git checkout <commit>  # go back to the commit (hash or tag)
+git checkout master  # return to current state of project
 git grep Log $(git rev-list --all) -- '*.ps1'  # searches all  ps1  files in all commits
 git log -- *pdf  # shows if any PDF's have been inadvertently included
 git log --follow *Colette*
