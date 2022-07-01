@@ -1,6 +1,7 @@
 vim: ft=build:
 
 HP ENVY 5532 > Wireless Settings > Settings > Advanced > IP Settings > OK > Manual  -> allows tweaking of printer's address
+nocodb
 regular expressions
 
 # encoding
@@ -16,6 +17,7 @@ ffmpeg -version
 
 ## Git
 git -P <command>  # --no-pager
+git branch -a  # lists local & remote branches
 git grep <caseSensitiveText>
 git init
 git push gh +master  # force push to remote
@@ -37,6 +39,7 @@ git reset HEAD~1  # throw away last commit, keeping changes for a better one
 gitk  # GUI showing files in each commit
 
 ### configurations
+$MACHINE/jo/gitconfig
 find . -wholename '*.git'
 find . -wholename '*.git/config' > gitconfig-all.txt
 find . -wholename '*.gitignore' > gitignore-all.txt
@@ -174,6 +177,7 @@ gswin64c -dSAFER -sDEVICE=png16m -r400 -dFirstPage=1 -dLastPage=22 -o output%02d
 
 # gpg
 gpg --edit-key 13F327EF
+gpg --verify file.asc [file]
 gpg --version
 
 ## key servers
@@ -233,6 +237,8 @@ v -> to rotate through Subtitles
 # internetworking
 curl ifconfig.co/city
 curl ifconfig.co/country
+https://www.gps-coordinates.net
+trashinbox
 web colors
 yt-dlp -F <videoURL>
 yt-dlp -f best <videoURL>
@@ -241,7 +247,9 @@ yt-dlp --version
 
 ## Thunderbird
 $DROPBOX/JH/TP-default-release/compatibility.ini  for LastVersion
-Alt+T > A (= Extensions)
+Alt+t > a (= Extensions)
+Alt+t > e (= Edit) > a a (= Account Settings)
+Alt+t > Manually sort folders
 Ctrl+Shft+B => Address Book
 Menu > File > Compact Folders
 right-click on folder > Properties > Repair Folder
@@ -307,6 +315,12 @@ vmargin={<top margin>,<bottom margin>}
 \defaultlists
 \setlength{\parindent}{0pt}
 \tightlists
+extrafontsizes
+
+### simple footer
+\usepackage{currfile}
+  \makeevenfoot{plain}{}{\cg {\currfilename}}{}
+   \makeoddfoot{plain}{}{\cg {\currfilename}}{}
 
 ## MiKTeX
 initexmf --report

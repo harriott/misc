@@ -23,9 +23,9 @@ modkey+s = awful.hotkeys_popup
 
 # Bash
 <somecommand> | xcol <keyword1> <keyword2> ... # for highlighting
-[ -s "nohup.out" ] && echo non-zero file size
 [ true ] && echo y
 [ -z "$a" ] && echo zero_string; [ -n "$a" ] && echo string
+[[ 1 == 1 ]] && echo "true"
 bash --version
 cal       " this month, with today highlighted
 cal -3    " all 3 months from now
@@ -53,6 +53,12 @@ shopt -u nullglob  # incase  t=$'\?'; echo $t
 alias
 compgen -A alias | awk '{print}' ORS=' : '  # compact list
 
+## file manage
+[ -d "$d" ] && echo "directory $d is there"
+[ -s "nohup.out" ] && echo non-zero file size
+[[ -d "$d" && ! -L "$d" ]] && echo "It's a directory and not a symbolic link"
+mkdir -p <aDirectoryPath>  # won't overwrite if it already exists
+
 ## functions
 "$@" = "$1" "$2" ...
 export -f <usefulfunction>  # allows it to be used in a script
@@ -66,8 +72,11 @@ declare -F  # lists all declare -f possibilities
 declare -f <function_name>  # shows its contents
 type <function_name>
 
-## substitute user identity
-su -  # login shell
+## job control
+ctrl+c
+fg %n
+jobs -l  # then  kill %n
+jobs(1p)
 
 ## Login shell?
 echo $0  # "-bash" = login shell, "bash" = non-login shell
@@ -96,11 +105,16 @@ sudo !!
 >& = redirect to a file descriptor
 1>&2 = 2>&1
 
+## sudo
+su -  # login shell
+substitute user identity
+
 ## trap
 trap - debug  # turn off debug
 trap read debug  # puts a read request after each executable line
 
 ## variables
+empty=''; [[ -z $empty ]] && echo empty
 export  # lists environment variables
 set  # lists all variables
 unset $var
@@ -108,6 +122,9 @@ unset $var
 ### arrays
 array=(element1 element2 element3)
 echo ${#array[@]}  # length
+firstElement=${array[0]}
+for element in "${array[@]}"; do echo "$element"; done
+mapfile -t GreekArray < <(printf "Alpha\nBeta\nGamma"); echo ${GreekArray[@]}
 
 #### list
 echo ${array[@]}
@@ -122,6 +139,10 @@ if [ "$a" -ne "$b" ]
 
 ### strings
 "String Tricks that Bash Knows"
+${string/substring/firstMatchReplacement}
+${string//substring/allMatchesReplacement}
+${string/#substringAtStart/replacement}
+${string/%substringAtEnd/replacement}
 ${string:position:length}
 [[ $t =~ (y|n) ]] && echo 'good answer'
 
@@ -135,19 +156,25 @@ copyq tab  # lists them
 ctrl+home -> move_to_top
 
 # datetime
+strftime
+
+## date
 date '+%F %a %H:%M'
 date '+%Y%m%d%H%M'
 date +%s; sleep 1; date +%s
 date +%y%m%d-%H%M
+date -d @<unixTimeToConvert>
 date -R
 date -r <fileToGetDateOf>
 date(1)
-strftime
 
 # fcron
 systemctl status fcron.service
 
 ## fcrontab
+VISUAL= fcrontab -e
+
+### listing
 fcrontab -l
 sudo cat /var/spool/fcron/jo.orig
 
@@ -178,8 +205,11 @@ ls **/* | wc -l      # all of the files
 
 ### find
 find(1)
+find $PWD -name <file>  # gets full path
+find . -maxdepth 1 -mindepth 1 -type f -name "*"  # those in working directory
 find . -name '*.txt' ! -name 'build*'  # excluding build*
 find . -newer oldFile
+find . -path <excludedDirectory> -prune -o -name '<filename>' -print
 find . -type f  -exec du -h {} + | sort -r -h > sizes.txt
 find . -type l -ls  # list all symlinks in a directory tree
 
@@ -222,7 +252,6 @@ sudo rsnapshot du  # can takes many hours...
 systemctl list-unit-files | grep rsnapshot
 
 ## rsync
-"rsync manual"
 log: > = the item is received
 rsync: -l = --links = copy symlinks as symlinks
 
@@ -306,15 +335,18 @@ hp-toolbox &  # HP Device Manager
 ## storage - non-optical
 blkid -o list  # as root shows fs_type
 df -h [<disk>]
+du -sh <bigDirectory>
 lsblk -f
 sudo fatlabel /dev/sdi1 [<newLabel>]
 
 ### partitions
 gdisk(8)
+sudo mkfs.ext4 -L <label> /dev/sdxx
 
 #### parted
 can't set the volume-name
 mklabel <label>  # destroys existing partitions
+parted(8)
 sudo parted <device>
 
 ##### --list  all devices
@@ -327,7 +359,7 @@ sudo parted -l
 
 ## storage - optical
 cd-drive  # info
-cdrecord dev=/dev/sr0 -checkdrive
+cdrecord dev=/dev/sr0 -checkdrive  # Vendor_info etc
 
 ### tray
 eject  # opens tray
@@ -488,12 +520,13 @@ mpv av://v4l2:/dev/video0
 mpv --start=-2 <avfile>  # starts 2 seconds from end
 
 ### interactive control
-hash     => cycle audio tracks
+./,      => framewise steps forward/backward
 A        => cycle aspect ratio
 Alt+0    => halve video window size
 Alt+1    => full video window size
 Ctrl +/- => +/-100 ms audio delay
 f        => toggle fullscreen
+hash     => cycle audio tracks
 i/I      => statistics
 o/O      => show progress
 s        => screenshot
@@ -515,6 +548,7 @@ one frame   ./,
 
 # networking
 bluetoothctl -- devices
+neomutt -v
 notmuch search '"the Pennines"' # finds exactly that
 sudo iptraf-ng  # ncurses network statistic monitoring utility
 sudo lshw -c network
@@ -581,16 +615,21 @@ nmcli connection up uuid <UUID>
 nordvpn cities United_Kingdom
 nordvpn cities United_States
 nordvpn countries
+nordvpn rate x  # 1 (poor) to 5 (excellent)
 nordvpn set technology nordlynx
 nordvpn settings
 nordvpn status
+pgrep nordvpn
+sudo pkill -9 -f nordvpn  # doesn't logout
 
 ### account
-nordvpn connect UK London
+nordvpn connect UK
 nordvpn connect US
 nordvpn disconnect
 nordvpn login
 nordvpn logout
+nordvpn rate 5
+nordvpn status | xcol United
 
 ## ss
 bm ss
@@ -656,6 +695,7 @@ niceness: -19 = lowest priority, 20 = highest
 pkill zoom
 pstree
 sudo iotop -o
+xprop  # WM_CLASS(STRING) = "instance", "class"
 
 ## pgrep
 bm pgrep
@@ -697,6 +737,7 @@ man hier  # description of the filesystem hierarchy
 notify-send -u critical "test of critical notification"
 notify-send -t 5000 -u low "Hello World"
 passwd jo  # then re-login
+swapon --show
 uname -a  # unix name, includes linux version number
 w  # list users and load on system
 whereis <executable>
@@ -771,6 +812,7 @@ C-a > --> display-menu
 pgrep tmux -l
 set synchronize-panes
 tmux kill-server
+tmux kill-session -a  # kills all but current session
 tmux send ls enter  # ls  in the currently active pane
 tmux show-options -s
 
@@ -797,7 +839,7 @@ s --> easymotion
 ### panes
 C-a q     --> display-panes
 C-a { / } --> swap-pane -U / -D
-C-a Space --> cycle through 5 standard layouts
+C-a Space --> next-layout (of 5 defaults)
 
 ### sessions
 :choose-tree -> put a pane into tree mode, can kill and select
