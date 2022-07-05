@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 # ----------------------------------------------------------------------
-# perl $ITstack\onGitHub\misc\PerlTools\mysmsMD.pl <aMySMSscreenscrapefile>
+# PS> perl $onGH\misc\PerlTools\mysmsMD.pl <aMySMSscreenscrapefile>
 # when you want to convert screen-scrape from mysms into markdown format
 # ----------------------------------------------------------------------
 #  used in  $vimfiles/ftplugin/md.vim

@@ -114,8 +114,10 @@ trap - debug  # turn off debug
 trap read debug  # puts a read request after each executable line
 
 ## variables
+(( $1 == 1 || $1 == 2 )) && echo "number 1 or 2"
 empty=''; [[ -z $empty ]] && echo empty
 export  # lists environment variables
+if (( ! $n == 1 )); then echo 'not 1'; fi
 set  # lists all variables
 unset $var
 
@@ -840,6 +842,7 @@ s --> easymotion
 C-a q     --> display-panes
 C-a { / } --> swap-pane -U / -D
 C-a Space --> next-layout (of 5 defaults)
+:join-pane -s 2 -t 1  # move w2 as a pane to w1
 
 ### sessions
 :choose-tree -> put a pane into tree mode, can kill and select

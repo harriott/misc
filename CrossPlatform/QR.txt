@@ -134,6 +134,15 @@ perl -e "print qq(Hello, world!)"
 perl -i -ne 'printf q(%04d %s), $., $_' <file_needing_linenumbers>
 perl -ne 'printf' <file_to_print>
 
+### regex
+* = 0 or more times
++ = 1 or more times
+\d = [0-9]
+\n = newline
+\s = space, tab, newline
+\w = alphanumeric or _
+a{m,n} = between m & n a's
+
 ### say
 say scalar @array;  # number of elements
 use feature 'say';
