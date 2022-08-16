@@ -1,9 +1,10 @@
 # vim: ft=gitconfig
 
-# this should be sourced by  ~/.gitconfig
+# this should be sourced by  ~/.gitconfig  ( $MACHINE/jo/gitconfig )
 
 [alias]
 	hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
     lg = log --graph --pretty=format:'%C(red bold)%h%Creset -%C(yellow bold)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative
 [push]
 	default = simple
+

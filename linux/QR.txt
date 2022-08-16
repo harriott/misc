@@ -2,6 +2,7 @@ vim: ft=build:
 
 commands here are generic, see also $ARCHBUILDS/QR.txt
 
+info info
 Make (software)
 npm -g list
 npm config get prefix
@@ -23,40 +24,39 @@ modkey+s = awful.hotkeys_popup
 
 # Bash
 <somecommand> | xcol <keyword1> <keyword2> ... # for highlighting
-[ true ] && echo y
-[ -z "$a" ] && echo zero_string; [ -n "$a" ] && echo string
-[[ 1 == 1 ]] && echo "true"
 bash --version
-cal       " this month, with today highlighted
-cal -3    " all 3 months from now
-cal -n 18 " all 18 months from now
-cal -w    " week numbers
-cal -y    " year
 echo "$floatingpointnumber-$another" | bc  # FP math
 echo "$PS1"
 echo $PWD
 echo $SHELL
 echo $?  # 0 if command succeeded
-elif
 env | grep SHELL
 exit 0  # to quit script
 printf command
 read -p "hit Enter"
-set -e  # terminate on a fail
-set -x : show commands and arguments
+scriptDir=$(dirname "${BASH_SOURCE[0]}")
 shopt
 shopt dotglob  # reports back its status
 shopt -u nullglob  # incase  t=$'\?'; echo $t
+xdg-open $cITh/unix-like/linux/bash.pdf
 ~/Arch/bash_history
 
 ## aliases
 alias
 compgen -A alias | awk '{print}' ORS=' : '  # compact list
 
+## conditionals
+[ "$a" ] && echo $a
+[ -z "$a" ] && echo zero_string; [ -n "$a" ] && echo string
+[ true ] && echo y
+[[ 1 == 1 ]] && echo "true"
+elif
+
 ## file manage
 [ -d "$d" ] && echo "directory $d is there"
 [ -s "nohup.out" ] && echo non-zero file size
 [[ -d "$d" && ! -L "$d" ]] && echo "It's a directory and not a symbolic link"
+man -h ls
 mkdir -p <aDirectoryPath>  # won't overwrite if it already exists
 
 ## functions
@@ -105,6 +105,12 @@ sudo !!
 >& = redirect to a file descriptor
 1>&2 = 2>&1
 
+# set
+echo $-  # current options
+set -e  # terminate on a fail
+set -v  # show code lines as they're used
+set -x : show commands and arguments
+
 ## sudo
 su -  # login shell
 substitute user identity
@@ -114,23 +120,27 @@ trap - debug  # turn off debug
 trap read debug  # puts a read request after each executable line
 
 ## variables
+$undefined && echo 'Eh! $undefined true!'
 (( $1 == 1 || $1 == 2 )) && echo "number 1 or 2"
 empty=''; [[ -z $empty ]] && echo empty
 export  # lists environment variables
 if (( ! $n == 1 )); then echo 'not 1'; fi
 set  # lists all variables
-unset $var
+
+### unset
+var1=1; var2=2
+echo $var1 $var2
+unset var1 var2
 
 ### arrays
 array=(element1 element2 element3)
 echo ${#array[@]}  # length
 firstElement=${array[0]}
-for element in "${array[@]}"; do echo "$element"; done
 mapfile -t GreekArray < <(printf "Alpha\nBeta\nGamma"); echo ${GreekArray[@]}
 
 #### list
 echo ${array[@]}
-for i in "${array[*]}"; do echo "$i"; done
+for item in "${array[@]}"; do echo "$item"; done
 
 ### integer comparison
 if [ "$a" -ge "$b" ]
@@ -140,13 +150,24 @@ if [ "$a" -lt "$b" ]
 if [ "$a" -ne "$b" ]
 
 ### strings
-"String Tricks that Bash Knows"
+[[ $t =~ (y|n) ]] && echo 'good answer'
+echo lkj | rev | cut -c 2- | rev
+echo ljk | sed 's/.$//'
+s=12345; echo $s | awk '{print substr($1,length($1)-2) }'
+s=12345; echo $s | cut -c $((${#s}-2))-
+
+#### parameter expansion
 ${string/substring/firstMatchReplacement}
 ${string//substring/allMatchesReplacement}
 ${string/#substringAtStart/replacement}
 ${string/%substringAtEnd/replacement}
 ${string:position:length}
-[[ $t =~ (y|n) ]] && echo 'good answer'
+
+a=12345; a=${a:2}; echo $a
+b="a(b(c(d"; o ${b##*\(}
+t=lkj; echo ${t:0:${#t}-1}
+
+name=polish.ostrich.racing.champion; o ${name#*.}; o ${name##*.}; o ${name%%.*}; o ${name%.*}
 
 # bc
 an arbitrary precision calculator language
@@ -160,10 +181,18 @@ ctrl+home -> move_to_top
 # datetime
 strftime
 
+## cal
+cal       " this month
+cal -3    " last month, this, next
+cal -n 18 " all 18 months from now
+cal -w    " week numbers
+cal -y    " year
+
 ## date
 date '+%F %a %H:%M'
 date '+%Y%m%d%H%M'
 date +%s; sleep 1; date +%s
+date +%Y%m%d
 date +%y%m%d-%H%M
 date -d @<unixTimeToConvert>
 date -R
@@ -171,21 +200,17 @@ date -r <fileToGetDateOf>
 date(1)
 
 # fcron
-systemctl status fcron.service
-
-## fcrontab
-VISUAL= fcrontab -e
-
-### listing
 fcrontab -l
-sudo cat /var/spool/fcron/jo.orig
+systemctl status fcron.service
 
 # file manage
 cp -r <sourceDir> .
+fuseiso <ISO_image> <mountDirectory>
 "GNU Grep Manual"
 "install(1)"
 ls -l
 mkdir -p  # --parents = make parent directories as needed (no error if existing)
+ls(1)
 rm(1)
 sort(1)
 
@@ -212,7 +237,7 @@ find . -maxdepth 1 -mindepth 1 -type f -name "*"  # those in working directory
 find . -name '*.txt' ! -name 'build*'  # excluding build*
 find . -newer oldFile
 find . -path <excludedDirectory> -prune -o -name '<filename>' -print
-find . -type f  -exec du -h {} + | sort -r -h > sizes.txt
+find . -type f -exec du -h {} + | sort -r -h > sizes.txt
 find . -type l -ls  # list all symlinks in a directory tree
 
 ### sizes
@@ -254,8 +279,8 @@ sudo rsnapshot du  # can takes many hours...
 systemctl list-unit-files | grep rsnapshot
 
 ## rsync
-log: > = the item is received
-rsync: -l = --links = copy symlinks as symlinks
+log: >  = the item is received
+rsync: -l  = --links  = copy symlinks as symlinks
 
 # get at root on tty2
 Ctrl+Alt+F2 > root + pw
@@ -303,7 +328,7 @@ lspci | grep -e VGA -e 3D  # gets just the graphics card name
 lpadmin
 lpq  # show printer queue status
 lpstat -p -d  # show status of printers, including which is set as default
-lpstat -s  # status
+lpstat -s  # status, including URL
 sudo systemctl status cups.service
 
 ### cancel print jobs
@@ -311,9 +336,12 @@ cancel -a
 lprm
 
 ### lp
-lp *  # prints all images in a directory
 lp -n num-copies <image>
 lp -o scaling=200 <image>  # prints divided across 4 pages
+
+#### prints all images in a directory
+lp *
+lp *.JPG
 
 #### orientation
 automatically selects the best orientation for filling the page
@@ -334,36 +362,44 @@ hp-systray & disown  # HPLIP Status Service tray icon (double-click to get HP De
 hp-testpage
 hp-toolbox &  # HP Device Manager
 
-## storage - non-optical
-blkid -o list  # as root shows fs_type
+## storage
+umount /dev/sdxx
+umount /mountpoint
+
+### non-optical
 df -h [<disk>]
 du -sh <bigDirectory>
 lsblk -f
-sudo fatlabel /dev/sdi1 [<newLabel>]
+lsblk(8)
 
-### partitions
+#### FAT
+sudo fatlabel /dev/sdi1 [<newLabel>]
+sudo mkfs.vfat -n 'label' -I /dev/sdxn
+
+#### partitions
 gdisk(8)
 sudo mkfs.ext4 -L <label> /dev/sdxx
 
-#### parted
+##### parted
 can't set the volume-name
 mklabel <label>  # destroys existing partitions
 parted(8)
 sudo parted <device>
 
-##### --list  all devices
+###### --list  all devices
 sudo parted -l | grep dev -B 1
 sudo parted -l | grep sdl -B 1 -A 6
 
-##### CL-mode
+###### CL-mode
 -s => don't ask
 sudo parted -l
 
-## storage - optical
+### optical
 cd-drive  # info
 cdrecord dev=/dev/sr0 -checkdrive  # Vendor_info etc
+sudo wipefs [-a] /dev/sdx  # [wipe] signatures
 
-### tray
+#### tray
 eject  # opens tray
 eject -h
 eject -t  # closes tray
@@ -592,12 +628,12 @@ ip l  # lists ethernet devices
 ip r  # ip route show - compactly shows my internal ip address
 
 ## iwd
-b iwd
+man iwd
 sudo ls /var/lib/iwd
 systemctl status iwd.service
 
 ### iwctl
-b iwctl
+man iwctl
 iwctl device list  # shows MAC address
 iwctl known-networks list
 iwctl station wlan0 get-networks  # shows if  wlan0  is connected to one
@@ -639,6 +675,7 @@ ss --tcp --listening
 ss -tulw  # listening on TCP, UDP, RAW sockets
 
 ## ssh
+$HOME/.ssh/authorized_keys
 ssh localhost
 sudo systemctl restart sshd.service
 sudo systemctl status sshd.service
@@ -665,6 +702,9 @@ pass(1)
 Firefox shows Document Outline
 Outline = the hyperref bookmarks that correspond to headings of a LaTeX document
 pdfimages -h
+pdfimages -png pdf.pdf png  # pulls out images separated
+pdftoppm -png -r 300 <pdf> <basename_for_ppm_sequence>
+pdftoppm -jpg -r 300 <pdf> <basename_for_ppm_sequence>
 
 ## C5 printing
 Firefox can't figure it's portrait
@@ -674,8 +714,11 @@ Ubuntu's qpdfview gets it almost right
 ## pdftk
 pdftk in.pdf burst  # breaks into individual pages
 in*.pdf cat output out.pdf  # concatenate a sequence of PDFs
-pdftk leftRotated.pdf cat 1-endeast output horizontal.pdf
 pdftk secure.pdf input_pw <password> output normal.pdf
+
+### fix rotations
+pdftk leftRotated.pdf cat 1-endeast output horizontal.pdf
+pdftk leftRotated-rightRotated.pdf cat 1east 2west output horizontal.pdf
 
 ## qpdfview
 F6 = View > Docks > Outline (such as the headings of a LaTeX document)
@@ -712,6 +755,7 @@ pgrep <aprogram>  # reports it's process id
 echo "don't forget that" | sed 's/\x27/\"/'
 sed -i '0~2 a\\' <fileToAddBlankLineAfterEach2ndLine>
 sed -i '/<regex>/!d' <filetoreduce>  # removes lines that don't match
+sed -i '1s/^/vim: ft=<filetype>:\n\n/' $cslF
 sed G <file>  # outputs <file> with blank lines added
 
 ## show file contents
@@ -731,11 +775,13 @@ sudo alsactl store
 
 # system
 cat /etc/hostname
+clamscan -r  # shows Loading & Compiling
+clamscan -r 2>&1 | tee clamscan.log
 gtk-launch --version
 halt -p
 lsmod(8)  # show what kernel modules are currently loaded
 maximum 255 bytes per filename & 4096 per path
-man hier  # description of the filesystem hierarchy
+i hier  # detailed description of the filesystem hierarchy
 notify-send -u critical "test of critical notification"
 notify-send -t 5000 -u low "Hello World"
 passwd jo  # then re-login
@@ -796,7 +842,16 @@ whoami
 Ctrl+s  pause output to screen
 Ctrl+q  resume output to screen
 sudo fgconsole
+tput colors
 tput(1)
+
+## terminal line settings
+stty - a
+
+### flow control
+[-]ixon = the setting
+ctrl-q = XON
+ctrl-s = XOFF
 
 ## size
 stty size  # lines columns

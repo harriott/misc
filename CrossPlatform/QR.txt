@@ -16,10 +16,11 @@ ffmpeg -i <video> -vframes 1 frame.jpg  # extracts a single frame
 ffmpeg -version
 
 ## Git
+$machine\troin\gitconfig
 git -P <command>  # --no-pager
 git branch -a  # lists local & remote branches
 git grep <caseSensitiveText>
-git init
+git init -b gh
 git push gh +master  # force push to remote
 git rev-parse --show-toplevel  # print the top level directory of the current repository
 git show <pathToFile>  # highlights the changes
@@ -33,6 +34,7 @@ git checkout <commit>  # go back to the commit (hash or tag)
 git checkout master  # return to current state of project
 git grep Log $(git rev-list --all) -- '*.ps1'  # searches all  ps1  files in all commits
 git log -- *pdf  # shows if any PDF's have been inadvertently included
+git log --follow '*cmusq.vim'
 git log --follow *Colette*
 git log -S <string>
 git reset HEAD~1  # throw away last commit, keeping changes for a better one
@@ -152,7 +154,6 @@ echo $WORKON_HOME
 pew ls
 pip --version
 pip list --outdated
-pipx run pycowsay moo
 python --version
 python "import sys; print (sys.path)"
 
@@ -164,6 +165,11 @@ C:\Windows\pyw.exe
 PS> .'C:\Program Files\Python310\python.exe' --version
 PS> C:\Users\troin\AppData\Local\Programs\Python\Python310-32\python.exe  # reports "32 bit"
 PS> where.exe python
+
+### pipx
+~/.local/pipx/venvs
+pipx list
+pipx run pycowsay moo
 
 ### versions
 ~\.pyenv
@@ -185,7 +191,9 @@ gs
 gswin64c -dSAFER -sDEVICE=png16m -r400 -dFirstPage=1 -dLastPage=22 -o output%02d.png input.pdf
 
 # gpg
-gpg --edit-key 13F327EF
+<key-id> can be the short key id = the last 8 characters
+gpg --delete-key <key-id>
+gpg --edit-key <key-id>
 gpg --verify file.asc [file]
 gpg --version
 
@@ -249,14 +257,11 @@ curl ifconfig.co/country
 https://www.gps-coordinates.net
 trashinbox
 web colors
-yt-dlp -F <videoURL>
-yt-dlp -f best <videoURL>
-yt-dlp -f ba <videoURL>  # bestaudio (= best*[vcodec=none])
-yt-dlp --version
 
 ## Thunderbird
 $DROPBOX/JH/TP-default-release/compatibility.ini  for LastVersion
-Alt+t > a (= Extensions)
+Alt+e > p (= Preferences)
+Alt+t > a (= Add-ons Manager)
 Alt+t > e (= Edit) > a a (= Account Settings)
 Alt+t > Manually sort folders
 Ctrl+Shft+B => Address Book
@@ -280,8 +285,18 @@ C:\MozillaThunderbird\thunderbird.exe -addressbook
 curl wttr.in/London
 curl wttr.in/Newcastle
 
+## yt-dlp
+i yt-dlp
+yt-dlp -F <videoURL>
+yt-dlp -f "[height<=?720]" <videoURL>
+yt-dlp -f best <videoURL>
+yt-dlp -f ba <videoURL>  # bestaudio (= best*[vcodec=none])
+yt-dlp --version
+
 # LaTeX
-$IT1/Cross-platform/TeX/LaTeX/dts-tex.txt  has tests
+$DROPBOX/JH/dts-tex.txt
+
+## commands
 \pagebreak
 \section*{ unnumbered section }
 \stepcounter{section} % increase section number by 1
@@ -296,7 +311,7 @@ $IT1/Cross-platform/TeX/LaTeX/dts-tex.txt  has tests
 \usepackage{titlesec}  % incompatible with memoir
 \vfill
 
-## font sizes
+### font sizes
 \tiny
 \scriptsize
 \footnotesize
@@ -308,19 +323,46 @@ $IT1/Cross-platform/TeX/LaTeX/dts-tex.txt  has tests
 \huge
 \Huge
 
+### geometry
+hmargin={<left margin>,<right margin>}
+vmargin={<top margin>,<bottom margin>}
+
+### indents
+\noindent
+\setlength{\parindent}{0pt}
+
+### multicols
+\usepackage{multicol}
+...
+\begin{document}
+\begin{multicols}{3}
+...
+\end{multicols}
+
+## engines
+pdflatex --version
+
+### MiKTeX
+initexmf --report
+miktex --version
+miktex --verbose fndb refresh
+
+#### FNDB
+after filename changes in  $tex
+  initexmf --update-fndb
+  MiKTeX Console > Tasks > Refresh file name database
+
+#### MiKTeX Package Manager
+C:\Users\troin\AppData\Local\MiKTeX\miktex\log\mpmcli.log
+mpm --list > "$ITstack\MSWin\MiKTeX\$Cn-packages-$(Get-Date -f yyMMdd-hhmm).txt"
+miktex --verbose packages check-update
+miktex packages list | measure | select -expand Count
+
 ## fonts - Indic
 FreeFont
 Lohit used by Wikipedia
 
-## geometry
-hmargin={<left margin>,<right margin>}
-vmargin={<top margin>,<bottom margin>}
-
-## indents
-\noindent
-\setlength{\parindent}{0pt}
-
-## Memoir
+## package - Memoir
 \defaultlists
 \setlength{\parindent}{0pt}
 \tightlists
@@ -331,29 +373,7 @@ extrafontsizes
   \makeevenfoot{plain}{}{\cg {\currfilename}}{}
    \makeoddfoot{plain}{}{\cg {\currfilename}}{}
 
-## MiKTeX
-initexmf --report
-
-### FNDB
-after filename changes in  C:\Users\troin\AppData\Roaming\MiKTeX\tex\
-  initexmf --update-fndb
-  MiKTeX Console > Tasks > Refresh file name database
-
-### MiKTeX Package Manager
-mpm --list > "MiKTeX-packageDB-$(Get-Date -f yyMMdd-hhmm).txt"
-mpm --update  # all packages
-mpm --verify  # integrity of all installed packages
-mpm --version
-
-## multicols
-\usepackage{multicol}
-...
-\begin{document}
-\begin{multicols}{3}
-...
-\end{multicols}
-
-## pdfpages
+## package - pdfpages
 doesn't respect geometry margins, so  \includepdfset{offset=<fromInnerEdge> <fromTop>}
 \includepdf[options]{<pdf>}
 
