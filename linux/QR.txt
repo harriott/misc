@@ -2,6 +2,7 @@ vim: ft=build:
 
 commands here are generic, see also $ARCHBUILDS/QR.txt
 
+emacs -mm &  # maximized
 info info
 Make (software)
 npm -g list
@@ -23,6 +24,7 @@ modkey+right_mouse_drag = resize
 modkey+s = awful.hotkeys_popup
 
 # Bash
+/etc/profile
 <somecommand> | xcol <keyword1> <keyword2> ... # for highlighting
 bash --version
 echo "$floatingpointnumber-$another" | bc  # FP math
@@ -198,6 +200,14 @@ date -d @<unixTimeToConvert>
 date -R
 date -r <fileToGetDateOf>
 date(1)
+
+# Emacs
+ctrl-x > ctrl-c => quit
+
+## view movements
+alt-v => scroll up
+ctrl-l => centre text in view
+ctrl-v => scroll down
 
 # fcron
 fcrontab -l
@@ -414,6 +424,7 @@ gphoto2 -DR  # delete all files in all folders
 gphoto2 -l  # list folders
 gphoto2 -L  # list files
 gphoto2 -P  # get all files
+gpicview  # opens first image in directory (no thumbnails)
 exiftool <image>
 exiftool -Orientation *
 exiv2 <image>
@@ -460,17 +471,30 @@ mouse right-click to find them
 can't send to printer...
 shows precise cursor position in pixels
 
+## pqiv commands
+esc/q => quit
+f => toggle full screen
+s => toggle slideshow
+
+### montage mode
+g => goto
+m => montage mode
+
+### navigating
+mouse
+backspace/space => previous/next
+
 ## scanimage
 scanimage -A  => --all-options => lists all available options
 scanimage -h
 scanimage -L  => --list-devices
 
-## sxiv command
-sxiv -frt * &  # using fullscreen, recursively open all flat
-
-## sxiv commands
-b => toggle infobar
+## [n]sxiv
 can't send to printer
+
+### commands
+b => toggle infobar
+q => quit
 Return => toggle thumbnails/image
 
 ## Vimiv
@@ -737,10 +761,16 @@ r  -> rotate by 90 degrees
 # processes
 lsof -i
 niceness: -19 = lowest priority, 20 = highest
-pkill zoom
-pstree
 sudo iotop -o
 xprop  # WM_CLASS(STRING) = "instance", "class"
+
+## kill
+kill -9 **<tab>  # fzf
+pkill zoom
+
+## list
+ps -efjH
+pstree
 
 ## pgrep
 bm pgrep
@@ -757,6 +787,7 @@ sed -i '0~2 a\\' <fileToAddBlankLineAfterEach2ndLine>
 sed -i '/<regex>/!d' <filetoreduce>  # removes lines that don't match
 sed -i '1s/^/vim: ft=<filetype>:\n\n/' $cslF
 sed G <file>  # outputs <file> with blank lines added
+sed '1i\\newFirstLineText' <fileToPrependTo>
 
 ## show file contents
 sed '/pattern/q' <file>  # cat's  <file>  until  pattern
@@ -785,6 +816,7 @@ i hier  # detailed description of the filesystem hierarchy
 notify-send -u critical "test of critical notification"
 notify-send -t 5000 -u low "Hello World"
 passwd jo  # then re-login
+ps $(pgrep Xorg)  # shows which tty X is on
 swapon --show
 uname -a  # unix name, includes linux version number
 w  # list users and load on system
@@ -792,7 +824,7 @@ whereis <executable>
 xset q  # shows a variety of IO settings
 
 ## decode key-presses
-sudo showkey  # keycodes
+doas showkey  # keycodes
 xev | awk -F'[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }'  # scancodes
 
 ## directory sizes as root
@@ -861,11 +893,11 @@ printf '\033[8;40;100t'
 resize -s 90 150
 
 ## tmux
-$TERM is set to 'screen-256color'
 bind  --> alias for  bind-key
 C-a z --> toggle zoom
 C-a < --> display-menu
 C-a > --> display-menu
+if [ $TERM == 'screen-256color' ]; then echo "you're in tmux"; fi
 pgrep tmux -l
 set synchronize-panes
 tmux kill-server

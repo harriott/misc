@@ -1,6 +1,6 @@
 # vim: ft=gitconfig
 
-# this should be sourced by  ~/.gitconfig  ( $MACHINE/jo/gitconfig )
+# this should be sourced by  ~/.gitconfig  ( $machBld/jo/gitconfig )
 
 [alias]
 	hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
