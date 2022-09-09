@@ -47,6 +47,158 @@ yt-dlp -f best <videoURL>
 yt-dlp -f ba <videoURL>  # bestaudio (= best*[vcodec=none])
 yt-dlp --version
 
+# Emacs
+emacs $core/TextNotes/TN/org/org.org &
+~\AppData\Roaming\_emacs
+
+## commands
+C-* => calc-dispatch
+C-g => keyboard-quit
+C-x C-c => quit
+M-w => copy
+M-x calendar
+M-x display-time-world => times around the world
+M-x kill-emacs => force quit
+
+### buffers
+C-x b => switch buffer
+C-x k => kill buffer
+M-x minimap-mode
+
+### calendar
+C-@ => set mark
+M-= => days to or from mark
+q => quit
+
+#### diary
+d => diary-view-entries
+m => diary-mark-entries
+s => diary-show-all-entries
+u => calendar-unmark
+
+#### info
+a => holidays
+M-x => sunrise/sunset
+p c => ISO date
+p d => day of year
+p f => date in French
+p o => mb with date in various forms
+S => sunrise/sunset for point
+
+#### movements
+. => today
+< or > => left or right
+C-x [ or ] => previous or next year
+M { or } => back or forward 1m
+n C-n => move ahead n weeks
+
+### directories files
+C-x C-r => recentf-open-files
+M-# => sr-speedbar-toggle
+
+#### Dired
+C-x C-f or d enter => Dired
+M-x dired
+q => quit
+
+#### files
+C-x C-r => recentf-open-files
+C-x C-s => save-some-buffers
+
+### help
+C-h b => describe-bindings
+C-h i => info
+C-h f => describe-function
+C-h k => describe-key
+C-h m => describe-mode
+C-h p => finder-by-keyword
+C-h r => info-emacs-manual
+C-h v => describe-variable
+C-h a => apropos-command
+C-h w => where-is
+M-x help m
+
+### Markdown Mode
+S-tab => rotate buffer visibility
+tab => rotate subtree visibility
+
+### minibuffer
+C-h v command-history
+C-x ESC ESC => repeat-complex-command
+M-x list-command-history
+
+### movements
+C-b C-f => back/forward character
+C-a/e => start/end of line
+C-n/p => next/previous line
+C-v M-v => next previous screen
+M-b M-f => back/forward word
+M-< M-> => start end of buffer
+
+### Org-mode
+C-c C-n/p => next/previous heading
+C-c C-x C-v => org-toggle-inline-images
+S-tab => rotate buffer visibility
+tab => rotate subtree visibility
+
+### packages
+M-x describe-package <package>
+no built in documentation for straight.el
+
+#### list-packages
+M-x list-packages
+M-x package-list-packages
+
+##### commands
+// => clear filter
+/k => package-menu-filter-by-keyword
+/N <regex> => filter
+/u => package-menu-filter-upgradable
+RET => help for package
+U => package-menu-mark-upgrades
+x => do upgrades
+
+#### Paradox
+M-x paradox-list-packages
+
+##### commands
+h => help
+v => visit homepage
+
+### search & replace
+C-r => isearch-backward
+C-s => isearch-repeat-forward
+M-% => query-replace
+M-s o (= M-x occur) > regex => buffer shows lines containing regex
+
+### text
+C-@ or C-SPC => mark
+C-_ => undo
+C-k => kill-line
+C-x h => mark entire buffer
+
+### windows
+C-x 0 => delete-window
+C-x 1 => delete-other-windows
+C-x o => other-window
+
+## Evil
+$GHrUse/emacs/emacs-evil-evil/evil-maps.el
+C-z => toggles it
+
+# Emacs reference sheets
+http://www.rgrjr.com/emacs/emacs_cheat.html
+https://www.emacswiki.org/emacs/Reference_Sheet_by_Aaron_Hawley
+
+# Emacs - Spacemacs
+c-x c-c => quit
+sp b d => kill the current buffer
+sp b n => switch to next buffer (avoiding special buffers)
+sp b p => switch to previous buffer (avoiding special buffers)
+sp b Y => copy whole buffer
+sp f e e => ~/.spacemacs.env
+Spacemacs documentation
+
 # encoding
 http://daringfireball.net/projects/markdown/syntax
 
@@ -461,19 +613,6 @@ espeak -v fr+f2 "Bonjour tout le monde"
 # text wrangling
 carriage return (U+000D) returns the cursor to the left of the line (usually just before line feed on MSWin)
 finding characters
-
-## Emacs reference sheets
-http://www.rgrjr.com/emacs/emacs_cheat.html
-https://www.emacswiki.org/emacs/Reference_Sheet_by_Aaron_Hawley
-
-## Emacs - Spacemacs
-c-x c-c => quit
-sp b d => kill the current buffer
-sp b n => switch to next buffer (avoiding special buffers)
-sp b p => switch to previous buffer (avoiding special buffers)
-sp b Y => copy whole buffer
-sp f e e => ~/.spacemacs.env
-Spacemacs documentation
 
 ## vim
 $HOME/.viminfo

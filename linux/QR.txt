@@ -2,7 +2,6 @@ vim: ft=build:
 
 commands here are generic, see also $ARCHBUILDS/QR.txt
 
-emacs -mm &  # maximized
 info info
 Make (software)
 npm -g list
@@ -203,6 +202,8 @@ date(1)
 
 # Emacs
 ctrl-x > ctrl-c => quit
+emacs -mm &  # maximized
+emacs -nw  # in terminal
 
 ## view movements
 alt-v => scroll up

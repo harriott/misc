@@ -1,4 +1,5 @@
-# vim: set fdl=2 tw=0:
+
+# vim: set fdl=2:
 
 # Joseph Harriott - Mon 17 Feb 2020
 
