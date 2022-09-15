@@ -25,6 +25,7 @@ W => browse-url-of-dired-file
 
 ### buffers
 C-x b => switch buffer
+C-x C-b => list buffers
 C-x k => kill buffer
 M-x minimap-mode
 
@@ -105,9 +106,10 @@ C-h w => where-is
 M-x help m
 
 ### fonts
-C-u C-x = => details of face under cursor
+C-u C-x <equals> => details of face under cursor
 M-: (face-attribute 'default :font)
 M-: (print (font-family-list))
+M-x customize > Faces
 M-x describe-face
 M-x describe-font => narrowable list of ISO font names
 M-x menu-set-font => interactive Pick a font popup
@@ -193,6 +195,7 @@ https://www.emacswiki.org/emacs/Reference_Sheet_by_Aaron_Hawley
 
 # Emacs - Spacemacs
 c-x c-c => quit
+sp b b => list buffers
 sp b d => kill the current buffer
 sp b n => switch to next buffer (avoiding special buffers)
 sp b p => switch to previous buffer (avoiding special buffers)

@@ -28,6 +28,7 @@ cpLrm () { cp -Lr $1-c $1; sudo rm -fr $1-c; }
 # git clone https://github.com/joseph8th/literatemacs $GHrCl/emacs/joseph8th-literatemacs
 # git clone https://github.com/jrblevin/markdown-mode $GHrCl/emacs/jrblevin-markdown-mode
 # git clone https://github.com/jwiegley/use-package $GHrCl/emacs/jwiegley-use-package
+# git clone https://github.com/kai2nenobu/emacs-dokuwiki-mode $GHrCl/emacs/kai2nenobu-emacs-dokuwiki-mode
 # git clone https://github.com/kovisoft/slimv $GHrCl/vim-Lisp/kovisoft-slimv
 # git clone https://github.com/leo-arch/clifm $GHrCl/linux/leo-arch-clifm
 # git clone https://github.com/noctuid/evil-guide $GHrCl/emacs/noctuid-evil-guide
@@ -39,7 +40,6 @@ cpLrm () { cp -Lr $1-c $1; sudo rm -fr $1-c; }
 # git clone https://github.com/vim/vim $GHrCl/CP/vim-vim
 # git clone https://git.sr.ht/~bzg/worg $GHrCl/emacs/_bzg-worg
 # git clone https://git.sr.ht/~protesilaos/dotfiles $GHrCl/linux/Arch/protesilaos-dotfiles
-git clone https://github.com/kai2nenobu/emacs-dokuwiki-mode $GHrCl/emacs/kai2nenobu-emacs-dokuwiki-mode
 
 if [ $host = 'sbMb' ]; then
     # rsync -iLrtv --delete $GHrUse/ $GHrCl  # if lost...

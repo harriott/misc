@@ -9,6 +9,8 @@
 ;;  or symlink to  ~\AppData\Roaming\.emacsd\init.el  ($MSwin10\symlinks.ps1)
 ;;  or can be called by  $MSwin10\user\Emacs\initPoint.el
 
+;; notes for the curious
+;; ---------------------
 ;; $Env:AppData\.emacs.d  directory
 ;; don't symlink it from Dropbox - some packages will fail to load
 ;;  just let it get populated from your  ~/.emacs.d/init.el
@@ -17,6 +19,11 @@
 
 ;; I began here by adapting code from
 ;;  literatemacs  https://github.com/joseph8th/literatemacs - with thanks
+
+;; I'm coming at this as a competent Vim user
+;; so I'm managing this file from gVim with code folding implemented by
+;; $vimfiles/ftplugin/lisp.vim
+;;  https://github.com/harriott/vimfiles/blob/master/ftplugin/lisp.vim
 
 ;;;; 1 package management option 1 bootstrap  straight.el
 ;; 0 requires  $Env:AppData\.emacs.d\early-init.el  to undefine  package-enable-at-startup
@@ -183,9 +190,6 @@
 (setq display-line-numbers-type `relative)
 
 ;;; directories files
-;; edit the file, not the link
-(setq vc-follow-symlinks t)
-
 ;; Dired+
 (when (eq system-type 'windows-nt)
     (use-package dired+)
@@ -196,6 +200,9 @@
     (use-package dirvish)
     (dirvish-override-dired-mode)
     ) ;; loads of extra functionality
+
+;; edit the file, not the link
+(setq vc-follow-symlinks t)
 
 ;; full file-path into kill-ring
 (global-set-key (kbd "C-c f") (lambda () (interactive) (kill-new buffer-file-name)))
@@ -289,20 +296,25 @@
 (use-package dokuwiki-mode :mode ("\\.dw\\'")) ;; emacs-dokuwiki-mode
 
 ;; Emacs Dashboard
+(setq dashboard-items '((recents  . 25)))
 (use-package dashboard
     :ensure t
     :config
     (dashboard-setup-startup-hook))
 
 ;; font
-(when (member "Ubuntu" (font-family-list))
-    (set-frame-font "Ubuntu 9" t t))
+(set-face-attribute 'default nil :family "Ubuntu Mono" :height 100)
+(set-face-attribute 'fixed-pitch nil :family "Ubuntu Mono")
+(set-face-attribute 'variable-pitch nil :family "Ubuntu")
+;; - thanks to Protesilaos Stavrou
 
 ;; GUI frame size
 (if (display-graphic-p)
     (when (string= (system-name) "sbMb")
-        (progn (setq default-frame-alist '( (height . 68) (width . 106)))))
-    ) ; assuming Ubuntu 9
+        ; (progn (setq default-frame-alist '( (height . 59) (width . 106)))))
+    ; ) ; for default font
+        (progn (setq default-frame-alist '( (height . 73) (width . 106)))))
+    ) ; for Ubuntu 100
 
 ;; highlight nested parentheses
 (use-package rainbow-delimiters
@@ -336,13 +348,17 @@
 ; (use-package gruvbox-theme)
 ;   (load-theme 'gruvbox-dark-soft t)
 
-; ;;; layout - Smart Mode Line
-; (use-package smart-mode-line
+; ;;; layout - Modus themes
+; (use-package emacs
 ;     :init
-;     (setq sml/no-confirm-load-theme t)
-;     ; Error ... Wrong number of arguments
-;     (setq sml/theme)
-;     )
+;     ;; Add all your customizations prior to loading the themes
+;     (setq modus-themes-italic-constructs t
+;           modus-themes-bold-constructs nil
+;           modus-themes-region '(bg-only no-extend))
+;     :config
+;     ;; Load the theme of your choice:
+;     (load-theme 'modus-vivendi) ;; OR (load-theme 'modus-vivendi)
+;     :bind ("<f5>" . modus-themes-toggle))
 
 ;;; layout - Zenburn
 (setq zenburn-use-variable-pitch t) ;; use variable-pitch fonts for some headings and titles
@@ -367,10 +383,33 @@
 ;;; minibuffer - Consult
 (use-package consult
     :bind (
+          ("C-c m" . consult-mode-command)
+          ("C-c k" . consult-kmacro)
+          ("C-x M-:" . consult-complex-command)  ; replaces  repeat-complex-command
+          ("C-x b" . consult-buffer)  ; file history replacement for  switch-to-buffer
+          ;; M-g bindings (goto-map)
+           ("M-g i" . consult-imenu)
+           ("M-g m" . consult-mark)
+           ("M-g k" . consult-global-mark)
+          ;; M-s bindings (search-map)
+           ("M-s e" . consult-isearch-history)
+           ("M-s l" . consult-line)  ; jump to line containing regex
           ("M-y" . consult-yank-pop)
           ("<help> a" . consult-apropos)
+          ;; isearch integration
+           :map isearch-mode-map
+           ("M-e" . consult-isearch-history)    ; replaces  isearch-edit-string
+           ("M-s e" . consult-isearch-history)  ; replaces  isearch-edit-string
+          ;; Minibuffer history
+           :map minibuffer-local-map
+           ("M-s" . consult-history)   ; replaces  next-matching-history-element
+           ("M-r" . consult-history)  ; replaces  previous-matching-history-element
+           ; not sure what's the benefit
           )
+    :hook (completion-list-mode . consult-preview-at-point-mode)  ; does what?
     :init)
+
+;;; minibuffer - Embark
 
 ;;; minibuffer - history
 (save-place-mode 1)
