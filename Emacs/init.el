@@ -103,6 +103,9 @@
 ;; Calendar
 (general-define-key "C-x c" 'calendar)
 
+;; ESUP
+(use-package esup)
+
 ;; set locale to UTF8
 (set-language-environment 'utf-8)
 (set-terminal-coding-system 'utf-8)
@@ -111,15 +114,22 @@
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
-;;; auto-saves & backups
-;; auto-saves
-; - they're ephemeral, incase of crash
-(setq auto-save-file-name-transforms '(("\\`/.*/\\([^/]+\\)\\'" "~/.emacs_autosave/\\1" t)))
+;;; auto-save backup lock
+;; auto-save filess (= /home/user/#foo.txt#)
+(when (eq system-type 'gnu/linux)
+    (setq auto-save-file-name-transforms '(("\\`/.*/\\([^/]+\\)\\'" "~/.emacs_autosave/\\1" t))))
+(when (eq system-type 'windows-nt)
+    (setq auto-save-file-name-transforms '(("\\`/.*/\\([^/]+\\)\\'" "c:/Users/troin/.emacs_autosave/\\1" t))))
+    ;; doesn't have any effect
 (setq auto-save-interval 20) ; default is 300 characters
 
-;; backups
-; (setq backup-directory-alist '(("." . "~/.emacs_backups/"))) ; auto generated if needed
-(setq make-backup-files nil) ; because I don't want to manage them
+;; backup files (= /home/user/foo.txt~)
+; (setq backup-directory-alist '(("." . "~/.emacs_backups/")))
+; - auto generated as needed on  linux
+(setq make-backup-files nil)  ; I don't want to manage them
+
+;; lock files (= /home/user/.#foo.txt)
+(setq create-lockfiles nil)  ; I don't need them
 
 ;;; Calendar-mode
 ;; European style
@@ -156,24 +166,39 @@
 
 ;;; coding - Markdown Mode
 (use-package markdown-mode
-    :mode ("\\.markdown\\'" "\\.md\\'")
+    :mode ("\\.gfm\\'" "\\.markdown\\'" "\\.md\\'")
+    :preface (defun my/markdown-OVERVIEW () (markdown-cycle t))
     :init
-    ; (setq markdown-cycle-global-status 3) ; doesn't trigger CONTENTS
+        (add-hook 'markdown-mode-hook #'my/markdown-OVERVIEW)
+        (add-hook 'markdown-mode-hook 'variable-pitch-mode)
     (setq markdown-command "pandoc"))
-; (add-hook 'markdown-mode-hook
-    ; (lambda ()
-    ; (setq markdown-cycle-global-status 3))) ; doesn't trigger CONTENTS
 
-;; md-outline-list
-; decorated mouse-clickable left fringes for lists
-(autoload 'md-outline-list-mode "md-outline-list")
-(add-hook 'markdown-mode-hook #'md-outline-list-mode)
+;;; column & line numbers
+; in mode line
+(column-number-mode t)
+(line-number-mode t)
+
+; relative numbers in gutter
+(global-display-line-numbers-mode t)
+(setq display-line-numbers-type `relative)
 
 ;;; directories files
-;; Global Auto Revert mode
-(global-auto-revert-mode t) ; only if no local changes to a file
-;; revert Dired and other buffers
-(setq global-auto-revert-non-file-buffers t)
+;; edit the file, not the link
+(setq vc-follow-symlinks t)
+
+;; Dired+
+(when (eq system-type 'windows-nt)
+    (use-package dired+)
+    ) ;; some extra functionality
+
+;; Dirvish
+(when (eq system-type 'gnu/linux)
+    (use-package dirvish)
+    (dirvish-override-dired-mode)
+    ) ;; loads of extra functionality
+
+;; full file-path into kill-ring
+(global-set-key (kbd "C-c f") (lambda () (interactive) (kill-new buffer-file-name)))
 
 ;; recentf
 (recentf-mode 1)
@@ -185,6 +210,18 @@
 (global-set-key (kbd "C-#") 'sr-speedbar-toggle)
 (require 'sr-speedbar)
 (setq speedbar-show-unknown-files t) ; show all files
+
+;;; directories files - reverting
+;; Global Auto Revert mode
+(global-auto-revert-mode t) ; only if no local changes to a file
+;; revert Dired and other buffers
+(setq global-auto-revert-non-file-buffers t)
+
+;; https://emacs.stackexchange.com/a/172/26821
+(global-set-key (kbd "C-c r") (lambda ()
+    (interactive)
+    (revert-buffer t t t)
+    (message "buffer is reverted")))
 
 ;;; editing
 ;; anzu
@@ -205,9 +242,17 @@
 (setq evil-shift-width 0)
 (use-package evil)
 (evil-mode 1)
+(evil-set-initial-state 'dired-mode 'normal)
+(evil-set-initial-state 'dokuwiki-mode 'normal)
+(evil-set-initial-state 'markdown-mode 'normal)
+(evil-set-initial-state 'sh-mode 'normal) ; Shell-script mode
 
 ;; flash not beep
 (setq visible-bell 1)
+
+;; full path in frame title
+(setq frame-title-format
+    (list '(buffer-file-name "%f" (dired-directory dired-directory "%b"))))
 
 ;; Helpful
 (use-package helpful)
@@ -234,8 +279,14 @@
    ))
 
 ;;; layout
-;; display images referenced in Org-mode
-(setq org-startup-with-inline-images t)
+(global-hl-line-mode 1) ;; HL Mode
+(setq-default word-wrap t) ;; don't break words
+(show-paren-mode t) ;; highlight corresponding parentheses when cursor is on one
+(use-package minimap) ;; Minimap
+
+;; DokuWiki
+(add-hook 'dokuwiki-mode-hook 'variable-pitch-mode)
+(use-package dokuwiki-mode :mode ("\\.dw\\'")) ;; emacs-dokuwiki-mode
 
 ;; Emacs Dashboard
 (use-package dashboard
@@ -243,19 +294,20 @@
     :config
     (dashboard-setup-startup-hook))
 
-;; highlight corresponding parentheses when cursor is on one
-(show-paren-mode t)
+;; font
+(when (member "Ubuntu" (font-family-list))
+    (set-frame-font "Ubuntu 9" t t))
+
+;; GUI frame size
+(if (display-graphic-p)
+    (when (string= (system-name) "sbMb")
+        (progn (setq default-frame-alist '( (height . 68) (width . 106)))))
+    ) ; assuming Ubuntu 9
 
 ;; highlight nested parentheses
 (use-package rainbow-delimiters
     :config
     (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
-
-;; HL Mode
-(global-hl-line-mode 1)
-
-;; Minimap
-(use-package minimap)
 
 ;; Narrowing allowed
 (put 'narrow-to-region 'disabled nil)
@@ -265,6 +317,10 @@
 (menu-bar-mode -1)
 ;; no shortcut buttons along the top
 (tool-bar-mode 0)
+
+;; Org-mode
+(add-hook 'org-mode-hook 'variable-pitch-mode)
+(setq org-startup-with-inline-images t) ;; display referenced images
 
 ;; Origami
 (use-package origami)
@@ -276,31 +332,45 @@
     (setq rainbow-x-colors nil)
     (add-hook 'prog-mode-hook 'rainbow-mode))
 
-; ;;; layout - Darktooth theme
-; (use-package darktooth-theme)
-;   (load-theme 'darktooth t)
+; ;;; layout - gruvbox-theme
+; (use-package gruvbox-theme)
+;   (load-theme 'gruvbox-dark-soft t)
 
-;;; layout - gruvbox-theme
-(use-package gruvbox-theme)
-  (load-theme 'gruvbox-dark-soft t)
+; ;;; layout - Smart Mode Line
+; (use-package smart-mode-line
+;     :init
+;     (setq sml/no-confirm-load-theme t)
+;     ; Error ... Wrong number of arguments
+;     (setq sml/theme)
+;     )
 
-; ;;; layout - Kaolin theme
-; (use-package kaolin-themes)
-;   (load-theme 'kaolin-valley-dark t)
+;;; layout - Zenburn
+(setq zenburn-use-variable-pitch t) ;; use variable-pitch fonts for some headings and titles
+(setq zenburn-scale-org-headlines t) ;; scale headings in org-mode
+(setq zenburn-scale-outline-headlines t) ;; scale headings in outline-mode
+(use-package zenburn-theme)
+  (load-theme 'zenburn t)
 
-; ;;; layout - Spacemacs-theme
-; (use-package spacemacs-theme)
-;   (load-theme 'spacemacs-dark t)
-; ;; Fails to install...
+;;; open in gVim
+(when (eq system-type 'gnu/linux)
+    (global-set-key (kbd "C-c g") (lambda ()
+        (interactive)
+        (call-process "gvim" nil 0 nil buffer-file-name)
+        (message "opened in gVim"))))
 
-;;; column & line numbers
-; in mode line
-(column-number-mode t)
-(line-number-mode t)
+(when (eq system-type 'windows-nt)
+    (global-set-key (kbd "C-c g") (lambda ()
+        (interactive)
+        (call-process "C:/Vim/vim90/gvim.exe" nil 0 nil buffer-file-name)
+        (message "opened in gVim"))))
 
-; relative numbers in gutter
-(global-display-line-numbers-mode t)
-(setq display-line-numbers-type `relative)
+;;; minibuffer - Consult
+(use-package consult
+    :bind (
+          ("M-y" . consult-yank-pop)
+          ("<help> a" . consult-apropos)
+          )
+    :init)
 
 ;;; minibuffer - history
 (save-place-mode 1)

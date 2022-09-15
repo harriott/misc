@@ -35,10 +35,11 @@ cpLrm () { cp -Lr $1-c $1; sudo rm -fr $1-c; }
 # git clone https://github.com/vlime/vlime $GHrCl/vim-Lisp/vlime-vlime
 # git clone https://github.com/streetturtle/awesome-wm-widgets $GHrCl/linux/wm-awesome/streetturtle-awesome-wm-widgets
 # git clone https://github.com/rxi/json.lua $GHrCl/CP/rxi-json.lua
+# git clone https://github.com/TobiasZawada/md-outline-list $GHrCl/emacs/TobiasZawada-md-outline-list
 # git clone https://github.com/vim/vim $GHrCl/CP/vim-vim
 # git clone https://git.sr.ht/~bzg/worg $GHrCl/emacs/_bzg-worg
 # git clone https://git.sr.ht/~protesilaos/dotfiles $GHrCl/linux/Arch/protesilaos-dotfiles
-git clone https://github.com/TobiasZawada/md-outline-list $GHrCl/emacs/TobiasZawada-md-outline-list
+git clone https://github.com/kai2nenobu/emacs-dokuwiki-mode $GHrCl/emacs/kai2nenobu-emacs-dokuwiki-mode
 
 if [ $host = 'sbMb' ]; then
     # rsync -iLrtv --delete $GHrUse/ $GHrCl  # if lost...

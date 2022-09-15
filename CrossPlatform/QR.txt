@@ -9,47 +9,9 @@ Closest Named Web Colors
 Shades of black
 web colors
 
-## Thunderbird
-$DROPBOX/JH/TP-default-release/compatibility.ini  for LastVersion
-ppppp > p (= Preferences)
-alt+t > a (= Add-ons Manager)
-alt+t > e (= Edit) > a a (= Account Settings)
-alt+t > Manually sort folders
-alt+v (= View) > b (= Message Body As) >
-  h (= Original HTML)
-  p (= Plain Text)  - can then export & Delete inline images
-ctrl+Shft+B => Address Book
-Menu > File > Compact Folders
-right-click on folder > Properties > Repair Folder
-C:\MozillaThunderbird\thunderbird.exe -addressbook
-
-### tbkeys-lite Main key bindings
-    "j": "cmd:cmd_nextMsg",
-    "k": "cmd:cmd_previousMsg",
-    "o": "cmd:cmd_openMessage",
-    "f": "cmd:cmd_forward",
-    "#": "cmd:cmd_delete",
-    "r": "cmd:cmd_reply",
-    "a": "cmd:cmd_replyall",
-    "x": "cmd:cmd_archive",
-    "c": "func:MsgNewMessage",
-    "u": "tbkeys:closeMessageAndRefresh"
-
-## wttr.in
-curl wttr.in/London
-curl wttr.in/Newcastle
-
-## yt-dlp
-i yt-dlp
-yt-dlp -F <videoURL>
-yt-dlp -f "[height<=?720]" <videoURL>
-yt-dlp -f best <videoURL>
-yt-dlp -f ba <videoURL>  # bestaudio (= best*[vcodec=none])
-yt-dlp --version
-
 # Emacs
+cd C:\Users\troin\AppData\Roaming\.emacs.d
 emacs $core/TextNotes/TN/org/org.org &
-~\AppData\Roaming\_emacs
 
 ## commands
 C-* => calc-dispatch
@@ -59,6 +21,7 @@ M-w => copy
 M-x calendar
 M-x display-time-world => times around the world
 M-x kill-emacs => force quit
+W => browse-url-of-dired-file
 
 ### buffers
 C-x b => switch buffer
@@ -92,18 +55,39 @@ C-x [ or ] => previous or next year
 M { or } => back or forward 1m
 n C-n => move ahead n weeks
 
+#### Dashboard
+b => Bookmarks
+r => Recent Files
+return => open
+tab / shift-tab => next / previous item
+
 ### directories files
 C-x C-r => recentf-open-files
 M-# => sr-speedbar-toggle
 
 #### Dired
-C-x C-f or d enter => Dired
+Dired+: ( => toggle details
+
+##### Dired
+?
+C-x C-f => find-file
+C-x d => dired
 M-x dired
 q => quit
+W => browse-url-of-dired-file
 
 #### files
 C-x C-r => recentf-open-files
 C-x C-s => save-some-buffers
+
+#### VC Directory Mode
+C-x v d => vc-directory
+C-x v v => vc-next-action
+
+### elisp
+(font-family-list)
+C-u C-x C-e	=> evaluate expression and insert result at point
+M-: => M-x eval-expression
 
 ### help
 C-h b => describe-bindings
@@ -114,9 +98,25 @@ C-h m => describe-mode
 C-h p => finder-by-keyword
 C-h r => info-emacs-manual
 C-h v => describe-variable
+  system-type
+  window-system
 C-h a => apropos-command
 C-h w => where-is
 M-x help m
+
+### fonts
+C-u C-x = => details of face under cursor
+M-: (face-attribute 'default :font)
+M-: (print (font-family-list))
+M-x describe-face
+M-x describe-font => narrowable list of ISO font names
+M-x menu-set-font => interactive Pick a font popup
+M-x set-frame-font => narrowable list of ISO font names
+M-x variable-pitch-mode => toggles it
+
+#### size
+C-mouse wheel
+C-x C-+/-/0 => grow/shrink/reset font
 
 ### Markdown Mode
 S-tab => rotate buffer visibility
@@ -176,6 +176,7 @@ C-@ or C-SPC => mark
 C-_ => undo
 C-k => kill-line
 C-x h => mark entire buffer
+M-y => yank-pop
 
 ### windows
 C-x 0 => delete-window
@@ -469,6 +470,43 @@ curl ifconfig.co/city
 curl ifconfig.co/country
 https://www.gps-coordinates.net
 trashinbox
+
+## Thunderbird
+$DROPBOX/JH/TP-default-release/compatibility.ini  for LastVersion
+alt+t > a (= Add-ons Manager)
+alt+t > e (= Edit) > a a (= Account Settings)
+alt+t > Manually sort folders
+alt+v (= View) > b (= Message Body As) >
+  h (= Original HTML)
+  p (= Plain Text)  - can then export & Delete inline images
+ctrl+Shft+B => Address Book
+Menu > File > Compact Folders
+right-click on folder > Properties > Repair Folder
+C:\MozillaThunderbird\thunderbird.exe -addressbook
+
+### tbkeys-lite Main key bindings
+    "j": "cmd:cmd_nextMsg",
+    "k": "cmd:cmd_previousMsg",
+    "o": "cmd:cmd_openMessage",
+    "f": "cmd:cmd_forward",
+    "#": "cmd:cmd_delete",
+    "r": "cmd:cmd_reply",
+    "a": "cmd:cmd_replyall",
+    "x": "cmd:cmd_archive",
+    "c": "func:MsgNewMessage",
+    "u": "tbkeys:closeMessageAndRefresh"
+
+## wttr.in
+curl wttr.in/London
+curl wttr.in/Newcastle
+
+## yt-dlp
+i yt-dlp
+yt-dlp -F <videoURL>
+yt-dlp -f "[height<=?720]" <videoURL>
+yt-dlp -f best <videoURL>
+yt-dlp -f ba <videoURL>  # bestaudio (= best*[vcodec=none])
+yt-dlp --version
 
 # LaTeX
 $DROPBOX/JH/dts-tex.txt
