@@ -3,7 +3,7 @@
 # --------------------------------------------------
 # strip down a saved Facebook Messenger conversation
 #
-# I call this from my $ARCHBUILDS/jo/Bash/bashrc-ob
+# I call this from my $ABjo/Bash/bashrc-ob
 # --------------------------------------------------
 # Joseph Harriott - Tue 23 Jun 2020
 

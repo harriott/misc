@@ -176,7 +176,7 @@
     :mode ("\\.gfm\\'" "\\.markdown\\'" "\\.md\\'")
     :preface (defun my/markdown-OVERVIEW () (markdown-cycle t))
     :init
-        (add-hook 'markdown-mode-hook #'my/markdown-OVERVIEW)
+        ; (add-hook 'markdown-mode-hook #'my/markdown-OVERVIEW) ; open in OVERVIEW
         (add-hook 'markdown-mode-hook 'variable-pitch-mode)
     (setq markdown-command "pandoc"))
 
@@ -225,10 +225,15 @@
 (setq global-auto-revert-non-file-buffers t)
 
 ;; https://emacs.stackexchange.com/a/172/26821
-(global-set-key (kbd "C-c r") (lambda ()
+(global-set-key (kbd "C-c v") (lambda ()
     (interactive)
     (revert-buffer t t t)
     (message "buffer is reverted")))
+
+;; Revert Buffer All
+(use-package revert-buffer-all
+    :commands (revert-buffer-all))
+(global-set-key (kbd "C-S-M-r") 'revert-buffer-all)
 
 ;;; editing
 ;; anzu
@@ -243,11 +248,23 @@
 ;; cycle-spacing
 (bind-key "M-SPC" 'cycle-spacing)  ; needs some other keybind in Openbox
 
+;;; editing - undo
+;; bigger undo (thanks to  ideasman42)
+(setq undo-limit 6710886400) ;; 64mb.
+(setq undo-strong-limit 100663296) ;; 96mb.
+(setq undo-outer-limit 1006632960) ;; 960mb.
+
+;; Undo Fu
+(use-package undo-fu
+    :config
+    (global-set-key (kbd "C-M-z") 'undo-fu-only-undo)
+    (global-set-key (kbd "C-S-z") 'undo-fu-only-redo))
+
 ;;; interface
 ;; Evil
 (setq evil-default-state 'emacs)
 (setq evil-shift-width 0)
-(use-package evil)
+(use-package evil :init (setq evil-undo-system 'undo-fu))
 (evil-mode 1)
 (evil-set-initial-state 'dired-mode 'normal)
 (evil-set-initial-state 'dokuwiki-mode 'normal)
@@ -367,30 +384,19 @@
 (use-package zenburn-theme)
   (load-theme 'zenburn t)
 
-;;; open in gVim
-(when (eq system-type 'gnu/linux)
-    (global-set-key (kbd "C-c g") (lambda ()
-        (interactive)
-        (call-process "gvim" nil 0 nil buffer-file-name)
-        (message "opened in gVim"))))
-
-(when (eq system-type 'windows-nt)
-    (global-set-key (kbd "C-c g") (lambda ()
-        (interactive)
-        (call-process "C:/Vim/vim90/gvim.exe" nil 0 nil buffer-file-name)
-        (message "opened in gVim"))))
-
 ;;; minibuffer - Consult
 (use-package consult
     :bind (
           ("C-c m" . consult-mode-command)
           ("C-c k" . consult-kmacro)
           ("C-x M-:" . consult-complex-command)  ; replaces  repeat-complex-command
-          ("C-x b" . consult-buffer)  ; file history replacement for  switch-to-buffer
+          ("C-x b" . consult-buffer)  ; replacement for  switch-to-buffer
+                                      ; includes file history and preview
           ;; M-g bindings (goto-map)
            ("M-g i" . consult-imenu)
-           ("M-g m" . consult-mark)
            ("M-g k" . consult-global-mark)
+           ("M-g m" . consult-mark)
+           ("M-g o" . consult-outline)  ; shows headings, if available
           ;; M-s bindings (search-map)
            ("M-s e" . consult-isearch-history)
            ("M-s l" . consult-line)  ; jump to line containing regex
@@ -410,6 +416,22 @@
     :init)
 
 ;;; minibuffer - Embark
+(use-package embark
+  :bind
+  (("C-c e" . embark-act)
+   ("C-c d" . embark-dwim)
+   ("C-h B" . embark-bindings))  ; alternative for  describe-bindings
+  :init
+  ; replace the key help with a completing-read interface
+  (setq prefix-help-command #'embark-prefix-help-command)
+  ; :config
+  ;; hide the mode line of the Embark live/completions buffers
+  ; (add-to-list 'display-buffer-alist
+               ; '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                 ; nil
+                 ; (window-parameters (mode-line-format . none))))
+  )
+(use-package embark-consult :after (embark consult))
 
 ;;; minibuffer - history
 (save-place-mode 1)
@@ -453,4 +475,17 @@
             "C-M-n" #'vertico-next-group
             "C-M-p" #'vertico-previous-group)
   )
+
+;;; open in gVim
+(when (eq system-type 'gnu/linux)
+    (global-set-key (kbd "C-c g") (lambda ()
+        (interactive)
+        (call-process "gvim" nil 0 nil buffer-file-name)
+        (message "opened in gVim"))))
+
+(when (eq system-type 'windows-nt)
+    (global-set-key (kbd "C-c g") (lambda ()
+        (interactive)
+        (call-process "C:/Vim/vim90/gvim.exe" nil 0 nil buffer-file-name)
+        (message "opened in gVim"))))
 
