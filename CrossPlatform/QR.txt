@@ -120,14 +120,23 @@ M-x variable-pitch-mode => toggles it
 C-mouse wheel
 C-x C-+/-/0 => grow/shrink/reset font
 
-### Markdown Mode
-S-tab => rotate buffer visibility
-tab => rotate subtree visibility
-
 ### minibuffer
 C-h v command-history
 C-x ESC ESC => repeat-complex-command
 M-x list-command-history
+
+### modes
+C-h v minor-mode-list
+
+#### Markdown Mode
+S-tab => rotate buffer visibility
+tab => rotate subtree visibility
+
+#### Org-mode
+C-c C-n/p => next/previous heading
+C-c C-x C-v => org-toggle-inline-images
+S-tab => rotate buffer visibility
+tab => rotate subtree visibility
 
 ### movements
 C-b C-f => back/forward character
@@ -136,12 +145,6 @@ C-n/p => next/previous line
 C-v M-v => next previous screen
 M-b M-f => back/forward word
 M-< M-> => start end of buffer
-
-### Org-mode
-C-c C-n/p => next/previous heading
-C-c C-x C-v => org-toggle-inline-images
-S-tab => rotate buffer visibility
-tab => rotate subtree visibility
 
 ### packages
 M-x describe-package <package>
@@ -219,7 +222,6 @@ ffmpeg -i <video> -vframes 1 frame.jpg  # extracts a single frame
 ffmpeg -version
 
 ## Git
-$machine\troin\gitconfig
 git -P <command>  # --no-pager
 git branch -a  # lists local & remote branches
 git grep <caseSensitiveText>
@@ -237,6 +239,7 @@ git checkout <commit>  # go back to the commit (hash or tag)
 git checkout master  # return to current state of project
 git grep Log $(git rev-list --all) -- '*.ps1'  # searches all  ps1  files in all commits
 git log -- *pdf  # shows if any PDF's have been inadvertently included
+git log --follow *spacemacs*
 git log --follow '*cmusq.vim'
 git log --follow *Colette*
 git log -S <string>
@@ -244,14 +247,12 @@ git reset HEAD~1  # throw away last commit, keeping changes for a better one
 gitk  # GUI showing files in each commit
 
 ### configurations
-$machBld/jo/gitconfig
 find . -wholename '*.git'
 find . -wholename '*.git/config' > gitconfig-all.txt
 find . -wholename '*.gitignore' > gitignore-all.txt
 find . -wholename '*.git/config' | wc -l
 gci -r .git | select fullname
 gci -r .gitignore | select fullname
-git config -l
 git remote rename origin gh
 grep -rl --include "config" harriott . > gitconfig-harriott.txt
 
@@ -264,6 +265,13 @@ fgrep -rl --include "config" 'harriott' | xargs fgrep -rl 'symlinks'
 grep -rl --include "config" ignorecase . | wc -l
 grep -rl --include "config" symlinks . | wc -l
 
+#### gitconfig
+$machBld/jo/gitconfig  inludes  $onGH/misc/CrossPlatform/gitconfig
+$machine\troin\gitconfig
+git config -l
+git hist
+git lg
+
 ### the index
 git checkout-index -f <somefile>  # overwrite from the index's copy
 git ls-files
@@ -273,11 +281,6 @@ git rm --cached -r .  # empties the index
 #### damaged
 del .git\index
 git reset
-
-### user's gitconfig
-$machBld/jo/gitconfig
-$machine\troin\gitconfig
-git lg
 
 ## Java
 java -version
@@ -347,6 +350,7 @@ perl -ne 'printf' <file_to_print>
 \s = space, tab, newline
 \w = alphanumeric or _
 a{m,n} = between m & n a's
+jkorpela
 
 ### say
 say scalar @array;  # number of elements
@@ -390,8 +394,8 @@ mkvirtualenv <name>  # also activates it
 workon  # activate (or list all)
 
 # Ghostscript convert pdf to png
-gs
-gswin64c -dSAFER -sDEVICE=png16m -r400 -dFirstPage=1 -dLastPage=22 -o output%02d.png input.pdf
+$ gspdfpng
+PS> gsp
 
 # file manage
 sharkdp/bat
@@ -430,6 +434,12 @@ gpg -K  # --list-secret-keys
 # imagey
 72 dpi = 18.3 dots per mm
 COLOR TOOLS  http://html-color-codes.info/
+
+## ffmpeg transpose
+0 = 90° counter clockwise and vertical flip (default)
+1 = 90° clockwise
+2 = 90° counter clockwise
+3 = 90° clockwise and vertical flip
 
 ## ImageMagick
 identify -format '%w %h %f \n' *  # images listed by size
@@ -513,9 +523,11 @@ yt-dlp --version
 
 # LaTeX
 $DROPBOX/JH/dts-tex.txt
+xc
 
 ## commands
 \pagebreak
+\renewcommand{\arraystretch}{1.5}
 \section*{ unnumbered section }
 \stepcounter{section} % increase section number by 1
 \tableofcontents*  % ToC without itself listed therein
@@ -577,6 +589,9 @@ miktex --verbose packages check-update
 miktex packages list | measure | select -expand Count
 
 ## fonts - Indic
+(face-remap-add-relative 'default :family "Arial" :height 140)
+
+### Indic
 FreeFont
 Lohit used by Wikipedia
 

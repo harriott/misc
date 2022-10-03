@@ -91,6 +91,7 @@
 ;     (auto-package-update-maybe))
 
 ;;;; 3 Paradox
+;; for alternative package searches
 (use-package paradox)
 (setq paradox-github-token t) ; don't bother with integrated GitHub starring
 
@@ -104,7 +105,7 @@
 
 ;; local lisp
 (add-to-list 'load-path "~/.emacs.d/lisp/")
-(add-to-list 'load-path "~/.emacs.d/TobiasZawada-md-outline-list")
+(add-to-list 'load-path "~/.emacs.d/harriott-zenburn-emacs/")
 
 ;;;; 5 settings 1
 ;; Calendar
@@ -190,19 +191,13 @@
 (setq display-line-numbers-type `relative)
 
 ;;; directories files
-;; Dired+
-(when (eq system-type 'windows-nt)
-    (use-package dired+)
-    ) ;; some extra functionality
-
-;; Dirvish
-(when (eq system-type 'gnu/linux)
-    (use-package dirvish)
-    (dirvish-override-dired-mode)
-    ) ;; loads of extra functionality
-
 ;; edit the file, not the link
 (setq vc-follow-symlinks t)
+
+;; emacs-neotree
+(use-package neotree)
+(global-set-key (kbd "C-c n") 'neotree-toggle)
+(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
 
 ;; full file-path into kill-ring
 (global-set-key (kbd "C-c f") (lambda () (interactive) (kill-new buffer-file-name)))
@@ -217,6 +212,24 @@
 (global-set-key (kbd "C-#") 'sr-speedbar-toggle)
 (require 'sr-speedbar)
 (setq speedbar-show-unknown-files t) ; show all files
+
+;;; directories files - Dired
+;; all-the-icons-dired
+(use-package all-the-icons-dired
+    :config
+    (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+    :if (display-graphic-p))
+
+;; Dired+
+(when (eq system-type 'windows-nt)
+    (use-package dired+)
+    ) ;; some extra functionality
+
+;; Dirvish
+(when (eq system-type 'gnu/linux)
+    (use-package dirvish)
+    (dirvish-override-dired-mode)
+    ) ;; loads of extra functionality
 
 ;;; directories files - reverting
 ;; Global Auto Revert mode
@@ -236,14 +249,24 @@
 (global-set-key (kbd "C-S-M-r") 'revert-buffer-all)
 
 ;;; editing
+;; all-the-icons-completion
+(use-package all-the-icons-completion)
+(all-the-icons-completion-mode)
+(add-hook 'marginalia-mode-hook #'all-the-icons-completion-marginalia-setup)
+
 ;; anzu
 (use-package anzu)
 (global-anzu-mode +1)
 (global-set-key [remap query-replace] 'anzu-query-replace)
 (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
+(setq anzu-cons-mode-line-p nil)  ; for Spaceline
 
 ;; autopair
 (electric-pair-mode 1)
+
+;; Company
+(use-package company)
+(add-hook 'after-init-hook 'global-company-mode)
 
 ;; cycle-spacing
 (bind-key "M-SPC" 'cycle-spacing)  ; needs some other keybind in Openbox
@@ -268,6 +291,7 @@
 (evil-mode 1)
 (evil-set-initial-state 'dired-mode 'normal)
 (evil-set-initial-state 'dokuwiki-mode 'normal)
+(evil-set-initial-state 'emacs-lisp-mode 'normal)
 (evil-set-initial-state 'markdown-mode 'normal)
 (evil-set-initial-state 'sh-mode 'normal) ; Shell-script mode
 
@@ -319,19 +343,9 @@
     :config
     (dashboard-setup-startup-hook))
 
-;; font
-(set-face-attribute 'default nil :family "Ubuntu Mono" :height 100)
-(set-face-attribute 'fixed-pitch nil :family "Ubuntu Mono")
-(set-face-attribute 'variable-pitch nil :family "Ubuntu")
-;; - thanks to Protesilaos Stavrou
-
-;; GUI frame size
-(if (display-graphic-p)
-    (when (string= (system-name) "sbMb")
-        ; (progn (setq default-frame-alist '( (height . 59) (width . 106)))))
-    ; ) ; for default font
-        (progn (setq default-frame-alist '( (height . 73) (width . 106)))))
-    ) ; for Ubuntu 100
+;; git-gutter.el
+(use-package git-gutter)
+(global-git-gutter-mode t)
 
 ;; highlight nested parentheses
 (use-package rainbow-delimiters
@@ -361,9 +375,43 @@
     (setq rainbow-x-colors nil)
     (add-hook 'prog-mode-hook 'rainbow-mode))
 
+;; spaceline-config
+(use-package spaceline)
+    (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)  ; yellow = evil
+    (spaceline-emacs-theme)  ; can comment out
+
+;;; layout - cursor
+(setq-default cursor-type 'bar) ;; has little effect
+
+;; beacon
+(use-package beacon)
+(beacon-mode 1)
+
+;;; layout - font
+;; all-the-icons
+(use-package all-the-icons :if (display-graphic-p))
+
+;; defaults (thanks to Protesilaos Stavrou)
+(when (eq system-type 'gnu/linux)
+    (set-face-attribute 'default nil :family "Ubuntu Mono" :height 100)
+    (set-face-attribute 'fixed-pitch nil :family "Ubuntu Mono")
+    (set-face-attribute 'variable-pitch nil :family "Ubuntu"))
+(when (eq system-type 'windows-nt)
+    (set-face-attribute 'default nil :family "Lucida Console" :height 100)
+    (set-face-attribute 'fixed-pitch nil :family "Lucida Console")
+    (set-face-attribute 'variable-pitch nil :family "Arial"))
+
 ; ;;; layout - gruvbox-theme
 ; (use-package gruvbox-theme)
 ;   (load-theme 'gruvbox-dark-soft t)
+
+;;; layout - GUI frame size
+(if (display-graphic-p) (when (string= (system-name) "sbMb")
+        ; (progn (setq default-frame-alist '( (height . 59) (width . 106)))))) ; for default font
+        (progn (setq default-frame-alist '( (height . 72) (width . 106)))))) ; for Ubuntu 100
+(if (display-graphic-p) (when (string= (system-name) "T430I73520M")
+        (progn (setq default-frame-alist '( (height . 48) (width . 106)))))
+    ) ; further increasing the height can cause the frame to shoot off below the screen
 
 ; ;;; layout - Modus themes
 ; (use-package emacs
@@ -381,7 +429,8 @@
 (setq zenburn-use-variable-pitch t) ;; use variable-pitch fonts for some headings and titles
 (setq zenburn-scale-org-headlines t) ;; scale headings in org-mode
 (setq zenburn-scale-outline-headlines t) ;; scale headings in outline-mode
-(use-package zenburn-theme)
+; (use-package zenburn-theme)  ; gets the original
+(require 'zenburn-theme)  ; gets my version
   (load-theme 'zenburn t)
 
 ;;; minibuffer - Consult
@@ -443,7 +492,6 @@
 
 ;;; minibuffer - Marginalia
 (use-package marginalia
-    ; :load-path "elpa/marginalia-20220721.1833"
     :general
     (:keymaps 'minibuffer-local-map
               "M-A" 'marginalia-cycle)
@@ -478,14 +526,12 @@
 
 ;;; open in gVim
 (when (eq system-type 'gnu/linux)
-    (global-set-key (kbd "C-c g") (lambda ()
-        (interactive)
-        (call-process "gvim" nil 0 nil buffer-file-name)
+    (global-set-key (kbd "C-c g") (lambda () (interactive)
+        (call-process "gvim" nil 0 nil buffer-file-name (format "+%d" (line-number-at-pos nil t)))
         (message "opened in gVim"))))
 
 (when (eq system-type 'windows-nt)
-    (global-set-key (kbd "C-c g") (lambda ()
-        (interactive)
+    (global-set-key (kbd "C-c g") (lambda () (interactive)
         (call-process "C:/Vim/vim90/gvim.exe" nil 0 nil buffer-file-name)
         (message "opened in gVim"))))
 
