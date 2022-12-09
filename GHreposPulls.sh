@@ -1,7 +1,7 @@
 #!/bin/bash
 # vim: set fdl=1 tw=0:
 
-# Joseph Harriott  Fri 05 Aug 2022
+# Joseph Harriott  Wed 05 Oct 2022
 
 # Recursively find all *.git directories in  $GHrCl
 # for each one, execute a git pull, then copy over to  $GHrUse  on Dropbox.
@@ -18,6 +18,10 @@ set -e  # quits on error
 mr () { echo "fixing ${tpf3b}$1${tpfn}"; mv $1 $1-c; }
 cpLrm () { cp -Lr $1-c $1; sudo rm -fr $1-c; }
 
+# git clone https://git.sr.ht/~bzg/worg $GHrCl/emacs/_bzg-worg
+# git clone https://git.sr.ht/~protesilaos/dotfiles $GHrCl/linux/Arch/protesilaos-dotfiles
+# git clone https://github.com/Eckankar/vim-latex-folding $GHrCl/CP/vim/Eckankar/vim-latex-folding
+# git clone https://github.com/TobiasZawada/md-outline-list $GHrCl/emacs/TobiasZawada-md-outline-list
 # git clone https://github.com/amrali-eg/EncodingChecker $GHrCl/amrali-eg-EncodingChecker
 # git clone https://github.com/bbatsov/zenburn-emacs $GHrCl/emacs/bbatsov-zenburn-emacs
 # git clone https://github.com/daviwil/dotfiles $GHrCl/emacs/daviwil-dotfiles
@@ -34,15 +38,23 @@ cpLrm () { cp -Lr $1-c $1; sudo rm -fr $1-c; }
 # git clone https://github.com/kai2nenobu/emacs-dokuwiki-mode $GHrCl/emacs/kai2nenobu-emacs-dokuwiki-mode
 # git clone https://github.com/kovisoft/slimv $GHrCl/vim-Lisp/kovisoft-slimv
 # git clone https://github.com/leo-arch/clifm $GHrCl/linux/leo-arch-clifm
+# git clone https://github.com/lervag/vimtex $GHrCl/CP/vim/lervag-vimtex
 # git clone https://github.com/noctuid/evil-guide $GHrCl/emacs/noctuid-evil-guide
 # git clone https://github.com/plexus/chemacs2 $GHrCl/emacs/plexus-chemacs2
-# git clone https://github.com/vlime/vlime $GHrCl/vim-Lisp/vlime-vlime
-# git clone https://github.com/streetturtle/awesome-wm-widgets $GHrCl/linux/wm-awesome/streetturtle-awesome-wm-widgets
 # git clone https://github.com/rxi/json.lua $GHrCl/CP/rxi-json.lua
-# git clone https://github.com/TobiasZawada/md-outline-list $GHrCl/emacs/TobiasZawada-md-outline-list
+# git clone https://github.com/streetturtle/awesome-wm-widgets $GHrCl/linux/wm-awesome/streetturtle-awesome-wm-widgets
 # git clone https://github.com/vim/vim $GHrCl/CP/vim-vim
-# git clone https://git.sr.ht/~bzg/worg $GHrCl/emacs/_bzg-worg
-# git clone https://git.sr.ht/~protesilaos/dotfiles $GHrCl/linux/Arch/protesilaos-dotfiles
+# git clone https://github.com/vlime/vlime $GHrCl/vim-Lisp/vlime-vlime
+# git clone https://github.com/adityatelange/hugo-PaperMod $GHrCl/CP/adityatelange-hugo-PaperMod
+# git clone https://github.com/adityatelange/hugo-PaperMod $GHrCl/CP/adityatelange-hugo-PaperMod
+# git clone https://github.com/gohugoio/hugo $GHrCl/CP/Hugo/gohugoio-hugo
+# git clone https://github.com/harriott/hugo-PaperMod $GHrCl/CP/Hugo/harriott-hugo-PaperMod
+# git clone https://github.com/razonyang/hugo-theme-bootstrap-skeleton $GHrCl/CP/Hugo/razonyang-hugo-theme-bootstrap-skeleton
+# git clone https://github.com/razonyang/hugo-theme-bootstrap $GHrCl/CP/Hugo/razonyang-hugo-theme-bootstrap
+# git clone https://github.com/Vimux/blank $GHrCl/CP/Hugo/Vimux-blank
+# git clone https://github.com/LukeSmithxyz/lugo $GHrCl/CP/Hugo/LukeSmithxyz-lugo
+# git clone https://github.com/gohugoio/hugo-mod-bootstrap-scss $GHrCl/CP/Hugo/gohugoio-hugo-mod-bootstrap-scss
+git clone https://github.com/heyeshuang/hugo-theme-tokiwa $GHrCl/CP/Hugo/heyeshuang-hugo-theme-tokiwa
 
 if [ $host = 'sbMb' ]; then
     # rsync -iLrtv --delete $GHrUse/ $GHrCl  # if lost...

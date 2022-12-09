@@ -1,6 +1,6 @@
 vim: ft=build:
 
-commands here are generic, see also $ARCHBUILDS/QR.txt
+commands here are generic, see also $OSAB/QR.txt
 
 info info
 Make (software)
@@ -51,9 +51,10 @@ compgen -A alias | awk '{print}' ORS=' : '  # compact list
 [ -z "$a" ] && echo zero_string; [ -n "$a" ] && echo string
 [ true ] && echo y
 c=1; [[ $c == 1 ]] && echo "true"
-elif
+if <condition1>; then <action1>; elif <condition2>; then <action2>; fi
 
 ## file manage
+for f in *; do mv $f ${f:2}; done
 man -h ls
 mkdir -p <aDirectoryPath>  # won't overwrite if it already exists
 
@@ -155,8 +156,10 @@ if [ "$a" -ne "$b" ]
 
 ### strings
 [[ $t =~ (y|n) ]] && echo 'good answer'
-echo lkj | rev | cut -c 2- | rev
-echo ljk | sed 's/.$//'
+case conversions: var=vAlUe; o ${var^^}; o "${var,,}"
+o lkj | rev | cut -c 2- | rev
+o ljk | sed 's/.$//'
+qs=$'quote\'*star'; o "$qs"
 s=12345; echo $s | awk '{print substr($1,length($1)-2) }'
 s=12345; echo $s | cut -c $((${#s}-2))-
 
@@ -178,6 +181,10 @@ an arbitrary precision calculator language
 bc -q
 command: scale=n  => results to n decimal places
 
+## limitations
+^ only accepts integer powers
+can be inaccurate
+
 # CopyQ
 copyq tab  # lists them
 ctrl+home -> move_to_top
@@ -187,6 +194,7 @@ strftime
 
 ## cal
 cal       " this month
+cal (command)
 cal -3    " last month, this, next
 cal -n 18 " all 18 months from now
 cal -w    " week numbers
@@ -194,7 +202,8 @@ cal -y    " year
 
 ## date
 date '+%F %a %H:%M'
-date '+%Y%m%d%H%M'
+date +%y%m%d-%H%M%S
+date +%j-%H%M
 date +%s; sleep 1; date +%s
 date +%Y%m%d
 date +%y%m%d-%H%M
@@ -251,7 +260,7 @@ find $PWD -name <file>  # gets full path
 find . -maxdepth 1 -mindepth 1 -type f -name "*"  # those in working directory
 find . -name '*.txt' ! -name 'build*'  # excluding build*
 find . -newer oldFile
-find . -path <excludedDirectory> -prune -o -name '<filename>' -print
+find . -path 'exclude*these*paths' -prune -o -name '<filename>' -print
 find . -type f -exec du -h {} + | sort -r -h > sizes.txt
 find . -type l -ls  # list all symlinks in a directory tree
 
@@ -259,7 +268,7 @@ find . -type l -ls  # list all symlinks in a directory tree
 diskonaut -h
 du -sh  # size of current directory
 du --max-depth=1 -h <directory>
-dust
+dust  # graphical size representation
 
 #### listed
 du -ah . | grep -v "/$" | sort -rh | head -44  # recursive list of largest 44 files
@@ -270,6 +279,8 @@ du(1)
 ls -1Rhs | sed -e "s/^ *//" | grep "^[0-9]" | sort -hr | head -n50  # neat recursive list of largest
 
 #### ncdu
+? -> help
+g -> rotate through % graph none
 n -> order by name
 s -> order by size
 
@@ -279,7 +290,7 @@ stat -c '%a %n' *  # show octal permissions
 
 ### tree
 tree(1)
-tree -d
+tree -d [-L n]  # directories only, do depth n
 tree -fi
 
 ## rm + pv
@@ -294,6 +305,7 @@ sudo rsnapshot du  # can takes many hours...
 systemctl list-unit-files | grep rsnapshot
 
 ## rsync
+output info
 log: >  = the item is received
 rsync: -l  = --links  = copy symlinks as symlinks
 
@@ -319,6 +331,7 @@ mount | grep /dev/sd
 solaar show
 uname -m  # machine hardare name
 xbacklight -set 50
+xev | awk -F'[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }'  # scancodes
 
 ## battery
 acpi -h
@@ -357,6 +370,7 @@ lp -o scaling=200 <image>  # prints divided across 4 pages
 #### prints all images in a directory
 lp *
 lp *.JPG
+lp *.png -o ColorModel=KGray  # black cartridge only
 
 #### orientation
 automatically selects the best orientation for filling the page
@@ -390,6 +404,10 @@ lsblk(8)
 #### FAT
 sudo fatlabel /dev/sdi1 [<newLabel>]
 sudo mkfs.vfat -n 'label' -I /dev/sdxn
+
+#### fsck
+e2fsck(8): sudo e2fsck -pv /dev/sdx1
+fsck manages lost+found directory
 
 #### partitions
 gdisk(8)
@@ -436,6 +454,7 @@ exiv2 <image>
 
 ## feh
 can open webp
+can't animate a gif
 feh -F  # fullscreen
 feh -l  # list image specifications
 
@@ -476,16 +495,22 @@ mouse right-click to find them
 can't send to printer...
 shows precise cursor position in pixels
 
-## pqiv commands
+## pqiv
+pqiv -i <animateGif> &  # opens the animated gif without the obtrusive info box
+pqiv --auto-montage-mode * &  # flat recursive view of all imagies
+pqiv(1)
+
+### commands
 esc/q => quit
 f => toggle full screen
+i => toggle info box
 s => toggle slideshow
 
-### montage mode
+#### montage mode
 g => goto
 m => montage mode
 
-### navigating
+#### navigating
 mouse
 backspace/space => previous/next
 
@@ -495,7 +520,9 @@ scanimage -h
 scanimage -L  => --list-devices
 
 ## [n]sxiv
+can't animate a gif
 can't send to printer
+Simple X Image Viewer
 
 ### commands
 b => toggle infobar
@@ -503,6 +530,7 @@ q => quit
 Return => toggle thumbnails/image
 
 ## Vimiv
+can't open a gif
 O  switch focus
 o  toggle the library
 vimiv &
@@ -524,13 +552,16 @@ t    toggle
 
 # multimedia
 ffprobe -i <avfile> -show_format -v quiet | sed -n 's/duration=//p'  # fractional seconds
+
+## audio
 pavucontrol
 
-## cmus
+### cmus
 "C* Music Player"
+can't play omv's
 cmus_notify -h
 
-### commands
+#### commands
 ,        seek -1m
 .        seek +1m
 7        settings
@@ -549,10 +580,14 @@ r        toggle repeat
 v        player-stop
 z        player-prev
 
-## gst123
+### convert audio files to mp3
+for f in *; do ffmpeg -i "$f" -b:a 64K -vn "${f%.*}.mp3" ; done
+for f in *; do ffmpeg -i "$f" -b:a 128K -vn "${f%.*}.mp3" ; done
+
+### gst123
 gst123 -Z .  # play random audio files recursively forever
 
-### control
+#### control
 left/right -> seek 10 seconds
 down/up -> seek 1 minute
 PgDn/Up -> seek 10 minute
@@ -584,15 +619,17 @@ mediainfo --Inform='Video;%FrameCount%' $the_file
 mediainfo --Output='General;%Duration%' <avfile>  # milliseconds
 
 ## mpv
+can play omv's
 mpv av://v4l2:/dev/video0
 mpv --start=-2 <avfile>  # starts 2 seconds from end
 
 ### interactive control
 ./,      => framewise steps forward/backward
 A        => cycle aspect ratio
-Alt+0    => halve video window size
-Alt+1    => full video window size
-Ctrl +/- => +/-100 ms audio delay
+alt+0    => halve video window size
+alt+1    => full video window size
+alt+2    => double video window size
+ctrl +/- => +/-100 ms audio delay
 f        => toggle fullscreen
 hash     => cycle audio tracks
 i/I      => statistics
@@ -760,8 +797,9 @@ pdfinfo <a_pdf_file>  # A5 = 420x595. See GSview for more sizes.
 
 ## Zathura
 <tab> toggles Outline view
-+/-/=  -> zoom in/out/original
-r  -> rotate by 90 degrees
++/-/=  ->  zoom in/out/original
+r      ->  rotate by 90 degrees
+R      ->  reload document
 "zathura man page"
 
 # processes
@@ -791,6 +829,7 @@ pgrep <aprogram>  # reports it's process id
 echo "don't forget that" | sed 's/\x27/\"/'
 sed -i '0~2 a\\' <fileToAddBlankLineAfterEach2ndLine>
 sed -i '/<regex>/!d' <filetoreduce>  # removes lines that don't match
+sed -i '1,2d' <file_to_remove_first_two_lines_from>
 sed -i '1s/^/vim: ft=<filetype>:\n\n/' $cslF
 sed G <file>  # outputs <file> with blank lines added
 sed '1i\\newFirstLineText' <fileToPrependTo>
@@ -829,9 +868,10 @@ w  # list users and load on system
 whereis <executable>
 xset q  # shows a variety of IO settings
 
-## decode key-presses
-doas showkey  # keycodes
-xev | awk -F'[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }'  # scancodes
+## CPU-X
+cpu-x -h
+cpu-x -N
+Openbox Menu > System > CPU-X
 
 ## directory sizes as root
 du -shx
@@ -844,10 +884,10 @@ dunstify -u critical "Read this now!"
 
 ## groups
 /etc/group  # to see them all
-gpasswd
+gpasswd [-a <user> <group_to_add_to>]
 groups jo
-sudo groupadd <group>
-sudo groupdel <group>
+sudo groupadd <group_to_create>
+sudo groupdel <group_to_delete>
 
 ## monitoring
 glances
@@ -956,6 +996,12 @@ URxvt.url-launcher
 # tr
 tr '\n' ' ' < <in> [> <out>]  # replace newlines with spaces
 tr (Unix)
+
+# vim
+$HOME/.viminfo
+find . -type f -name tags
+e -la /usr/bin/vim
+file "$(command -v vim)"
 
 # windows
 xrdb -query -all  # shows loaded X resources

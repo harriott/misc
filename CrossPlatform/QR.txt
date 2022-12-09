@@ -9,9 +9,118 @@ Closest Named Web Colors
 Shades of black
 web colors
 
+# documenting
+pdf-crop-margins pdf.pdf  # silently makes  pdf-cropped.pdf
+
+## eBook
+~/CalibreLibrary
+Foliate - mouse to top for settings
+
+## LaTeX
+$Drpbx/JH/dts-tex.txt
+xc
+
+### commands
+\newenvironment{<envName>}[<n>][<default>]{<beginEnv>}{<endEnv>}
+\pagebreak
+\renewcommand{\arraystretch}{1.5}  % tabular (default 1.0)
+\section*{ unnumbered section }
+\stepcounter{section} % increase section number by 1
+\tableofcontents*  % ToC without itself listed therein
+\textbf{...}
+\textit{...}
+\textsubscript{}
+\textsuperscript{}
+\the\length  % prints that length
+\today
+\usepackage{soul}  % Hyphenation for letterspacing, underlining, and more
+\usepackage{titlesec}  % incompatible with memoir
+\vfill
+
+#### horizontal spaces in text or math mode
+\enspace =>.5em
+\quad => 1em
+\qquad => 2em
+
+#### font sizes
+\tiny
+\scriptsize
+\footnotesize
+\small
+\normalsize
+\large
+\Large
+\LARGE
+\huge
+\Huge
+
+#### geometry
+hmargin={<left margin>,<right margin>}
+vmargin={<top margin>,<bottom margin>}
+
+#### indents
+\noindent
+\setlength{\parindent}{0pt}
+
+#### multicols
+\usepackage{multicol}
+...
+\begin{document}
+\begin{multicols}{3}
+...
+\end{multicols}
+
+### engines
+pdflatex --version
+
+#### MiKTeX
+initexmf --report
+miktex --version
+miktex --verbose fndb refresh
+
+##### FNDB
+after filename changes in  $tex
+  initexmf --update-fndb
+  MiKTeX Console > Tasks > Refresh file name database
+
+##### MiKTeX Package Manager
+C:\Users\troin\AppData\Local\MiKTeX\miktex\log\mpmcli.log
+mpm --list > "$ITstack\MSWin\MiKTeX\$Cn-packages-$(Get-Date -f yyMMdd-hhmm).txt"
+miktex --verbose packages check-update
+miktex packages list | measure | select -expand Count
+
+### fonts - Indic
+(face-remap-add-relative 'default :family "Arial" :height 140)
+
+#### Indic
+FreeFont
+Lohit used by Wikipedia
+
+### package - Memoir
+\defaultlists
+\setlength{\parindent}{0pt}
+\tightlists
+extrafontsizes
+
+#### sectioning
+beforeskip
+
+##### afterSskip
+\setaftersubsecskip{0em}  % text follows heading inline
+\setaftersubsecskip{2.3ex plus 2ex}  % the default for Section
+
+#### simple footer
+\usepackage{currfile}
+  \makeevenfoot{plain}{}{\cg {\currfilename}}{}
+   \makeoddfoot{plain}{}{\cg {\currfilename}}{}
+
+### package - pdfpages
+doesn't respect geometry margins, so  \includepdfset{offset=<fromInnerEdge> <fromTop>}
+\includepdf[options]{<pdf>}
+
 # Emacs
 cd C:\Users\troin\AppData\Roaming\.emacs.d
-emacs $core/TextNotes/TN/org/org.org &
+emacs $TeNo/TN/Emacs/org/org.org &
 
 ## commands
 C-* => calc-dispatch
@@ -67,13 +176,13 @@ C-x C-r => recentf-open-files
 M-# => sr-speedbar-toggle
 
 #### Dired
+C-x d (= M-x dired) => dired
 Dired+: ( => toggle details
 
 ##### Dired
 ?
 C-x C-f => find-file
-C-x d => dired
-M-x dired
+g => reload
 q => quit
 W => browse-url-of-dired-file
 
@@ -208,6 +317,7 @@ Spacemacs documentation
 
 # encoding
 http://daringfireball.net/projects/markdown/syntax
+yj -ty <file.toml >file.yml
 
 ## Bluefish
 alt+e (= Edit) > s (= Preferences...)
@@ -221,14 +331,22 @@ bluefish -v
 ffmpeg -i <video> -vframes 1 frame.jpg  # extracts a single frame
 ffmpeg -version
 
+### transpose
+0 = 90° counter clockwise and vertical flip (default)
+1 = 90° clockwise
+2 = 90° counter clockwise
+3 = 90° clockwise and vertical flip
+
 ## Git
 git -P <command>  # --no-pager
 git branch -a  # lists local & remote branches
+git clone https://github.com/... [target_directory] --depth=n  # clones only to commit depth n
 git grep <caseSensitiveText>
 git init -b gh
 git push gh +master  # force push to remote
 git rev-parse --show-toplevel  # print the top level directory of the current repository
 git show <pathToFile>  # highlights the changes
+git submodule
 git version
 GitLab Markdown
 https://github.com/github/linguist/blob/master/lib/linguist/languages.yml
@@ -289,6 +407,7 @@ PS> where.exe java
 ## npm
 npm list
 npm prefix -g
+npm --version
 which npm
 
 ### cspell
@@ -357,12 +476,12 @@ say scalar @array;  # number of elements
 use feature 'say';
 
 ## Python
-echo $WORKON_HOME
+o $WORKON_HOME
 pew ls
 pip --version
 pip list --outdated
-python --version
 python "import sys; print (sys.path)"
+yaml2toml <yaml> <toml>
 
 ### MSWin
 C:\Windows\py.exe
@@ -377,6 +496,8 @@ PS> where.exe python
 ~/.local/pipx/venvs
 pipx list
 pipx run pycowsay moo
+pipx uninstall -h
+pipx upgrade-all
 
 ### versions
 ~\.pyenv
@@ -390,7 +511,10 @@ deactivate
 lsvirtualenv  # lists the known environments
 
 #### virtualenvwrapper
+deactivate
 mkvirtualenv <name>  # also activates it
+rmvirtualenv <name>
+which python
 workon  # activate (or list all)
 
 # Ghostscript convert pdf to png
@@ -405,11 +529,16 @@ pt
 pt /version
 pt Solange .
 
-## Vifm
+## Vifm help
+VIFM(1)
+
+### commands
 cw => rename
 p => copy here
 tab => switch pane
 yy => yank file
+ZQ => :quit!
+ZZ => :quit
 
 # gpg
 <key-id> can be the short key id = the last 8 characters
@@ -435,13 +564,8 @@ gpg -K  # --list-secret-keys
 72 dpi = 18.3 dots per mm
 COLOR TOOLS  http://html-color-codes.info/
 
-## ffmpeg transpose
-0 = 90° counter clockwise and vertical flip (default)
-1 = 90° clockwise
-2 = 90° counter clockwise
-3 = 90° clockwise and vertical flip
-
 ## ImageMagick
+$CrPl/IMclf-sbMb.txt
 identify -format '%w %h %f \n' *  # images listed by size
 montage <left> <right> -geometry +9+9 -tile 2x1 <lr>
 
@@ -484,8 +608,12 @@ curl ifconfig.co/country
 https://www.gps-coordinates.net
 trashinbox
 
+## Hugo
+hugo mod graph
+hugo mod tidy  # cleans  go.mod  and (re)generates  go.sum
+
 ## Thunderbird
-$DROPBOX/JH/TP-default-release/compatibility.ini  for LastVersion
+$Drpbx/JH/TP-default-release/compatibility.ini  for LastVersion
 alt+t > a (= Add-ons Manager)
 alt+t > e (= Edit) > a a (= Account Settings)
 alt+t > Manually sort folders
@@ -521,94 +649,14 @@ yt-dlp -f best <videoURL>
 yt-dlp -f ba <videoURL>  # bestaudio (= best*[vcodec=none])
 yt-dlp --version
 
-# LaTeX
-$DROPBOX/JH/dts-tex.txt
-xc
-
-## commands
-\pagebreak
-\renewcommand{\arraystretch}{1.5}
-\section*{ unnumbered section }
-\stepcounter{section} % increase section number by 1
-\tableofcontents*  % ToC without itself listed therein
-\textbf{...}
-\textit{...}
-\textsubscript{}
-\textsuperscript{}
-\the\length  % prints that length
-\today
-\usepackage{soul}  % Hyphenation for letterspacing, underlining, and more
-\usepackage{titlesec}  % incompatible with memoir
-\vfill
-
-### font sizes
-\tiny
-\scriptsize
-\footnotesize
-\small
-\normalsize
-\large
-\Large
-\LARGE
-\huge
-\Huge
-
-### geometry
-hmargin={<left margin>,<right margin>}
-vmargin={<top margin>,<bottom margin>}
-
-### indents
-\noindent
-\setlength{\parindent}{0pt}
-
-### multicols
-\usepackage{multicol}
-...
-\begin{document}
-\begin{multicols}{3}
-...
-\end{multicols}
-
-## engines
-pdflatex --version
-
-### MiKTeX
-initexmf --report
-miktex --version
-miktex --verbose fndb refresh
-
-#### FNDB
-after filename changes in  $tex
-  initexmf --update-fndb
-  MiKTeX Console > Tasks > Refresh file name database
-
-#### MiKTeX Package Manager
-C:\Users\troin\AppData\Local\MiKTeX\miktex\log\mpmcli.log
-mpm --list > "$ITstack\MSWin\MiKTeX\$Cn-packages-$(Get-Date -f yyMMdd-hhmm).txt"
-miktex --verbose packages check-update
-miktex packages list | measure | select -expand Count
-
-## fonts - Indic
-(face-remap-add-relative 'default :family "Arial" :height 140)
-
-### Indic
-FreeFont
-Lohit used by Wikipedia
-
-## package - Memoir
-\defaultlists
-\setlength{\parindent}{0pt}
-\tightlists
-extrafontsizes
-
-### simple footer
-\usepackage{currfile}
-  \makeevenfoot{plain}{}{\cg {\currfilename}}{}
-   \makeoddfoot{plain}{}{\cg {\currfilename}}{}
-
-## package - pdfpages
-doesn't respect geometry margins, so  \includepdfset{offset=<fromInnerEdge> <fromTop>}
-\includepdf[options]{<pdf>}
+## YouTube shortcuts
+Keyboard shortcuts for YouTube
+0 .. 9 => jump 0% .. 90%
+c => toggle captions
+f => toggle full screen
+j/l => seek 10s backwards or forwards
+m => toggle mute
+when paused: ./, => skip to next/previous frame
 
 # less
 greenwoodsoftware
@@ -628,14 +676,8 @@ space => forward one window
 / ? => search forward backward
 n N => next previous
 
-# LibreOffice
-- Alt+F12 (=Tools > Options)
-- Sheets: Ctrl+1 (= Format Cells) allows French
-
-## Export
-Alt+f (= File) > t (= Export)
-defaults to GIF in Draw
-defaults to JPEG in Calc
+# OpenShot
+ctrl+shift+p (= Edit > Preferences)
 
 # screens
 Sony Xperia 10 II: 1080x2520 = 21:9
@@ -651,14 +693,6 @@ Sony Xperia 10 II: 1080x2520 = 21:9
 CommonMark Implementations
 highlight.js
 
-# Sumatra PDF
-Ctrl+6         - View Single pages
-Ctrl+7         - View Facing pages
-Ctrl+Shift+Tab - go to previous tab
-Ctrl+Tab       - go to next tab
-r              - reload
-z              - toggle zoom between Fit Page, Fit Width, Fit Content
-
 # text-to-speech
 espeak "Hello World!"
 
@@ -671,7 +705,6 @@ carriage return (U+000D) returns the cursor to the left of the line (usually jus
 finding characters
 
 ## vim
-$HOME/.viminfo
 $HOME/_viminfo
 $ITstack/vimfiles/spell/fr.utf-8.add
 ^M = carriage return
@@ -685,9 +718,4 @@ gvim -S <savedSession>
 #### window size
 gvim -geometry 200x55
 PS> gvim -c "set columns=217 lines=54"  # maximum on a 1600x900 screen with rhs taskbar
-
-### on GNU/Linux
-find . -type f -name tags
-e -la /usr/bin/vim
-file "$(command -v vim)"
 
