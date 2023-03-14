@@ -51,7 +51,7 @@
 (use-package straight
    :custom (straight-use-package-by-default t))
 
-;;;; 1 package management option 2 bootstrap  use-package
+; ;;;; 1 package management option 2 bootstrap  use-package
 ; (require 'package)
 
 ; ;;; set package archives

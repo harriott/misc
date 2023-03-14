@@ -3,7 +3,7 @@
 # ----------------------------------------
 # for playing with dates
 
-# perl $ITstack/onGitHub/misc/datetimes.pl
+# perl $onGH/misc/datetimes.pl
 # ----------------------------------------
 
 use strict;  use warnings;

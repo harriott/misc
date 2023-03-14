@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# Joseph Harriott  Fri 05 Aug 2022
+# Joseph Harriott  Tue 28 Feb 2023
 
 # check for symlinks in JH, which could bother Dropbox
 # ----------------------------------------------------
 
 # bash $onGH/misc/linux/symlinks_log.sh
 
-dir=$Drpbx/JH
+dir=$Drpbx/JH/search
 find $dir/ -type l -ls > $dir/symlinks
 echo "vim: se ft=slJH nowrap:" > $dir/symlinks.log
 echo "" >> $dir/symlinks.log

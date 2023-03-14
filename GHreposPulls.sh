@@ -21,7 +21,12 @@ cpLrm () { cp -Lr $1-c $1; sudo rm -fr $1-c; }
 # git clone https://git.sr.ht/~bzg/worg $GHrCl/emacs/_bzg-worg
 # git clone https://git.sr.ht/~protesilaos/dotfiles $GHrCl/linux/Arch/protesilaos-dotfiles
 # git clone https://github.com/Eckankar/vim-latex-folding $GHrCl/CP/vim/Eckankar/vim-latex-folding
+# git clone https://github.com/LukeSmithxyz/lugo $GHrCl/CP/Hugo/LukeSmithxyz-lugo
 # git clone https://github.com/TobiasZawada/md-outline-list $GHrCl/emacs/TobiasZawada-md-outline-list
+# git clone https://github.com/Vimux/Mainroad $GHrCl/CP/Hugo/Vimux-Mainroad
+# git clone https://github.com/Vimux/blank $GHrCl/CP/Hugo/Vimux-blank
+# git clone https://github.com/adityatelange/hugo-PaperMod $GHrCl/CP/adityatelange-hugo-PaperMod
+# git clone https://github.com/adityatelange/hugo-PaperMod $GHrCl/CP/adityatelange-hugo-PaperMod
 # git clone https://github.com/amrali-eg/EncodingChecker $GHrCl/amrali-eg-EncodingChecker
 # git clone https://github.com/bbatsov/zenburn-emacs $GHrCl/emacs/bbatsov-zenburn-emacs
 # git clone https://github.com/daviwil/dotfiles $GHrCl/emacs/daviwil-dotfiles
@@ -29,9 +34,14 @@ cpLrm () { cp -Lr $1-c $1; sudo rm -fr $1-c; }
 # git clone https://github.com/emacs-evil/evil $GHrCl/emacs/emacs-evil-evil
 # git clone https://github.com/emacs-mirror/emacs $GHrCl/emacs/emacs-mirror-emacs
 # git clone https://github.com/getmail6/getmail6 $GHrCl/linux/mail/getmail6-getmail6
+# git clone https://github.com/gohugoio/hugo $GHrCl/CP/Hugo/gohugoio-hugo
+# git clone https://github.com/gohugoio/hugo-mod-bootstrap-scss $GHrCl/CP/Hugo/gohugoio-hugo-mod-bootstrap-scss
 # git clone https://github.com/greduan/emacs-theme-gruvbox $GHrCl/emacs/greduan-emacs-theme-gruvbox
+# git clone https://github.com/harriott/hugo-PaperMod $GHrCl/CP/Hugo/harriott-hugo-PaperMod
 # git clone https://github.com/harriott/zenburn-emacs $GHrCl/emacs/harriott-zenburn-emacs
+# git clone https://github.com/heyeshuang/hugo-theme-tokiwa $GHrCl/CP/Hugo/heyeshuang-hugo-theme-tokiwa
 # git clone https://github.com/jakebox/jake-emacs $GHrCl/emacs/jakebox-jake-emacs
+# git clone https://github.com/jekyll/minima $GHrCl/CP/Jekyll-jekyll-minima
 # git clone https://github.com/joseph8th/literatemacs $GHrCl/emacs/joseph8th-literatemacs
 # git clone https://github.com/jrblevin/markdown-mode $GHrCl/emacs/jrblevin-markdown-mode
 # git clone https://github.com/jwiegley/use-package $GHrCl/emacs/jwiegley-use-package
@@ -39,22 +49,26 @@ cpLrm () { cp -Lr $1-c $1; sudo rm -fr $1-c; }
 # git clone https://github.com/kovisoft/slimv $GHrCl/vim-Lisp/kovisoft-slimv
 # git clone https://github.com/leo-arch/clifm $GHrCl/linux/leo-arch-clifm
 # git clone https://github.com/lervag/vimtex $GHrCl/CP/vim/lervag-vimtex
+# git clone https://github.com/majutsushi/urxvt-font-size $GHrCl/linux/tmux-fontSize/majutsushi-urxvt-font-size
+# git clone https://github.com/negrel/hugo-theme-pico $GHrCl/CP/Hugo/negrel-hugo-theme-pico
 # git clone https://github.com/noctuid/evil-guide $GHrCl/emacs/noctuid-evil-guide
 # git clone https://github.com/plexus/chemacs2 $GHrCl/emacs/plexus-chemacs2
+# git clone https://github.com/razonyang/hugo-theme-bootstrap $GHrCl/CP/Hugo/razonyang-hugo-theme-bootstrap
+# git clone https://github.com/razonyang/hugo-theme-bootstrap-skeleton $GHrCl/CP/Hugo/razonyang-hugo-theme-bootstrap-skeleton
 # git clone https://github.com/rxi/json.lua $GHrCl/CP/rxi-json.lua
+# git clone https://github.com/simmel/urxvt-resize-font $GHrCl/linux/tmux-fontSize/simmel-urxvt-resize-font
 # git clone https://github.com/streetturtle/awesome-wm-widgets $GHrCl/linux/wm-awesome/streetturtle-awesome-wm-widgets
+# git clone https://github.com/theNewDynamic/gohugo-theme-ananke $GHrCl/CP/Hugo/theNewDynamic-gohugo-theme-ananke
 # git clone https://github.com/vim/vim $GHrCl/CP/vim-vim
 # git clone https://github.com/vlime/vlime $GHrCl/vim-Lisp/vlime-vlime
-# git clone https://github.com/adityatelange/hugo-PaperMod $GHrCl/CP/adityatelange-hugo-PaperMod
-# git clone https://github.com/adityatelange/hugo-PaperMod $GHrCl/CP/adityatelange-hugo-PaperMod
-# git clone https://github.com/gohugoio/hugo $GHrCl/CP/Hugo/gohugoio-hugo
-# git clone https://github.com/harriott/hugo-PaperMod $GHrCl/CP/Hugo/harriott-hugo-PaperMod
-# git clone https://github.com/razonyang/hugo-theme-bootstrap-skeleton $GHrCl/CP/Hugo/razonyang-hugo-theme-bootstrap-skeleton
-# git clone https://github.com/razonyang/hugo-theme-bootstrap $GHrCl/CP/Hugo/razonyang-hugo-theme-bootstrap
-# git clone https://github.com/Vimux/blank $GHrCl/CP/Hugo/Vimux-blank
-# git clone https://github.com/LukeSmithxyz/lugo $GHrCl/CP/Hugo/LukeSmithxyz-lugo
-# git clone https://github.com/gohugoio/hugo-mod-bootstrap-scss $GHrCl/CP/Hugo/gohugoio-hugo-mod-bootstrap-scss
-git clone https://github.com/heyeshuang/hugo-theme-tokiwa $GHrCl/CP/Hugo/heyeshuang-hugo-theme-tokiwa
+# git clone https://github.com/jgm/pandoc $GHrCl/CP/jgm-pandoc
+# git clone https://github.com/stefano-m/awesome-capslock_widget $GHrCl/linux/wm-awesome/stefano-m-awesome-capslock_widget
+# git clone https://github.com/afaundez/jekyll-favicon $GHrCl/CP/Jekyll/afaundez-jekyll-favicon
+# git clone https://github.com/mmistakes/mm-github-pages-starter $GHrCl/CP/Jekyll/mmistakes-mm-github-pages-starter
+# git clone https://github.com/mmistakes/minimal-mistakes $GHrCl/CP/Jekyll/mmistakes-minimal-mistakes
+# git clone https://github.com/jekyll/jekyll $GHrCl/CP/Jekyll/jekyll-jekyll
+# git clone https://github.com/rhysd/vim-gfm-syntax $GHrCl/CP/vim/rhysd-vim-gfm-syntax
+# git clone https://github.com/doronbehar/pistol $GHrCl/linux/doronbehar-pistol
 
 if [ $host = 'sbMb' ]; then
     # rsync -iLrtv --delete $GHrUse/ $GHrCl  # if lost...
@@ -70,7 +84,7 @@ if [ $host = 'sbMb' ]; then
             false
         elif [[ $repository =~ clifm ]]; then
             [ -s "src/aux.c" ] && mv src/aux.c src/aux-rNT.c
-        elif [[ $repository =~ protesilaos ]]; then
+        elif [[ $repository =~ (jekyll|protesilaos) ]]; then
             fd -tl -HL -x unlink {} \; -x touch {}
         fi
         cd $GHrCl
@@ -81,7 +95,6 @@ if [ $host = 'sbMb' ]; then
     set +e
     rsync -iLrtv --delete $GHrCl/ $GHrUse
     echo "${tpf3b}2nd rsync to highlight any errors${tpfn}"
-    # read -p "incase there were errors, now re-rsync from ${tpf5}$GHrCl${tpfn} to see them"
     rsync -iLrtv --delete $GHrCl/ $GHrUse
     echo ${tpfn}; exit
 
