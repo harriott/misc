@@ -5,7 +5,6 @@ vim: nospell:
 commands here are generic, see also `$OSAB/QR.md`
 
     info info
-    openbox --reconfigure
     rhash -a --bsd <somefile>
     rhash --list-hashes => list names of all supported hashes
     rhash --sha256 <file>
@@ -76,6 +75,7 @@ date(1)
     gem list
     gem update
     npm -g list
+    npm -g up[date]
     npm config get prefix
 
 # fcron
@@ -92,7 +92,6 @@ date(1)
 - install(1)
 - ls(1)
 - rm(1)
-- sort(1)
 
 ## compressed
     7z x <pw'd_zip>
@@ -116,9 +115,9 @@ GNU Grep Manual
     ls **/* | wc -l      # all of the files
 
 ### find
-    find . -type f | rev | cut -d . -f1 | rev | sort | uniq -ic | sort -rn  # counts by extensions
     find $PWD -name <file>  # gets full path
     find . -maxdepth 1 -mindepth 1 -type f -name "*"  # those in working directory
+    find . -name "*" -type f ! -path '*/.git/*'
     find . -name '*.txt' ! -name 'build*'  # excluding build*
     find . -newer oldFile
     find . -path 'exclude*these*paths' -prune -o -name '<filename>' -print
@@ -178,12 +177,15 @@ tree(1)
 - log: `>  = the item is received`
 - rsync: `-l  = --links  = copy symlinks as symlinks`
 
+## symlinks
+    [[ -L $s ]] && echo 'symlink exists'
+    readlink $s  # returns target
+
 # get at root on tty2
     Ctrl+Alt+F2 > root + pw
 
 # GNU Privacy Guard
     echo "...seems to be working..." | gpg -ase -r jo | gpg  # tests key ( makes empty file secret.out)
-    gpg --send-keys key-id  # then can never be deleted from the keyserver
     gpg --full-gen-key
 
 fingerprint: `xxxx xxxx xxxx xxxx xxxx  xxxx xxxx xxxx xxxx xxxx`
@@ -213,8 +215,8 @@ fingerprint: `xxxx xxxx xxxx xxxx xxxx  xxxx xxxx xxxx xxxx xxxx`
     feh -F  # fullscreen
     feh -l  # list image specifications
 
-can open webp
-can't animate a gif
+- can open `webp`
+- can't animate a `gif`
 
 ### in-image
     d => toggle_filenames
@@ -232,7 +234,7 @@ up/down => zoom in/out
     ctrl+Shift+p > Close on ESC
 
 - can only fill page for printing
-- can't open webp
+- can't open `webp`
 
 ### keybindings
     alt+m => Metadata Info
@@ -322,14 +324,18 @@ list open files
     ffprobe -i <avfile> -show_format -v quiet | sed -n 's/duration=//p'  # fractional seconds
 
 ## audio
-    convert audio files to mp3:  for f in *; do ffmpeg -i "$f" -b:a 128K -vn "${f%.*}.mp3" ; done
     pavucontrol
+
+### convert
+    for f in *.flac; do ffmhb -i "$f" -c:a libvorbis -aq 4 "${f%.*}.ogg" ; done
+    for f in *.oma; do ffmhb -i "$f" -c:a libvorbis "${f%.*}.ogg" ; done  # default VBR quality 3
+    for f in *; do ffmhb -i "$f" -b:a 128K -vn "${f%.*}.mp3" ; done
 
 ### cmus
     cmus_notify -h
 
 - C* Music Player
-- can't play omv's
+- can't play oma's omv's
 
 #### commands
     ,        seek -1m
@@ -364,21 +370,16 @@ list open files
     q -> quit
     ? -> help
 
-## OpenShot
-    Ctrl+e  # Export
+### libpulse
+    pacat --list-file-formats
+    pactl list sinks short
+    pactl list sources short
+    pactl set-sink-volume 0 60%  # master volume to reasonable level
+    parecord -d 0 a.flac
 
-crossfades are created in overlaps
-
-### Nikon CoolPix P7700 VGA 640x480
-    Target > AVI (mpeg4)
-    Video Profile > VGA Widescreen NTSC (854x480)
-
-### Preferences
-    Ctrl+Shift+p
-
-#### Default Profile
-- defaults to HD 720p 30 fps
-- need to `Restart` `OpenShot` when changed
+### SoX
+    rec -c 2 a.flac  # record in stereo
+    soxi <audioFile>  # info, including duration
 
 ## mediainfo
     mediainfo <avfile> | grep Encoded
@@ -418,6 +419,10 @@ can play omv's
     10 seconds  mouse wheel up/down
     1 minute    up/down
     10 minutes  shift+pgup/pgdwn
+
+#### volume
+- `/` `9` decrease
+- `*` `0` increase
 
 # networking
     bluetoothctl -- devices
@@ -537,6 +542,7 @@ requires a `DHCP` client to get an IP address
 # pass
     pass
     pass help
+    pass init
     pass ls
 
 pass(1)
@@ -604,6 +610,7 @@ zathura man page
 
 # sed
     [[:alpha:]] = [[:lower:]] + [[:upper:]] = [A-Za-z]
+    sed --version
 
 - replace a string in multiple files
 - stream editor
@@ -625,7 +632,9 @@ zathura man page
     sed -n '2,$p' <file>  # prints from the 2nd line
 
 # shell
-echo $SHELL  # reveals flavour
+- `dc` desk calculator (reverse-Polish)
+- `echo $SHELL` reveals flavour
+- `fc` "fix command"
 
 ## Bash
     /etc/profile
@@ -762,7 +771,10 @@ don't export them
     echo ${array[@]}
     for item in "${array[@]}"; do echo "$item"; done
 
-#### integer comparison
+#### integers
+    i=0; echo $((i+=1))
+
+##### comparison
     if [ "$a" -ge "$b" ]
     if [ "$a" -gt "$b" ]
     if [ "$a" -le "$b" ]
@@ -812,6 +824,7 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     i hier  # detailed description of the filesystem hierarchy
     notify-send -u critical "test of critical notification"
     notify-send -t 5000 -u low "Hello World"
+    openbox --reconfigure
     passwd jo  # then re-login
     ps $(pgrep Xorg)  # shows which tty X is on
     swapon --show

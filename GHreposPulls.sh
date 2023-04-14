@@ -69,6 +69,7 @@ cpLrm () { cp -Lr $1-c $1; sudo rm -fr $1-c; }
 # git clone https://github.com/jekyll/jekyll $GHrCl/CP/Jekyll/jekyll-jekyll
 # git clone https://github.com/rhysd/vim-gfm-syntax $GHrCl/CP/vim/rhysd-vim-gfm-syntax
 # git clone https://github.com/doronbehar/pistol $GHrCl/linux/doronbehar-pistol
+# git clone https://github.com/OpenShot/openshot-qt $GHrCl/CP/OpenShot-openshot-qt
 
 if [ $host = 'sbMb' ]; then
     # rsync -iLrtv --delete $GHrUse/ $GHrCl  # if lost...

@@ -353,7 +353,8 @@ Spacemacs documentation
 # encoding
     yj -ty <file.toml >file.yml
 
-<http://daringfireball.net/projects/markdown/syntax>
+- <http://daringfireball.net/projects/markdown/syntax>
+- `*.oma` = Sony OpenMG
 
 ## Bluefish
     alt+e (= Edit) > s (= Preferences...)
@@ -361,12 +362,23 @@ Spacemacs documentation
 
 ## ffmpeg
     -vf crop=iw:ih-80:0:0
-    ffmpeg -i <video> -vframes 1 frame.jpg  # extracts a single frame
-    ffmpeg -version
+    ffmhb -i <video> -vf 'scale=iw/2:ih/2' <same_video_with_half_the_frame_size>
+    ffmhb -i <video> -vframes 1 frame.jpg  # extracts a single frame
+    ffmpeg -version | xcol --enable-libvorbis
 
 - `-filter:a afftdn=nr=90:nf=-20` removes white noise
+- `-r ntsc` = 29.97 fps (= 30000/1001)
 - `-t` length of output
 - `-vf crop=width:height:x:y` height=depth below y
+
+### concatenation protocol
+    ffmhb -i "concat:1.mpg|2.mpg|3.mpg" -c copy o.mpg
+
+convert mp4's first to MPEG-2 transport streams (`ffmhb -i 1.mp4 -c copy 1.ts`) and concatenate them back to an mp4
+
+### ffprobe
+    ffprobe -v error -show_format -show_streams <videoFile>
+    man ffprobe
 
 ### transpose
 - `0`  90° counter clockwise and vertical flip (default)
@@ -453,16 +465,26 @@ Tig Manual
 - `t`  tree view
 - `j/k/-/space/home/end`  movements
 
+## Go
+    go env
+    go version
+
 ## Java
     java -version
     PS> where.exe java
 
 ## npm
-    npm list
     npm prefix -g
+    npm up -g  # upgrade
+    npm -g list
     npm --version
     which npm
     wikit mooji -b
+
+### ffmpeg-concat
+- `-d <transition_duration>` default `500`
+- `-o <out_file>` default `out.mp4`
+- `-t <transition_name>` default `fade`
 
 ### cspell
     cspell trace "colour"  # shows which dictionary it's in
@@ -589,10 +611,6 @@ Tig Manual
 
 HTML Element
 
-# Ghostscript convert pdf to png
-    $ gspdfpng
-    PS> gsp
-
 # file manage
 sharkdp/bat
 
@@ -612,16 +630,43 @@ VIFM(1)
 - `ZQ`  `:quit!`
 - `ZZ`  `:quit`
 
+# Ghostscript convert pdf to png
+    $ gspdfpng
+    PS> gsp
+
 # gpg
     <key-id> can be the short key id = the last 8 characters
     gpg --delete-key <key-id>
-    gpg --edit-key <key-id>
+    gpg --send-keys key-id  # then can never be deleted from the keyserver
     gpg --verify file.asc [file]
+
+## help
+    gpg --dump-options
     gpg --version
+    gpg -h
+
+## options for output
+`-o <file>` (`--output <file>`) write output
+
+### format
+- `-a` (`--armor`) ASCII armored
+- default is binary OpenPGP
+
+## edit a key
+    gpg --edit-key <key-id>
+
+### commands
+    expire > 2y
+
+- `key n` can get at `ssb` (= subkey)
+- `n` can get at `sec` (= primary key)
 
 ## key servers
+    gpg --search-keys <key-id>  # enter number of key imports it (or just Enter to quit)
+
 - <https://keys.openpgp.org/>
-- <https://keyserver.ubuntu.com>
+- Hockeypuck OpenPGP keyserver <https://keyserver.ubuntu.com>
+- MIT PGP Public Key Server <http://pgp.mit.edu/>
 
 ## show stuff
     gpg --export-ownertrust  # shows trust settings
@@ -643,6 +688,14 @@ VIFM(1)
 
 ### convert
     convert -flatten img.png img-white.png
+    -background <color>
+    -border 20x20
+    -fill <color>
+    -font Arcon
+    -gravity center
+    -pointsize 48
+    -size 640x480
+    label:"some text"
 
 - anisotropic resize
 - can convert from WebP
@@ -688,6 +741,8 @@ VIFM(1)
     gh config list
     git diff upstream/master...HEAD
 
+`~/.ssh/known_hosts`: `AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa`
+
 ## ssg
     bundle exec jekyll s  # serve locally
 
@@ -696,14 +751,18 @@ Liquid template language
 ### Hugo
     hugo mod graph
     hugo mod tidy  # cleans  go.mod  and (re)generates  go.sum
+    hugo server --help
+    hugo server --navigateToChanged
+    hugo server -D
 
 ## Thunderbird
-    C:\MozillaThunderbird\thunderbird.exe -addressbook
     $CrPl/networking/Thunderbird/builds.txt
+    C:\MozillaThunderbird\thunderbird.exe -addressbook
+    thunderbird -addressbook
 
 `$Drpbx/JH/TP-default-release/compatibility.ini` for LastVersion
 
-### commands
+### internal commands
     alt+t > a (= Add-ons Manager)
     alt+t > e (= Edit) > a a (= Account Settings)
     alt+t > Manually sort folders
@@ -784,7 +843,45 @@ messes up if terminal is resized
 - `n N`  next previous
 
 # OpenShot
+crossfades are created in overlaps
+
+## Export
+- `ctrl+e` = `Export`
+- `ctrl+p` = `Choose Profile`
+- `ctrl+shift+s` = `Save Project As`
+
+### Quality
+- `Low` is small and blurry
+- `Med` is comes out around 10x bigger
+- `High` is 4x bigger again, but good
+
+## Nikon CoolPix P7700 VGA 640x480
+    Target > AVI (mpeg4)
+    Video Profile > VGA Widescreen NTSC (854x480)
+
+## Preferences
     ctrl+shift+p (= Edit > Preferences)
+
+### Default Profile
+- defaults to HD 720p 30 fps
+- need to `Restart` `OpenShot` when changed
+
+## Profiles
+    $core/IT_stack/OpenShot
+
+- `*assets` folders can be deleted
+
+### Choose Profile
+    ctrl+p
+
+- `HD 720p 30 fps (1280x720)`
+- `HD 1080p 30 fps (1920x1080)`
+- `VGA NTSC (640x480)` 29.97fps
+
+## projects
+    pkill openshot  # when it's struggling to find project files...
+
+fix `path` in the `*.osp`
 
 # screens
 Sony Xperia 10 II: 1080x2520 = 21:9

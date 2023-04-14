@@ -1,7 +1,6 @@
 vim: nospell:
 
     lsusb
-    mount | grep /dev/sd
     solaar show
     uname -m  # machine hardare name
     xbacklight -set 50
@@ -71,6 +70,11 @@ automatically selects the best orientation for filling the page
 # storage
     umount /dev/sdxx
     umount /mountpoint
+
+## mount
+    mount | grep /dev/sd
+
+mount(8)
 
 ## non-optical
     df -h [<disk>]
