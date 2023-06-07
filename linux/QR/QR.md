@@ -14,14 +14,6 @@ commands here are generic, see also `$OSAB/QR.md`
 - Make (software)
 - Pipe Viewer
 
-# awesome wm
-    modkey+left_mouse_drag = move
-    modkey+right_mouse_drag = resize
-    modkey+s = awful.hotkeys_popup
-
-- maximized (horizontally or vertically) are indicated by (horizontal or vertical) double arrow, and break tiling
-- on top clients are indicated by a caret
-
 # bc
     an arbitrary precision calculator language
     bc -q
@@ -29,7 +21,7 @@ commands here are generic, see also `$OSAB/QR.md`
 command: `scale=n  => results to n decimal places`
 
 ## limitations
-- `^` only accepts integer powers
+- `<circumflex>i` = to power of integer i
 - can be inaccurate
 
 # CopyQ
@@ -108,9 +100,10 @@ GNU Grep Manual
 
 ## investigations
     diff -qrN dir1/ dir2/
-    echo `find . -type d | wc -l`-1 | bc  # counts all subdirectories
+    find . -type f | sed 's/.*\.//' | sort | uniq -c  # counts by extension
 
-### file counts
+### counts
+    echo `find . -type d | wc -l`-1 | bc  # counts all subdirectories
     isutf8 **/* | wc -l  # non UTF-8 files (fails when too many)
     ls **/* | wc -l      # all of the files
 
@@ -153,7 +146,7 @@ du(1)
 stat(1)
 
 ### tree
-    tree -d [-L n]  # directories only, do depth n
+    tree -d [-L n]  # directories only, maximum Level (= depth) n
     tree -f
     tree -fi
 
@@ -172,20 +165,77 @@ tree(1)
 /usr/bin/rsnapshot sync: completed successfully
 
 ## rsync
-    output info
+    rsync -inrtv --delete --progress path1/large_file_dir1/ path2/large_file_dir2
 
-- log: `>  = the item is received`
-- rsync: `-l  = --links  = copy symlinks as symlinks`
+- output info: `>` = the item is received
+
+### options
+- `-l` (`--links`) copy symlinks as symlinks
+- `-n` (`--dry-run`)
+- `-r` (`--recursive`)
+- `-t` (`--times`) keep modification times
+
+#### for system files
+- `-A` (`--acls`) keep ACLs, implies `-p`
+- `-a` (`--archive` = `-Dgloprt`)
+    - `-D` (`--devices --specials`)
+        - `--devices` keep device files
+        - `--specials` keep special files
+    - `-g` (`--group`)
+    - `-o` (`--owner`) if super-user
+    - `-p` (`--perms`) keep permissions
+- `-X` (`--xattrs`) keep extended attributes
 
 ## symlinks
     [[ -L $s ]] && echo 'symlink exists'
     readlink $s  # returns target
 
+# file contents
+    sort -o file file  # sort in place
+
+## awk
+    awk -i inplace -F, '{print $3,$2,$1}' OFS='┊' toReorder.csv
+
+GAWK(1)
+
+### built-in variables
+- `FILENAME` name of the current input-file
+- `FS` input field separator character (default = any space and tab characters)
+- `NR` number of input records
+- `NF` number of fields in an input record
+- `OFMT` format for numeric output (default = `%.6g`)
+- `OFS` output field separator (default = <space>)
+- `ORS` output record separator (default = <newline>)
+- `RS` record separator (default = newline)
+
+## sed
+    [[:alpha:]] = [[:lower:]] + [[:upper:]] = [A-Za-z]
+    sed --version
+
+- replace a string in multiple files
+- stream editor
+
+### make changes
+    echo "don't forget that" | sed 's/\x27/\"/'
+    sed -i '0~2 a\\' <fileToAddBlankLineAfterEach2ndLine>
+    sed -i '/<regex>/!d' <filetoreduce>  # removes lines that don't match
+    sed -i '1,4d' <file_to_remove_first_four_lines_from>
+    sed -i '1s/^/vim: ft=<filetype>:\n\n/' $cslF
+    sed G <file>  # outputs <file> with blank lines added
+    sed '1i\\newFirstLineText' <fileToPrependTo>
+
+### show file contents
+    sed '/pattern/q' <file>  # cat's  <file>  until  pattern
+    sed 5q <file> print first 5 lines
+    sed -e '' <file>  # mimics cat
+    sed -n '/<regex>/p' <file>  # prints only the matching lines
+    sed -n '2,$p' <file>  # prints from the 2nd line
+
 # get at root on tty2
     Ctrl+Alt+F2 > root + pw
 
 # GNU Privacy Guard
-    echo "...seems to be working..." | gpg -ase -r jo | gpg  # tests key ( makes empty file secret.out)
+    echo "encrypt me this" | gpg -ase -r jharr
     gpg --full-gen-key
 
 fingerprint: `xxxx xxxx xxxx xxxx xxxx  xxxx xxxx xxxx xxxx xxxx`
@@ -326,11 +376,6 @@ list open files
 ## audio
     pavucontrol
 
-### convert
-    for f in *.flac; do ffmhb -i "$f" -c:a libvorbis -aq 4 "${f%.*}.ogg" ; done
-    for f in *.oma; do ffmhb -i "$f" -c:a libvorbis "${f%.*}.ogg" ; done  # default VBR quality 3
-    for f in *; do ffmhb -i "$f" -b:a 128K -vn "${f%.*}.mp3" ; done
-
 ### cmus
     cmus_notify -h
 
@@ -355,6 +400,11 @@ list open files
     r        toggle repeat
     v        player-stop
     z        player-prev
+
+### convert
+    for f in *.flac; do ffmhb -i "$f" -c:a libvorbis -aq 4 "${f%.*}.ogg" ; done
+    for f in *.oma; do ffmhb -i "$f" -c:a libvorbis "${f%.*}.ogg" ; done  # default VBR quality 3
+    for f in *; do ffmhb -i "$f" -b:a 128K -vn "${f%.*}.mp3" ; done
 
 ### gst123
     gst123 -Z .  # play random audio files recursively forever
@@ -436,6 +486,7 @@ can play omv's
 
 ## email
     neomutt -v
+    notmuch config get database.path
     notmuch search '"the Pennines"' # finds exactly that
     notmuch search tag:attachment | wc -l
     notmuch search tag:fm | wc -l
@@ -543,7 +594,9 @@ requires a `DHCP` client to get an IP address
     pass
     pass help
     pass init
+    pass insert <location> > <pw>
     pass ls
+    pass rm -r <folder>
 
 pass(1)
 
@@ -580,11 +633,12 @@ pass(1)
     pdfimages -h
     pdfimages -png pdfNam3.pdf pngName  # pulls out images separated (if there are any)
     pdftoppm -png -r 300 <pdf> <basename_for_ppm_sequence>
-    pdftoppm -jpg -r 300 <pdf> <basename_for_ppm_sequence>
+    pdftoppm -jpeg -r 300 <pdf> <basename_for_ppm_sequence>
 
 ## Zathura
     <tab> => toggles Outline view
     +/-/= => zoom in/out/original
+    f11   => toggle fullscreen
     r     => rotate by 90 degrees
     R     => reload document
 
@@ -602,34 +656,11 @@ zathura man page
 
 ## list
     ps -efjH
-    pstree
+    pstree -C age
 
 ## pgrep
     bm pgrep
     pgrep <aprogram>  # reports it's process id
-
-# sed
-    [[:alpha:]] = [[:lower:]] + [[:upper:]] = [A-Za-z]
-    sed --version
-
-- replace a string in multiple files
-- stream editor
-
-## make changes
-    echo "don't forget that" | sed 's/\x27/\"/'
-    sed -i '0~2 a\\' <fileToAddBlankLineAfterEach2ndLine>
-    sed -i '/<regex>/!d' <filetoreduce>  # removes lines that don't match
-    sed -i '1,2d' <file_to_remove_first_two_lines_from>
-    sed -i '1s/^/vim: ft=<filetype>:\n\n/' $cslF
-    sed G <file>  # outputs <file> with blank lines added
-    sed '1i\\newFirstLineText' <fileToPrependTo>
-
-## show file contents
-    sed '/pattern/q' <file>  # cat's  <file>  until  pattern
-    sed 5q <file> print first 5 lines
-    sed -e '' <file>  # mimics cat
-    sed -n '/<regex>/p' <file>  # prints only the matching lines
-    sed -n '2,$p' <file>  # prints from the 2nd line
 
 # shell
 - `dc` desk calculator (reverse-Polish)
@@ -637,6 +668,7 @@ zathura man page
 - `fc` "fix command"
 
 ## Bash
+    $ulLB/Scratch0.sh
     /etc/profile
     <somecommand> | xcol <keyword1> <keyword2> ... # for highlighting
     bash --version
@@ -709,6 +741,7 @@ jobs(1p)
 ### loops
     for f in **/*; do echo $f; done
     for i in {0..9..2}; do echo $i; done
+    for i in bee fly wasp; do echo $i; done
 
 ### managing commands
     echo $?  # exit code of last command
@@ -752,11 +785,7 @@ substitute user identity
     trap read debug  # puts a read request after each executable line
 
 ### variables
-    $undefined && echo 'Eh! $undefined true!'
-    (( $1 == 1 || $1 == 2 )) && echo "number 1 or 2"
-    empty=''; [[ -z $empty ]] && echo empty
     export  # lists environment variables
-    if (( ! $n == 1 )); then echo 'not 1'; fi
     set  # lists all variables
 
 #### arrays
@@ -772,7 +801,9 @@ don't export them
     for item in "${array[@]}"; do echo "$item"; done
 
 #### integers
+    (( $1 == 1 || $1 == 2 )) && echo "number 1 or 2"
     i=0; echo $((i+=1))
+    if (( ! $n == 1 )); then echo 'not 1'; fi
 
 ##### comparison
     if [ "$a" -ge "$b" ]
@@ -781,8 +812,13 @@ don't export them
     if [ "$a" -lt "$b" ]
     if [ "$a" -ne "$b" ]
 
+#### empty or undefined
+    $undefined && echo 'Eh! $undefined true!'
+    empty=''; [[ -z $empty ]] && echo empty
+
 #### strings
     [[ $t =~ (y|n) ]] && echo 'good answer'
+    n=''; n=n; [[ -n $n ]] && echo $n
     o lkj | rev | cut -c 2- | rev
     o ljk | sed 's/.$//'
     qs=$'quote\'*star'; o "$qs"
@@ -835,6 +871,13 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
 
 - lsmod(8) show what kernel modules are currently loaded
 - maximum 255 bytes per filename & 4096 per path
+
+## awesome wm
+- maximized (horizontally or vertically) are indicated by (horizontal or vertical) double arrow, and break tiling
+-`modkey+left_mouse_drag` move
+-`modkey+right_mouse_drag` resize
+-`modkey+s` awful.hotkeys_popup
+- on top clients are indicated by a caret
 
 ## CPU-X
     cpu-x -h

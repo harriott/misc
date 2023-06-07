@@ -1,11 +1,11 @@
 vim: nospell:
 
-    $onGH/misc/CrossPlatform; m4ps 0 1
+    $onGH/misc/CrossPlatform/QR; m4ps 0 1
 
 - `HP ENVY 5532 > Wireless Settings > Settings > Advanced > IP Settings > OK > Manual` allows tweaking of printer's address
 - regular expressions
-- Stack Exchange Network
 - syntax of this file is ensured in `$vimfiles/filetype.vim`
+- Software Engineering Stack Exchange
 
 # colours
 - Closest Named Web Colors
@@ -13,7 +13,6 @@ vim: nospell:
 - web colors
 
 # documenting
-    LibreOffice Calc > alt+o p (= Format > Page Style) > Page
     pdf-crop-margins pdf.pdf  # silently makes  pdf-cropped.pdf
 
 ## eBook
@@ -24,129 +23,14 @@ vim: nospell:
 
 E-book viewer `<esc>` brings up the controls
 
-## LaTeX
-    $Drpbx/JH/dts-tex.txt
-    :s/μ/\\mu{}/g
-    xc
+## LibreOffice
+    alt+f12 (= Options)
+    Calc > alt+o p (= Format > Page Style) > Page
+    r ~/.config/libreoffice/4/user/
 
-### commands
-    \begin{figure}[h] \includegraphics[width=0.5\textwidth]{image} \end{figure}
-    \newenvironment{<envName>}[<n>][<default>]{<beginEnv>}{<endEnv>}
-    \pagebreak
-    \pagestyle{empty}  % no headers or footers from here
-    \renewcommand{\arraystretch}{1.5}  % tabular (default 1.0)
-    \section*{ unnumbered section }
-    \stepcounter{section} % increase section number by 1
-    \tableofcontents*  % ToC without itself listed therein
-    \textbf{...}
-    \textit{...}
-    \textsubscript{}
-    \textsuperscript{}
-    \the\length  % prints that length
-    \today
-    \usepackage[dvipsnames]{xcolor}
-    \usepackage{soul}  % Hyphenation for letterspacing, underlining, and more
-    \usepackage{titlesec}  % incompatible with memoir
-    \vfill
-
-#### horizontal spaces in text or math mode
-    \enspace =>.5em
-    \quad => 1em
-    \qquad => 2em
-
-#### font sizes
-    \tiny
-    \scriptsize
-    \footnotesize
-    \small
-    \normalsize
-    \large
-    \Large
-    \LARGE
-    \huge
-    \Huge
-
-#### geometry
-    hmargin={<left margin>,<right margin>}
-    vmargin={<top margin>,<bottom margin>}
-    top=20mm
-
-#### indents
-    \noindent
-    \setlength{\parindent}{0pt}
-    \leftskip=1cm ... \leftskip=0cm
-    \rightskip=1cm ... \rightskip=0cm
-
-#### multicols
-    \usepackage{multicol}
-    ...
-    \begin{document}
-    \begin{multicols}{3}
-    ...
-    \end{multicols}
-
-### engines
-    pdflatex --version
-
-#### MiKTeX
-    initexmf --report
-    miktex --version
-    miktex --verbose fndb refresh
-
-##### FNDB
-    initexmf --update-fndb
-    MiKTeX Console > Tasks > Refresh file name database
-
-after filename changes in `$tex`
-
-##### MiKTeX Package Manager
-    C:\Users\troin\AppData\Local\MiKTeX\miktex\log\mpmcli.log
-    mpm --list > "$ITstack\MSWin\MiKTeX\$Cn-packages-$(Get-Date -f yyMMdd-hhmm).txt"
-    miktex --verbose packages check-update
-    miktex packages list | measure | select -expand Count
-
-### fonts - Indic
-    FreeFont
-
-`Lohit` used by Wikipedia
-
-### package - blindtext
-    \blinddocument
-    \Blinddocument
-    \blindtext
-    \Blindtext[5]
-    \usepackage[bible]{blindtext}
-
-### package - Memoir
-    \defaultlists
-    \documentclass[20pt,a4paper,article,extrafontsizes]{memoir}
-    \tightlists
-
-#### sectioning
-    \chapterstyle{article}
-
-##### lower level headings
-    \setaftersubsecskip{0em}  % text follows heading inline
-    \the\setaftersubsecskip
-    afterskip
-    beforeskip
-
-##### default fonts
-- sec: `\Large\bfseries`
-- subsec: `\large\bfseries`
-- subsubsec: `\bfseries`
-
-#### simple footer
-    \usepackage{currfile}
-      \makeevenfoot{plain}{}{\cg {\currfilename}}{}
-       \makeoddfoot{plain}{}{\cg {\currfilename}}{}
-
-might require `[article]`
-
-### package - pdfpages
-    \includepdf[options]{<pdf>}
-
-doesn't respect `geometry` margins, so `\includepdfset{offset=<fromInnerEdge> <fromTop>}`
+### porting
+    \user\config
+    C:\Users\jnbh\AppData\Roaming\LibreOffice\4\user\registrymodifications.xcu
 
 # Emacs
     sl C:\Users\troin\AppData\Roaming\.emacs.d
@@ -351,10 +235,11 @@ no built in documentation for `straight.el`
 Spacemacs documentation
 
 # encoding
+    code-minimap <textyfile>
     yj -ty <file.toml >file.yml
 
-- <http://daringfireball.net/projects/markdown/syntax>
 - `*.oma` = Sony OpenMG
+- Stack Overflow
 
 ## Bluefish
     alt+e (= Edit) > s (= Preferences...)
@@ -472,6 +357,14 @@ Tig Manual
 ## Java
     java -version
     PS> where.exe java
+
+## markdown
+- <https://github.com/github/linguist/blob/master/lib/linguist/languages.yml> dosini
+- <http://daringfireball.net/projects/markdown/syntax>
+
+### Markdown Guide
+- <https://www.markdownguide.org/basic-syntax/>
+- <https://www.markdownguide.org/extended-syntax/>
 
 ## npm
     npm prefix -g
@@ -595,21 +488,55 @@ Tig Manual
     workon  # activate (or list all)
 
 ## Ruby
+    ruby -v
+
+### gems
+    gem env
+    gem list
+    rougify -h
+
+`minima` builds out the original repository copy of images that are less than 1024x512!
+
+#### bundler
     bundle exec github-pages versions
     bundle install  # recreates Gemfile.lock from Gemfile
     bundle outdated
     bundle show
-    bundle update
-    gem env
-    gem list
-    gem update
-    ruby -v
+    bundle update --all
+
+#### update
+    fd -p "$GEM_HOME/gems" --changed-within 1d --max-depth 1  # lists recently updated
+    gem update  # updates all
+
+### IRB
+    $onGH\misc\irbrc
+
+`irb` is quit with `exit` or `ctrl+d`
 
 ## webish
-    <a>anchor_link<a>
     js-beautify -f obfuscated.html -o beautiful.html
 
-HTML Element
+### HTML Elements
+    <!-- a comment -->
+    <a>anchor_link<a>
+
+### LiquidJS
+    {% comment %}
+    multi-line comment
+    {% endcomment %}
+
+### ssg - Hugo
+    hugo mod graph
+    hugo mod tidy  # cleans  go.mod  and (re)generates  go.sum
+    hugo serve --help
+    hugo serve --navigateToChanged
+    hugo serve -D  # includes drafts
+
+### ssg - Jekyll
+    [link to post]({% post_url 20xx-xx-xx-name-of-post %})
+    bundle exec jekyll s  # serve locally
+
+YAML front matter
 
 # file manage
 sharkdp/bat
@@ -636,19 +563,18 @@ VIFM(1)
 
 # gpg
     <key-id> can be the short key id = the last 8 characters
+    echo "encrypt me this" | gpg -ase -r 13F327EF -o gpg.asc
     gpg --delete-key <key-id>
     gpg --send-keys key-id  # then can never be deleted from the keyserver
     gpg --verify file.asc [file]
 
-## help
-    gpg --dump-options
-    gpg --version
-    gpg -h
+## command options
+`-s` (`--sign`) sign a message
 
-## options for output
+### options for output
 `-o <file>` (`--output <file>`) write output
 
-### format
+#### format
 - `-a` (`--armor`) ASCII armored
 - default is binary OpenPGP
 
@@ -660,6 +586,23 @@ VIFM(1)
 
 - `key n` can get at `ssb` (= subkey)
 - `n` can get at `sec` (= primary key)
+
+## export / import
+    gpg -ao backup.asc --export-secret-keys --export-options backup <id>  # incudes trust
+    gpg -ao private.asc --export-secret-keys <id>
+        gpg --import private.asc > passphrase  # also bring in public key
+    gpg -ao public.asc --export <id>
+
+## gpg-agent
+    $ABjo/gpg-agent.conf
+    gpg-agent -h
+
+## help
+    gpg --dump-options
+    gpg --version
+    gpg -h
+
+The GNU Privacy Handbook
 
 ## key servers
     gpg --search-keys <key-id>  # enter number of key imports it (or just Enter to quit)
@@ -673,7 +616,6 @@ VIFM(1)
     gpg --fingerprint jh  # neater fingerprint output
     gpg --list-sigs  # --list-keys --with-sig-list
     gpg -k  # --list-keys
-    gpg -k | xcol 13F327EF expired expires jharr sprbMb
     gpg -K  # --list-secret-keys
 
 # imagey
@@ -687,14 +629,15 @@ VIFM(1)
     montage <upper> <lower> -geometry +0+0 -tile 1x2 <ul>
 
 ### convert
-    convert -flatten img.png img-white.png
     -background <color>
     -border 20x20
+    -draw 'text xpixels,ypixels "label"'
     -fill <color>
     -font Arcon
     -gravity center
     -pointsize 48
     -size 640x480
+    convert -flatten img.png img-white.png
     label:"some text"
 
 - anisotropic resize
@@ -722,6 +665,13 @@ VIFM(1)
 
 `-gravity northwest`  the default
 
+## MyPaint
+- `ctrl+s` = `File > Save`
+- `d` = `Brush > Decrease Brush Size`
+- `f` = `Brush > Increase Brush Size`
+- `z` = undo
+- `Save` pads out right & bottom images that aren't up to 1024x512...
+
 ## VLC Player
 - `-`  slow down by .1x
 - `+`  speed up by .1x for each press
@@ -736,6 +686,7 @@ VIFM(1)
 
 - <https://www.gps-coordinates.net>
 - trashinbox
+- Webmasters
 
 ## GitHub
     gh config list
@@ -743,21 +694,9 @@ VIFM(1)
 
 `~/.ssh/known_hosts`: `AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa`
 
-## ssg
-    bundle exec jekyll s  # serve locally
-
-Liquid template language
-
-### Hugo
-    hugo mod graph
-    hugo mod tidy  # cleans  go.mod  and (re)generates  go.sum
-    hugo server --help
-    hugo server --navigateToChanged
-    hugo server -D
-
 ## Thunderbird
     $CrPl/networking/Thunderbird/builds.txt
-    C:\MozillaThunderbird\thunderbird.exe -addressbook
+    PS> C:\MozillaThunderbird\thunderbird.exe -addressbook
     thunderbird -addressbook
 
 `$Drpbx/JH/TP-default-release/compatibility.ini` for LastVersion
@@ -792,6 +731,11 @@ mozillamessaging
     x: cmd:cmd_archive
     c: func:MsgNewMessage
     u: tbkeys:closeMessageAndRefresh
+
+### To
+    jharr@ftml.net, trohib@gmail.com
+    <jharr@ftml.net>, <trohib@gmail.com>
+    Joseph HARRIOTT <jharr@ftml.net>, Joseph HARRIOTT <trohib@gmail.com>
 
 ### View
     alt+v > s (= Sort by) > h (= Unthreaded)

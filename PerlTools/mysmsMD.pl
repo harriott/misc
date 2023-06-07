@@ -43,7 +43,7 @@ while (@mysms) {
   # (until we've marked the timestamped last line of a message)
     $scrapeLine = shift @mysms;
     $lineCR .= "◙$scrapeLine";  # concatenate lines with ◙ marker between
-  }
+  } # endless if last line isn't dated...
   # set type of MS
   $MStype = quotemeta("SMS");
   # check for MMS

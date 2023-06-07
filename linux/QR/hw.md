@@ -2,6 +2,7 @@ vim: nospell:
 
     lsusb
     solaar show
+    sudo chmod 777 /run/media/jo/TOSHIBA
     uname -m  # machine hardare name
     xbacklight -set 50
     xev | awk -F'[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }'  # scancodes
