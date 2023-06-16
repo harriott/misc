@@ -534,6 +534,7 @@ Tig Manual
 
 ### ssg - Jekyll
     [link to post]({% post_url 20xx-xx-xx-name-of-post %})
+    bundle exec jekyll build
     bundle exec jekyll s  # serve locally
 
 YAML front matter

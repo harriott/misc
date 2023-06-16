@@ -32,12 +32,12 @@ command: `scale=n  => results to n decimal places`
     strftime
 
 ## cal
-    cal       " this month
+    cal           " this month
     cal (command)
-    cal -3    " last month, this, next
-    cal -n 18 " all 18 months from now
-    cal -w    " week numbers
-    cal -y    " year
+    cal -3        " last month, this, next
+    cal -n 18     " all 18 months from now
+    cal -w[y]     " week numbers
+    cal -y        " year
 
 ## date
     date '+%F %a %H:%M'
@@ -80,6 +80,7 @@ date(1)
     ls -l
     mkdir -p  # --parents = make parent directories as needed (no error if existing)
     readlink <symlinkTarget>
+    tar -xzf archive.tar.gz [-C <target_directory>]
 
 - install(1)
 - ls(1)
@@ -118,6 +119,10 @@ GNU Grep Manual
     find . -type l -ls  # list all symlinks in a directory tree
 
 find(1)
+
+### mlocate
+    locate -c <target>  # --count
+    locate -h
 
 ### sizes
     diskonaut -h
@@ -287,12 +292,15 @@ up/down => zoom in/out
 - can't open `webp`
 
 ### keybindings
-    alt+m => Metadata Info
     ctrl+s => save dialogue
     f => toggles selected panes
     F1 => credits
     F10 => frameless
-    m => useful Exif info, it it's there
+
+#### Panels
+    alt+m => Metadata Info
+    i => File Info
+    m => Metadata Ribbon
 
 #### Alt
     Alt A > Exposure > Gamma
@@ -439,6 +447,7 @@ list open files
 ## mpv
     mpv av://v4l2:/dev/video0
     mpv --start=-2 <avfile>  # starts 2 seconds from end
+    mpv <audio.ogg>
 
 can play omv's
 
@@ -632,8 +641,8 @@ pass(1)
     [-f <firstPage>] [-l <lastPage>]
     pdfimages -h
     pdfimages -png pdfNam3.pdf pngName  # pulls out images separated (if there are any)
-    pdftoppm -png -r 300 <pdf> <basename_for_ppm_sequence>
-    pdftoppm -jpeg -r 300 <pdf> <basename_for_ppm_sequence>
+    pdftoppm -png -r 300 <pdf> <basename_for_png_sequence>
+    pdftoppm -j -r 300 <pdf> <basename_for_jpeg_sequence>
 
 ## Zathura
     <tab> => toggles Outline view

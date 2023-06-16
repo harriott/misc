@@ -123,3 +123,12 @@ parted(8)
     eject -t  # closes tray
     eject -T sr1  # toggles tray of sr1
 
+# webcam
+    cameractrls
+
+## V4l-utils
+    qv4l2
+    v4l2-ctl --list-devices
+    v4l2-ctl -d /dev/video0 --list-ctrls
+    v4l2-ctl -d /dev/video1 --list-ctrls
+

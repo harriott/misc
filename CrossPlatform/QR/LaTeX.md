@@ -17,6 +17,7 @@ functionality included in Memoir
 
 # commands
     \begin{figure}[h] \includegraphics[width=0.5\textwidth]{image} \end{figure}
+    \centred{\rule{9cm}{0.4pt}}  % horizontal line
     \newenvironment{<envName>}[<n>][<default>]{<beginEnv>}{<endEnv>}
     \pagebreak
     \pagestyle{empty}  % no headers or footers from here
@@ -24,8 +25,6 @@ functionality included in Memoir
     \renewcommand{\arraystretch}{1.5}  % tabular (default 1.0)
     \stepcounter{section} % increase section number by 1
     \tableofcontents*  % ToC without itself listed therein
-    \textbf{...}
-    \textit{...}
     \textsubscript{}
     \textsuperscript{}
     \the\length  % prints that length
@@ -35,6 +34,11 @@ functionality included in Memoir
     \usepackage{soul}  % Hyphenation for letterspacing, underlining, and more
     \usepackage{titlesec}  % incompatible with memoir
     \vfill
+
+## font styles
+    \textit{...}
+
+`\textbf{...}` = `{\bfseries ...}` = bold
 
 ## horizontal spaces in text or math mode
     \enspace =>.5em
