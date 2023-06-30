@@ -15,10 +15,11 @@ commands here are generic, see also `$OSAB/QR.md`
 - Pipe Viewer
 
 # bc
-    an arbitrary precision calculator language
     bc -q
+    bc <<< 'scale=2; 3 * 2.004 / 1'  # the final redundant division fixes  scale
 
-command: `scale=n  => results to n decimal places`
+- "an arbitrary precision calculator language"
+- command: `scale=n  => results to n decimal places`
 
 ## limitations
 - `<circumflex>i` = to power of integer i
@@ -51,6 +52,14 @@ command: `scale=n  => results to n decimal places`
     date -r <fileToGetDateOf>
 
 date(1)
+
+# TeX Live
+    sudo tlmgr -gui
+    sudo tlmgr update -all -dry-run
+
+## tests
+    pdflatex sample2e.tex
+    tex --version
 
 # Emacs
     ctrl-x > ctrl-c => quit
@@ -127,7 +136,7 @@ find(1)
 ### sizes
     diskonaut -h
     du -sh  # size of current directory
-    du --max-depth=1 -h <directory>
+    du --max-depth=0 -h <directory>
     dust  # graphical size representation
 
 #### listed
@@ -140,10 +149,13 @@ find(1)
 du(1)
 
 #### ncdu
-    ? -> help
-    g -> rotate through % graph none
-    n -> order by name
-    s -> order by size
+    ncdu [<directory>]
+
+##### commands
+- `?` -> help
+- `g` -> rotate through % graph none
+- `n` -> order by name
+- `s` -> order by size
 
 ### stat
     stat -c '%a %n' *  # show octal permissions
@@ -322,14 +334,24 @@ up/down => zoom in/out
 ## pqiv
     pqiv -i <animateGif> &  # opens the animated gif without the obtrusive info box
     pqiv --auto-montage-mode * &  # flat recursive view of all imagies
+    pqiv --show-bindings
 
-pqiv(1)
+- changes aren't saved
+- plays mp4's
+- powerful quick image viewer
+- recursive
+- shows size in status bar tab
 
 ### commands
     esc/q => quit
     f => toggle full screen
+    h => flip horizontally
     i => toggle info box
+    j => file selection dialogue
+    n => negative
     s => toggle slideshow
+        c-r => toggle shuffle
+    <space> <backspace> => next previous
 
 #### montage mode
     g => goto
@@ -383,6 +405,11 @@ list open files
 
 ## audio
     pavucontrol
+
+### Music Player Daemon
+    mpd
+    mpd --kill
+    pgrep mpd
 
 ### cmus
     cmus_notify -h
@@ -494,51 +521,61 @@ can play omv's
     networkctl list
 
 ## email
+    thunderbird -addressbook
+
+### clm - neomutt
     neomutt -v
+    sidebar_format
+
+### clm - notmuch
     notmuch config get database.path
     notmuch search '"the Pennines"' # finds exactly that
     notmuch search tag:attachment | wc -l
+    notmuch search tag:cz | wc -l
     notmuch search tag:fm | wc -l
     notmuch search tag:gmail | wc -l
     notmuch search tag:trohib | wc -l
-    thunderbird -addressbook
+    notmuch search tag:zou | wc -l
+    notmuch search tag:zou and tag:inbox | wc -l
 
-### firewall
+NOTMUCH-SEARCH-TERMS(7)
+
+## firewall
     sudo iptables -L
 
-#### Firewalld
+### Firewalld
     sudo firewall-config
     sudo systemctl start firewalld
     sudo systemctl stop firewalld
     sudo systemctl status firewalld
     sudo systemctl restart firewalld
 
-##### firewall-cmd
+#### firewall-cmd
     sudo firewall-cmd --info-zone=home
     sudo firewall-cmd --info-zone=public
     sudo firewall-cmd --panic-on
     sudo firewall-cmd --state
 
-#### iptables
+### iptables
     sudo iptables -nvL
     sudo systemctl status iptables.service
 
-### hostname
+## hostname
     hostname
     hostnamectl
     uname -n  # hostname
 
-### ip
+## ip
     ip a  # ip address show
     ip l  # lists ethernet devices
     ip r  # ip route show - compactly shows my internal ip address
 
-### iwd
+## iwd
     man iwd
     sudo ls /var/lib/iwd
     systemctl status iwd.service
 
-#### iwctl
+### iwctl
     man iwctl
     iwctl device list  # shows MAC address
     iwctl known-networks list
@@ -546,17 +583,17 @@ can play omv's
 
 requires a `DHCP` client to get an IP address
 
-### NetworkManager
+## NetworkManager
     nmcli device  # list of networking devices
     nmcli device wifi list | cat  # paged list of SSIDs, with those IN-USE starred
     nmcli device wifi connect <SSID> password <password>
 
-#### saved connections
+### saved connections
     nmcli connection delete <SSID>  # can help
     nmcli connection show | cat  # reports UUIDs and colourizes the active device
     nmcli connection up uuid <UUID>
 
-### NordVPN
+## NordVPN
     nordvpn cities United_Kingdom
     nordvpn cities United_States
     nordvpn countries
@@ -567,7 +604,7 @@ requires a `DHCP` client to get an IP address
     pgrep nordvpn
     sudo pkill -9 -f nordvpn  # doesn't logout
 
-#### account
+### account
     nordvpn connect UK
     nordvpn connect US
     nordvpn disconnect
@@ -576,21 +613,21 @@ requires a `DHCP` client to get an IP address
     nordvpn rate 5
     nordvpn status | xcol United
 
-### ss
+## ss
     bm ss
     ss --tcp --listening
     ss -tulw  # listening on TCP, UDP, RAW sockets
 
-### ssh
+## ssh
     $HOME/.ssh/authorized_keys
     ssh localhost
     sudo systemctl restart sshd.service
     sudo systemctl status sshd.service
 
-#### session commands
+### session commands
     ~? => supported escape sequences
 
-##### exit
+#### exit
     exit
     ~.
 
@@ -699,10 +736,24 @@ zathura man page
 
 command substitution `$(...)`
 
+### echo
+`-n` no trailing newline
+
+#### backslash escapes
+    echo -e "\\t" word_after_tab
+    echo -e '\t' word_after_tab
+
+`-E`  # (default) no interpretation
+
 ### aliases
     alias
     compgen -A alias | awk '{print}' ORS=' : '  # compact list
     unalias
+
+### clear screen (saving scrollback)
+    clear -x  # erase the all lines not in scrollback
+    ctrl+l => scroll the current line to the top
+    tput reset
 
 ### conditionals
     [ "$a" ] && echo $a
@@ -748,6 +799,8 @@ jobs(1p)
     shopt login_shell
 
 ### loops
+    break  # breaks out of loop
+    continue  # to next iteration of loop
     for f in **/*; do echo $f; done
     for i in {0..9..2}; do echo $i; done
     for i in bee fly wasp; do echo $i; done
@@ -772,6 +825,10 @@ jobs(1p)
     2 = stderr file descriptor
     >& = redirect to a file descriptor
     1>&2 = 2>&1
+
+### $PATH
+    echo "${PATH//:/$'\n'}"
+    echo "$PATH" | tr ':' '\n'
 
 ### set
     echo $-  # current options
@@ -895,7 +952,7 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
 
 ## directory sizes as root
     du -shx
-    ncdu -x
+    ncdu -x  # --one-file-system
 
 ## Dunst
     dunstctl close-all
@@ -1016,7 +1073,7 @@ tput(1)
 - `URxvt.url-launcher`
 
 # tr
-    tr '\n' ' ' < <in> [> <out>]  # replace newlines with spaces
+    tr '\n' '~' < <in> | sed 's/~/  /g' [> <out>]  # replace newlines with double spaces
 
 tr (Unix)
 

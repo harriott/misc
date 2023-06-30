@@ -2,7 +2,7 @@ vim: nospell:
 
     $onGH/misc/CrossPlatform/QR; m4ps 0 1
 
-    $Drpbx/JH/dts-tex.txt
+    $DJH/dts-tex.txt
     :s/μ/\\mu{}/g
     xc
 
@@ -106,59 +106,69 @@ after filename changes in `$tex`
 
 `Lohit` used by Wikipedia
 
-# package - blindtext
+# packages
+    tlmgr info pgfplots
+
+## psnfss
+    \usepackage{pifont}
+    \ding{80}  % a little star
+    \ding{220}  % a fat arrow
+
+## blindtext
     \blinddocument
     \Blinddocument
     \blindtext
     \Blindtext[5]
     \usepackage[bible]{blindtext}
 
-# package - Memoir
+## Memoir
     \defaultlists
     \documentclass[20pt,a4paper,article,extrafontsizes,twocolumn]{memoir}
+    \newcommand{\maketitle}
     \nonzeroparskip
     \tightlists
 
 Font sizes
 
-## sectioning
+### sectioning
     \chapterstyle{article}
 
-### lower level headings - default fonts
+#### lower level headings - default fonts
 - sec: `\Large\bfseries`
 - subsec: `\large\bfseries`
 - subsubsec: `\bfseries`
 
-### lower level headings - section tweaks
+#### lower level headings - section tweaks
     \setsecheadstyle{\color{gray}\Large\bfseries}
 
-#### sub
+##### sub
     \setaftersubsecskip{0em}  % text follows heading inline
     \the\setaftersubsecskip
 
-### lower level headings - skips
+#### lower level headings - skips
     \setbeforesecskip{3.5ex plus 1ex minus .2ex} % vspace before section plus allowable stretch minus allowable shrink
     rg -ttex 'skip'
 
 - afterskip
 - beforeskip
 
-#### beforeskip - defaults
+##### beforeskip - defaults
 - sec: `3.5ex plus 1 minus .2`
 - subsec: `3.25ex plus 1 minus .2`
 - subsubsec: `3.25ex plus 1 minus .2`
 
-## simple footer
+### simple footer
     \usepackage{currfile}
       \makeevenfoot{plain}{}{\cg {\currfilename}}{}
        \makeoddfoot{plain}{}{\cg {\currfilename}}{}
 
 might require `[article]`
 
-# package - pdfpages
+## pdfpages
     \includepdf[options]{<pdf>}
 
-doesn't respect `geometry` margins, so `\includepdfset{offset=<fromInnerEdge> <fromTop>}`
+- doesn't respect `geometry` margins, so `\includepdfset{offset=<fromInnerEdge> <fromTop>}`
+- if business cards aren't sized right, go through images
 
 # verse
 ```tex

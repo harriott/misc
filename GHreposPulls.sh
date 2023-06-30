@@ -57,19 +57,21 @@ set -e  # quits on error
 # git clone https://github.com/jgm/pandoc $GHrCl/CP/jgm-pandoc
 # git clone https://github.com/rxi/json.lua $GHrCl/CP/rxi-json.lua
 # git clone https://github.com/wfxr/code-minimap $GHrCl/CP/wfxr-code-minimap
+# git clone https://github.com/reutenauer/polyglossia $GHrCl/CP/reutenauer-polyglossia
+# git clone https://github.com/MartinThoma/LaTeX-examples/ $GHrCl/CP/MartinThoma-LaTeX-examples
 
 #===> Ruby
 # git clone https://github.com/rouge-ruby/rouge $GHrCl/CP/Ruby/rouge-ruby-rouge
 
 #====> Jekyll
 # git clone https://github.com/afaundez/jekyll-favicon $GHrCl/CP/Jekyll/afaundez-jekyll-favicon
-# git clone https://github.com/jekyll/jekyll $GHrCl/CP/Jekyll/jekyll-jekyll
 # git clone https://github.com/mmistakes/minimal-mistakes $GHrCl/CP/Jekyll/mmistakes-minimal-mistakes
 # git clone https://github.com/mmistakes/mm-github-pages-starter $GHrCl/CP/Jekyll/mmistakes-mm-github-pages-starter
 # git clone https://github.com/jwarby/jekyll-pygments-themes $GHrCl/CP/Jekyll/jwarby-jekyll-pygments-themes
 # git clone https://github.com/qian256/qian256.github.io/ $GHrCl/CP/Ruby/Jekyll/qian256-qian256_github_io
 # git clone https://github.com/jasonemiller/jasonemiller.github.io $GHrCl/CP/Ruby/Jekyll/jasonemiller-jasonemiller.github.io
 # git clone https://github.com/cloudify-cosmo/getcloudify.org $GHrCl/CP/Ruby/Jekyll/cloudify-cosmo-getcloudify.org
+# git clone https://github.com/jekyll/jekyll $GHrCl/CP/Ruby/Jekyll/jekyll-jekyll
 
 #===> Hugo
 # git clone https://github.com/LukeSmithxyz/lugo $GHrCl/CP/Hugo/LukeSmithxyz-lugo
@@ -100,21 +102,38 @@ if [ $host = 'sbMb' ]; then
     # rsync -iLrtv --delete $GHrUse/ $GHrCl  # if lost...
 
     # pulls to  $GHrCl
+    # pull=no
+    # start='./CP/MartinThoma-LaTeX-examples'
+    # start='./CP/Ruby/Jekyll/jekyll-jekyll'
+    # start='./linux/Arch/protesilaos-dotfiles'
+    # start='./linux/dwt1-dotfiles'
+    # start='./linux/leo-arch-clifm'
+    pull=yes
     cd $GHrCl; pwd
     dotgits=$(find . -name '*.git' | sort)
     for dotgit in $dotgits; do
         repository=${dotgit%/*}
-        echo "pulling ${tpf3b}$repository${tpfn}"
-        cd $repository
-        git pull
-        if [[ $repository =~ nonexistant ]]; then
-            false
-        elif [[ $repository =~ clifm ]]; then
-            [ -s "src/aux.c" ] && mv src/aux.c src/aux-rNT.c
-        elif [[ $repository =~ (jekyll|protesilaos) ]]; then
-            fd -tl -HL -x unlink {} \; -x touch {}
+        echo $repository
+        [[ $repository == $start ]] && pull=yes
+        if [[ $pull == yes ]]; then
+            echo "pulling ${tpf3b}$repository${tpfn}"
+            cd $repository
+            git pull
+            if [[ $repository =~ nonexistant ]]; then
+                false
+            elif [[ $repository =~ LaTeX-examples ]]; then
+                sy=publications/hasy/symbols
+                for cc in $sy/AE $sy/O; do
+                    [ -s $cc.pdf ] && mv $cc.pdf $cc-caps.pdf
+                done
+            elif [[ $repository =~ clifm ]]; then
+                [ -s "src/aux.c" ] && mv src/aux.c src/aux-rNT.c
+            elif [[ $repository =~ (jekyll|protesilaos) ]]; then
+                fd -tl -HL -x unlink {} \; -x touch {}
+            fi
+            cd $GHrCl
         fi
-        cd $GHrCl
+        # [[ $pull == yes ]] && break  # when you want only one repository
     done
 
     # sync all to  $GHrUse

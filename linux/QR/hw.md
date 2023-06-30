@@ -3,9 +3,9 @@ vim: nospell:
     lsusb
     solaar show
     sudo chmod 777 /run/media/jo/TOSHIBA
+    sudo chmod 644 $Obc/autostart/urxvtl.sh
     uname -m  # machine hardare name
     xbacklight -set 50
-    xev | awk -F'[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }'  # scancodes
 
 # battery
     acpi -h
@@ -24,6 +24,13 @@ vim: nospell:
     echo $(xrandr -q | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f1) $(xrandr -q | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f2)  # screen size
     GPU=$(lspci | grep VGA | cut -d ":" -f3);RAM=$(cardid=$(lspci | grep VGA |cut -d " " -f1);lspci -v -s $cardid | grep " prefetchable"| cut -d "=" -f2);echo $GPU $RAM
     lspci | grep -e VGA -e 3D  # gets just the graphics card name
+
+# keyboard
+    xev | awk -F'[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }'  # scancodes
+
+## for XF86 symbols
+    xmodmap -pke | grep Audio
+    xmodmap -pke | grep Brightness
 
 # printing - CUPS
     lpadmin
@@ -89,8 +96,12 @@ lsblk(8)
     sudo mkfs.vfat -n 'label' -I /dev/sdxn
 
 ### fsck
-- e2fsck(8): `sudo e2fsck -pv /dev/sdx1`
 - `fsck` manages `lost+found` directory
+
+#### e2fsck
+    sudo e2fsck -pv /dev/sdx1  # p = automatic, or just hit enter at each question
+
+e2fsck(8)
 
 ### partitions
     sudo mkfs.ext4 -L <label> /dev/sdxx

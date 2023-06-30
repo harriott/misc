@@ -7,7 +7,7 @@
 
 # bash $onGH/misc/linux/symlinks_log.sh
 
-dir=$Drpbx/JH/search
+dir=$DJH/search
 find $dir/ -type l -ls > $dir/symlinks
 echo "vim: se ft=slJH nowrap:" > $dir/symlinks.log
 echo "" >> $dir/symlinks.log

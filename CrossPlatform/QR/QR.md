@@ -24,9 +24,12 @@ vim: nospell:
 E-book viewer `<esc>` brings up the controls
 
 ## LibreOffice
+    $CrPl/documenting/LibreOffice/Buildup.txt
     alt+f12 (= Options)
     Calc > alt+o p (= Format > Page Style) > Page
     r ~/.config/libreoffice/4/user/
+
+Writer: right-click on a hyperlink for `Remove Hyperlink`
 
 ### porting
     \user\config
@@ -239,6 +242,7 @@ Spacemacs documentation
     yj -ty <file.toml >file.yml
 
 - `*.oma` = Sony OpenMG
+- R: `q("no")`
 - Stack Overflow
 
 ## Bluefish
@@ -450,7 +454,6 @@ Tig Manual
     pew ls
     pip --version
     pip list --outdated
-    python "import sys; print (sys.path)"
     yaml2toml <yaml> <toml>
 
 ### MSWin
@@ -468,6 +471,14 @@ Tig Manual
     pipx run pycowsay moo
     pipx uninstall -h
     pipx upgrade-all
+
+### sys
+```python
+for arg in sys.argv[1:]: print(arg)
+print(sys.argv[0])  # the full pathname of the program
+```
+
+    python -c "import sys; print (sys.path)"
 
 ### versions
     ~\.pyenv
@@ -619,9 +630,19 @@ The GNU Privacy Handbook
     gpg -k  # --list-keys
     gpg -K  # --list-secret-keys
 
-# imagey
+# images
 - 72 dpi = 18.3 dots per mm
 - COLOR TOOLS <http://html-color-codes.info/>
+
+## GIMP - Crop
+    shift+c
+
+`Fixed Aspect ratio > 700:333` (as for `Mastodon` header image) triggers a selection box of that ratio
+
+## GIMP - Export
+    ctrl+shift+e
+
+`alt+f` (= `File`) > `x` (= `Export As...`)
 
 ## ImageMagick
     $CrPl/IMclf-sbMb.txt
@@ -673,14 +694,6 @@ The GNU Privacy Handbook
 - `z` = undo
 - `Save` pads out right & bottom images that aren't up to 1024x512...
 
-## VLC Player
-- `-`  slow down by .1x
-- `+`  speed up by .1x for each press
-- `=`  returns speed to normal
-- `A`  to Change Aspect ratio
-- `b`  to rotate through Audio tracks
-- `v`  to rotate through Subtitles
-
 # internetworking
     curl ifconfig.co/city
     curl ifconfig.co/country
@@ -700,12 +713,10 @@ The GNU Privacy Handbook
     PS> C:\MozillaThunderbird\thunderbird.exe -addressbook
     thunderbird -addressbook
 
-`$Drpbx/JH/TP-default-release/compatibility.ini` for LastVersion
+`$DJH/TP-default-release/compatibility.ini` for LastVersion
 
 ### internal commands
-    alt+t > a (= Add-ons Manager)
-    alt+t > e (= Edit) > a a (= Account Settings)
-    alt+t > Manually sort folders
+    alt+e > e (= Settings) > Config Editor... (= Advanced Preferences)
     ctrl+Shft+B (= Address Book)
     Menu > File > Compact Folders
     right-click on folder > Properties > Repair Folder
@@ -720,6 +731,23 @@ The GNU Privacy Handbook
 - `f`/`p` goes to next/previous message
 
 mozillamessaging
+
+#### Tools
+    alt+t > a (= Add-ons Manager)
+    alt+t > e (= Edit) > a a (= Account Settings)
+    alt+t > Manually sort folders
+
+#### View
+    alt+v > s (= Sort by) > h (= Unthreaded)
+
+##### body
+    b (= Message Body As) >
+      h (= Original HTML)
+      p (= Plain Text)  - can then export & Delete inline images
+
+### run safely
+    $OSAB/jo/wm/TS/thunderbird_safely.sh
+    $machine\T91\runSafely.ps1
 
 ### tbkeys-lite Main key bindings
     j: cmd:cmd_nextMsg
@@ -737,14 +765,6 @@ mozillamessaging
     jharr@ftml.net, trohib@gmail.com
     <jharr@ftml.net>, <trohib@gmail.com>
     Joseph HARRIOTT <jharr@ftml.net>, Joseph HARRIOTT <trohib@gmail.com>
-
-### View
-    alt+v > s (= Sort by) > h (= Unthreaded)
-
-#### body
-    b (= Message Body As) >
-      h (= Original HTML)
-      p (= Plain Text)  - can then export & Delete inline images
 
 ## wttr.in
     curl wttr.in/London
@@ -868,4 +888,12 @@ Sony Xperia 10 II: 1080x2520 = 21:9
 #### window size
     gvim -geometry 200x55
     PS> gvim -c "set columns=217 lines=54"  # maximum on a 1600x900 screen with rhs taskbar
+
+# VLC Player
+- `-`  slow down by .1x
+- `+`  speed up by .1x for each press
+- `=`  returns speed to normal
+- `A`  to Change Aspect ratio
+- `b`  to rotate through Audio tracks
+- `v`  to rotate through Subtitles
 
