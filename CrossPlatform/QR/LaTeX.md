@@ -4,11 +4,8 @@ vim: nospell:
 
     $DJH/dts-tex.txt
     :s/μ/\\mu{}/g
+    \setlength{\columnsep}{1cm}
     xc
-
-# maths environments
-    \longrightarrow
-    \rightarrow
 
 # chngcntr
     \counterwithout{section}{section} % (chngcntr) removes unneeded Chapter number for Sections
@@ -39,11 +36,7 @@ functionality included in Memoir
     \textit{...}
 
 `\textbf{...}` = `{\bfseries ...}` = bold
-
-## horizontal spaces in text or math mode
-    \enspace =>.5em
-    \quad => 1em
-    \qquad => 2em
+`\texttt{...}` = `{\ttfamily ...}` = monospaced
 
 ## font sizes
     \tiny
@@ -61,6 +54,11 @@ functionality included in Memoir
     hmargin={<left margin>,<right margin>}
     vmargin={<top margin>,<bottom margin>}
     top=20mm
+
+## horizontal spaces in text or math mode
+    \enspace =>.5em
+    \quad => 1em
+    \qquad => 2em
 
 ## indents
     \noindent
@@ -106,8 +104,13 @@ after filename changes in `$tex`
 
 `Lohit` used by Wikipedia
 
+# maths environments
+    \longrightarrow
+    \rightarrow
+
 # packages
     tlmgr info pgfplots
+    tlmgr update --all
 
 ## psnfss
     \usepackage{pifont}
@@ -128,7 +131,8 @@ after filename changes in `$tex`
     \nonzeroparskip
     \tightlists
 
-Font sizes
+- `\the\columnsep` reports `10.0pt`
+- Font sizes
 
 ### sectioning
     \chapterstyle{article}
@@ -183,10 +187,10 @@ odd lines are normal \\
 
 \indentpattern{01230}
 \begin{patverse}
-zero indent
-  one indent
-    two indents
-      three indents
+zero indent \\
+  one indent \\
+    two indents \\
+      three indents \\
 zero indent
 \end{patverse}
 

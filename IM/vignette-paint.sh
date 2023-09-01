@@ -2,7 +2,7 @@
 
 # Joseph Harriott  Tue 02 Mar 2021
 #  developed from Fred Weinhaus'  vignette2.sh
-#   $tITUL/linux/ImageMagick/VIGNETTE2/vignette2.sh
+#   $jtUL/linux/ImageMagick/VIGNETTE2/vignette2.sh
 
 # parameters:
 #  ellipse horizontal offset % from -50 to 50

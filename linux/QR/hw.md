@@ -87,24 +87,30 @@ mount(8)
 ## non-optical
     df -h [<disk>]
     du -sh <bigDirectory>
-    lsblk -f
-
-lsblk(8)
 
 ### FAT
     sudo fatlabel /dev/sdi1 [<newLabel>]
     sudo mkfs.vfat -n 'label' -I /dev/sdxn
 
 ### fsck
-- `fsck` manages `lost+found` directory
+`fsck` manages `lost+found` directory
 
 #### e2fsck
     sudo e2fsck -pv /dev/sdx1  # p = automatic, or just hit enter at each question
 
 e2fsck(8)
 
+### lsblk
+    lsblk -f
+
+lsblk(8)
+
 ### partitions
     sudo mkfs.ext4 -L <label> /dev/sdxx
+
+#### gdisk
+    sudo gdisk /dev/sdx
+    sudo gdisk -l /dev/sda
 
 gdisk(8)
 
@@ -112,16 +118,17 @@ gdisk(8)
     mklabel <label>  # destroys existing partitions
     sudo parted <device>
 
-can't set the volume-name
-parted(8)
-
-##### --list  all devices
-    sudo parted -l | grep dev -B 1
-    sudo parted -l | grep sdl -B 1 -A 6
+- can't set the volume-name
+- GNU Parted User Manual
+- parted(8)
 
 ##### CL-mode
     -s => don't ask
-    sudo parted -l
+    sudo parted -l | grep sdl -B 1 -A 6  # --list
+
+### Trash
+    du -hs ~/.local/share/Trash
+    rm -rf ~/.local/share/Trash
 
 ## optical
     cd-drive  # info

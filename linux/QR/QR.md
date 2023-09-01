@@ -1,6 +1,6 @@
 vim: nospell:
 
-    $onGH/misc/linux; m4ps 0 1
+    $onGH/misc/linux/QR; m4ps 0 1
 
 commands here are generic, see also `$OSAB/QR.md`
 
@@ -28,6 +28,7 @@ commands here are generic, see also `$OSAB/QR.md`
 # CopyQ
     copyq tab  # lists them
     ctrl+home -> move_to_top
+    pkill copyq; copyq &
 
 # datetime
     strftime
@@ -71,14 +72,6 @@ date(1)
     ctrl-l => centre text in view
     ctrl-v => scroll down
 
-# encoding
-    gem env
-    gem list
-    gem update
-    npm -g list
-    npm -g up[date]
-    npm config get prefix
-
 # fcron
     fcrontab -l
     systemctl status fcron.service
@@ -88,7 +81,6 @@ date(1)
     fuseiso <ISO_image> <mountDirectory>
     ls -l
     mkdir -p  # --parents = make parent directories as needed (no error if existing)
-    readlink <symlinkTarget>
     tar -xzf archive.tar.gz [-C <target_directory>]
 
 - install(1)
@@ -125,7 +117,6 @@ GNU Grep Manual
     find . -newer oldFile
     find . -path 'exclude*these*paths' -prune -o -name '<filename>' -print
     find . -type f -exec du -h {} + | sort -r -h > sizes.txt
-    find . -type l -ls  # list all symlinks in a directory tree
 
 find(1)
 
@@ -135,16 +126,17 @@ find(1)
 
 ### sizes
     diskonaut -h
-    du -sh  # size of current directory
-    du --max-depth=0 -h <directory>
     dust  # graphical size representation
 
 #### listed
-    du -ah . | grep -v "/$" | sort -rh | head -44  # recursive list of largest 44 files
-    du -h --max-depth=1  # for a quick list of folder sizes
-    du -sh  # gets size of current directory
-    du -sh <glob>
     ls -1Rhs | sed -e "s/^ *//" | grep "^[0-9]" | sort -hr | head -n50  # neat recursive list of largest
+
+##### du
+    du -ah . | grep -v "/$" | sort -rh | head -44  # recursive list of largest 44 files
+    du -h --max-depth=0 <directory>
+    du -h --max-depth=1  # for a quick list of folder sizes
+    du -sh  # size of current directory
+    du -sh <glob>
 
 du(1)
 
@@ -162,7 +154,14 @@ du(1)
 
 stat(1)
 
+### symlinks
+    [[ -L $s ]] && echo 'symlink exists'
+    exa $s  # shows symlinks with out reference in red
+    find . -type l -ls  # recursively list all symlinks with their references
+    readlink $s  # returns referenced node
+
 ### tree
+    tree -a
     tree -d [-L n]  # directories only, maximum Level (= depth) n
     tree -f
     tree -fi
@@ -184,17 +183,20 @@ tree(1)
 ## rsync
     rsync -inrtv --delete --progress path1/large_file_dir1/ path2/large_file_dir2
 
-- output info: `>` = the item is received
+output info: `>` = the item is received
 
 ### options
-- `-l` (`--links`) copy symlinks as symlinks
+    --exclude=PATTERN
+
+- `-l` (`--links`) copy symlinks as symlinks (so no "skipping non-regular file" if the symlink's reference exists)
+- `-L` (`--copy-links`) transform symlink into referent file/dir
 - `-n` (`--dry-run`)
 - `-r` (`--recursive`)
 - `-t` (`--times`) keep modification times
 
 #### for system files
 - `-A` (`--acls`) keep ACLs, implies `-p`
-- `-a` (`--archive` = `-Dgloprt`)
+- `-a` (`--archive` = `-Dgloprt`) handles symlinks with no reference
     - `-D` (`--devices --specials`)
         - `--devices` keep device files
         - `--specials` keep special files
@@ -203,12 +205,8 @@ tree(1)
     - `-p` (`--perms`) keep permissions
 - `-X` (`--xattrs`) keep extended attributes
 
-## symlinks
-    [[ -L $s ]] && echo 'symlink exists'
-    readlink $s  # returns target
-
 # file contents
-    sort -o file file  # sort in place
+    sort -o <file> <file>  # sort in place
 
 ## awk
     awk -i inplace -F, '{print $3,$2,$1}' OFS='┊' toReorder.csv
@@ -229,6 +227,7 @@ GAWK(1)
     [[:alpha:]] = [[:lower:]] + [[:upper:]] = [A-Za-z]
     sed --version
 
+- GNU sed
 - replace a string in multiple files
 - stream editor
 
@@ -348,6 +347,7 @@ up/down => zoom in/out
     h => flip horizontally
     i => toggle info box
     j => file selection dialogue
+    m => toggle montage
     n => negative
     s => toggle slideshow
         c-r => toggle shuffle
@@ -529,6 +529,9 @@ can play omv's
 
 ### clm - notmuch
     notmuch config get database.path
+
+#### search
+    nmse ...
     notmuch search '"the Pennines"' # finds exactly that
     notmuch search tag:attachment | wc -l
     notmuch search tag:cz | wc -l
@@ -538,7 +541,8 @@ can play omv's
     notmuch search tag:zou | wc -l
     notmuch search tag:zou and tag:inbox | wc -l
 
-NOTMUCH-SEARCH-TERMS(7)
+- NOTMUCH-SEARCH-TERMS(7)
+- seems to not find emails that're included in subsequent ones
 
 ## firewall
     sudo iptables -L
@@ -605,6 +609,7 @@ requires a `DHCP` client to get an IP address
     sudo pkill -9 -f nordvpn  # doesn't logout
 
 ### account
+    nordvpn connect CA
     nordvpn connect UK
     nordvpn connect US
     nordvpn disconnect
@@ -630,6 +635,28 @@ requires a `DHCP` client to get an IP address
 #### exit
     exit
     ~.
+
+# npm
+    npm ls -g
+    npm prefix -g  # =  npm config get prefix
+    npm un[install] -g [<package>]
+    npm up[date] -g [<package>]
+    npm -v  # --version
+    which npm
+
+## cspell
+    cspell trace "colour"  # shows which dictionary it's in
+    cspell check <filename>
+    cspell lint --help
+
+## ffmpeg-concat
+- `-d <transition_duration>` default `500`
+- `-o <out_file>` default `out.mp4`
+- `-t <transition_name>` default `fade`
+
+## npx
+    ls ~/.npm/_npx/*/node_modules
+    rm -r ~/.npm/_npx/
 
 # one-line of command output
     echo $(ls)
@@ -665,6 +692,10 @@ pass(1)
     pdftk leftRotated.pdf cat 1-endeast output horizontal.pdf
     pdftk leftRotated-rightRotated.pdf cat 1east 2west output horizontal.pdf
 
+## Poppler
+    pdfimages -h
+    pdfimages -png pdfNam3.pdf pngName  # pulls out images separated (if there are any)
+
 ## qpdfview
     F6 = View > Docks > Outline (such as the headings of a LaTeX document)
     F8 = Thumnails
@@ -676,8 +707,6 @@ pass(1)
 
 ## XpdfReader
     [-f <firstPage>] [-l <lastPage>]
-    pdfimages -h
-    pdfimages -png pdfNam3.pdf pngName  # pulls out images separated (if there are any)
     pdftoppm -png -r 300 <pdf> <basename_for_png_sequence>
     pdftoppm -j -r 300 <pdf> <basename_for_jpeg_sequence>
 
@@ -693,6 +722,7 @@ zathura man page
 # processes
     lsof -i
     niceness: -19 = lowest priority, 20 = highest
+    pidof init  # process id of  init, which is always 1
     sudo iotop -o
     xprop  # WM_CLASS(STRING) = "instance", "class"
 
@@ -701,6 +731,7 @@ zathura man page
     pkill zoom
 
 ## list
+    ps -ef | grep yt-dlp
     ps -efjH
     pstree -C age
 
@@ -708,12 +739,18 @@ zathura man page
     bm pgrep
     pgrep <aprogram>  # reports it's process id
 
+# Ruby gem
+    gem env
+    gem list
+    gem update
+
 # shell
 - `dc` desk calculator (reverse-Polish)
 - `echo $SHELL` reveals flavour
 - `fc` "fix command"
 
 ## Bash
+    $onGH/misc/linux/QR/script.sh
     $ulLB/Scratch0.sh
     /etc/profile
     <somecommand> | xcol <keyword1> <keyword2> ... # for highlighting
@@ -726,8 +763,7 @@ zathura man page
     env | grep SHELL
     exit 0  # to quit script
     printf command
-    read -p "hit Enter"
-    scriptDir=$(dirname "${BASH_SOURCE[0]}")
+    read -p "hit Enter"; echo hello
     shopt
     shopt dotglob  # reports back its status
     shopt -u nullglob  # incase  t=$'\?'; echo $t
@@ -747,7 +783,7 @@ command substitution `$(...)`
 
 ### aliases
     alias
-    compgen -A alias | awk '{print}' ORS=' : '  # compact list
+    compgen -A alias | awk '{print}' ORS=' : '; echo  # compact list
     unalias
 
 ### clear screen (saving scrollback)
@@ -780,7 +816,7 @@ command substitution `$(...)`
     unset -f <function>
 
 #### lists
-    compgen -A function | awk '{print}' ORS=' : '
+    compgen -A function | awk '{print}' ORS=' : '; echo
     declare -F  # lists all declare -f possibilities
 
 #### show code
@@ -855,15 +891,17 @@ substitute user identity
     set  # lists all variables
 
 #### arrays
-    array=(element1 element2 element3)
+    array=(element1 element2  element3)
     echo ${#array[@]}  # length
     firstElement=${array[0]}
     mapfile -t GreekArray < <(printf "Alpha\nBeta\nGamma"); echo ${GreekArray[@]}
+    string='My string'; [[ $string =~ "My" ]] && echo success
 
 don't export them
 
 ##### list
     echo ${array[@]}
+    for ((index=0; index<${#array[@]}; ++index)); do echo "$index" "${array[index]}"; done
     for item in "${array[@]}"; do echo "$item"; done
 
 #### integers
@@ -965,6 +1003,11 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     groups jo
     sudo groupadd <group_to_create>
     sudo groupdel <group_to_delete>
+
+## GRUB
+    grub-install --version
+
+(GRand Unified Bootloader)
 
 ## monitoring
     glances

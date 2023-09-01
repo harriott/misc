@@ -8,6 +8,7 @@
 # -------------------------------------------------------------------------
 # $GHrCl  &  $GHrUse  are defined in  $Bash/export-jo
 # bash $onGH/misc/GHreposPulls.sh
+# du -sh $GHrUse
 
 set -e  # quits on error
 
@@ -16,7 +17,55 @@ set -e  # quits on error
 # Check that symlinks are gone with  bash $onGH/misc/linux/symlinks_log.sh
 
 #=> clones
-# git clone https://github.com/amrali-eg/EncodingChecker $GHrCl/amrali-eg-EncodingChecker
+
+#==> CP
+# git clone https://github.com/OpenShot/openshot-qt $GHrCl/CP/OpenShot-openshot-qt
+# git clone https://github.com/jgm/pandoc $GHrCl/CP/jgm-pandoc
+# git clone https://github.com/rxi/json.lua $GHrCl/CP/rxi-json.lua
+# git clone https://github.com/wfxr/code-minimap $GHrCl/CP/wfxr-code-minimap
+# git clone https://github.com/reutenauer/polyglossia $GHrCl/CP/reutenauer-polyglossia
+# git clone https://github.com/MartinThoma/LaTeX-examples/ $GHrCl/CP/MartinThoma-LaTeX-examples
+
+#===> Ruby
+# git clone https://github.com/rouge-ruby/rouge $GHrCl/CP/Ruby/rouge-ruby-rouge
+
+#====> Jekyll
+# git clone https://github.com/afaundez/jekyll-favicon $GHrCl/CP/Jekyll/afaundez-jekyll-favicon
+# git clone https://github.com/mmistakes/minimal-mistakes $GHrCl/CP/Jekyll/mmistakes-minimal-mistakes
+# git clone https://github.com/mmistakes/mm-github-pages-starter $GHrCl/CP/Jekyll/mmistakes-mm-github-pages-starter
+# git clone https://github.com/jwarby/jekyll-pygments-themes $GHrCl/CP/Jekyll/jwarby-jekyll-pygments-themes
+# git clone https://github.com/qian256/qian256.github.io/ $GHrCl/CP/Ruby/Jekyll/qian256-qian256_github_io
+# git clone https://github.com/jasonemiller/jasonemiller.github.io $GHrCl/CP/Ruby/Jekyll/jasonemiller-jasonemiller.github.io
+# git clone https://github.com/cloudify-cosmo/getcloudify.org $GHrCl/CP/Ruby/Jekyll/cloudify-cosmo-getcloudify.org
+# git clone https://github.com/jekyll/jekyll $GHrCl/CP/Ruby/Jekyll/jekyll-jekyll
+# git clone https://github.com/rfong/rflog $GHrCl/CP/Ruby/Jekyll/rfong-rflog
+
+#===> Hugo
+# git clone https://github.com/LukeSmithxyz/lugo $GHrCl/CP/Hugo/LukeSmithxyz-lugo
+# git clone https://github.com/Vimux/Mainroad $GHrCl/CP/Hugo/Vimux-Mainroad
+# git clone https://github.com/Vimux/blank $GHrCl/CP/Hugo/Vimux-blank
+# git clone https://github.com/adityatelange/hugo-PaperMod $GHrCl/CP/adityatelange-hugo-PaperMod
+# git clone https://github.com/adityatelange/hugo-PaperMod $GHrCl/CP/adityatelange-hugo-PaperMod
+# git clone https://github.com/gohugoio/hugo $GHrCl/CP/Hugo/gohugoio-hugo
+# git clone https://github.com/gohugoio/hugo-mod-bootstrap-scss $GHrCl/CP/Hugo/gohugoio-hugo-mod-bootstrap-scss
+# git clone https://github.com/harriott/hugo-PaperMod $GHrCl/CP/Hugo/harriott-hugo-PaperMod
+# git clone https://github.com/heyeshuang/hugo-theme-tokiwa $GHrCl/CP/Hugo/heyeshuang-hugo-theme-tokiwa
+# git clone https://github.com/negrel/hugo-theme-pico $GHrCl/CP/Hugo/negrel-hugo-theme-pico
+#  couldn't pull, so  sudo rm -r $GHrCl/CP/Hugo/negrel-hugo-theme-pico
+# git clone https://github.com/razonyang/hugo-theme-bootstrap $GHrCl/CP/Hugo/razonyang-hugo-theme-bootstrap
+# git clone https://github.com/razonyang/hugo-theme-bootstrap-skeleton $GHrCl/CP/Hugo/razonyang-hugo-theme-bootstrap-skeleton
+# git clone https://github.com/theNewDynamic/gohugo-theme-ananke $GHrCl/CP/Hugo/theNewDynamic-gohugo-theme-ananke
+# git clone https://github.com/gohugoio/hugoThemesSite $GHrCl/CP/Hugo/gohugoio-hugoThemesSite
+# git clone https://github.com/chipzoller/hugo-clarity $GHrCl/CP/Hugo/chipzoller-hugo-clarity
+# git clone https://github.com/thegeeklab/hugo-geekdoc $GHrCl/CP/Hugo/thegeeklab-hugo-geekdoc
+
+#===> Vim
+# git clone https://github.com/Eckankar/vim-latex-folding $GHrCl/CP/vim/Eckankar/vim-latex-folding
+# git clone https://github.com/kovisoft/slimv $GHrCl/vim-Lisp/kovisoft-slimv
+# git clone https://github.com/lervag/vimtex $GHrCl/CP/vim/lervag-vimtex
+# git clone https://github.com/rhysd/vim-gfm-syntax $GHrCl/CP/vim/rhysd-vim-gfm-syntax
+# git clone https://github.com/vim/vim $GHrCl/CP/vim-vim
+# git clone https://github.com/vlime/vlime $GHrCl/vim-Lisp/vlime-vlime
 
 #==> emacs
 # git clone https://git.sr.ht/~bzg/worg $GHrCl/emacs/_bzg-worg
@@ -46,56 +95,16 @@ set -e  # quits on error
 # git clone https://github.com/simmel/urxvt-resize-font $GHrCl/linux/tmux-fontSize/simmel-urxvt-resize-font
 # git clone https://github.com/stefano-m/awesome-capslock_widget $GHrCl/linux/wm-awesome/stefano-m-awesome-capslock_widget
 # git clone https://github.com/streetturtle/awesome-wm-widgets $GHrCl/linux/wm-awesome/streetturtle-awesome-wm-widgets
+# git clone https://github.com/jarun/nnn $GHrCl/linux/jarun-nnn
 
 #===> Arch
 # git clone https://git.sr.ht/~protesilaos/dotfiles $GHrCl/linux/Arch/protesilaos-dotfiles
 # git clone https://gitlab.archlinux.org/archlinux/packaging/packages/pacman $GHrCl/linux/Arch/gitlab_archlinux_org-archlinux-packaging-packages-pacman
 # git clone https://gitlab.archlinux.org/archlinux/packaging/packages/texlive-core $GHrCl/linux/Arch/gitlab_archlinux_org-archlinux-packaging-packages/texlive-core
 
-#==> CP
-# git clone https://github.com/OpenShot/openshot-qt $GHrCl/CP/OpenShot-openshot-qt
-# git clone https://github.com/jgm/pandoc $GHrCl/CP/jgm-pandoc
-# git clone https://github.com/rxi/json.lua $GHrCl/CP/rxi-json.lua
-# git clone https://github.com/wfxr/code-minimap $GHrCl/CP/wfxr-code-minimap
-# git clone https://github.com/reutenauer/polyglossia $GHrCl/CP/reutenauer-polyglossia
-# git clone https://github.com/MartinThoma/LaTeX-examples/ $GHrCl/CP/MartinThoma-LaTeX-examples
-
-#===> Ruby
-# git clone https://github.com/rouge-ruby/rouge $GHrCl/CP/Ruby/rouge-ruby-rouge
-
-#====> Jekyll
-# git clone https://github.com/afaundez/jekyll-favicon $GHrCl/CP/Jekyll/afaundez-jekyll-favicon
-# git clone https://github.com/mmistakes/minimal-mistakes $GHrCl/CP/Jekyll/mmistakes-minimal-mistakes
-# git clone https://github.com/mmistakes/mm-github-pages-starter $GHrCl/CP/Jekyll/mmistakes-mm-github-pages-starter
-# git clone https://github.com/jwarby/jekyll-pygments-themes $GHrCl/CP/Jekyll/jwarby-jekyll-pygments-themes
-# git clone https://github.com/qian256/qian256.github.io/ $GHrCl/CP/Ruby/Jekyll/qian256-qian256_github_io
-# git clone https://github.com/jasonemiller/jasonemiller.github.io $GHrCl/CP/Ruby/Jekyll/jasonemiller-jasonemiller.github.io
-# git clone https://github.com/cloudify-cosmo/getcloudify.org $GHrCl/CP/Ruby/Jekyll/cloudify-cosmo-getcloudify.org
-# git clone https://github.com/jekyll/jekyll $GHrCl/CP/Ruby/Jekyll/jekyll-jekyll
-
-#===> Hugo
-# git clone https://github.com/LukeSmithxyz/lugo $GHrCl/CP/Hugo/LukeSmithxyz-lugo
-# git clone https://github.com/Vimux/Mainroad $GHrCl/CP/Hugo/Vimux-Mainroad
-# git clone https://github.com/Vimux/blank $GHrCl/CP/Hugo/Vimux-blank
-# git clone https://github.com/adityatelange/hugo-PaperMod $GHrCl/CP/adityatelange-hugo-PaperMod
-# git clone https://github.com/adityatelange/hugo-PaperMod $GHrCl/CP/adityatelange-hugo-PaperMod
-# git clone https://github.com/gohugoio/hugo $GHrCl/CP/Hugo/gohugoio-hugo
-# git clone https://github.com/gohugoio/hugo-mod-bootstrap-scss $GHrCl/CP/Hugo/gohugoio-hugo-mod-bootstrap-scss
-# git clone https://github.com/harriott/hugo-PaperMod $GHrCl/CP/Hugo/harriott-hugo-PaperMod
-# git clone https://github.com/heyeshuang/hugo-theme-tokiwa $GHrCl/CP/Hugo/heyeshuang-hugo-theme-tokiwa
-# git clone https://github.com/negrel/hugo-theme-pico $GHrCl/CP/Hugo/negrel-hugo-theme-pico
-# git clone https://github.com/razonyang/hugo-theme-bootstrap $GHrCl/CP/Hugo/razonyang-hugo-theme-bootstrap
-# git clone https://github.com/razonyang/hugo-theme-bootstrap-skeleton $GHrCl/CP/Hugo/razonyang-hugo-theme-bootstrap-skeleton
-# git clone https://github.com/theNewDynamic/gohugo-theme-ananke $GHrCl/CP/Hugo/theNewDynamic-gohugo-theme-ananke
-# git clone https://github.com/gohugoio/hugoThemesSite $GHrCl/CP/Hugo/gohugoio-hugoThemesSite
-
-#===> Vim
-# git clone https://github.com/Eckankar/vim-latex-folding $GHrCl/CP/vim/Eckankar/vim-latex-folding
-# git clone https://github.com/kovisoft/slimv $GHrCl/vim-Lisp/kovisoft-slimv
-# git clone https://github.com/lervag/vimtex $GHrCl/CP/vim/lervag-vimtex
-# git clone https://github.com/rhysd/vim-gfm-syntax $GHrCl/CP/vim/rhysd-vim-gfm-syntax
-# git clone https://github.com/vim/vim $GHrCl/CP/vim-vim
-# git clone https://github.com/vlime/vlime $GHrCl/vim-Lisp/vlime-vlime
+#==> MSWin
+# git clone https://github.com/amrali-eg/EncodingChecker $GHrCl/amrali-eg-EncodingChecker
+# git clone https://github.com/jdhitsolutions/PSScriptTools $GHrCl/MSWin/jdhitsolutions-PSScriptTools
 
 #=> pulls to  $GHrCl  &  syncs to  $GHrUse
 if [ $host = 'sbMb' ]; then
@@ -127,7 +136,11 @@ if [ $host = 'sbMb' ]; then
                     [ -s $cc.pdf ] && mv $cc.pdf $cc-caps.pdf
                 done
             elif [[ $repository =~ clifm ]]; then
+                [ -s "misc/codecov/aux.c.gcov" ] &&
+                    mv misc/codecov/aux.c.gcov misc/codecov/aux-rNT.c.gcov
                 [ -s "src/aux.c" ] && mv src/aux.c src/aux-rNT.c
+                [ -s "src/aux.h" ] && mv src/aux.h src/aux-rNT.h
+                # fd aux $GHrCl/linux/leo-arch-clifm
             elif [[ $repository =~ (jekyll|protesilaos) ]]; then
                 fd -tl -HL -x unlink {} \; -x touch {}
             fi

@@ -2,10 +2,63 @@ vim: nospell:
 
     $onGH/misc/CrossPlatform/QR; m4ps 0 1
 
-- `HP ENVY 5532 > Wireless Settings > Settings > Advanced > IP Settings > OK > Manual` allows tweaking of printer's address
 - regular expressions
 - syntax of this file is ensured in `$vimfiles/filetype.vim`
 - Software Engineering Stack Exchange
+
+# AV - OBS Studio Settings
+    Output > Recording > Encoder > x264 low CPU usage
+
+`Alt+f` (= `File`) > `s` (= `Settings`) > `Output` > `Recording` > `Recording Path`
+
+# AV - OpenShot
+crossfades are created in overlaps
+
+## Export
+- `ctrl+e` = `Export`
+- `ctrl+p` = `Choose Profile`
+- `ctrl+shift+s` = `Save Project As`
+
+### Quality
+- `Low` is small and blurry
+- `Med` is comes out around 10x bigger
+- `High` is 4x bigger again, but good
+
+## Nikon CoolPix P7700 VGA 640x480
+    Target > AVI (mpeg4)
+    Video Profile > VGA Widescreen NTSC (854x480)
+
+## Preferences
+    ctrl+shift+p (= Edit > Preferences)
+
+### Default Profile
+- defaults to HD 720p 30 fps
+- need to `Restart` `OpenShot` when changed
+
+## Profiles
+    $core/IT_stack/OpenShot
+
+- `*assets` folders can be deleted
+
+### Choose Profile
+    ctrl+p
+
+- `HD 720p 30 fps (1280x720)`
+- `HD 1080p 30 fps (1920x1080)`
+- `VGA NTSC (640x480)` 29.97fps
+
+## projects
+    pkill openshot  # when it's struggling to find project files...
+
+fix `path` in the `*.osp`
+
+# AV - VLC Player
+- `-`  slow down by .1x
+- `+`  speed up by .1x for each press
+- `=`  returns speed to normal
+- `A`  to Change Aspect ratio
+- `b`  to rotate through Audio tracks
+- `v`  to rotate through Subtitles
 
 # colours
 - Closest Named Web Colors
@@ -15,31 +68,37 @@ vim: nospell:
 # documenting
     pdf-crop-margins pdf.pdf  # silently makes  pdf-cropped.pdf
 
-## eBook
-`Foliate` - mouse to top for settings
-
-### Calibre
+## eBook - Calibre
     ~/CalibreLibrary
 
 E-book viewer `<esc>` brings up the controls
 
+## eBook - Foliate
+- `ctrl-q` = quit
+- mouse to top for settings
+
 ## LibreOffice
     $CrPl/documenting/LibreOffice/Buildup.txt
-    alt+f12 (= Options)
-    Calc > alt+o p (= Format > Page Style) > Page
     r ~/.config/libreoffice/4/user/
 
-Writer: right-click on a hyperlink for `Remove Hyperlink`
+- `alt+f12` = `Tools > Options`
+- `alt+t e` = `Tools > Extensions` = `ctrl+alt+e`
+- `ctrl+alt+e` = `Tools > Extension Manager...`
+- Writer: right-click on a hyperlink for `Remove Hyperlink`
+
+### Draw
+- curve: `left-click > [shift] move > left-click > move > double-left-click`
+- `F2` (= `Insert > Text Box`)
+
+### Page Style
+- `alt+o p` = `shft+alt+p` = `Format > Page Style`
+- `Page` is where can set borders
 
 ### porting
     \user\config
     C:\Users\jnbh\AppData\Roaming\LibreOffice\4\user\registrymodifications.xcu
 
-# Emacs
-    sl C:\Users\troin\AppData\Roaming\.emacs.d
-    emacs $TeNo/TN/Emacs/org/org.org &
-
-## commands
+# Emacs - commands
 - `C-*`  calc-dispatch
 - `C-g`  keyboard-quit
 - `C-x C-c`  quit
@@ -49,24 +108,24 @@ Writer: right-click on a hyperlink for `Remove Hyperlink`
 - `M-x kill-emacs`  force quit
 - `W`  browse-url-of-dired-file
 
-### buffers
+## buffers
 - `C-x b`  switch buffer
 - `C-x C-b`  list buffers
 - `C-x k`  kill buffer
 - `M-x minimap-mode`
 
-### calendar
+## calendar
 - `C-@`  set mark
 - `M-=`  days to or from mark
 - `q`  quit
 
-#### diary
+### diary
 - `d`  diary-view-entries
 - `m`  diary-mark-entries
 - `s`  diary-show-all-entries
 - `u`  calendar-unmark
 
-#### info
+### info
 - `a`  holidays
 - `M-x`  sunrise/sunset
 - `p c`  ISO date
@@ -75,43 +134,43 @@ Writer: right-click on a hyperlink for `Remove Hyperlink`
 - `p o`  mb with date in various forms
 - `S`  sunrise/sunset for point
 
-#### movements
+### movements
 - `.`  today
 - `< or >`  left or right
 - `C-x [ or ]`  previous or next year
 - `M { or }`  back or forward 1m
 - `n C-n`  move ahead n weeks
 
-#### Dashboard
+### Dashboard
 - `b`  Bookmarks
 - `r`  Recent Files
 - `return`  open
 - `tab / shift-tab`  next / previous item
 
-### directories files
+## directories files
 - `C-x C-r`  recentf-open-files
 - `M-#`  sr-speedbar-toggle
 
-#### Dired
+### Dired
 - `C-x d (= M-x dired)`  dired
 - `Dired+: (`  toggle details
 
-##### Dired
+#### Dired
 - `?`
 - `C-x C-f`  find-file
 - `g`  reload
 - `q`  quit
 - `W`  browse-url-of-dired-file
 
-#### files
+### files
 - `C-x C-r`  recentf-open-files
 - `C-x C-s`  save-some-buffers
 
-#### VC Directory Mode
+### VC Directory Mode
 - `C-x v d`  vc-directory
 - `C-x v v`  vc-next-action
 
-### elisp
+## elisp
     (blah blah blah)  ; comment
     (face-remap-add-relative 'default :family "Arial" :height 140)
     (font-family-list)
@@ -119,7 +178,7 @@ Writer: right-click on a hyperlink for `Remove Hyperlink`
 - `C-u C-x C-e`  evaluate expression and insert result at point
 - `M-:`  M-x eval-expression
 
-### help
+## help
 - `C-h b`  describe-bindings
 - `C-h i`  info
 - `C-h f`  describe-function
@@ -134,7 +193,7 @@ Writer: right-click on a hyperlink for `Remove Hyperlink`
 
 variables: `system-type`, `window-system`
 
-### fonts
+## fonts
 - `C-u C-x <equals>`  details of face under cursor
 - `M-: (face-attribute 'default :font)`
 - `M-: (print (font-family-list))`
@@ -145,29 +204,29 @@ variables: `system-type`, `window-system`
 - `M-x set-frame-font`  narrowable list of ISO font names
 - `M-x variable-pitch-mode`  toggles it
 
-#### size
+### size
 - `C-mouse wheel`
 - `C-x C-+/-/0`  grow/shrink/reset font
 
-### minibuffer
+## minibuffer
 - `C-h v command-history`
 - `C-x ESC ESC`  repeat-complex-command
 - `M-x list-command-history`
 
-### modes
+## modes
     C-h v minor-mode-list
 
-#### Markdown Mode
+### Markdown Mode
 - `S-tab`  rotate buffer visibility
 - `tab`  rotate subtree visibility
 
-#### Org-mode
+### Org-mode
 - `C-c C-n/p`  next/previous heading
 - `C-c C-x C-v`  org-toggle-inline-images
 - `S-tab`  rotate buffer visibility
 - `tab`  rotate subtree visibility
 
-### movements
+## movements
 - `C-b C-f`  back/forward character
 - `C-a/e`  start/end of line
 - `C-n/p`  next/previous line
@@ -175,16 +234,16 @@ variables: `system-type`, `window-system`
 - `M-b M-f`  back/forward word
 - `M-< M->`  start end of buffer
 
-### packages
+## packages
     M-x describe-package <package>
 
 no built in documentation for `straight.el`
 
-#### list-packages
+### list-packages
     M-x list-packages
     M-x package-list-packages
 
-##### commands
+#### commands
 - `//`  clear filter
 - `/k` = `package-menu-filter-by-keyword`
 - `/N <regex>`  filter
@@ -193,32 +252,32 @@ no built in documentation for `straight.el`
 - `U` = `package-menu-mark-upgrades` - mark available upgrades
 - `x`  do upgrades
 
-#### Paradox
+### Paradox
     M-x paradox-list-packages
 
-##### commands
+#### commands
 - `h`  help
 - `v`  visit homepage
 
-### search & replace
+## search & replace
 - `C-r`  isearch-backward
 - `C-s`  isearch-repeat-forward
 - `M-%`  query-replace
 - `M-s o (= M-x occur) > regex`  buffer shows lines containing regex
 
-### text
+## text
 - `C-@ or C-SPC`  mark
 - `C-_`  undo
 - `C-k`  kill-line
 - `C-x h`  mark entire buffer
 - `M-y`  yank-pop
 
-### windows
+## windows
 - `C-x 0`  delete-window
 - `C-x 1`  delete-other-windows
 - `C-x o`  other-window
 
-## Evil
+# Emacs - Evil
 - `$GHrUse/emacs/emacs-evil-evil/evil-maps.el`
 - `C-z`  toggles it
 
@@ -358,6 +417,15 @@ Tig Manual
     go env
     go version
 
+### Hugo
+    hugo  # populates public/
+    hugo server  # defaults to  http://localhost:1313/
+    hugo server -p 1314  # http://localhost:1314/
+    hugo version
+    rm -r public, hugo
+
+`hugo -b http://...` overrides `baseURL` defined in a `config.toml`
+
 ## Java
     java -version
     PS> where.exe java
@@ -369,24 +437,6 @@ Tig Manual
 ### Markdown Guide
 - <https://www.markdownguide.org/basic-syntax/>
 - <https://www.markdownguide.org/extended-syntax/>
-
-## npm
-    npm prefix -g
-    npm up -g  # upgrade
-    npm -g list
-    npm --version
-    which npm
-    wikit mooji -b
-
-### ffmpeg-concat
-- `-d <transition_duration>` default `500`
-- `-o <out_file>` default `out.mp4`
-- `-t <transition_name>` default `fade`
-
-### cspell
-    cspell trace "colour"  # shows which dictionary it's in
-    cspell check <filename>
-    cspell lint --help
 
 ## Pandoc
 `--fail-if-warnings`  exit with error status if there are any warnings
@@ -580,6 +630,8 @@ VIFM(1)
     gpg --send-keys key-id  # then can never be deleted from the keyserver
     gpg --verify file.asc [file]
 
+GnuPG
+
 ## command options
 `-s` (`--sign`) sign a message
 
@@ -630,16 +682,33 @@ The GNU Privacy Handbook
     gpg -k  # --list-keys
     gpg -K  # --list-secret-keys
 
+# HW
+    duf
+
+`HP ENVY 5532 > Wireless Settings > Settings > Advanced > IP Settings > OK > Manual` allows tweaking of printer's address
+
+## screens
+Sony Xperia 10 II: 1080x2520 = 21:9
+
+### widescreen 16:9
+- 854x480
+- 1280x720 = 720p = "HD Ready"
+- 1600x900
+- 1920x1080
+
 # images
 - 72 dpi = 18.3 dots per mm
 - COLOR TOOLS <http://html-color-codes.info/>
 
-## GIMP - Crop
+## GIMP
+paintbrush: shift previews a new straight line from last point to current mouse cursor location
+
+### Crop
     shift+c
 
 `Fixed Aspect ratio > 700:333` (as for `Mastodon` header image) triggers a selection box of that ratio
 
-## GIMP - Export
+### Export
     ctrl+shift+e
 
 `alt+f` (= `File`) > `x` (= `Export As...`)
@@ -695,10 +764,12 @@ The GNU Privacy Handbook
 - `Save` pads out right & bottom images that aren't up to 1024x512...
 
 # internetworking
+    $CrPl/networking/browsers/browsers.txt
     curl ifconfig.co/city
     curl ifconfig.co/country
+    ssh-keygen -lv -f ssh_host_rsa_key.pub  # shows fingerprint & ASCII art
 
-- <https://www.gps-coordinates.net>
+- GPS Coordinates <https://www.gps-coordinates.net>
 - trashinbox
 - Webmasters
 
@@ -722,9 +793,10 @@ The GNU Privacy Handbook
     right-click on folder > Properties > Repair Folder
 
 #### Keyboard Shortcuts
-- `Ctrl+R`  **R**eply (to sender only)
-- `Ctrl+Shft+B`  Address **B**ook (like Bookmarks in Firefox)
-- `Ctrl+Shft+F`  **F**ind in folder
+- `ctrl+r`  **R**eply (to sender only)
+- `ctrl+shft+b`  Address **B**ook (like Bookmarks in Firefox)
+- `ctrl+shft+f`  **F**ind in folder
+- `ctrl+u`  view email source
 - `m` toggles message read/unread
 - `(Shift+)j`  (not) junk
 - `s` toggles starring
@@ -807,67 +879,10 @@ messes up if terminal is resized
 - `/ ?`  search forward backward
 - `n N`  next previous
 
-# OpenShot
-crossfades are created in overlaps
-
-## Export
-- `ctrl+e` = `Export`
-- `ctrl+p` = `Choose Profile`
-- `ctrl+shift+s` = `Save Project As`
-
-### Quality
-- `Low` is small and blurry
-- `Med` is comes out around 10x bigger
-- `High` is 4x bigger again, but good
-
-## Nikon CoolPix P7700 VGA 640x480
-    Target > AVI (mpeg4)
-    Video Profile > VGA Widescreen NTSC (854x480)
-
-## Preferences
-    ctrl+shift+p (= Edit > Preferences)
-
-### Default Profile
-- defaults to HD 720p 30 fps
-- need to `Restart` `OpenShot` when changed
-
-## Profiles
-    $core/IT_stack/OpenShot
-
-- `*assets` folders can be deleted
-
-### Choose Profile
-    ctrl+p
-
-- `HD 720p 30 fps (1280x720)`
-- `HD 1080p 30 fps (1920x1080)`
-- `VGA NTSC (640x480)` 29.97fps
-
-## projects
-    pkill openshot  # when it's struggling to find project files...
-
-fix `path` in the `*.osp`
-
-# screens
-Sony Xperia 10 II: 1080x2520 = 21:9
-
-## widescreen 16:9
-- 854x480
-- 1280x720 = 720p = "HD Ready"
-- 1600x900
-- 1920x1080
-
 # Stack Exchange Network
 - `@petersmith` = Peter Smith
 - CommonMark Implementations
 - `highlight.js`
-
-# text-to-speech
-    espeak "Hello World!"
-
-## French
-    espeak -v fr "Votre texte à lire..."
-    espeak -v fr+f2 "Bonjour tout le monde"
 
 # text wrangling
 - carriage return (U+000D) returns the cursor to the left of the line (usually just before line feed on MSWin)
@@ -889,11 +904,10 @@ Sony Xperia 10 II: 1080x2520 = 21:9
     gvim -geometry 200x55
     PS> gvim -c "set columns=217 lines=54"  # maximum on a 1600x900 screen with rhs taskbar
 
-# VLC Player
-- `-`  slow down by .1x
-- `+`  speed up by .1x for each press
-- `=`  returns speed to normal
-- `A`  to Change Aspect ratio
-- `b`  to rotate through Audio tracks
-- `v`  to rotate through Subtitles
+# text-to-speech
+    espeak "Hello World!"
+
+## French
+    espeak -v fr "Votre texte à lire..."
+    espeak -v fr+f2 "Bonjour tout le monde"
 
