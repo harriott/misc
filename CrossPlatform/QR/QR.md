@@ -259,18 +259,18 @@ no built in documentation for `straight.el`
 - `h`  help
 - `v`  visit homepage
 
-## search & replace
-- `C-r`  isearch-backward
-- `C-s`  isearch-repeat-forward
-- `M-%`  query-replace
-- `M-s o (= M-x occur) > regex`  buffer shows lines containing regex
-
 ## text
 - `C-@ or C-SPC`  mark
 - `C-_`  undo
 - `C-k`  kill-line
 - `C-x h`  mark entire buffer
 - `M-y`  yank-pop
+
+### search & replace
+- `C-r`  isearch-backward
+- `C-s`  isearch-repeat-forward
+- `M-%`  query-replace
+- `M-s o (= M-x occur) > regex`  buffer shows lines containing regex
 
 ## windows
 - `C-x 0`  delete-window
@@ -850,7 +850,10 @@ mozillamessaging
     yt-dlp -f ba <videoURL>  # bestaudio (= best*[vcodec=none])
     yt-dlp --version
 
-## YouTube shortcuts
+## YouTube
+file formats
+
+### shortcuts
 - `0 .. 9`  jump 0% .. 90%
 - `c`  toggle captions
 - `f`  toggle full screen
@@ -891,8 +894,10 @@ messes up if terminal is resized
 ## vim
     $HOME/_viminfo
     $ITstack/vimfiles/spell/fr.utf-8.add
+    echo $MYVIMRC
     gci -r tags -force | where { ! $_.PSIsContainer } | select -expandProperty fullname > tags-Win10.txt
     [g]vim .  # will open netrw on current directory
+    vim -u NONE  # skip all initialisations
 
 `^M`  carriage return
 

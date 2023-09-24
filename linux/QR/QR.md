@@ -79,12 +79,10 @@ date(1)
 # file manage
     cp -r <sourceDir> .
     fuseiso <ISO_image> <mountDirectory>
-    ls -l
     mkdir -p  # --parents = make parent directories as needed (no error if existing)
     tar -xzf archive.tar.gz [-C <target_directory>]
 
 - install(1)
-- ls(1)
 - rm(1)
 
 ## compressed
@@ -168,6 +166,12 @@ stat(1)
 
 tree(1)
 
+## ls
+    ls -l
+
+- `-d` (= `--directory`)
+- ls(1)
+
 ## rm with Pipe Viewer
 1. `find <directory> | wc -l  # gets the <filecount>`
 2. `sudo rm -rv <directory> | pv -l -s <filecount> > /dev/null  # shows progress for rm`
@@ -188,6 +192,7 @@ output info: `>` = the item is received
 ### options
     --exclude=PATTERN
 
+- `-i` (`--itemize-changes`)
 - `-l` (`--links`) copy symlinks as symlinks (so no "skipping non-regular file" if the symlink's reference exists)
 - `-L` (`--copy-links`) transform symlink into referent file/dir
 - `-n` (`--dry-run`)
@@ -206,12 +211,17 @@ output info: `>` = the item is received
 - `-X` (`--xattrs`) keep extended attributes
 
 # file contents
+    cat
+    tac
+    shuf
     sort -o <file> <file>  # sort in place
 
 ## awk
     awk -i inplace -F, '{print $3,$2,$1}' OFS='┊' toReorder.csv
 
-GAWK(1)
+- `-F` (interpret patterns as `--fixed-strings`, not regex)
+- GAWK(1)
+- GNU Awk
 
 ### built-in variables
 - `FILENAME` name of the current input-file
@@ -225,8 +235,10 @@ GAWK(1)
 
 ## sed
     [[:alpha:]] = [[:lower:]] + [[:upper:]] = [A-Za-z]
+    echo "THIS is a test!" | sed 's/.*/\L&/; s/[a-z]*/\u&/g'  # title case
     sed --version
 
+- `-E`/`-r` (`--regexp-extended`) extended regular expressions
 - GNU sed
 - replace a string in multiple files
 - stream editor
@@ -329,6 +341,7 @@ up/down => zoom in/out
 ## Pinta
 - can't send to printer...
 - shows precise cursor position in pixels
+- `backspace` (= `Edit > Erase Selection`)
 
 ## pqiv
     pqiv -i <animateGif> &  # opens the animated gif without the obtrusive info box
@@ -968,6 +981,7 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     passwd jo  # then re-login
     ps $(pgrep Xorg)  # shows which tty X is on
     swapon --show
+    sysctl -a  # display all kernel parameters
     uname -a  # unix name, includes linux version number
     w  # list users and load on system
     whereis <executable>
@@ -1025,6 +1039,7 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     systemctl  # list running Systemd units
     systemctl --failed
     systemctl --no-pager
+    systemctl --version
     systemctl is-enabled <service>
     systemctl list-timers
     systemctl list-unit-files
@@ -1042,7 +1057,8 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     sudo fgconsole
     tput colors
 
-tput(1)
+- tput(1)
+- w(1)
 
 ## terminal line settings
     stty - a

@@ -429,8 +429,8 @@
 (setq zenburn-use-variable-pitch t) ;; use variable-pitch fonts for some headings and titles
 (setq zenburn-scale-org-headlines t) ;; scale headings in org-mode
 (setq zenburn-scale-outline-headlines t) ;; scale headings in outline-mode
-; (use-package zenburn-theme)  ; gets the original
-(require 'zenburn-theme)  ; gets my version
+(use-package zenburn-theme)  ; gets the original
+; (require 'zenburn-theme)  ; gets my version
   (load-theme 'zenburn t)
 
 ;;; minibuffer - Consult

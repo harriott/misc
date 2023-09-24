@@ -20,7 +20,6 @@ functionality included in Memoir
     \pagestyle{empty}  % no headers or footers from here
     \raggedleftSomeText\par}
     \renewcommand{\arraystretch}{1.5}  % tabular (default 1.0)
-    \stepcounter{section} % increase section number by 1
     \tableofcontents*  % ToC without itself listed therein
     \textsubscript{}
     \textsuperscript{}
@@ -78,6 +77,7 @@ functionality included in Memoir
 ## sections
     \section*{ unnumbered section }
     \setcounter{secnumdepth}{3} % default
+    \stepcounter{section} % increase section number by 1
 
 # engines
     pdflatex --version
@@ -110,12 +110,9 @@ after filename changes in `$tex`
 
 # packages
     tlmgr info pgfplots
-    tlmgr update --all
+    tlmgr update --list
 
-## psnfss
-    \usepackage{pifont}
-    \ding{80}  % a little star
-    \ding{220}  % a fat arrow
+`datetime2`
 
 ## blindtext
     \blinddocument
@@ -123,6 +120,19 @@ after filename changes in `$tex`
     \blindtext
     \Blindtext[5]
     \usepackage[bible]{blindtext}
+
+## hyperref
+    \href{...}
+    \pdfstringdefDisableCommands{...}  % to fix "token not allowed"
+
+## pifont
+    \ding{80}  % a little star
+    \usepackage{pifont}
+
+## psnfss
+    \usepackage{pifont}
+    \ding{80}  % a little star
+    \ding{220}  % a fat arrow
 
 ## Memoir
     \defaultlists

@@ -25,6 +25,7 @@ set -e  # quits on error
 # git clone https://github.com/wfxr/code-minimap $GHrCl/CP/wfxr-code-minimap
 # git clone https://github.com/reutenauer/polyglossia $GHrCl/CP/reutenauer-polyglossia
 # git clone https://github.com/MartinThoma/LaTeX-examples/ $GHrCl/CP/MartinThoma-LaTeX-examples
+# git clone https://github.com/pypa/pipx $GHrCl/CP/pypa-pipx
 
 #===> Ruby
 # git clone https://github.com/rouge-ruby/rouge $GHrCl/CP/Ruby/rouge-ruby-rouge
@@ -66,6 +67,7 @@ set -e  # quits on error
 # git clone https://github.com/rhysd/vim-gfm-syntax $GHrCl/CP/vim/rhysd-vim-gfm-syntax
 # git clone https://github.com/vim/vim $GHrCl/CP/vim-vim
 # git clone https://github.com/vlime/vlime $GHrCl/vim-Lisp/vlime-vlime
+# git clone https://github.com/preservim/tagbar $GHrCl/CP/Vim/preservim-tagbar
 
 #==> emacs
 # git clone https://git.sr.ht/~bzg/worg $GHrCl/emacs/_bzg-worg
