@@ -307,15 +307,14 @@ up/down => zoom in/out
 ```
 
 ## nomacs
-    ctrl+k => keyboard Shortcuts
-    ctrl+r => resize
-    ctrl+Shift+p > Close on ESC
-
 - can only fill page for printing
 - can't open `webp`
 
 ### keybindings
+    ctrl+k => keyboard Shortcuts
+    ctrl+r => resize
     ctrl+s => save dialogue
+    ctrl+shift+p > Close on ESC
     f => toggles selected panes
     F1 => credits
     F10 => frameless
