@@ -4,9 +4,6 @@
 ""> 2 plugin - ALE
 packadd ale
 
-""> 2 plugin - csv.vim
-packadd csv.vim
-
 ""> 2 plugin - fzf.vim
 packadd fzf.vim
 
@@ -30,4 +27,10 @@ colorscheme tomorrow
 
 ""> 2 plugin - VimTeX
 packadd vimtex
+
+""> 3 plugin - after
+source $vimfiles/after/plugin/plugins.vim
+
+""> 4 ftplugin
+source $onGH/misc/CrossPlatform/vimtest/ftplugin-csv.vim
 

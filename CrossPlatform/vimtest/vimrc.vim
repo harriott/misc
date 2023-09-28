@@ -21,11 +21,9 @@ source $vimfiles/gvimrc-Arch.vim
 
 ""> 2 plugin
 source $vimfiles/plugin/plugin.vim
-source $vimfiles/plugin/plugins.vim
-
-""> 3 plugin - after
-source $vimfiles/after/plugin/plugins.vim
-
-""> 4 ftplugin
-source $onGH/misc/CrossPlatform/vimtest/ftplugin-csv.vim
+" source $vimfiles/plugin/plugins.vim
+"
+""> 2 plugin - csv.vim
+" packadd csv.vim
+packadd $vimfiles/pack/packs-cp/opt/csv.vim
 
