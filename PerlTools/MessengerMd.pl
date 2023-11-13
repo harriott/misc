@@ -7,7 +7,8 @@
 # -----------------------------------------------------------------------------------
 #  used in  $vimfiles/ftplugin/md.vim
 
-# perl $onGH/misc/PerlTools/MessengerMd.pl $IT1/InterNetworking/comms/Facebook/MessengerScrape1.md
+# perl $misc/PerlTools/MessengerMd.pl $jtIT/InterNetworking/comms/Facebook/MessengerScrape1.md
+# I store my archived messages as  FBM.md
 
 use strict;  use warnings;
 use Tie::File;  # on MSWin requires  fileformat=dos

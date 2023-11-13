@@ -46,8 +46,9 @@ Command-Line Printing and Options  http://localhost:631/help/options.html
     lprm
 
 ## lp
-    lp -n num-copies <image>
+    lp -n <number_of_copies> <image>
     lp -o scaling=200 <image>  # prints divided across 4 pages
+    lp -o fit-to-page <image>
 
 can't center image on page
 
@@ -133,6 +134,7 @@ gdisk(8)
 ## optical
     cd-drive  # info
     cdrecord dev=/dev/sr0 -checkdrive  # Vendor_info etc
+    cdrecord -v -sao dev=/dev/sr0 linux.iso
     sudo wipefs [-a] /dev/sdx  # [wipe] signatures
 
 ### tray

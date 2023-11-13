@@ -1,6 +1,8 @@
 vim: nospell:
 
-    $onGH/misc/CrossPlatform/QR; m4ps 0 1
+    $misc/CrossPlatform/QR; m4ps 0 1
+
+    $JHt/IT/CP/fonts-SE595756-fontcharlist
 
 - regular expressions
 - syntax of this file is ensured in `$vimfiles/filetype.vim`
@@ -65,19 +67,155 @@ fix `path` in the `*.osp`
 - Shades of black
 - web colors
 
-# documenting
-    pdf-crop-margins pdf.pdf  # silently makes  pdf-cropped.pdf
-
-## eBook - Calibre
+# documenting - eBook - Calibre
     ~/CalibreLibrary
 
 E-book viewer `<esc>` brings up the controls
 
-## eBook - Foliate
+# documenting - eBook - Foliate
 - `ctrl-q` = quit
 - mouse to top for settings
 
-## LibreOffice
+# documenting - LaTeX
+    $DJH/dts-tex.txt
+    :s/μ/\\mu{}/g
+    \setlength{\columnsep}{1cm}
+    xc
+
+## chngcntr
+    \counterwithout{section}{section} % (chngcntr) removes unneeded Chapter number for Sections
+
+functionality included in Memoir
+
+## commands
+    \begin{figure}[h] \includegraphics[width=0.5\textwidth]{image} \end{figure}
+    \centred{\rule{9cm}{0.4pt}}  % horizontal line
+    \newenvironment{<envName>}[<n>][<default>]{<beginEnv>}{<endEnv>}
+    \pagebreak
+    \pagestyle{empty}  % no headers or footers from here
+    \raggedleftSomeText\par}
+    \tableofcontents*  % ToC without itself listed therein
+    \textsubscript{}
+    \textsuperscript{}
+    \the\length  % prints that length
+    \title{your title} ... \begin{document} ... \maketitle
+    \today
+    \usepackage[dvipsnames]{xcolor}
+    \usepackage{soul}  % Hyphenation for letterspacing, underlining, and more
+    \usepackage{titlesec}  % incompatible with memoir
+    \vfill
+
+### font styles
+    \textit{...}
+
+`\textbf{...}` = `{\bfseries ...}` = bold
+`\texttt{...}` = `{\ttfamily ...}` = monospaced
+
+### font sizes
+    \tiny
+    \scriptsize
+    \footnotesize
+    \small
+    \normalsize
+    \large
+    \Large
+    \LARGE
+    \huge
+    \Huge
+
+### geometry
+    hmargin={<left margin>,<right margin>}
+    vmargin={<top margin>,<bottom margin>}
+    top=20mm
+
+### horizontal spaces in text or math mode
+    \enspace =>.5em
+    \quad => 1em
+    \qquad => 2em
+
+### indents
+    \noindent
+    \setlength{\parindent}{0pt}
+    \setlength{\parindent}{-3em}  % starts left of margin
+    \leftskip=1cm ... \leftskip=0cm
+    \rightskip=1cm ... \rightskip=0cm
+
+### multicols
+    \usepackage{multicol}
+    ...
+    \begin{document}
+    \begin{multicols}{3}
+    ...
+    \end{multicols}
+
+### sections
+    \section*{ unnumbered section }
+    \setcounter{secnumdepth}{3} % default
+    \stepcounter{section} % increase section number by 1
+
+`titlesec`: `\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}`
+
+## engines
+    pdflatex --version
+
+### MiKTeX
+    initexmf --report
+    miktex --version
+    miktex --verbose fndb refresh
+
+#### FNDB
+    initexmf --update-fndb
+    MiKTeX Console > Tasks > Refresh file name database
+
+after filename changes in `$tex`
+
+#### MiKTeX Package Manager
+    C:\Users\troin\AppData\Local\MiKTeX\miktex\log\mpmcli.log
+    mpm --list > "$ITstack\MSWin\MiKTeX\$Cn-packages-$(Get-Date -f yyMMdd-hhmm).txt"
+    miktex --verbose packages check-update
+    miktex packages list | measure | select -expand Count
+
+## fonts - Indic
+    FreeFont
+
+`Lohit` used by Wikipedia
+
+## maths environments
+    \longrightarrow
+    \rightarrow
+
+## tabular environment
+    \multicolumn{num_cols}{alignment}{contents}
+    \renewcommand{\arraystretch}{1.5}  % tabular (default 1.0)
+
+### multirow
+    \multirow{<num_rows>}{<width>}{<contents>} % * for default width
+    \usepackage{multirow}
+
+## verse
+```tex
+\renewcommand{\poemtitlefont}{\normalfont\bfseries\large}  % removed \centering
+
+\begin{verse}
+
+\begin{altverse}
+odd lines are normal \\
+  even lines will be indented
+\end{altverse}
+
+\indentpattern{01230}
+\begin{patverse}
+zero indent \\
+  one indent \\
+    two indents \\
+      three indents \\
+zero indent
+\end{patverse}
+
+\end{verse}
+```
+
+# documenting - LibreOffice
     $CrPl/documenting/LibreOffice/Buildup.txt
     r ~/.config/libreoffice/4/user/
 
@@ -86,17 +224,24 @@ E-book viewer `<esc>` brings up the controls
 - `ctrl+alt+e` = `Tools > Extension Manager...`
 - Writer: right-click on a hyperlink for `Remove Hyperlink`
 
-### Draw
+## Draw
 - curve: `left-click > [shift] move > left-click > move > double-left-click`
 - `F2` (= `Insert > Text Box`)
 
-### Page Style
+## Page Style
 - `alt+o p` = `shft+alt+p` = `Format > Page Style`
 - `Page` is where can set borders
 
-### porting
+## porting
     \user\config
     C:\Users\jnbh\AppData\Roaming\LibreOffice\4\user\registrymodifications.xcu
+
+# documenting - pdf
+    pdf-crop-margins pdf.pdf  # silently makes  pdf-cropped.pdf
+
+## Ghostscript convert pdf to png
+    $ gspdfpng
+    PS> gsp
 
 # Emacs - commands
 - `C-*`  calc-dispatch
@@ -341,8 +486,9 @@ convert mp4's first to MPEG-2 transport streams (`ffmhb -i 1.mp4 -c copy 1.ts`) 
     git branch -m <new_name_of_branch>
     git clone https://github.com/... [target_directory] --depth=n  # clones only to commit depth n
     git grep <caseSensitiveText>
-    git init -b gh
+    git init -b gh  # --initial-branch=<branch_name>
     git push gh +master  # force push to remote
+    git rev-parse --short HEAD  # the short commit hash
     git rev-parse --show-toplevel  # print the top level directory of the current repository
     git show <pathToFile>  # highlights the changes
     git submodule
@@ -394,7 +540,7 @@ convert mp4's first to MPEG-2 transport streams (`ffmhb -i 1.mp4 -c copy 1.ts`) 
 ##### linux
     r ~/.ssh
 
-`$machBld/jo/gitconfig` inludes `$onGH/misc/CrossPlatform/gitconfig`
+`$machBld/jo/gitconfig` inludes `$misc/CrossPlatform/gitconfig`
 
 ### the index
     git checkout-index -f <somefile>  # overwrite from the index's copy
@@ -619,10 +765,6 @@ VIFM(1)
 - `ZQ`  `:quit!`
 - `ZZ`  `:quit`
 
-# Ghostscript convert pdf to png
-    $ gspdfpng
-    PS> gsp
-
 # gpg
     <key-id> can be the short key id = the last 8 characters
     echo "encrypt me this" | gpg -ase -r 13F327EF -o gpg.asc
@@ -723,7 +865,7 @@ paintbrush: shift previews a new straight line from last point to current mouse 
     -background <color>
     -border 20x20
     -draw 'text xpixels,ypixels "label"'
-    -fill <color>
+    -fill blue -draw 'rectangle x1,y1 x2,y2'  - the coordinates are diagonal opposites
     -font Arcon
     -gravity center
     -pointsize 48
@@ -737,7 +879,6 @@ paintbrush: shift previews a new straight line from last point to current mouse 
 #### Bash
     convert -flatten transparent.png white_background.png
     convert -list
-    convert -list color
     convert -list gravity
     convert <colourimage> -colorspace Gray <grayimage>
     convert <people> -paint 9 <people-oil>
@@ -772,6 +913,10 @@ paintbrush: shift previews a new straight line from last point to current mouse 
 - GPS Coordinates <https://www.gps-coordinates.net>
 - trashinbox
 - Webmasters
+
+## WhatsApp group members
+    Firefox > Inspect (Q) > Copy > Inner HTML
+    Google Chrome > right-click > Inspect > ...
 
 ## GitHub
     gh config list
@@ -893,7 +1038,6 @@ messes up if terminal is resized
 
 ## vim
     $HOME/_viminfo
-    $ITstack/vimfiles/spell/fr.utf-8.add
     echo $MYVIMRC
     gci -r tags -force | where { ! $_.PSIsContainer } | select -expandProperty fullname > tags-Win10.txt
     [g]vim .  # will open netrw on current directory

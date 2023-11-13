@@ -3,7 +3,7 @@
 
 # Joseph Harriott - Sat 05 Aug 2023
 # sequence for creating montages
-# bash $onGH/misc/IM/montage.sh
+# bash $misc/IM/montage.sh
 
 #=> 0 prepare in a directory
 # i0-image = original - maybe scanned

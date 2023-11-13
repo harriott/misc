@@ -7,14 +7,14 @@
 # for each one, execute a  git pull, then copy over to  $GHrUse  on Dropbox.
 # -------------------------------------------------------------------------
 # $GHrCl  &  $GHrUse  are defined in  $Bash/export-jo
-# bash $onGH/misc/GHreposPulls.sh
+# bash $misc/GHreposPulls.sh
 # du -sh $GHrUse
 
 set -e  # quits on error
 
 # There are a load of special cases mostly due to symlinks that I need to dereference for Dropbox
 #  but there were also some with names that are illegal on MSWin.
-# Check that symlinks are gone with  bash $onGH/misc/linux/symlinks_log.sh
+# Check that symlinks are gone with  bash $misc/linux/symlinks_log.sh
 
 #=> clones
 
@@ -26,6 +26,7 @@ set -e  # quits on error
 # git clone https://github.com/reutenauer/polyglossia $GHrCl/CP/reutenauer-polyglossia
 # git clone https://github.com/MartinThoma/LaTeX-examples/ $GHrCl/CP/MartinThoma-LaTeX-examples
 # git clone https://github.com/pypa/pipx $GHrCl/CP/pypa-pipx
+# git clone https://github.com/CP/nomacs/nomacs $GHrCl/nomacs-nomacs
 
 #===> Ruby
 # git clone https://github.com/rouge-ruby/rouge $GHrCl/CP/Ruby/rouge-ruby-rouge
@@ -88,7 +89,10 @@ set -e  # quits on error
 # git clone https://github.com/noctuid/evil-guide $GHrCl/emacs/noctuid-evil-guide
 # git clone https://github.com/plexus/chemacs2 $GHrCl/emacs/plexus-chemacs2
 
-#==> linux
+#==> unix
+# git clone https://gitlab.com/rwxrob/dotfiles $GHrCl/unix/rwxrob-dotfiles
+
+#===> linux
 # git clone https://github.com/doronbehar/pistol $GHrCl/linux/doronbehar-pistol
 # git clone https://github.com/getmail6/getmail6 $GHrCl/linux/mail/getmail6-getmail6
 # git clone https://github.com/leo-arch/clifm $GHrCl/linux/leo-arch-clifm
@@ -98,8 +102,9 @@ set -e  # quits on error
 # git clone https://github.com/stefano-m/awesome-capslock_widget $GHrCl/linux/wm-awesome/stefano-m-awesome-capslock_widget
 # git clone https://github.com/streetturtle/awesome-wm-widgets $GHrCl/linux/wm-awesome/streetturtle-awesome-wm-widgets
 # git clone https://github.com/jarun/nnn $GHrCl/linux/jarun-nnn
+# git clone https://github.com/tats/w3m $GHrCl/linux/tats-w3m
 
-#===> Arch
+#====> Arch
 # git clone https://git.sr.ht/~protesilaos/dotfiles $GHrCl/linux/Arch/protesilaos-dotfiles
 # git clone https://gitlab.archlinux.org/archlinux/packaging/packages/pacman $GHrCl/linux/Arch/gitlab_archlinux_org-archlinux-packaging-packages-pacman
 # git clone https://gitlab.archlinux.org/archlinux/packaging/packages/texlive-core $GHrCl/linux/Arch/gitlab_archlinux_org-archlinux-packaging-packages/texlive-core
@@ -132,11 +137,6 @@ if [ $host = 'sbMb' ]; then
             git pull
             if [[ $repository =~ nonexistant ]]; then
                 false
-            elif [[ $repository =~ LaTeX-examples ]]; then
-                sy=publications/hasy/symbols
-                for cc in $sy/AE $sy/O; do
-                    [ -s $cc.pdf ] && mv $cc.pdf $cc-caps.pdf
-                done
             elif [[ $repository =~ clifm ]]; then
                 [ -s "misc/codecov/aux.c.gcov" ] &&
                     mv misc/codecov/aux.c.gcov misc/codecov/aux-rNT.c.gcov
@@ -145,6 +145,13 @@ if [ $host = 'sbMb' ]; then
                 # fd aux $GHrCl/linux/leo-arch-clifm
             elif [[ $repository =~ (jekyll|protesilaos) ]]; then
                 fd -tl -HL -x unlink {} \; -x touch {}
+            elif [[ $repository =~ LaTeX-examples ]]; then
+                sy=publications/hasy/symbols
+                for cc in $sy/AE $sy/O; do
+                    [ -s $cc.pdf ] && mv $cc.pdf $cc-caps.pdf
+                done
+            elif [[ $repository =~ rwxrob-dotfiles ]]; then
+                rm common/fonts/fonts scripts/yt
             fi
             cd $GHrCl
         fi

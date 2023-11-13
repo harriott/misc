@@ -1,36 +1,39 @@
 
 " configurations that might be tested
 
-""> 2 plugin - ALE
+""> 0 check that this file's not been sourced
+let g:possible_vim = 1
+
+""> 1 plugin - ALE
 packadd ale
 
-""> 2 plugin - fzf.vim
+""> 1 plugin - fzf.vim
 packadd fzf.vim
 
-""> 2 plugin - vim-illuminate
+""> 1 plugin - vim-illuminate
 packadd vim-illuminate
 
-""> 2 plugin - ingo-library
+""> 1 plugin - ingo-library
 packadd vim-ingo-library
 
-"">> 2 plugin - vim-airline
+""> 1 plugin - vim-airline
 packadd vim-airline
 
-""> 2 plugin - vim-ShowTrailingWhitespace
+""> 1 plugin - vim-ShowTrailingWhitespace
 packadd vim-ShowTrailingWhitespace
 
-""> 2 plugin - vim-startify
+""> 1 plugin - vim-startify
 packadd vim-startify
 
-""> 2 plugin - vim-colors-tomorrow
+""> 1 plugin - vim-colors-tomorrow
 colorscheme tomorrow
 
-""> 2 plugin - VimTeX
+""> 1 plugin - VimTeX
 packadd vimtex
 
-""> 3 plugin - after
+""> 2 plugin - after
 source $vimfiles/after/plugin/plugins.vim
 
-""> 4 ftplugin
-source $onGH/misc/CrossPlatform/vimtest/ftplugin-csv.vim
+""> 3 ftplugin
+source $misc/CrossPlatform/vimtest/ftplugin-csv.vim
 

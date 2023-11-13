@@ -1,7 +1,7 @@
 #!/bin/bash
 # vim: set sw=2:
 
-# bash $onGH/misc/linux/QR/script.sh
+# bash $misc/linux/QR/script.sh
 
 
 script_dirname=$(dirname "${BASH_SOURCE[0]}")

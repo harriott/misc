@@ -1,6 +1,6 @@
 vim: nospell:
 
-    $onGH/misc/linux/QR; m4ps 0 1
+    $misc/linux/QR; m4ps 0 1
 
 commands here are generic, see also `$OSAB/QR.md`
 
@@ -48,6 +48,7 @@ commands here are generic, see also `$OSAB/QR.md`
     date +%s; sleep 1; date +%s
     date +%Y%m%d
     date +%y%m%d-%H%M
+    date -d 'now -1 year'
     date -d @<unixTimeToConvert>
     date -R
     date -r <fileToGetDateOf>
@@ -92,11 +93,6 @@ date(1)
 ## Dolphin
     F4        -> Konsole  attached below
     Shift+F4  -> Konsole  in a new window
-
-## grepping
-    grep -P '[\p{Devanagari}]' **/*.md  # finds Devanagari characters
-
-GNU Grep Manual
 
 ## investigations
     diff -qrN dir1/ dir2/
@@ -215,13 +211,15 @@ output info: `>` = the item is received
     tac
     shuf
     sort -o <file> <file>  # sort in place
+    wc -l <file>  # counts lines
 
 ## awk
     awk -i inplace -F, '{print $3,$2,$1}' OFS='┊' toReorder.csv
+    awk '{ print ($1 % 2 == 0) ? "even" : "odd" }' numbers.txt
+    v=variable; awk -v var="$v" 'BEGIN {print var}'
+    z $cIThul/gawk.pdf
 
-- `-F` (interpret patterns as `--fixed-strings`, not regex)
-- GAWK(1)
-- GNU Awk
+GNU Awk
 
 ### built-in variables
 - `FILENAME` name of the current input-file
@@ -233,24 +231,38 @@ output info: `>` = the item is received
 - `ORS` output record separator (default = <newline>)
 - `RS` record separator (default = newline)
 
+## grepping
+    grep -c '^PatternAtStartOfLine' <file>  # returns count of occurances
+    grep -P '[\p{Devanagari}]' **/*.md  # finds Devanagari characters
+
+- `-F` (interpret patterns as `--fixed-strings`, not regex)
+- GNU Grep Manual
+
 ## sed
+    $cIThul/sed
     [[:alpha:]] = [[:lower:]] + [[:upper:]] = [A-Za-z]
-    echo "THIS is a test!" | sed 's/.*/\L&/; s/[a-z]*/\u&/g'  # title case
     sed --version
+    sed 5q <file> prints first 5 lines
 
 - `-E`/`-r` (`--regexp-extended`) extended regular expressions
 - GNU sed
-- replace a string in multiple files
 - stream editor
 
 ### make changes
     echo "don't forget that" | sed 's/\x27/\"/'
+    echo "THIS is a test!" | sed 's/.*/\L&/; s/[a-z]*/\u&/g'  # title case
     sed -i '0~2 a\\' <fileToAddBlankLineAfterEach2ndLine>
     sed -i '/<regex>/!d' <filetoreduce>  # removes lines that don't match
-    sed -i '1,4d' <file_to_remove_first_four_lines_from>
     sed -i '1s/^/vim: ft=<filetype>:\n\n/' $cslF
     sed G <file>  # outputs <file> with blank lines added
     sed '1i\\newFirstLineText' <fileToPrependTo>
+
+- `&` whole matched pattern
+- replace a string in multiple files
+
+#### delete lines
+    sed -i '1,4d' <file>
+    sed -i '2d' <file>
 
 ### show file contents
     sed '/pattern/q' <file>  # cat's  <file>  until  pattern
@@ -291,7 +303,7 @@ fingerprint: `xxxx xxxx xxxx xxxx xxxx  xxxx xxxx xxxx xxxx xxxx`
 
 ## feh
     feh -F  # fullscreen
-    feh -l  # list image specifications
+    feh -l [*] # [recursively] list image specifications
 
 - can open `webp`
 - can't animate a `gif`
@@ -528,6 +540,10 @@ can play omv's
     sudo lshw -c network
     sudo lsof -i -P -n | grep LISTEN  # to see the listening ports
 
+## w3m
+- `B` (= `BACK`)
+- `H` Current keymap file
+
 ## devices
     ip link
     networkctl list
@@ -706,7 +722,7 @@ pass(1)
 
 ## Poppler
     pdfimages -h
-    pdfimages -png pdfNam3.pdf pngName  # pulls out images separated (if there are any)
+    pdfimages [-j/-png] pdfNam3.pdf imageName  # pulls out images (default ppm) separated (if there are any)
 
 ## qpdfview
     F6 = View > Docks > Outline (such as the headings of a LaTeX document)
@@ -720,7 +736,7 @@ pass(1)
 ## XpdfReader
     [-f <firstPage>] [-l <lastPage>]
     pdftoppm -png -r 300 <pdf> <basename_for_png_sequence>
-    pdftoppm -j -r 300 <pdf> <basename_for_jpeg_sequence>
+    pdftoppm -jpeg -r 300 <pdf> <basename_for_jpeg_sequence>
 
 ## Zathura
     <tab> => toggles Outline view
@@ -728,6 +744,7 @@ pass(1)
     f11   => toggle fullscreen
     r     => rotate by 90 degrees
     R     => reload document
+    zathura --mode=fullscreen a.pdf &
 
 zathura man page
 
@@ -762,7 +779,7 @@ zathura man page
 - `fc` "fix command"
 
 ## Bash
-    $onGH/misc/linux/QR/script.sh
+    $misc/linux/QR/script.sh
     $ulLB/Scratch0.sh
     /etc/profile
     <somecommand> | xcol <keyword1> <keyword2> ... # for highlighting
@@ -779,7 +796,7 @@ zathura man page
     shopt
     shopt dotglob  # reports back its status
     shopt -u nullglob  # incase  t=$'\?'; echo $t
-    xdg-open $cITh/unix-like/linux/bash.pdf
+    xdg-open $cIThul/linux/bash.pdf
     ~/Arch/bash_history
 
 command substitution `$(...)`
@@ -807,10 +824,13 @@ command substitution `$(...)`
     [ "$a" ] && echo $a
     [ -z "$a" ] && echo zero_string; [ -n "$a" ] && echo string
     [ true ] && echo y
+    [ "y" ] && echo y
     c=1; [[ $c == 1 ]] && echo "true"
+    t="y"; if [ $t ]; then echo $t; fi
     if <condition1>; then <action1>; elif <condition2>; then <action2>; fi
 
 ### file manage
+    find -iname \*.flv -o -iname \*.mp4 -o -iname \*.ogv
     for f in *; do mv $f ${f:2}; done
     man -h ls
     mkdir -p <aDirectoryPath>  # won't overwrite if it already exists
@@ -906,6 +926,7 @@ substitute user identity
     array=(element1 element2  element3)
     echo ${#array[@]}  # length
     firstElement=${array[0]}
+    mapfile -t found < <(find .)
     mapfile -t GreekArray < <(printf "Alpha\nBeta\nGamma"); echo ${GreekArray[@]}
     string='My string'; [[ $string =~ "My" ]] && echo success
 
@@ -914,10 +935,11 @@ don't export them
 ##### list
     echo ${array[@]}
     for ((index=0; index<${#array[@]}; ++index)); do echo "$index" "${array[index]}"; done
-    for item in "${array[@]}"; do echo "$item"; done
+    for item in "${array[@]}"; do echo; echo "$item"; done
 
 #### integers
     (( $1 == 1 || $1 == 2 )) && echo "number 1 or 2"
+    ((i-=2)) # decrements $i by 2
     i=0; echo $((i+=1))
     if (( ! $n == 1 )); then echo 'not 1'; fi
 
@@ -1082,8 +1104,6 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     if [ $TERM == 'screen-256color' ]; then echo "you're in tmux"; fi
     pgrep tmux -l
     set synchronize-panes
-    tmux kill-server
-    tmux kill-session -a  # kills all but current session
     tmux send ls enter  # ls  in the currently active pane
     tmux show-options -s
 
@@ -1120,6 +1140,7 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     tmux a -t myname        # attach to session myname
     tmux detach
     tmux kill-server; tmux  # good for resetting
+    tmux kill-session -a    # kills all but current session
     tmux ls                 # list sessions
     tmux lsk -Na            # includes my rebinds
 

@@ -8,7 +8,7 @@
 # -------------------------------------------------------------------------
 # $GHrCl  is defined in  $machine\PSProfile.ps1
 # $cITh  &  $GHrUse  are defined in  $MSWin10\PSProfile.ps1
-# PS> iex "$onGH/misc/GHreposPulls.ps1"
+# PS> iex "$misc/GHreposPulls.ps1"
 
 # git clone https://github.com/bbatsov/prelude $GHrCl/emacs/emacsbbatsov-prelude
 # git clone https://github.com/GChristensen/rho-emacs $GHrCl/emacs/GChristensen-rho-emacs
