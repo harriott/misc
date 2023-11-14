@@ -662,7 +662,6 @@ Tig Manual
     PS> where.exe python
 
 ### pipx
-    ~/.local/pipx/venvs
     pipx list
     pipx run pycowsay moo
     pipx uninstall -h
@@ -827,7 +826,13 @@ The GNU Privacy Handbook
 # HW
     duf
 
+## for paper
 `HP ENVY 5532 > Wireless Settings > Settings > Advanced > IP Settings > OK > Manual` allows tweaking of printer's address
+
+### Epson EcoTank ET-5170 - feed tray
+- downside is printed
+- landscape top is to right
+- portrait top is to back of printer
 
 ## screens
 Sony Xperia 10 II: 1080x2520 = 21:9
@@ -903,110 +908,6 @@ paintbrush: shift previews a new straight line from last point to current mouse 
 - `f` = `Brush > Increase Brush Size`
 - `z` = undo
 - `Save` pads out right & bottom images that aren't up to 1024x512...
-
-# internetworking
-    $CrPl/networking/browsers/browsers.txt
-    curl ifconfig.co/city
-    curl ifconfig.co/country
-    ssh-keygen -lv -f ssh_host_rsa_key.pub  # shows fingerprint & ASCII art
-
-- GPS Coordinates <https://www.gps-coordinates.net>
-- trashinbox
-- Webmasters
-
-## WhatsApp group members
-    Firefox > Inspect (Q) > Copy > Inner HTML
-    Google Chrome > right-click > Inspect > ...
-
-## GitHub
-    gh config list
-    git diff upstream/master...HEAD
-
-`~/.ssh/known_hosts`: `AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa`
-
-## Thunderbird
-    $CrPl/networking/Thunderbird/builds.txt
-    PS> C:\MozillaThunderbird\thunderbird.exe -addressbook
-    thunderbird -addressbook
-
-`$DJH/TP-default-release/compatibility.ini` for LastVersion
-
-### internal commands
-    alt+e > e (= Settings) > Config Editor... (= Advanced Preferences)
-    ctrl+Shft+B (= Address Book)
-    Menu > File > Compact Folders
-    right-click on folder > Properties > Repair Folder
-
-#### Keyboard Shortcuts
-- `ctrl+r`  **R**eply (to sender only)
-- `ctrl+shft+b`  Address **B**ook (like Bookmarks in Firefox)
-- `ctrl+shft+f`  **F**ind in folder
-- `ctrl+u`  view email source
-- `m` toggles message read/unread
-- `(Shift+)j`  (not) junk
-- `s` toggles starring
-- `f`/`p` goes to next/previous message
-
-mozillamessaging
-
-#### Tools
-    alt+t > a (= Add-ons Manager)
-    alt+t > e (= Edit) > a a (= Account Settings)
-    alt+t > Manually sort folders
-
-#### View
-    alt+v > s (= Sort by) > h (= Unthreaded)
-
-##### body
-    b (= Message Body As) >
-      h (= Original HTML)
-      p (= Plain Text)  - can then export & Delete inline images
-
-### run safely
-    $OSAB/jo/wm/TS/thunderbird_safely.sh
-    $machine\T91\runSafely.ps1
-
-### tbkeys-lite Main key bindings
-    j: cmd:cmd_nextMsg
-    k: cmd:cmd_previousMsg
-    o: cmd:cmd_openMessage
-    f: cmd:cmd_forward
-    #: cmd:cmd_delete
-    r: cmd:cmd_reply
-    a: cmd:cmd_replyall
-    x: cmd:cmd_archive
-    c: func:MsgNewMessage
-    u: tbkeys:closeMessageAndRefresh
-
-### To
-    jharr@ftml.net, trohib@gmail.com
-    <jharr@ftml.net>, <trohib@gmail.com>
-    Joseph HARRIOTT <jharr@ftml.net>, Joseph HARRIOTT <trohib@gmail.com>
-
-## wttr.in
-    curl wttr.in/London
-    curl wttr.in/Newcastle
-
-## yt-dlp
-    i yt-dlp
-    yt-dlp -F <videoURL>
-    yt-dlp -f "[height<=?720]" <videoURL>
-    yt-dlp -f best <videoURL>
-    yt-dlp -f ba <videoURL>  # bestaudio (= best*[vcodec=none])
-    yt-dlp --version
-
-## YouTube
-file formats
-
-### shortcuts
-- `0 .. 9`  jump 0% .. 90%
-- `c`  toggle captions
-- `f`  toggle full screen
-- `j/l`  seek 10s backwards or forwards
-- `m`  toggle mute
-- `when paused: ./,`  skip to next/previous frame
-
-Keyboard shortcuts for YouTube
 
 # less
 greenwoodsoftware

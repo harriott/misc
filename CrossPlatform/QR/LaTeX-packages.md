@@ -18,6 +18,10 @@ vim: nospell:
     \setmainfont{...}
     \setmonofont{...}
 
+# geometry
+- `hmargin` `left` `right`
+- `vmargin` `top` `bottom`
+
 # hyperref
     \href{...}
     \pdfstringdefDisableCommands{...}  % to fix "token not allowed"
