@@ -2,10 +2,12 @@ vim: nospell:
 
     $misc/CrossPlatform/QR; m4ps 0 1
 
+    \usepackage{url}
     tlmgr info pgfplots
     tlmgr update --list
 
-`datetime2`
+- `datetime2`
+- `ifplatform`: `\ifwindows ... \else ... \fi`
 
 # blindtext
     \blinddocument
@@ -34,9 +36,6 @@ vim: nospell:
     \usepackage{polyglossia}
     \setdefaultlanguage[variant=uk]{english}
     \setdefaultlanguage{french}
-    \setmainfont{ArchitectsDaughter}
-    \setmainfont{Arimo}
-    \setmainfont{FingerPaint-Regular}
 
 # psnfss
     \usepackage{pifont}

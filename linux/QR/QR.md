@@ -4,6 +4,8 @@ vim: nospell:
 
 commands here are generic, see also `$OSAB/QR.md`
 
+    dotnet --list-runtimes
+    dotnet --list-sdks
     info info
     rhash -a --bsd <somefile>
     rhash --list-hashes => list names of all supported hashes
@@ -13,6 +15,77 @@ commands here are generic, see also `$OSAB/QR.md`
 
 - Make (software)
 - Pipe Viewer
+
+# audio
+    pavucontrol
+
+## Music Player Daemon
+    mpd
+    mpd --kill
+    pgrep mpd
+
+## cmus
+    cmus_notify -h
+
+- C* Music Player
+- can't play oma's omv's
+
+### commands
+    ,        seek -1m
+    .        seek +1m
+    7        settings
+    ^c       echo Type :quit<enter> to exit cmus.
+    ^l       refresh
+    ^r       toggle repeat_current
+    space    win-toggle => mark
+    C        toggle continue
+    P        win-mv-before
+    b        player-next
+    e        win-add-q
+    h, left  seek -5
+    l, right seek +5
+    p        win-mv-after
+    r        toggle repeat
+    v        player-stop
+    z        player-prev
+
+## convert
+    for f in *.flac; do ffi "$f" -c:a libvorbis -aq 4 "${f%.*}.ogg" ; done
+    for f in *.oma; do ffi "$f" -c:a libvorbis "${f%.*}.ogg" ; done  # default VBR quality 3
+    for f in *.wav; do ffi "$f" -c:a libvorbis -aq 4 "${f%.*}.ogg"; rm "$f"; done
+    for f in *; do ffi "$f" -b:a 128K -vn "${f%.*}.mp3" ; done
+
+## gst123
+    gst123 -Z .  # play random audio files recursively forever
+
+### control
+    left/right -> seek 10 seconds
+    down/up -> seek 1 minute
+    PgDn/Up -> seek 10 minute
+    space -> toggle pause
+    +/- -> change volume by 10%
+    m -> toggle mute
+    n -> next file
+    q -> quit
+    ? -> help
+
+## libpulse
+    pacat --list-file-formats
+    pactl list sinks short
+    pactl list sources short
+    pactl set-sink-volume 0 60%  # master volume to reasonable level
+    parecord -d 0 parecord.flac
+    parecord -d 1 parecord.flac
+    parecord -d 16 parecord.flac
+
+## SoX
+    rec -c 2 sox.flac  # record in stereo
+    soxi <audioFile>  # info, including duration
+
+## vimpc
+    $ABjo/wm/MPD/vimpcrc
+
+`q` stops & quits
 
 # bc
     bc -q
@@ -76,6 +149,71 @@ date(1)
 # fcron
     fcrontab -l
     systemctl status fcron.service
+
+# file contents
+    cat
+    tac
+    shuf
+    sort -o <file> <file>  # sort in place
+    wc -l <file>  # counts lines
+
+## awk
+    awk -i inplace -F, '{print $3,$2,$1}' OFS='┊' toReorder.csv
+    awk '{ print ($1 % 2 == 0) ? "even" : "odd" }' numbers.txt
+    v=variable; awk -v var="$v" 'BEGIN {print var}'
+    z $cIThul/gawk.pdf
+
+GNU Awk
+
+### built-in variables
+- `FILENAME` name of the current input-file
+- `FS` input field separator character (default = any space and tab characters)
+- `NR` number of input records
+- `NF` number of fields in an input record
+- `OFMT` format for numeric output (default = `%.6g`)
+- `OFS` output field separator (default = <space>)
+- `ORS` output record separator (default = <newline>)
+- `RS` record separator (default = newline)
+
+## grepping
+    grep -c '^PatternAtStartOfLine' <file>  # returns count of occurances
+    grep -P '[\p{Devanagari}]' **/*.md  # finds Devanagari characters
+
+- `-F` (interpret patterns as `--fixed-strings`, not regex)
+- GNU Grep Manual
+
+## sed
+    $cIThul/sed
+    [[:alpha:]] = [[:lower:]] + [[:upper:]] = [A-Za-z]
+    sed --version
+    sed 5q <file> prints first 5 lines
+
+- `-E`/`-r` (`--regexp-extended`) extended regular expressions
+- GNU sed
+- stream editor
+
+### make changes
+    echo "don't forget that" | sed 's/\x27/\"/'
+    echo "THIS is a test!" | sed 's/.*/\L&/; s/[a-z]*/\u&/g'  # title case
+    sed -i '0~2 a\\' <fileToAddBlankLineAfterEach2ndLine>
+    sed -i '/<regex>/!d' <filetoreduce>  # removes lines that don't match
+    sed -i '1s/^/vim: ft=<filetype>:\n\n/' $cslF
+    sed G <file>  # outputs <file> with blank lines added
+    sed '1i\\newFirstLineText' <fileToPrependTo>
+
+- `&` whole matched pattern
+- replace a string in multiple files
+
+#### delete lines
+    sed -i '1,4d' <file>
+    sed -i '2d' <file>
+
+### show file contents
+    sed '/pattern/q' <file>  # cat's  <file>  until  pattern
+    sed 5q <file> print first 5 lines
+    sed -e '' <file>  # mimics cat
+    sed -n '/<regex>/p' <file>  # prints only the matching lines
+    sed -n '2,$p' <file>  # prints from the 2nd line
 
 # file manage
     cp -r <sourceDir> .
@@ -150,7 +288,6 @@ stat(1)
 
 ### symlinks
     [[ -L $s ]] && echo 'symlink exists'
-    exa $s  # shows symlinks with out reference in red
     find . -type l -ls  # recursively list all symlinks with their references
     readlink $s  # returns referenced node
 
@@ -205,71 +342,6 @@ output info: `>` = the item is received
     - `-o` (`--owner`) if super-user
     - `-p` (`--perms`) keep permissions
 - `-X` (`--xattrs`) keep extended attributes
-
-# file contents
-    cat
-    tac
-    shuf
-    sort -o <file> <file>  # sort in place
-    wc -l <file>  # counts lines
-
-## awk
-    awk -i inplace -F, '{print $3,$2,$1}' OFS='┊' toReorder.csv
-    awk '{ print ($1 % 2 == 0) ? "even" : "odd" }' numbers.txt
-    v=variable; awk -v var="$v" 'BEGIN {print var}'
-    z $cIThul/gawk.pdf
-
-GNU Awk
-
-### built-in variables
-- `FILENAME` name of the current input-file
-- `FS` input field separator character (default = any space and tab characters)
-- `NR` number of input records
-- `NF` number of fields in an input record
-- `OFMT` format for numeric output (default = `%.6g`)
-- `OFS` output field separator (default = <space>)
-- `ORS` output record separator (default = <newline>)
-- `RS` record separator (default = newline)
-
-## grepping
-    grep -c '^PatternAtStartOfLine' <file>  # returns count of occurances
-    grep -P '[\p{Devanagari}]' **/*.md  # finds Devanagari characters
-
-- `-F` (interpret patterns as `--fixed-strings`, not regex)
-- GNU Grep Manual
-
-## sed
-    $cIThul/sed
-    [[:alpha:]] = [[:lower:]] + [[:upper:]] = [A-Za-z]
-    sed --version
-    sed 5q <file> prints first 5 lines
-
-- `-E`/`-r` (`--regexp-extended`) extended regular expressions
-- GNU sed
-- stream editor
-
-### make changes
-    echo "don't forget that" | sed 's/\x27/\"/'
-    echo "THIS is a test!" | sed 's/.*/\L&/; s/[a-z]*/\u&/g'  # title case
-    sed -i '0~2 a\\' <fileToAddBlankLineAfterEach2ndLine>
-    sed -i '/<regex>/!d' <filetoreduce>  # removes lines that don't match
-    sed -i '1s/^/vim: ft=<filetype>:\n\n/' $cslF
-    sed G <file>  # outputs <file> with blank lines added
-    sed '1i\\newFirstLineText' <fileToPrependTo>
-
-- `&` whole matched pattern
-- replace a string in multiple files
-
-#### delete lines
-    sed -i '1,4d' <file>
-    sed -i '2d' <file>
-
-### show file contents
-    sed '/pattern/q' <file>  # cat's  <file>  until  pattern
-    sed 5q <file> print first 5 lines
-    sed -e '' <file>  # mimics cat
-    sed -n '/<regex>/p' <file>  # prints only the matching lines
-    sed -n '2,$p' <file>  # prints from the 2nd line
 
 # get at root on tty2
     Ctrl+Alt+F2 > root + pw
@@ -427,69 +499,6 @@ list open files
 # multimedia
     ffprobe -i <avfile> -show_format -v quiet | sed -n 's/duration=//p'  # fractional seconds
 
-## audio
-    pavucontrol
-
-### Music Player Daemon
-    mpd
-    mpd --kill
-    pgrep mpd
-
-### cmus
-    cmus_notify -h
-
-- C* Music Player
-- can't play oma's omv's
-
-#### commands
-    ,        seek -1m
-    .        seek +1m
-    7        settings
-    ^C       echo Type :quit<enter> to exit cmus.
-    ^L       refresh
-    ^R       toggle repeat_current
-    space    win-toggle => mark
-    C        toggle continue
-    P        win-mv-before
-    b        player-next
-    e        win-add-q
-    h, left  seek -5
-    l, right seek +5
-    p        win-mv-after
-    r        toggle repeat
-    v        player-stop
-    z        player-prev
-
-### convert
-    for f in *.flac; do ffmhb -i "$f" -c:a libvorbis -aq 4 "${f%.*}.ogg" ; done
-    for f in *.oma; do ffmhb -i "$f" -c:a libvorbis "${f%.*}.ogg" ; done  # default VBR quality 3
-    for f in *; do ffmhb -i "$f" -b:a 128K -vn "${f%.*}.mp3" ; done
-
-### gst123
-    gst123 -Z .  # play random audio files recursively forever
-
-#### control
-    left/right -> seek 10 seconds
-    down/up -> seek 1 minute
-    PgDn/Up -> seek 10 minute
-    space -> toggle pause
-    +/- -> change volume by 10%
-    m -> toggle mute
-    n -> next file
-    q -> quit
-    ? -> help
-
-### libpulse
-    pacat --list-file-formats
-    pactl list sinks short
-    pactl list sources short
-    pactl set-sink-volume 0 60%  # master volume to reasonable level
-    parecord -d 0 a.flac
-
-### SoX
-    rec -c 2 a.flac  # record in stereo
-    soxi <audioFile>  # info, including duration
-
 ## mediainfo
     mediainfo <avfile> | grep Encoded
     mediainfo --Inform='Video;%FrameCount%' $the_file
@@ -535,16 +544,14 @@ can play omv's
 - `*` `0` increase
 
 # networking
+    arp-scan -lx
     bluetoothctl -- devices
     sudo iptraf-ng  # ncurses network statistic monitoring utility
     sudo lshw -c network
     sudo lsof -i -P -n | grep LISTEN  # to see the listening ports
 
-## w3m
-- `B` (= `BACK`)
-- `H` Current keymap file
-
 ## devices
+    arp-scan --localnet  # reports MAC addresses on network
     ip link
     networkctl list
 
@@ -572,34 +579,15 @@ can play omv's
 - NOTMUCH-SEARCH-TERMS(7)
 - seems to not find emails that're included in subsequent ones
 
-## firewall
-    sudo iptables -L
-
-### Firewalld
-    sudo firewall-config
-    sudo systemctl start firewalld
-    sudo systemctl stop firewalld
-    sudo systemctl status firewalld
-    sudo systemctl restart firewalld
-
-#### firewall-cmd
-    sudo firewall-cmd --info-zone=home
-    sudo firewall-cmd --info-zone=public
-    sudo firewall-cmd --panic-on
-    sudo firewall-cmd --state
-
-### iptables
-    sudo iptables -nvL
-    sudo systemctl status iptables.service
-
 ## hostname
     hostname
     hostnamectl
     uname -n  # hostname
 
-## ip
+## iproute2
     ip a  # ip address show
     ip l  # lists ethernet devices
+    ip neigh
     ip r  # ip route show - compactly shows my internal ip address
 
 ## iwd
@@ -663,7 +651,6 @@ requires a `DHCP` client to get an IP address
 #### exit
     exit
     ~.
-
 # npm
     npm ls -g
     npm prefix -g  # =  npm config get prefix
@@ -1002,7 +989,6 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     passwd jo  # then re-login
     ps $(pgrep Xorg)  # shows which tty X is on
     swapon --show
-    sysctl -a  # display all kernel parameters
     uname -a  # unix name, includes linux version number
     w  # list users and load on system
     whereis <executable>
@@ -1043,6 +1029,11 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     grub-install --version
 
 (GRand Unified Bootloader)
+
+## kernel parameters
+    sysctl -a  # display all kernel parameters
+    systeroid -A  # list all parameters
+    systeroid -T  # list parameters in a tree
 
 ## monitoring
     glances
@@ -1161,6 +1152,85 @@ tr (Unix)
     find . -type f -name tags
     e -la /usr/bin/vim
     file "$(command -v vim)"
+
+# WAN
+    pkill radio; radio -K  # quit & kill instances of  radio-active
+
+## firewall
+    sudo iptables -L
+
+### Firewalld
+    sudo firewall-config
+    sudo systemctl start firewalld
+    sudo systemctl stop firewalld
+    sudo systemctl status firewalld
+    sudo systemctl restart firewalld
+
+#### firewall-cmd
+    sudo firewall-cmd --info-zone=home
+    sudo firewall-cmd --info-zone=public
+    sudo firewall-cmd --panic-on
+    sudo firewall-cmd --state
+
+### iptables
+    sudo iptables -nvL
+    sudo systemctl status iptables.service
+
+## GNU Wget
+    wget -r -A.pdf http://url-to-webpage-with-pdfs/
+
+- `-O file` (`--output-document=file`)
+
+## rdrview
+    i rdrview
+    rdrview http://harriott.github.io -M
+
+## w3m
+    w3m http://harriott.github.io  # showing images
+    w3m https://man.archlinux.org/man/w3m.1.en
+
+### keymaps
+- `H` Current keymap file
+- `M` (= `EXTERN`) opens page in default browser
+- `o` (= `OPTIONS`) Option Setting Panel
+    1. `[shift-]tab` to option then `Enter`
+    1. `tab` to `[OK]` then `Enter` to end
+- `Q` (= `EXIT`)
+- `r` (= `VERSION`)
+- `R` (= `RELOAD`)
+
+#### movements
+- `+` ` ` (= `NEXT_PAGE`)
+- `-` `b` (= `PREV_PAGE`)
+- `[`, `]` (= `LINK_BEGIN`, `LINK_END`) start, end of page
+- `g` (= `BEGIN`) start of page
+- `w` (= `NEXT_WORD`)
+- `W` (= `PREV_WORD`)
+- `z` (= `CENTER_V`) centres on current line
+- vim-like
+
+#### navigation
+- `B` (= `BACK`)
+
+##### URLs
+- `c` (= `PEEK`) reveals the url
+- `e` (= `PEEK_IMG`) reveals the url
+- `U` (= `GOTO`) presents dialogue on current url (`ctrl-u` clears that url)
+- `u` (= `PEEK_LINK`)
+- `v` (= `VIEW`) toggles HTML view
+
+#### page contents
+- `I` (= `VIEW_IMAGE`)
+- `S` (= `SAVE_SCREEN`) requests name for file to save to (line breaks are kept)
+- `/` (= `SEARCH`) centres on found
+- `tab`, `shift+tab` jump to next, previous link
+
+#### tabs
+- `ctrl+q` (= `CLOSE_TAB`)
+- `s` (= `SELECT_MENU`) to move tabs
+- `T` (= `NEW_TAB`) re-opens current tab, new
+- `{` (= `PREV_TAB`)
+- `}` (= `NEXT_TAB`)
 
 # windows
     xrdb -query -all  # shows loaded X resources

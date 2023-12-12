@@ -1,0 +1,3 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =1
+let g:netrw_dirhist_1='/mnt/SDU3D1TB/Dropbox/JH/core/IT_stack/onGitHub/misc/CrossPlatform/vimtest'

@@ -1,6 +1,6 @@
 # vim: ft=gitconfig
 
-# $misc/CrossPlatform/gitconfig
+# $misc/CP/gitconfig
 # this should be sourced by  ~/.gitconfig  ( $machBld/jo/gitconfig )
 
 [alias]

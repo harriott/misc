@@ -1,5 +1,5 @@
 #!/bin/bash
-# vim: set fdl=1 tw=0:
+# vim: set fdl=1:
 
 # Joseph Harriott  Wed 05 Oct 2022
 
@@ -27,6 +27,7 @@ set -e  # quits on error
 # git clone https://github.com/MartinThoma/LaTeX-examples/ $GHrCl/CP/MartinThoma-LaTeX-examples
 # git clone https://github.com/pypa/pipx $GHrCl/CP/pypa-pipx
 # git clone https://github.com/CP/nomacs/nomacs $GHrCl/nomacs-nomacs
+# git clone https://github.com/gnuplot/gnuplot $GHrCl/gnuplot-gnuplot
 
 #===> Ruby
 # git clone https://github.com/rouge-ruby/rouge $GHrCl/CP/Ruby/rouge-ruby-rouge
@@ -60,6 +61,7 @@ set -e  # quits on error
 # git clone https://github.com/gohugoio/hugoThemesSite $GHrCl/CP/Hugo/gohugoio-hugoThemesSite
 # git clone https://github.com/chipzoller/hugo-clarity $GHrCl/CP/Hugo/chipzoller-hugo-clarity
 # git clone https://github.com/thegeeklab/hugo-geekdoc $GHrCl/CP/Hugo/thegeeklab-hugo-geekdoc
+# git clone https://github.com/rootwork/hugo-module-site $GHrCl/CP/Hugo/rootwork-hugo-module-site
 
 #===> Vim
 # git clone https://github.com/Eckankar/vim-latex-folding $GHrCl/CP/vim/Eckankar/vim-latex-folding
@@ -103,6 +105,7 @@ set -e  # quits on error
 # git clone https://github.com/streetturtle/awesome-wm-widgets $GHrCl/linux/wm-awesome/streetturtle-awesome-wm-widgets
 # git clone https://github.com/jarun/nnn $GHrCl/linux/jarun-nnn
 # git clone https://github.com/tats/w3m $GHrCl/linux/tats-w3m
+# git clone https://github.com/boysetsfrog/vimpc $GHrCl/linux/boysetsfrog-vimpc
 
 #====> Arch
 # git clone https://git.sr.ht/~protesilaos/dotfiles $GHrCl/linux/Arch/protesilaos-dotfiles
@@ -118,13 +121,16 @@ if [ $host = 'sbMb' ]; then
     # rsync -iLrtv --delete $GHrUse/ $GHrCl  # if lost...
 
     # pulls to  $GHrCl
-    # pull=no
-    # start='./CP/MartinThoma-LaTeX-examples'
-    # start='./CP/Ruby/Jekyll/jekyll-jekyll'
-    # start='./linux/Arch/protesilaos-dotfiles'
-    # start='./linux/dwt1-dotfiles'
-    # start='./linux/leo-arch-clifm'
-    pull=yes
+
+    # pull=no  # uncomment to pull from a  $start
+        # start='./CP/MartinThoma-LaTeX-examples'
+        # start='./CP/Ruby/Jekyll/jekyll-jekyll'
+        # start='./linux/Arch/protesilaos-dotfiles'
+        # start='./linux/dwt1-dotfiles'
+        # start='./linux/leo-arch-clifm'
+        # start='./unix/rwxrob-dotfiles'
+    pull=yes  # uncomment to pull all
+
     cd $GHrCl; pwd
     dotgits=$(find . -name '*.git' | sort)
     for dotgit in $dotgits; do
@@ -151,7 +157,7 @@ if [ $host = 'sbMb' ]; then
                     [ -s $cc.pdf ] && mv $cc.pdf $cc-caps.pdf
                 done
             elif [[ $repository =~ rwxrob-dotfiles ]]; then
-                rm common/fonts/fonts scripts/yt
+                true
             fi
             cd $GHrCl
         fi

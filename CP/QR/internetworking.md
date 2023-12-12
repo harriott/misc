@@ -6,6 +6,7 @@ vim: nospell:
     curl ifconfig.co/country
     ssh-keygen -lv -f ssh_host_rsa_key.pub  # shows fingerprint & ASCII art
 
+- GitHub CLI: `gh`
 - GPS Coordinates <https://www.gps-coordinates.net>
 - Webmasters
 
@@ -29,20 +30,50 @@ trashinbox
     Menu > File > Compact Folders
     right-click on folder > Properties > Repair Folder
 
-#### Keyboard Shortcuts
-- `ctrl+r`  **R**eply (to sender only)
-- `ctrl+shft+b`  Address **B**ook (like Bookmarks in Firefox)
-- `ctrl+shft+f`  **F**ind in folder
-- `ctrl+u`  view email source
-- `m` toggles message read/unread
-- `(Shift+)j`  (not) junk
-- `s` toggles starring
+#### keyboard shortcuts
+- `alt+1` = home tab
+- `alt+2-8` = tabs 2-8
+- `alt+9` = last tab
+- `f11` = toggle Today Pane
+
+- `ctrl+f` = find in message
+- `ctrl+g`/`f3` = find next in message
+- `ctrl+shift+g`/`shift+f3` = find previous in message
+- `ctrl+]/[` = increase/decrease indent
+- `ctrl+shift+v` = paste without formatting
+
+- `ctrl+shift+a` = attach
+- `alt+x` = reorder attachments
+
+- `ctrl+k` = focus (global) search box
+- `ctrl+shift+k` = focus quick filter
+
+- `ctrl+m/n`  new message
+- `ctrl+enter` = send message
+- `ctrl+o` or `enter` = open in new tab
+- `ctrl+p` = print
+- `ctrl+s` = save as file
+- `ctrl+u`  view source
+
+- `ctrl+shift+b`  Address **B**ook (like Bookmarks in Firefox)
+- `ctrl+shift+f`  **F**ind in folder
+
+- `m` toggle message read/unread
+- `s` toggle starring
 - `f`/`p` goes to next/previous message
+- `]`/`[` next/previous viewed message
+
+- `j`  junk
+- `(Shift+)j`  (not) junk
+
+- `ctrl+l`  forward
+- `ctrl+r`  **R**eply (to sender only)
+- `ctrl+shft+r`  reply to all
 
 mozillamessaging
 
 #### Tools
-    alt+t > a (= Add-ons Manager)
+    alt+t > a (= Add-ons and Themes)
     alt+t > e (= Edit) > a a (= Account Settings)
     alt+t > Manually sort folders
 
@@ -82,7 +113,6 @@ mozillamessaging
 `~/.ssh/known_hosts`: `AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa`
 
 # radio-active
-    pkill radio; radio -K  # quit & kill instances
     radio --last  # run playing last station
     radio --list  # list favourites
     radio --remove  # launch favourite removal dialog
@@ -97,6 +127,13 @@ mozillamessaging
 # WhatsApp group members
     Firefox > Inspect (Q) > Copy > Inner HTML
     Google Chrome > right-click > Inspect > ...
+
+# wikitext
+```mediawiki
+<code>inline monospaced</code>
+```
+
+https://en.wikipedia.org/wiki/Help:Wikitext
 
 # wttr.in
     curl wttr.in/London

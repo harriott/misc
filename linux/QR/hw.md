@@ -89,6 +89,16 @@ mount(8)
     df -h [<disk>]
     du -sh <bigDirectory>
 
+### permissions
+    ---------- 	0000  no permissions
+    ---x--x--x 	0111  execute
+    --w--w--w- 	0222  write
+    --wx-wx-wx 	0333  write & execute
+    -r--r--r-- 	0444  read
+    -r-xr-xr-x 	0555  read & execute
+    -rw-rw-rw- 	0666  read & write
+    -rwxrwxrwx 	0777  read, write, & execute
+
 ### FAT
     sudo fatlabel /dev/sdi1 [<newLabel>]
     sudo mkfs.vfat -n 'label' -I /dev/sdxn
@@ -145,9 +155,10 @@ gdisk(8)
 
 # webcam
     cameractrls
+    guvcview
 
 ## V4l-utils
-    qv4l2
+    qv4l2 &
     v4l2-ctl --list-devices
     v4l2-ctl -d /dev/video0 --list-ctrls
     v4l2-ctl -d /dev/video1 --list-ctrls

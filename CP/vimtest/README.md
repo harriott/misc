@@ -1,6 +1,6 @@
 vim: set fdl=4:
 
-$misc/CrossPlatform/vimtest/README.md
+$misc/CP/vimtest/README.md
 
 ## vimfiles test
 my reduced vim files for testing

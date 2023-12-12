@@ -3,6 +3,7 @@ vim: nospell:
     $misc/CrossPlatform/QR; m4ps 0 1
 
     $JHt/IT/CP/fonts-SE595756-fontcharlist
+    pdf-crop-margins pdf.pdf  # silently makes  pdf-cropped.pdf
 
 - regular expressions
 - syntax of this file is ensured in `$vimfiles/filetype.vim`
@@ -62,6 +63,11 @@ fix `path` in the `*.osp`
 - `b`  to rotate through Audio tracks
 - `v`  to rotate through Subtitles
 
+## seeks
+- 3s: `shift+left/right`
+- 10s: `alt+left/right`
+- 1m: `ctrl+left/right`
+
 # colours
 - Closest Named Web Colors
 - Shades of black
@@ -77,9 +83,9 @@ E-book viewer `<esc>` brings up the controls
 - mouse to top for settings
 
 # documenting - LaTeX
-    $DJH/dts-tex.txt
+    $DJH/search/dts-tex.fetl  # for my files
+    $JHt/IT/CP/TeX/LaTeX/  # for example code
     :s/μ/\\mu{}/g
-    \setlength{\columnsep}{1cm}
     xc
 
 ## chngcntr
@@ -90,10 +96,12 @@ functionality included in Memoir
 ## commands
     \begin{figure}[h] \includegraphics[width=0.5\textwidth]{image} \end{figure}
     \centred{\rule{9cm}{0.4pt}}  % horizontal line
+    \listfiles  in preamble gets package versions in  .log
     \newenvironment{<envName>}[<n>][<default>]{<beginEnv>}{<endEnv>}
     \pagebreak
     \pagestyle{empty}  % no headers or footers from here
     \raggedleftSomeText\par}
+    \setlength{\columnsep}{1cm}
     \tableofcontents*  % ToC without itself listed therein
     \textsubscript{}
     \textsuperscript{}
@@ -157,6 +165,7 @@ functionality included in Memoir
 
 ## engines
     pdflatex --version
+    pdflatex <path>/<texfile>  # outputs compilation results in  <path>/
 
 ### MiKTeX
     initexmf --report
@@ -235,13 +244,6 @@ zero indent
 ## porting
     \user\config
     C:\Users\jnbh\AppData\Roaming\LibreOffice\4\user\registrymodifications.xcu
-
-# documenting - pdf
-    pdf-crop-margins pdf.pdf  # silently makes  pdf-cropped.pdf
-
-## Ghostscript convert pdf to png
-    $ gspdfpng
-    PS> gsp
 
 # Emacs - commands
 - `C-*`  calc-dispatch
@@ -507,7 +509,7 @@ convert mp4's first to MPEG-2 transport streams (`ffmhb -i 1.mp4 -c copy 1.ts`) 
     git log --follow '*cmusq.vim'
     git log --follow *Colette*
     git log -3 --pretty="format:%C(auto)%h %as" -- */syntax/sh.vim  # last 3 dates of change
-    git log -S <string>
+    git log -S<change_string>  # reports commits that added or removed it
     git reset HEAD~1  # throw away last commit, keeping changes for a better one
     gitk &  # GUI showing files in each commit
 
@@ -542,6 +544,10 @@ convert mp4's first to MPEG-2 transport streams (`ffmhb -i 1.mp4 -c copy 1.ts`) 
 
 `$machBld/jo/gitconfig` inludes `$misc/CrossPlatform/gitconfig`
 
+### GitHub CLI
+    gh repo list  # handy list of your repositories
+    gh repo view  # in a repository, returns the README
+
 ### the index
     git checkout-index -f <somefile>  # overwrite from the index's copy
     git ls-files
@@ -564,13 +570,15 @@ Tig Manual
     go version
 
 ### Hugo
-    hugo  # populates public/
-    hugo server  # defaults to  http://localhost:1313/
+    hugo mod graph  # dependencies
+    hugo mod tidy  # (re)creates  go.mod  &  go.sum
+    hugo server  # baseURL  must be defined to get  http://localhost:1313/
     hugo server -p 1314  # http://localhost:1314/
     hugo version
-    rm -r public, hugo
+    rm -r public, hugo  # repopulates  public/
 
-`hugo -b http://...` overrides `baseURL` defined in a `config.toml`
+- `hugo -b http://...` overrides `baseURL` defined in a `config.toml`
+- "Page Not Found" if no theme...
 
 ## Java
     java -version
@@ -600,6 +608,12 @@ Tig Manual
     perl -de 0  # debug
     perl -e 'print reverse <>' <file_to_reverse>
     perl -le 'print a..z'
+
+### conditionals
+    if ( expr ) { action }
+    if ( expr ) { action } else { action }
+    if ( expr ) { action } elsif ( expr  ) { action } ... else { action }
+    unless ( expr ) { action }
 
 ### Commant Prompt
     set TERM=dumb  # allows Perl stuff to run without Terminal Size warnings
@@ -638,12 +652,15 @@ Tig Manual
 - `\s`  space, tab, newline
 - `\w`  alphanumeric or _
 - `a{m,n}`  between m & n a's
+- `^abc|abc$` abc at start or end
 
 <https://jkorpela.fi/perl/regexp.html>
 
 ### say
     say scalar @array;  # number of elements
     use feature 'say';
+
+replaces `print "$var\n";`
 
 ## Python
     o $WORKON_HOME
@@ -763,6 +780,10 @@ VIFM(1)
 - `yy`  yank file
 - `ZQ`  `:quit!`
 - `ZZ`  `:quit`
+
+# gnuplot commands
+    set terminal  # lists those available
+    show datafile commentschars
 
 # gpg
     <key-id> can be the short key id = the last 8 characters
