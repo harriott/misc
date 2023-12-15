@@ -580,6 +580,17 @@ Tig Manual
 - `hugo -b http://...` overrides `baseURL` defined in a `config.toml`
 - "Page Not Found" if no theme...
 
+## gnuplot
+    gnuplot -e 'set terminal'  # lists those available
+    gnuplot -e 'show datafile commentschars'
+    gnuplot -e 'show loadpath'
+    gnuplot -e 'show palette'
+    gnuplot -V
+    r $jtCP/gnuplot  # sample code
+
+### commands
+    q[uit]
+
 ## Java
     java -version
     PS> where.exe java
@@ -608,6 +619,7 @@ Tig Manual
     perl -de 0  # debug
     perl -e 'print reverse <>' <file_to_reverse>
     perl -le 'print a..z'
+    perl -v  # version
 
 ### conditionals
     if ( expr ) { action }
@@ -637,6 +649,11 @@ Tig Manual
 ##### list
     cpan -l > $machine\troin\cpanList.txt
     instmodsh  # followed by l
+
+### loops
+    last;  # break
+    next;  # continue
+    while ($boolean) {...}
 
 ### PS
     perl -e 'print \"Hello World\"'
@@ -756,6 +773,7 @@ print(sys.argv[0])  # the full pathname of the program
     hugo serve -D  # includes drafts
 
 ### ssg - Jekyll
+    [a post]({% post_url 2010-07-21-a-post %})
     [link to post]({% post_url 20xx-xx-xx-name-of-post %})
     bundle exec jekyll build
     bundle exec jekyll s  # serve locally
@@ -780,10 +798,6 @@ VIFM(1)
 - `yy`  yank file
 - `ZQ`  `:quit!`
 - `ZZ`  `:quit`
-
-# gnuplot commands
-    set terminal  # lists those available
-    show datafile commentschars
 
 # gpg
     <key-id> can be the short key id = the last 8 characters

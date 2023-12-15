@@ -27,7 +27,8 @@ set -e  # quits on error
 # git clone https://github.com/MartinThoma/LaTeX-examples/ $GHrCl/CP/MartinThoma-LaTeX-examples
 # git clone https://github.com/pypa/pipx $GHrCl/CP/pypa-pipx
 # git clone https://github.com/CP/nomacs/nomacs $GHrCl/nomacs-nomacs
-# git clone https://github.com/gnuplot/gnuplot $GHrCl/gnuplot-gnuplot
+# git clone https://github.com/gnuplot/gnuplot $GHrCl/CP/gnuplot-gnuplot
+# git clone https://github.com/Gnuplotting/gnuplot-palettes $GHrCl/CP/Gnuplotting-gnuplot-palettes
 
 #===> Ruby
 # git clone https://github.com/rouge-ruby/rouge $GHrCl/CP/Ruby/rouge-ruby-rouge
@@ -71,6 +72,7 @@ set -e  # quits on error
 # git clone https://github.com/vim/vim $GHrCl/CP/vim-vim
 # git clone https://github.com/vlime/vlime $GHrCl/vim-Lisp/vlime-vlime
 # git clone https://github.com/preservim/tagbar $GHrCl/CP/Vim/preservim-tagbar
+# git clone https://github.com/lambdalisue/fern.vim $GHrCl/CP/Vim/lambdalisue-fern.vim
 
 #==> emacs
 # git clone https://git.sr.ht/~bzg/worg $GHrCl/emacs/_bzg-worg
