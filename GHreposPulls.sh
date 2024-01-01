@@ -29,6 +29,8 @@ set -e  # quits on error
 # git clone https://github.com/CP/nomacs/nomacs $GHrCl/nomacs-nomacs
 # git clone https://github.com/gnuplot/gnuplot $GHrCl/CP/gnuplot-gnuplot
 # git clone https://github.com/Gnuplotting/gnuplot-palettes $GHrCl/CP/Gnuplotting-gnuplot-palettes
+# git clone https://github.com/MikelSotomonte/mpv-waveform $GHrCl/CP/MikelSotomonte-mpv-waveform
+# git clone https://github.com/mfcc64/mpv-scripts $GHrCl/CP/mpv/mfcc64-mpv-scripts
 
 #===> Ruby
 # git clone https://github.com/rouge-ruby/rouge $GHrCl/CP/Ruby/rouge-ruby-rouge
@@ -124,14 +126,14 @@ if [ $host = 'sbMb' ]; then
 
     # pulls to  $GHrCl
 
-    # pull=no  # uncomment to pull from a  $start
+    pull=no  # uncomment to pull from a  $start
         # start='./CP/MartinThoma-LaTeX-examples'
         # start='./CP/Ruby/Jekyll/jekyll-jekyll'
         # start='./linux/Arch/protesilaos-dotfiles'
         # start='./linux/dwt1-dotfiles'
         # start='./linux/leo-arch-clifm'
         # start='./unix/rwxrob-dotfiles'
-    pull=yes  # uncomment to pull all
+    # pull=yes  # uncomment to pull all
 
     cd $GHrCl; pwd
     dotgits=$(find . -name '*.git' | sort)

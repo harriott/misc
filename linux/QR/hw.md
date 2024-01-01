@@ -126,16 +126,20 @@ lsblk(8)
 gdisk(8)
 
 #### parted
-    mklabel <label>  # destroys existing partitions
-    sudo parted <device>
-
 - can't set the volume-name
 - GNU Parted User Manual
 - parted(8)
 
-##### CL-mode
-    -s => don't ask
+##### interactive mode
+    sudo parted <device>
+
+`mklabel <label>` destroys existing partitions
+
+##### script mode
     sudo parted -l | grep sdl -B 1 -A 6  # --list
+    sudo parted /dev/sda -s mklabel msdos mkpart primary 0% 100%  # also creates an MBR
+
+`-s` (`--script`) never prompts for user intervention
 
 ### Trash
     du -hs ~/.local/share/Trash

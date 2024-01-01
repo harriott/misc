@@ -31,23 +31,31 @@ commands here are generic, see also `$OSAB/QR.md`
 - can't play oma's omv's
 
 ### commands
-    ,        seek -1m
-    .        seek +1m
     7        settings
+
     ^c       echo Type :quit<enter> to exit cmus.
     ^l       refresh
-    ^r       toggle repeat_current
     space    win-toggle => mark
-    C        toggle continue
-    P        win-mv-before
-    b        player-next
     e        win-add-q
-    h, left  seek -5
-    l, right seek +5
+
+    P        win-mv-before
     p        win-mv-after
-    r        toggle repeat
+
+    b        player-next
     v        player-stop
     z        player-prev
+
+    h, left  seek -5
+    l, right seek +5
+    ,        seek -1m
+    .        seek +1m
+
+    ^r       toggle repeat_current
+    C        toggle continue
+    r        toggle repeat
+
+    -        vol -10%
+    + =      vol +10%
 
 ## convert
     for f in *.flac; do ffi "$f" -c:a libvorbis -aq 4 "${f%.*}.ogg" ; done
@@ -521,10 +529,13 @@ can play omv's
     f        => toggle fullscreen
     hash     => cycle audio tracks
     i/I      => statistics (doesn't include date)
-    o/O      => show progress
     s        => screenshot
     v        => toggle subtitle
     j/J      => cycle subtitles tracks
+
+#### OSD
+    delete => show progress bar
+    o/O    => show time/total
 
 #### playback speed
     BACKSPACE -> reset
@@ -752,7 +763,7 @@ zathura man page
     pstree -C age
 
 ## pgrep
-    bm pgrep
+    i pgrep
     pgrep <aprogram>  # reports it's process id
 
 # Ruby gem

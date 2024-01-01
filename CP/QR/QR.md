@@ -80,7 +80,7 @@ E-book viewer `<esc>` brings up the controls
 
 # documenting - eBook - Foliate
 - `ctrl-q` = quit
-- mouse to top for settings
+- right-click
 
 # documenting - LaTeX
     $DJH/search/dts-tex.fetl  # for my files

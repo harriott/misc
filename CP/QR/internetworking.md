@@ -19,8 +19,6 @@ trashinbox
 
 ## Thunderbird
     $CrPl/networking/Thunderbird/builds.txt
-    PS> C:\MozillaThunderbird\thunderbird.exe -addressbook
-    thunderbird -addressbook
 
 `$DJH/TP-default-release/compatibility.ini` for LastVersion
 
@@ -48,6 +46,7 @@ trashinbox
 - `ctrl+k` = focus (global) search box
 - `ctrl+shift+k` = focus quick filter
 
+- `a` = archive
 - `ctrl+m/n`  new message
 - `ctrl+enter` = send message
 - `ctrl+o` or `enter` = open in new tab
@@ -85,11 +84,7 @@ mozillamessaging
       h (= Original HTML)
       p (= Plain Text)  - can then export & Delete inline images
 
-### run safely
-    $OSAB/jo/wm/TS/thunderbird_safely.sh
-    $machine\T91\runSafely.ps1
-
-### tbkeys-lite Main key bindings
+#### tbkeys-lite Main key bindings
     j: cmd:cmd_nextMsg
     k: cmd:cmd_previousMsg
     o: cmd:cmd_openMessage
@@ -101,7 +96,15 @@ mozillamessaging
     c: func:MsgNewMessage
     u: tbkeys:closeMessageAndRefresh
 
-### To
+### run addressbook
+    PS> C:\MozillaThunderbird\thunderbird.exe -addressbook
+    thunderbird -addressbook
+
+### run safely
+    $OSAB/jo/wm/TS/thunderbird_safely.sh
+    $machine\T91\runSafely.ps1
+
+### To targets
     jharr@ftml.net, trohib@gmail.com
     <jharr@ftml.net>, <trohib@gmail.com>
     Joseph HARRIOTT <jharr@ftml.net>, Joseph HARRIOTT <trohib@gmail.com>
