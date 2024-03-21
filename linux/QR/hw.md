@@ -4,7 +4,7 @@ vim: nospell:
     solaar show
     sudo chmod 777 /run/media/jo/TOSHIBA
     sudo chmod 644 $Obc/autostart/urxvtl.sh
-    uname -m  # machine hardare name
+    uname -m  # reports eg  x86_64
     xbacklight -set 50
 
 # battery
@@ -87,7 +87,7 @@ mount(8)
 
 ## non-optical
     df -h [<disk>]
-    du -sh <bigDirectory>
+    du -sh [<bigDirectory>]
 
 ### permissions
     ---------- 	0000  no permissions
@@ -98,10 +98,6 @@ mount(8)
     -r-xr-xr-x 	0555  read & execute
     -rw-rw-rw- 	0666  read & write
     -rwxrwxrwx 	0777  read, write, & execute
-
-### FAT
-    sudo fatlabel /dev/sdi1 [<newLabel>]
-    sudo mkfs.vfat -n 'label' -I /dev/sdxn
 
 ### fsck
 `fsck` manages `lost+found` directory
@@ -117,7 +113,12 @@ e2fsck(8)
 lsblk(8)
 
 ### partitions
+    sudo mkfs.exfat -n <label> /dev/sdxx
     sudo mkfs.ext4 -L <label> /dev/sdxx
+
+#### FAT
+    sudo fatlabel /dev/sdi1 [<newLabel>]
+    sudo mkfs.vfat -n 'label' -I /dev/sdxn
 
 #### gdisk
     sudo gdisk /dev/sdx
@@ -159,7 +160,7 @@ gdisk(8)
 
 # webcam
     cameractrls
-    guvcview
+    guvcview &
 
 ## V4l-utils
     qv4l2 &

@@ -1,8 +1,9 @@
 #! /usr/bin/python3
 # vim: set cc=80 tw=79:
 
-# python $misc/timeSubtraction.py 0:22:37 0:6:14
-# python $misc/timeSubtraction.py 0:14:45 0:0:0
+# python $misc/CP/timeSubtraction.py 0:14:10 0:3:18
+# python $misc/CP/timeSubtraction.py 0:12:45 0:0:8
+# python $misc/CP/timeSubtraction.py 0:28:14 0:4:34
 
 import datetime
 import sys

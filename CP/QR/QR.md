@@ -1,13 +1,25 @@
 vim: nospell:
 
-    $misc/CrossPlatform/QR; m4ps 0 1
+    $misc/CP/QR; m4ps 0 1
 
     $JHt/IT/CP/fonts-SE595756-fontcharlist
     pdf-crop-margins pdf.pdf  # silently makes  pdf-cropped.pdf
 
 - regular expressions
+- ripgrep in JH: `$DJH/search/searches.md`
+
 - syntax of this file is ensured in `$vimfiles/filetype.vim`
 - Software Engineering Stack Exchange
+
+# audio
+    exiftool -ver
+
+## text-to-speech
+    espeak "Hello World!"
+
+### French
+    espeak -v fr "Votre texte à lire..."
+    espeak -v fr+f2 "Bonjour tout le monde"
 
 # AV - OBS Studio Settings
     Output > Recording > Encoder > x264 low CPU usage
@@ -67,6 +79,11 @@ fix `path` in the `*.osp`
 - 3s: `shift+left/right`
 - 10s: `alt+left/right`
 - 1m: `ctrl+left/right`
+
+# BBCode
+    $vimfiles/ftplugin/bbcode.vim
+    [code]some_code[/code]
+    [quote]quote[/quote]
 
 # colours
 - Closest Named Web Colors
@@ -201,35 +218,13 @@ after filename changes in `$tex`
     \multirow{<num_rows>}{<width>}{<contents>} % * for default width
     \usepackage{multirow}
 
-## verse
-```tex
-\renewcommand{\poemtitlefont}{\normalfont\bfseries\large}  % removed \centering
-
-\begin{verse}
-
-\begin{altverse}
-odd lines are normal \\
-  even lines will be indented
-\end{altverse}
-
-\indentpattern{01230}
-\begin{patverse}
-zero indent \\
-  one indent \\
-    two indents \\
-      three indents \\
-zero indent
-\end{patverse}
-
-\end{verse}
-```
-
 # documenting - LibreOffice
     $CrPl/documenting/LibreOffice/Buildup.txt
     r ~/.config/libreoffice/4/user/
 
 - `alt+f12` = `Tools > Options`
 - `alt+t e` = `Tools > Extensions` = `ctrl+alt+e`
+- `alt+t` (= `Format`) `> p` (= `Style de page...`)
 - `ctrl+alt+e` = `Tools > Extension Manager...`
 - Writer: right-click on a hyperlink for `Remove Hyperlink`
 
@@ -449,7 +444,10 @@ Spacemacs documentation
 
 - `*.oma` = Sony OpenMG
 - R: `q("no")`
+
+## Stack Exchange Network
 - Stack Overflow
+- What topics can I ask about here?
 
 ## Bluefish
     alt+e (= Edit) > s (= Preferences...)
@@ -503,7 +501,6 @@ convert mp4's first to MPEG-2 transport streams (`ffmhb -i 1.mp4 -c copy 1.ts`) 
 ### commits
     git checkout <commit>  # go back to the commit (hash or tag)
     git checkout master  # return to current state of project
-    git grep Log $(git rev-list --all) -- '*.ps1'  # searches all  ps1  files in all commits for "Log"
     git log -- *pdf  # shows if any PDF's have been inadvertently included
     git log --follow *spacemacs*
     git log --follow '*cmusq.vim'
@@ -512,6 +509,11 @@ convert mp4's first to MPEG-2 transport streams (`ffmhb -i 1.mp4 -c copy 1.ts`) 
     git log -S<change_string>  # reports commits that added or removed it
     git reset HEAD~1  # throw away last commit, keeping changes for a better one
     gitk &  # GUI showing files in each commit
+
+#### grep
+    git grep Log $(git rev-list --all) -- '*.ps1'  # searches all  ps1  files in all commits for "Log"
+
+in `$CrPl/networking/browsers`, `git grep activeInstall $(git rev-list --all) -- 'browsers.txt'`
 
 ### configurations
     find . -wholename '*.git'
@@ -604,6 +606,9 @@ Tig Manual
 - <https://www.markdownguide.org/extended-syntax/>
 
 ## Pandoc
+    $core/IT_stack/CP/Pandoc/monofont.md
+    $core/IT_stack/CP/Pandoc/weird.gfm
+
 `--fail-if-warnings`  exit with error status if there are any warnings
 
 ### verbose
@@ -859,7 +864,7 @@ The GNU Privacy Handbook
     gpg -K  # --list-secret-keys
 
 # HW
-    duf
+    duf (--all)  # storage devices info
 
 ## for paper
 `HP ENVY 5532 > Wireless Settings > Settings > Advanced > IP Settings > OK > Manual` allows tweaking of printer's address
@@ -944,7 +949,27 @@ paintbrush: shift previews a new straight line from last point to current mouse 
 - `z` = undo
 - `Save` pads out right & bottom images that aren't up to 1024x512...
 
-# less
+# Stack Exchange Network
+- `@petersmith` = Peter Smith
+- CommonMark Implementations
+- `highlight.js`
+
+# terminal - Alacritty
+    alacritty -V
+
+- `Ctrl+Shift+b` = `SearchBackward`, then `Esc`
+- `Ctrl+Shift+space` = `ToggleViMode`
+
+## font
+- `Ctrl+-` = `DecreaseFontSize`
+- `Ctrl+0` = `ResetFontSize`
+- `Ctrl+=` = `IncreaseFontSize`
+
+## scroll
+- `Shift+PageDown/Up` = `ScrollPageDown/Up`
+- `Shift+End/Home` = `ScrollToBottom/Top`
+
+# terminal - less
 greenwoodsoftware
 
 ## PS>
@@ -963,12 +988,10 @@ messes up if terminal is resized
 - `/ ?`  search forward backward
 - `n N`  next previous
 
-# Stack Exchange Network
-- `@petersmith` = Peter Smith
-- CommonMark Implementations
-- `highlight.js`
-
 # text wrangling
+    ! " # $ % & ' ( ) * + , - . /
+    ansifilter <file_to_strip_of_ANSI_terminal_escape_codes>
+
 - carriage return (U+000D) returns the cursor to the left of the line (usually just before line feed on MSWin)
 - finding characters
 
@@ -979,7 +1002,7 @@ messes up if terminal is resized
     [g]vim .  # will open netrw on current directory
     vim -u NONE  # skip all initialisations
 
-`^M`  carriage return
+`^M` carriage return
 
 ### gVim
     gvim -O <textfile0> <textfile1>  # opens them in a vertical split
@@ -988,11 +1011,4 @@ messes up if terminal is resized
 #### window size
     gvim -geometry 200x55
     PS> gvim -c "set columns=217 lines=54"  # maximum on a 1600x900 screen with rhs taskbar
-
-# text-to-speech
-    espeak "Hello World!"
-
-## French
-    espeak -v fr "Votre texte à lire..."
-    espeak -v fr+f2 "Bonjour tout le monde"
 

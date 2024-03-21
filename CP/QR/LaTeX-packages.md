@@ -2,6 +2,7 @@ vim: nospell:
 
     $misc/CrossPlatform/QR; m4ps 0 1
 
+    \usepackage{tikz}
     \usepackage{url}
     tlmgr info pgfplots
     tlmgr update --list
@@ -50,6 +51,7 @@ vim: nospell:
     \documentclass[20pt,a4paper,article,extrafontsizes,twocolumn]{memoir}
     \newcommand{\maketitle}
     \nonzeroparskip
+    \setlength{\columnsep}{7mm}
     \tightlists
 
 - `\the\columnsep` reports `10.0pt`
@@ -100,4 +102,29 @@ might require `[article]`
 
 - doesn't respect `geometry` margins, so `\includepdfset{offset=<fromInnerEdge> <fromTop>}`
 - if business cards aren't sized right, go through images
+
+# verse
+```tex
+\renewcommand{\poemtitlefont}{\normalfont\bfseries\large}  % removed \centering
+
+\begin{verse}
+
+no page break after this line \\*
+
+\begin{altverse}
+odd lines are normal \\
+  even lines will be indented
+\end{altverse}
+
+\indentpattern{01230}
+\begin{patverse}
+zero indent \\
+  one indent \\
+    two indents \\
+      three indents \\
+zero indent
+\end{patverse}
+
+\end{verse}
+```
 

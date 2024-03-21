@@ -1,12 +1,12 @@
 
 # vim: set fdl=2:
 
-# Joseph Harriott - Sun 04 Sep 2022
+# Joseph Harriott - lun. 04 mars 2024
 
 # Recursively find all *.git directories in  $GHrCl
 # for each one, execute a git pull, then copy over to  $GHrUse  on Dropbox.
 # -------------------------------------------------------------------------
-# $GHrCl  is defined in  $machine\PSProfile.ps1
+# $GHrCl  should be defined in  $MSWin10\PSProfile.ps1
 # $cITh  &  $GHrUse  are defined in  $MSWin10\PSProfile.ps1
 # PS> iex "$misc/GHreposPulls.ps1"
 
@@ -32,7 +32,7 @@ gci -Directory -r *.git | select -expand FullName |
 }
 write-host ''
 Read-Host '- now going to RobCopy to $GHrUse, when you''re ready'
-$LogFile = $cITh+"\GHreposRoboCopy.log"
+$LogFile = $ITscr+"\GHreposRoboCopy.log"
 'vim: nowrap tw=0:' > $LogFile
 '' >> $LogFile
 iex "robocopy /mir $GHrCl $GHrUse /NP /unilog+:$LogFile /tee"

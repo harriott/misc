@@ -19,11 +19,6 @@ commands here are generic, see also `$OSAB/QR.md`
 # audio
     pavucontrol
 
-## Music Player Daemon
-    mpd
-    mpd --kill
-    pgrep mpd
-
 ## cmus
     cmus_notify -h
 
@@ -85,6 +80,11 @@ commands here are generic, see also `$OSAB/QR.md`
     parecord -d 0 parecord.flac
     parecord -d 1 parecord.flac
     parecord -d 16 parecord.flac
+
+## Music Player Daemon
+    mpd
+    mpd --kill
+    pgrep mpd
 
 ## SoX
     rec -c 2 sox.flac  # record in stereo
@@ -162,7 +162,7 @@ date(1)
     cat
     tac
     shuf
-    sort -o <file> <file>  # sort in place
+    sort -ro <file> <file>  # reverse sort in place
     wc -l <file>  # counts lines
 
 ## awk
@@ -187,6 +187,7 @@ GNU Awk
     grep -c '^PatternAtStartOfLine' <file>  # returns count of occurances
     grep -P '[\p{Devanagari}]' **/*.md  # finds Devanagari characters
 
+- `-A num` (`--after-context=num`)
 - `-F` (interpret patterns as `--fixed-strings`, not regex)
 - GNU Grep Manual
 
@@ -201,13 +202,16 @@ GNU Awk
 - stream editor
 
 ### make changes
+    echo -e '1\n2\n3' | sed $'s/.*/\t&/g'  # inserting tabs
     echo "don't forget that" | sed 's/\x27/\"/'
     echo "THIS is a test!" | sed 's/.*/\L&/; s/[a-z]*/\u&/g'  # title case
-    sed -i '0~2 a\\' <fileToAddBlankLineAfterEach2ndLine>
+    sed -i $'s/\t/tab_gone/g' <file_with_tabs>
     sed -i '/<regex>/!d' <filetoreduce>  # removes lines that don't match
+    sed -i '/match/,+2d' <file>  # removes matched line and 2 after
+    sed -i '0~2 a\\' <fileToAddBlankLineAfterEach2ndLine>
     sed -i '1s/^/vim: ft=<filetype>:\n\n/' $cslF
     sed G <file>  # outputs <file> with blank lines added
-    sed '1i\\newFirstLineText' <fileToPrependTo>
+    sed '1i\newFirstLineText' <fileToPrependTo>
 
 - `&` whole matched pattern
 - replace a string in multiple files
@@ -224,32 +228,40 @@ GNU Awk
     sed -n '2,$p' <file>  # prints from the 2nd line
 
 # file manage
-    cp -r <sourceDir> .
     fuseiso <ISO_image> <mountDirectory>
     mkdir -p  # --parents = make parent directories as needed (no error if existing)
+    sudo chown -R <user>:<group> <dir>
     tar -xzf archive.tar.gz [-C <target_directory>]
 
+- `chmod 600 file` - owner can read and write
+- `chmod 644 file` - owner can change it, everyone else can read it
+- `chmod 660 file` - owner can read and write, and group members
+- `chmod 666 file` - all can read and write
+- `chmod 700 file` - owner can read, write and execute
+- `chmod 711 file` - `drwx--x--x`
+- `chmod 755 file` - `drwxr-xr-x`
+- `chmod 777 file` - all can read, write and execute
 - install(1)
+- ln(1)
 - rm(1)
 
 ## compressed
-    7z x <pw'd_zip>
     tar -xvf tar.gz.tar
+
+### 7-Zip
+    for z in *.zip; do 7z x $z; done
+    7z x <pw'd_zip>
+
+## cp
+    cp -r <sourceDir> .
+
+`-L`, `--dereference`
 
 ## Dolphin
     F4        -> Konsole  attached below
     Shift+F4  -> Konsole  in a new window
 
-## investigations
-    diff -qrN dir1/ dir2/
-    find . -type f | sed 's/.*\.//' | sort | uniq -c  # counts by extension
-
-### counts
-    echo `find . -type d | wc -l`-1 | bc  # counts all subdirectories
-    isutf8 **/* | wc -l  # non UTF-8 files (fails when too many)
-    ls **/* | wc -l      # all of the files
-
-### find
+## find
     find $PWD -name <file>  # gets full path
     find . -maxdepth 1 -mindepth 1 -type f -name "*"  # those in working directory
     find . -name "*" -type f ! -path '*/.git/*'
@@ -257,8 +269,20 @@ GNU Awk
     find . -newer oldFile
     find . -path 'exclude*these*paths' -prune -o -name '<filename>' -print
     find . -type f -exec du -h {} + | sort -r -h > sizes.txt
+    find . -xtype l -delete  # quickly removes broken symlinks
 
 find(1)
+
+## investigations
+    diff --no-dereference -qr dir1 dir2
+    stat -c '%a %n' *  # show octal permissions
+
+### counts
+    echo `find . -type d | wc -l`-1 | bc  # counts all subdirectories
+    find . -type f | sed 's/.*\.//' | sort | uniq -c  # counts by extension
+    find . | wc -l  # very fast in $Drpbx
+    isutf8 **/* | wc -l  # non UTF-8 files (fails when too many)
+    ls **/* | wc -l  # all of the files
 
 ### mlocate
     locate -c <target>  # --count
@@ -289,11 +313,6 @@ du(1)
 - `n` -> order by name
 - `s` -> order by size
 
-### stat
-    stat -c '%a %n' *  # show octal permissions
-
-stat(1)
-
 ### symlinks
     [[ -L $s ]] && echo 'symlink exists'
     find . -type l -ls  # recursively list all symlinks with their references
@@ -323,7 +342,7 @@ tree(1)
     sudo rsnapshot du  # can takes many hours...
     systemctl list-unit-files | grep rsnapshot
 
-/usr/bin/rsnapshot sync: completed successfully
+> /usr/bin/rsnapshot sync: completed successfully
 
 ## rsync
     rsync -inrtv --delete --progress path1/large_file_dir1/ path2/large_file_dir2
@@ -369,7 +388,7 @@ fingerprint: `xxxx xxxx xxxx xxxx xxxx  xxxx xxxx xxxx xxxx xxxx`
 
 # imagey
     colorpicker --one-shot --preview
-    for i in *.bmp; do convert $i ${i%.*}.jpg; done
+    for i in *.bmp; do convert $i ${i%.*}.jpg; done  # no spaces in names
     for i in *.jpeg; do convert $i jpg/${i%.*}.jpg; done  # gets them into subfolder jpg
     gphoto2 --auto-detect  # list detected cameras
     gphoto2 -DR  # delete all files in all folders
@@ -378,7 +397,7 @@ fingerprint: `xxxx xxxx xxxx xxxx xxxx  xxxx xxxx xxxx xxxx xxxx`
     gphoto2 -P  # get all files
     gpicview  # opens first image in directory (no thumbnails)
     exiftool <image>
-    exiftool -Orientation *
+    exiftool -Orientation *  # reports
     exiv2 <image>
 
 ## feh
@@ -411,11 +430,6 @@ up/down => zoom in/out
     F1 => credits
     F10 => frameless
 
-#### Panels
-    alt+m => Metadata Info
-    i => File Info
-    m => Metadata Ribbon
-
 #### Alt
     Alt A > Exposure > Gamma
     Alt A > Tiny Planet
@@ -424,15 +438,18 @@ up/down => zoom in/out
     Ctrl+w => next tab
     Ctrl+w => close tab
 
-#### panels
+#### Panels
+    alt+m => Metadata Info
+    i => File Info
     f => hide all
-    i => File Info Panel
+    m => Metadata Ribbon
     mouse right-click to find them
 
 ## Pinta
 - can't send to printer...
 - shows precise cursor position in pixels
 - `backspace` (= `Edit > Erase Selection`)
+- `Rectangle Select > Cut > Paint Bucket` to replace an area with a solid colour fill
 
 ## pqiv
     pqiv -i <animateGif> &  # opens the animated gif without the obtrusive info box
@@ -786,7 +803,6 @@ zathura man page
     echo "$PS1"
     echo $PWD
     echo $SHELL
-    echo $?  # 0 if command succeeded
     env | grep SHELL
     exit 0  # to quit script
     printf command
@@ -824,10 +840,11 @@ command substitution `$(...)`
     [ true ] && echo y
     [ "y" ] && echo y
     c=1; [[ $c == 1 ]] && echo "true"
+    if <condition1>; then <action1>; elif ... else ... fi
     t="y"; if [ $t ]; then echo $t; fi
-    if <condition1>; then <action1>; elif <condition2>; then <action2>; fi
 
 ### file manage
+    echo */  # lists directories
     find -iname \*.flv -o -iname \*.mp4 -o -iname \*.ogv
     for f in *; do mv $f ${f:2}; done
     man -h ls
@@ -867,12 +884,13 @@ jobs(1p)
 ### loops
     break  # breaks out of loop
     continue  # to next iteration of loop
+    for d in */; do echo $d; done
     for f in **/*; do echo $f; done
     for i in {0..9..2}; do echo $i; done
     for i in bee fly wasp; do echo $i; done
 
 ### managing commands
-    echo $?  # exit code of last command
+    echo $?  # exit code of last command, 0 if command succeeded
     eval $Command
     vi mode: v  => edit a command in $EDITOR
 
@@ -994,19 +1012,20 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     gtk-launch --version
     halt -p
     i hier  # detailed description of the filesystem hierarchy
+    locale
     notify-send -u critical "test of critical notification"
     notify-send -t 5000 -u low "Hello World"
     openbox --reconfigure
     passwd jo  # then re-login
     ps $(pgrep Xorg)  # shows which tty X is on
     swapon --show
-    uname -a  # unix name, includes linux version number
     w  # list users and load on system
     whereis <executable>
     xset q  # shows a variety of IO settings
 
 - lsmod(8) show what kernel modules are currently loaded
 - maximum 255 bytes per filename & 4096 per path
+- `uname -a` (= `--all`) handy list of system info
 
 ## awesome wm
 - maximized (horizontally or vertically) are indicated by (horizontal or vertical) double arrow, and break tiling
@@ -1047,6 +1066,7 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     systeroid -T  # list parameters in a tree
 
 ## monitoring
+    free -h
     glances
     gtop
     htop
@@ -1069,19 +1089,35 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     systemd-analyze blame  # time taken for boot processes
 
 ## users
+    echo $EUID
     id -u
     su -
     who  # lists users active on terminals
     whoami
 
 # term
-    Ctrl+s  pause output to screen
-    Ctrl+q  resume output to screen
     sudo fgconsole
     tput colors
 
+- `Ctrl+q` resume output to screen
+- `Ctrl+s` pause output to screen
 - tput(1)
 - w(1)
+
+## Alacritty
+    $OSAB/terminal/alacritty.toml
+
+- `Ctrl+Shift+b` = `SearchBackward`, then `Esc`
+- `Ctrl+Shift+space` = `ToggleViMode`
+
+### font
+- `Ctrl+-` = `DecreaseFontSize`
+- `Ctrl+0` = `ResetFontSize`
+- `Ctrl+=` = `IncreaseFontSize`
+
+### scroll
+- `Shift+PageDown/Up` = `ScrollPageDown/Up`
+- `Shift+End/Home` = `ScrollToBottom/Top`
 
 ## terminal line settings
     stty - a
@@ -1107,7 +1143,6 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     pgrep tmux -l
     set synchronize-panes
     tmux send ls enter  # ls  in the currently active pane
-    tmux show-options -s
 
 ### buffers
     C-a ]     --> paste-buffer -p
@@ -1138,13 +1173,13 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
 ### sessions
     :choose-tree -> put a pane into tree mode, can kill and select
 
-    tmux a                  # attach
-    tmux a -t myname        # attach to session myname
+    tmux a               # attach
+    tmux a -t myname     # attach to session myname
     tmux detach
-    tmux kill-server; tmux  # good for resetting
-    tmux kill-session -a    # kills all but current session
-    tmux ls                 # list sessions
-    tmux lsk -Na            # includes my rebinds
+    tmux kill-server     # good for resetting
+    tmux kill-session -a # kills all but current session
+    tmux ls              # list sessions
+    tmux lsk -Na         # includes my rebinds
 
 ## urxvt
     urxvt --help
@@ -1188,7 +1223,8 @@ tr (Unix)
     sudo systemctl status iptables.service
 
 ## GNU Wget
-    wget -r -A.pdf http://url-to-webpage-with-pdfs/
+    wget -kr -A.zip https://url-to-webpage-with-pdfs/  # works from that page
+    wget -r -A.pdf http://url-to-webpage-with-pdfs/  # works recursively from root page
 
 - `-O file` (`--output-document=file`)
 

@@ -31,6 +31,7 @@ set -e  # quits on error
 # git clone https://github.com/Gnuplotting/gnuplot-palettes $GHrCl/CP/Gnuplotting-gnuplot-palettes
 # git clone https://github.com/MikelSotomonte/mpv-waveform $GHrCl/CP/MikelSotomonte-mpv-waveform
 # git clone https://github.com/mfcc64/mpv-scripts $GHrCl/CP/mpv/mfcc64-mpv-scripts
+# git clone https://github.com/sharkdp/bat $GHrCl/CP/sharkdp-bat
 
 #===> Ruby
 # git clone https://github.com/rouge-ruby/rouge $GHrCl/CP/Ruby/rouge-ruby-rouge
@@ -75,6 +76,8 @@ set -e  # quits on error
 # git clone https://github.com/vlime/vlime $GHrCl/vim-Lisp/vlime-vlime
 # git clone https://github.com/preservim/tagbar $GHrCl/CP/Vim/preservim-tagbar
 # git clone https://github.com/lambdalisue/fern.vim $GHrCl/CP/Vim/lambdalisue-fern.vim
+# git clone https://github.com/Konfekt/vim-unicode-homoglyphs $GHrCl/CP/Vim/Konfekt-vim-unicode-homoglyphs
+# git clone https://github.com/vim-utils/vim-troll-stopper $GHrCl/CP/Vim/vim-utils-vim-troll-stopper
 
 #==> emacs
 # git clone https://git.sr.ht/~bzg/worg $GHrCl/emacs/_bzg-worg
@@ -85,7 +88,6 @@ set -e  # quits on error
 # git clone https://github.com/emacs-evil/evil $GHrCl/emacs/emacs-evil-evil
 # git clone https://github.com/emacs-mirror/emacs $GHrCl/emacs/emacs-mirror-emacs
 # git clone https://github.com/greduan/emacs-theme-gruvbox $GHrCl/emacs/greduan-emacs-theme-gruvbox
-# git clone https://github.com/harriott/zenburn-emacs $GHrCl/emacs/harriott-zenburn-emacs
 # git clone https://github.com/jakebox/jake-emacs $GHrCl/emacs/jakebox-jake-emacs
 # git clone https://github.com/jekyll/minima $GHrCl/CP/Jekyll-jekyll-minima
 # git clone https://github.com/joseph8th/literatemacs $GHrCl/emacs/joseph8th-literatemacs
@@ -97,51 +99,66 @@ set -e  # quits on error
 
 #==> unix
 # git clone https://gitlab.com/rwxrob/dotfiles $GHrCl/unix/rwxrob-dotfiles
+# git clone https://github.com/simmel/urxvt-resize-font $GHrCl/unix/simmel-urxvt-resize-font
 
 #===> linux
+# git clone https://github.com/boysetsfrog/vimpc $GHrCl/linux/boysetsfrog-vimpc
 # git clone https://github.com/doronbehar/pistol $GHrCl/linux/doronbehar-pistol
+# git clone https://github.com/fcambus/ansiweather $GHrCl/unix/linux/fcambus-ansiweather
 # git clone https://github.com/getmail6/getmail6 $GHrCl/linux/mail/getmail6-getmail6
+# git clone https://github.com/jarun/nnn $GHrCl/linux/jarun-nnn
 # git clone https://github.com/leo-arch/clifm $GHrCl/linux/leo-arch-clifm
 # git clone https://github.com/majutsushi/urxvt-font-size $GHrCl/linux/tmux-fontSize/majutsushi-urxvt-font-size
 # git clone https://github.com/rsnapshot/rsnapshot $GHrCl/linux/rsnapshot-rsnapshot
 # git clone https://github.com/simmel/urxvt-resize-font $GHrCl/linux/tmux-fontSize/simmel-urxvt-resize-font
 # git clone https://github.com/stefano-m/awesome-capslock_widget $GHrCl/linux/wm-awesome/stefano-m-awesome-capslock_widget
 # git clone https://github.com/streetturtle/awesome-wm-widgets $GHrCl/linux/wm-awesome/streetturtle-awesome-wm-widgets
-# git clone https://github.com/jarun/nnn $GHrCl/linux/jarun-nnn
 # git clone https://github.com/tats/w3m $GHrCl/linux/tats-w3m
-# git clone https://github.com/boysetsfrog/vimpc $GHrCl/linux/boysetsfrog-vimpc
+# git clone https://github.com/gsamokovarov/jump $GHrCl/linux/gsamokovarov-jump
 
 #====> Arch
 # git clone https://git.sr.ht/~protesilaos/dotfiles $GHrCl/linux/Arch/protesilaos-dotfiles
 # git clone https://gitlab.archlinux.org/archlinux/packaging/packages/pacman $GHrCl/linux/Arch/gitlab_archlinux_org-archlinux-packaging-packages-pacman
 # git clone https://gitlab.archlinux.org/archlinux/packaging/packages/texlive-core $GHrCl/linux/Arch/gitlab_archlinux_org-archlinux-packaging-packages/texlive-core
 
+#===> tmux
+# git clone https://github.com/CrispyConductor/tmux-copy-toolkit $GHrCl/unix/tmux/CrispyConductor-tmux-copy-toolkit
+# git clone https://github.com/tmux-plugins/tmux-resurrect $GHrCl/unix/tmux/tmux-plugins-tmux-resurrect
+# git clone https://github.com/tmux-plugins/tmux-logging $GHrCl/unix/tmux/tmux-plugins-tmux-logging
+# git clone https://github.com/tmux-plugins/tmux-prefix-highlight $GHrCl/unix/tmux/tmux-plugins-tmux-prefix-highlight
+
 #==> MSWin
 # git clone https://github.com/amrali-eg/EncodingChecker $GHrCl/amrali-eg-EncodingChecker
 # git clone https://github.com/jdhitsolutions/PSScriptTools $GHrCl/MSWin/jdhitsolutions-PSScriptTools
+# git clone https://github.com/Windos/BurntToast $GHrCl/MSWin/Windos-BurntToast
 
 #=> pulls to  $GHrCl  &  syncs to  $GHrUse
 if [ $host = 'sbMb' ]; then
     # rsync -iLrtv --delete $GHrUse/ $GHrCl  # if lost...
 
+    # sudo rm -r $GHrCl/unix/linux/BrodieRobertson-dotfiles
+    # git clone https://github.com/BrodieRobertson/dotfiles $GHrCl/unix/linux/BrodieRobertson-dotfiles
+
     # pulls to  $GHrCl
 
-    pull=no  # uncomment to pull from a  $start
+    pull=start  # uncomment to pull from a  $start
+        start='./CP/emacs/joseph8th-literatemacs'
         # start='./CP/MartinThoma-LaTeX-examples'
         # start='./CP/Ruby/Jekyll/jekyll-jekyll'
         # start='./linux/Arch/protesilaos-dotfiles'
         # start='./linux/dwt1-dotfiles'
         # start='./linux/leo-arch-clifm'
+        # start='./unix/linux/BrodieRobertson-dotfiles'
         # start='./unix/rwxrob-dotfiles'
-    # pull=yes  # uncomment to pull all
+    # pull=all  # uncomment to pull all
 
     cd $GHrCl; pwd
-    dotgits=$(find . -name '*.git' | sort)
+    dotgits=$(find . -name '.git' | sort)
     for dotgit in $dotgits; do
         repository=${dotgit%/*}
-        echo $repository
-        [[ $repository == $start ]] && pull=yes
-        if [[ $pull == yes ]]; then
+        # echo $repository
+        [[ $repository == $start ]] && pull=all
+        if [[ $pull == all ]]; then
             echo "pulling ${tpf3b}$repository${tpfn}"
             cd $repository
             git pull
@@ -160,13 +177,23 @@ if [ $host = 'sbMb' ]; then
                 for cc in $sy/AE $sy/O; do
                     [ -s $cc.pdf ] && mv $cc.pdf $cc-caps.pdf
                 done
-            elif [[ $repository =~ rwxrob-dotfiles ]]; then
-                true
             fi
             cd $GHrCl
         fi
-        # [[ $pull == yes ]] && break  # when you want only one repository
+        # [[ $pull == all ]] && break  # when you want only one repository
     done
+
+    echo "Broken symlinks:"
+    find . -xtype l
+    find . -xtype l -delete
+    echo "- removed"
+
+    # deref () { echo $1; mv $1 $1-c; cp -Lr $1-c $1; sudo rm -fr $1-c; }
+    # read -p "going to dereference some symlinks (for Dropbox)"
+    # for dotgit in $dotgits; do
+        # repository=${dotgit%/*}
+        # if [[ $repository =~ none ]]; then deref $repository fi
+    # done
 
     # sync all to  $GHrUse
     cd $GHrUse; pwd
@@ -176,19 +203,6 @@ if [ $host = 'sbMb' ]; then
     echo "${tpf3b}2nd rsync to highlight any errors${tpfn}"
     rsync -iLrtv --delete $GHrCl/ $GHrUse
     echo ${tpfn}
-
-    exit
-    # make repo-specific adjustments
-    read -p "going to fix some repositories for Dropbox"
-    mr () { echo "fixing ${tpf3b}$1${tpfn}"; mv $1 $1-c; }
-    cpLrm () { cp -Lr $1-c $1; sudo rm -fr $1-c; }
-    for dotgit in $dotgits; do
-        repository=${dotgit%/*}
-        if [[ $repository =~ nonexistant ]]; then
-            mr $repository
-            cpLrm $repository
-        fi  # this functionality seems to be replaced by rsync's  -L
-    done
 
 else
     echo "not configured for ${tpf5}$host${tpfn}"

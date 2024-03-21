@@ -1,6 +1,6 @@
 ;; vim: se ft=lisp:
 
-;; $misc/Emacs/init.el
+;; $misc/CP/Emacs/init.el
 ;; ------------------------
 ;; linux:
 ;;  handled in  $bSc/repeatable/Emacs.sh

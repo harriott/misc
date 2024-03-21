@@ -1,18 +1,52 @@
 vim: nospell:
 
-    $misc/CrossPlatform/QR; m4ps 0 1
+    $misc/CP/QR; m4ps 0 1
 
     curl ifconfig.co/city
     curl ifconfig.co/country
     ssh-keygen -lv -f ssh_host_rsa_key.pub  # shows fingerprint & ASCII art
 
-- GitHub CLI: `gh`
 - GPS Coordinates <https://www.gps-coordinates.net>
 - Webmasters
+
+# aria2
+    aria2c -h
+
+## input file
+    aria2c -i zips
+
+if aborted, `for f in *; do sed -i "/$f/d" zips; done`
 
 # browsing
     $CrPl/networking/browsers/browsers.txt
     carbonyl http://harriott.github.io
+
+`KeePassXC` "Getting Started Guide"
+
+## Chromium-based
+    chrome://apps/
+    chrome://plugins/
+
+- `chrome://system > extensions > Expand` a list of Extensions
+- `ctrl+h` (= `chrome://history`)
+- `ctrl+shift+o` (= `Bookmarks`) `> Organise > Export`
+- `ctrl+u` view page source in new tab
+
+## Firefox
+    about:config > caret
+    about:plugins
+    about:preferences#general
+    about:preferences#sync
+    ctrl+p > Destination > Save to PDF > Save
+
+- `alt+e` (= `Edit`) `> n` (= `Settings`) `> Privacy & Security > Cookies and Site Data > Manage Data...`
+- `ctrl+shft+b` (= `toggle Bookmarks Toolbar`)
+- `ctrl+shft+o` (= `Library`)
+- `f12` (= `Web Developer Tools`)
+
+## Vivaldi
+- `alt+p` (= `Settings`) `> Search > [ Google up to top and Set as Default , DuckDuckGo next, Wikipedia third ]`
+- `ctrl+b` (= `Manage Bookmarks`)
 
 # email
 trashinbox
@@ -23,10 +57,16 @@ trashinbox
 `$DJH/TP-default-release/compatibility.ini` for LastVersion
 
 ### internal commands
-    alt+e > e (= Settings) > Config Editor... (= Advanced Preferences)
-    ctrl+Shft+B (= Address Book)
     Menu > File > Compact Folders
     right-click on folder > Properties > Repair Folder
+
+- `alt+e > e` (= `Settings`) `> Config Editor...` (= `Advanced Preferences`)
+- `ctrl+shft+b` (= `Address Book`)
+
+#### Affichage
+- `alt+a` (= `Affichage`) `> o` (= `Corps de message en`)
+    - `h` (= `HTML original`)
+    - `x` (= `Texte seul`)
 
 #### keyboard shortcuts
 - `alt+1` = home tab
@@ -77,12 +117,13 @@ mozillamessaging
     alt+t > Manually sort folders
 
 #### View
-    alt+v > s (= Sort by) > h (= Unthreaded)
+- `alt+v > l` (= `Layout`) `> f` (= `Folder Pane`) to toggle it
+- `alt+v > s` (= `Sort by`) `> h` (= `Unthreaded`)
 
 ##### body
-    b (= Message Body As) >
-      h (= Original HTML)
-      p (= Plain Text)  - can then export & Delete inline images
+- `b` (= `Message Body As`)
+    - `h` (= `Original HTML`)
+    - `p` (= `Plain Text`)  - can then export & Delete inline images
 
 #### tbkeys-lite Main key bindings
     j: cmd:cmd_nextMsg
@@ -110,10 +151,12 @@ mozillamessaging
     Joseph HARRIOTT <jharr@ftml.net>, Joseph HARRIOTT <trohib@gmail.com>
 
 # GitHub
+    $JHm
     gh config list
     git diff upstream/master...HEAD
 
-`~/.ssh/known_hosts`: `AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa`
+- CLI: `gh`
+- `~/.ssh/known_hosts`: `AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa`
 
 # radio-active
     radio --last  # run playing last station
