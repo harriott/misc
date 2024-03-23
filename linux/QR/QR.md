@@ -169,7 +169,7 @@ date(1)
     awk -i inplace -F, '{print $3,$2,$1}' OFS='┊' toReorder.csv
     awk '{ print ($1 % 2 == 0) ? "even" : "odd" }' numbers.txt
     v=variable; awk -v var="$v" 'BEGIN {print var}'
-    z $cIThul/gawk.pdf
+    za $cIThul/gawk.pdf
 
 GNU Awk
 
@@ -299,8 +299,9 @@ find(1)
     du -ah . | grep -v "/$" | sort -rh | head -44  # recursive list of largest 44 files
     du -h --max-depth=0 <directory>
     du -h --max-depth=1  # for a quick list of folder sizes
-    du -sh  # size of current directory
-    du -sh <glob>
+    du -hs  # size of current directory
+    du -hs <glob>
+    du -s **/.git
 
 du(1)
 
@@ -327,6 +328,7 @@ du(1)
 tree(1)
 
 ## ls
+    dircolors --print-ls-colors
     ls -l
 
 - `-d` (= `--directory`)

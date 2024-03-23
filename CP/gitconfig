@@ -1,11 +1,15 @@
-# vim: ft=gitconfig
+; vim: ft=gitconfig
 
-# $misc/CP/gitconfig
-# this should be sourced by  ~/.gitconfig  ( $machBld/jo/gitconfig )
+; $misc/CP/gitconfig
+; this should be sourced by  ~/.gitconfig  ( $machBld/jo/gitconfig )
 
 [alias]
 	hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
     lg = log --graph --pretty=format:'%C(red bold)%h%Creset -%C(yellow bold)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative
 [push]
 	default = simple
+
+; uncomment if large clones are failing
+; [core]
+	; compression = 0
 

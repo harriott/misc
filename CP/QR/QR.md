@@ -7,7 +7,6 @@ vim: nospell:
 
 - regular expressions
 - ripgrep in JH: `$DJH/search/searches.md`
-
 - syntax of this file is ensured in `$vimfiles/filetype.vim`
 - Software Engineering Stack Exchange
 
@@ -480,11 +479,9 @@ convert mp4's first to MPEG-2 transport streams (`ffmhb -i 1.mp4 -c copy 1.ts`) 
 - `3`  90° clockwise and vertical flip
 
 ## Git
-    gh repo clone
     git -P <command>  # --no-pager
     git branch -a  # lists local & remote branches
     git branch -m <new_name_of_branch>
-    git clone https://github.com/... [target_directory] --depth=n  # clones only to commit depth n
     git grep <caseSensitiveText>
     git init -b gh  # --initial-branch=<branch_name>
     git push gh +master  # force push to remote
@@ -516,15 +513,15 @@ convert mp4's first to MPEG-2 transport streams (`ffmhb -i 1.mp4 -c copy 1.ts`) 
 in `$CrPl/networking/browsers`, `git grep activeInstall $(git rev-list --all) -- 'browsers.txt'`
 
 ### configurations
-    find . -wholename '*.git'
-    find . -wholename '*.git/config' > gitconfig-all.txt
-    find . -wholename '*.gitignore' > gitignore-all.txt
-    find . -wholename '*.git/config' | wc -l
-    gci -r .git | select fullname
-    gci -r .gitignore | select fullname
+    PS> gci -r .git | select fullname
+    PS> gci -r .gitignore | select fullname
     git remote -v
     git remote rename origin gh
-    grep -rl --include "config" harriott . > gitconfig-harriott.txt
+    $ find . -wholename '*.git'
+    $ find . -wholename '*.git/config' > gitconfig-all.txt
+    $ find . -wholename '*.gitignore' > gitignore-all.txt
+    $ find . -wholename '*.git/config' | wc -l
+    $ grep -rl --include "config" harriott . > gitconfig-harriott.txt
 
 #### lf
 - `autocrlf = input`  warning: CRLF will be replaced by LF
@@ -559,6 +556,12 @@ in `$CrPl/networking/browsers`, `git grep activeInstall $(git rev-list --all) --
 #### damaged
     del .git\index
     git reset
+
+### remotes
+    gh repo clone
+    git clone https://github.com/... [target_directory] --depth=n  # clones only to commit depth n
+    git pull --unshallow
+    git remote add upstream https://github.com/...
 
 ### tig
 Tig Manual
@@ -787,6 +790,12 @@ YAML front matter
 
 # file manage
 sharkdp/bat
+
+## LF file manager
+- `c` (`clear` paths in buffer)
+- `c-l` (`redraw`)
+- `d` (`cut`)
+- `p` (`paste`)
 
 ## The Platinum Searcher
     pt
