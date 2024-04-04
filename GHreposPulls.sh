@@ -140,6 +140,7 @@ gcfbn='git clone --filter=blob:none'
 # $gcfbn https://github.com/amrali-eg/EncodingChecker $GHrCl/amrali-eg-EncodingChecker
 # $gcfbn https://github.com/jdhitsolutions/PSScriptTools $GHrCl/MSWin/jdhitsolutions-PSScriptTools
 # $gcfbn https://github.com/Windos/BurntToast $GHrCl/MSWin/Windos-BurntToast
+# $gcfbn https://github.com/bdukes/PowerShellModules $GHrCl/MSWin/dukes-PowerShellModules
 
 #=> pulls to  $GHrCl  &  syncs to  $GHrUse
 if [ $host = 'sbMb' ]; then
@@ -178,15 +179,15 @@ if [ $host = 'sbMb' ]; then
         # start='./linux/leo-arch-clifm'
         # start='./unix/linux/BrodieRobertson-dotfiles'
         # start='./unix/rwxrob-dotfiles'
-    # pull=all  # uncomment to pull all
+    pull=GO  # uncomment to pull all
 
     cd $GHrCl; pwd
     dotgits=$(find . -name '.git' | sort)
     for dotgit in $dotgits; do
         repository=${dotgit%/*}
         # echo $repository
-        [[ $repository == $start ]] && pull=all
-        if [[ $pull == all ]]; then
+        [[ $repository == $start ]] && pull=GO
+        if [[ $pull == GO ]]; then
             echo "pulling ${tpf3b}$repository${tpfn}"
             cd $repository
             git pull
@@ -208,7 +209,7 @@ if [ $host = 'sbMb' ]; then
             fi
             cd $GHrCl
         fi
-        # [[ $pull == all ]] && break  # when you want only one repository
+        # [[ $pull == GO ]] && break  # when you want only one repository
     done
 
     echo "Broken symlinks:"
@@ -234,6 +235,7 @@ if [ $host = 'sbMb' ]; then
     rsync -iLrtv --delete $GHrCl/ $GHrUse
     echo ${tpfn}
 
+    cp $GHrUse/CP/wfxr-code-minimap/completions/powershell/_code-minimap.ps1 $ITscc/forMSWin/code-minimap/_code-minimap.ps1
 else
     echo "not configured for ${tpf5}$host${tpfn}"
 fi

@@ -409,9 +409,14 @@
 (if (display-graphic-p) (when (string= (system-name) "sbMb")
         ; (progn (setq default-frame-alist '( (height . 59) (width . 106)))))) ; for default font
         (progn (setq default-frame-alist '( (height . 72) (width . 106)))))) ; for Ubuntu 100
-(if (display-graphic-p) (when (string= (system-name) "T430I73520M")
-        (progn (setq default-frame-alist '( (height . 48) (width . 106)))))
-    ) ; further increasing the height can cause the frame to shoot off below the screen
+
+(if (display-graphic-p) (when (string= (system-name) "HPEB840G36")
+        (progn (setq default-frame-alist '( (height . 48) (width . 106))))))
+; further increasing the height can cause the frame to shoot off below the screen
+
+(if (display-graphic-p) (when (string= (system-name) "HPEB840G37")
+        (progn (setq default-frame-alist '( (height . 65) (width . 120))))))
+; further increasing the height can cause the frame to shoot off below the screen
 
 ; ;;; layout - Modus themes
 ; (use-package emacs

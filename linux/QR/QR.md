@@ -7,10 +7,6 @@ commands here are generic, see also `$OSAB/QR.md`
     dotnet --list-runtimes
     dotnet --list-sdks
     info info
-    rhash -a --bsd <somefile>
-    rhash --list-hashes => list names of all supported hashes
-    rhash --sha256 <file>
-    rhash --sha256 *  # to see if files are identical
     wcsf=$(wc -l <samplefile>); echo $wcsf
 
 - Make (software)
@@ -248,14 +244,19 @@ GNU Awk
 ## compressed
     tar -xvf tar.gz.tar
 
-### 7-Zip
-    for z in *.zip; do 7z x $z; done
-    7z x <pw'd_zip>
+`7-Zip`: `for z in *.zip; do 7z x $z; done`
 
 ## cp
     cp -r <sourceDir> .
 
 `-L`, `--dereference`
+
+## digests
+    md5sum -c <md5file>
+    rhash -a --bsd <somefile>
+    rhash --list-hashes => list names of all supported hashes
+    rhash --sha256 <file>
+    rhash --sha256 *  # to see if files are identical
 
 ## Dolphin
     F4        -> Konsole  attached below
@@ -681,6 +682,12 @@ requires a `DHCP` client to get an IP address
 #### exit
     exit
     ~.
+## transmission-cli
+    http://localhost:9091/transmission/web/
+    transmission-daemon --dump-settings
+    transmission-remote -a some.iso.torrent
+    transmission-remote -l
+
 # npm
     npm ls -g
     npm prefix -g  # =  npm config get prefix

@@ -3,10 +3,11 @@ vim: nospell:
     $misc/CP/QR; m4ps 0 1
 
     $JHt/IT/CP/fonts-SE595756-fontcharlist
+    fzf --help
+    fzf --version
     pdf-crop-margins pdf.pdf  # silently makes  pdf-cropped.pdf
 
 - regular expressions
-- ripgrep in JH: `$DJH/search/searches.md`
 - syntax of this file is ensured in `$vimfiles/filetype.vim`
 - Software Engineering Stack Exchange
 
@@ -237,7 +238,7 @@ after filename changes in `$tex`
 
 ## porting
     \user\config
-    C:\Users\jnbh\AppData\Roaming\LibreOffice\4\user\registrymodifications.xcu
+    ~\AppData\Roaming\LibreOffice\4\user\registrymodifications.xcu
 
 # Emacs - commands
 - `C-*`  calc-dispatch
@@ -444,10 +445,6 @@ Spacemacs documentation
 - `*.oma` = Sony OpenMG
 - R: `q("no")`
 
-## Stack Exchange Network
-- Stack Overflow
-- What topics can I ask about here?
-
 ## Bluefish
     alt+e (= Edit) > s (= Preferences...)
     bluefish -v
@@ -502,6 +499,7 @@ convert mp4's first to MPEG-2 transport streams (`ffmhb -i 1.mp4 -c copy 1.ts`) 
     git log --follow *spacemacs*
     git log --follow '*cmusq.vim'
     git log --follow *Colette*
+    git log -1  # credentials of last commit
     git log -3 --pretty="format:%C(auto)%h %as" -- */syntax/sh.vim  # last 3 dates of change
     git log -S<change_string>  # reports commits that added or removed it
     git reset HEAD~1  # throw away last commit, keeping changes for a better one
@@ -533,7 +531,7 @@ in `$CrPl/networking/browsers`, `git grep activeInstall $(git rev-list --all) --
     grep -rl --include "config" symlinks . | wc -l
 
 #### gitconfig
-    $machine\troin\gitconfig
+    $machBld\gitconfig
     git config -l
     git hist
     git lg
@@ -761,6 +759,10 @@ print(sys.argv[0])  # the full pathname of the program
 
 `irb` is quit with `exit` or `ctrl+d`
 
+## Stack Exchange Network
+- Stack Overflow
+- What topics can I ask about here?
+
 ## webish
     js-beautify -f obfuscated.html -o beautiful.html
 
@@ -789,13 +791,45 @@ print(sys.argv[0])  # the full pathname of the program
 YAML front matter
 
 # file manage
-sharkdp/bat
+- `7-Zip`: `7z x <pw'd_zip>`
+- sharkdp/bat
 
-## LF file manager
+## fd
+- recursive by default
+- sharkdp/fd
+
+### man
+- `-d1` = depth 1 (current dir)
+- `-E` (= `--exclude`) `<glob>`
+- `-H` (`--hidden`)
+- `-I` = `--no-ignore` = don't respect `.(fd|git)ignore`
+- `-L` follow links into symlinked directories
+- `-td` type dir
+- `-tf` type file
+- `-u` = `--unrestricted` = `--hidden --no-ignore`
+
+### recents
+    fd --changed-within 3h
+    fd -tf --changed-within 2d
+
+### symlinks
+    fd --max-depth 1 -Hl -tl
+    fd -H -tl  # only found targets, broken ones with red background
+    fd -Hl -tl  # show supposed link source
+    fd -tl -HL -X rm  # removes dead links
+
+## lf file manager
 - `c` (`clear` paths in buffer)
 - `c-l` (`redraw`)
+- `c-r` (`reload`)
 - `d` (`cut`)
+- `i` open in pager
 - `p` (`paste`)
+- `r` (`rename`)
+- `y` (`copy`)
+- `zh` (`set hidden!`) toggles
+
+by gokcehan
 
 ## The Platinum Searcher
     pt
@@ -803,15 +837,18 @@ sharkdp/bat
     pt Solange .
 
 ## Vifm help
-VIFM(1)
+- can't quit to current directory
+- VIFM(1)
 
 ### commands
 - `cw`  rename
 - `p`  copy here
+- `P`  move here
 - `tab`  switch pane
 - `yy`  yank file
 - `ZQ`  `:quit!`
 - `ZZ`  `:quit`
+- `<space>`/`<tab>` switches pane
 
 # gpg
     <key-id> can be the short key id = the last 8 characters
@@ -878,6 +915,9 @@ The GNU Privacy Handbook
 ## for paper
 `HP ENVY 5532 > Wireless Settings > Settings > Advanced > IP Settings > OK > Manual` allows tweaking of printer's address
 
+- place DL envelopes with the open side to the left
+- printed pages come out head first (= upside down, printed face up)
+
 ### Epson EcoTank ET-5170 - feed tray
 - downside is printed
 - landscape top is to right
@@ -942,7 +982,11 @@ paintbrush: shift previews a new straight line from last point to current mouse 
     for i in $(ls); do convert -resize 25% $i r$i; done
     for i in $(ls); do convert -resize 50% $i r$i; done
 
-#### Powershell tiff -> jpg recursively convert
+#### Powershell - biz card backgrounds
+    magick -size 924x568 plasma: plasma1.jpg
+    magick -size 924x568 xc:'rgba(0, 0, 0)' black.jpg
+
+#### Powershell - tiff -> jpg recursively convert
     gci -r *.tiff | %{ magick $_ $_'.jpg' }
     gci -r *.tiff | rm
 
@@ -957,6 +1001,29 @@ paintbrush: shift previews a new straight line from last point to current mouse 
 - `f` = `Brush > Increase Brush Size`
 - `z` = undo
 - `Save` pads out right & bottom images that aren't up to 1024x512...
+
+# ripgrep
+- in JH: `$DJH/search/searches.md`
+- outer whitespaces get ignored
+- tidied output in `$vfp\Win10\pulls.ps1` (`-N` = `--no-line-number`)
+
+## filetypes
+    rg --type-list > $ITscr/CP/ripgrep.rgtl
+
+- `.dw` not known
+- no group for gitconfigs
+
+## searches
+    rg '<someText>|<otherText>'  # searches recursively in files
+    rg '\.emacs\.d'
+    rg --no-ignore 'sometext'  # allows searching into gitignored places
+    rg -i <case-insensitive>
+    rg -thtml -tcss <webish>
+    rg -tmd '[\p{Devanagari}]'  # finds Devanagari characters
+    rg -tmd '\$Sig'
+    rg -tmd '\{TNW}'
+    rg -uu <someText>  # ignores ignore files, and searches in hidden stuff
+    rg <someText> **/*.ext
 
 # Stack Exchange Network
 - `@petersmith` = Peter Smith

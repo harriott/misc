@@ -37,3 +37,9 @@ dotgits=$(find . -name '.git' | sort)
 # followed by a helpful blank line
 # they're fixed by  git checkout
 
+# These repositories:
+#  $vfp/packs-cp/opt/vim-markdown
+#  $vfp/packs-cp/opt/vim-tagbar
+#  $vfp/packs-unix/opt/vim-hexokinase
+# fail due to tricky url's
+

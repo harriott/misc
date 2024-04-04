@@ -26,6 +26,7 @@ if aborted, `for f in *; do sed -i "/$f/d" zips; done`
 ## Chromium-based
     chrome://apps/
     chrome://plugins/
+    edge://favorites/
 
 - `chrome://system > extensions > Expand` a list of Extensions
 - `ctrl+h` (= `chrome://history`)
