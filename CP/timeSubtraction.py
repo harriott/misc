@@ -3,6 +3,7 @@
 
 # python $misc/CP/timeSubtraction.py 0:11:26 0:6:36
 # python $misc/CP/timeSubtraction.py 0:07:11 0:0:00
+# python $misc/CP/timeSubtraction.py 0:19:15 0:8:20
 
 import datetime
 import sys

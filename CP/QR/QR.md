@@ -606,6 +606,10 @@ Tig Manual
 - <https://www.markdownguide.org/basic-syntax/>
 - <https://www.markdownguide.org/extended-syntax/>
 
+## npm
+    npm prefix -g  # =  npm config get prefix
+    npm -v  # --version
+
 ## Pandoc
     $core/IT_stack/CP/Pandoc/monofont.md
     $core/IT_stack/CP/Pandoc/weird.gfm
@@ -618,6 +622,7 @@ Tig Manual
     \end{document}
 
 ## Perl
+    cpanm --help
     echo "my_string" | perl -pe 's/my/your/g'
     echo 'hello  there' | perl -pe 's/ +/ /'
     echo hello | perl -nle 'print uc'
@@ -688,7 +693,7 @@ replaces `print "$var\n";`
 ## Python
     o $WORKON_HOME
     pew ls
-    pip --version
+    pip -V (--version)
     pip list --outdated
     yaml2toml <yaml> <toml>
 
@@ -718,8 +723,9 @@ print(sys.argv[0])  # the full pathname of the program
 ### versions
     ~\.pyenv
     pyenv rehash
-    python  # reports "64 bit"
-    python --version
+    py  # reports "64 bit"
+    py -h  # --help
+    py -V  # --version
 
 ### virtualenv
     cdvirtualenv  # goto the package directory
@@ -1076,6 +1082,7 @@ messes up if terminal is resized
     echo $MYVIMRC
     gci -r tags -force | where { ! $_.PSIsContainer } | select -expandProperty fullname > tags-Win10.txt
     [g]vim .  # will open netrw on current directory
+    nvim -v  # --version
     vim -u NONE  # skip all initialisations
 
 `^M` carriage return

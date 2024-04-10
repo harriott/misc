@@ -1,3 +1,0 @@
-```tex
-\usepackage[dvipsnames]{xcolor}
-```

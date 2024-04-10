@@ -690,10 +690,8 @@ requires a `DHCP` client to get an IP address
 
 # npm
     npm ls -g
-    npm prefix -g  # =  npm config get prefix
     npm un[install] -g [<package>]
     npm up[date] -g [<package>]
-    npm -v  # --version
     which npm
 
 ## cspell
@@ -1105,7 +1103,7 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     whoami
 
 # term
-    sudo fgconsole
+    sudo fgconsole  # reports tty number
     tput colors
 
 - `Ctrl+q` resume output to screen
