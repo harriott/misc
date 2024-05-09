@@ -2,13 +2,14 @@ vim: nospell:
 
     $misc/CP/QR; m4ps 0 1
 
+syntax of this file is ensured in `$vimfiles/filetype.vim`
+
     $JHt/IT/CP/fonts-SE595756-fontcharlist
-    fzf --help
+    fzf -h
     fzf --version
     pdf-crop-margins pdf.pdf  # silently makes  pdf-cropped.pdf
 
 - regular expressions
-- syntax of this file is ensured in `$vimfiles/filetype.vim`
 - Software Engineering Stack Exchange
 
 # audio
@@ -21,53 +22,56 @@ vim: nospell:
     espeak -v fr "Votre texte à lire..."
     espeak -v fr+f2 "Bonjour tout le monde"
 
-# AV - OBS Studio Settings
+# AV
+    $ITscr/HW/audio/BTHeadphones/JBLTune720BT
+
+## OBS Studio Settings
     Output > Recording > Encoder > x264 low CPU usage
 
 `Alt+f` (= `File`) > `s` (= `Settings`) > `Output` > `Recording` > `Recording Path`
 
-# AV - OpenShot
+## OpenShot
 crossfades are created in overlaps
 
-## Export
+### Export
 - `ctrl+e` = `Export`
 - `ctrl+p` = `Choose Profile`
 - `ctrl+shift+s` = `Save Project As`
 
-### Quality
+#### Quality
 - `Low` is small and blurry
 - `Med` is comes out around 10x bigger
 - `High` is 4x bigger again, but good
 
-## Nikon CoolPix P7700 VGA 640x480
+### Nikon CoolPix P7700 VGA 640x480
     Target > AVI (mpeg4)
     Video Profile > VGA Widescreen NTSC (854x480)
 
-## Preferences
+### Preferences
     ctrl+shift+p (= Edit > Preferences)
 
-### Default Profile
+#### Default Profile
 - defaults to HD 720p 30 fps
 - need to `Restart` `OpenShot` when changed
 
-## Profiles
+### Profiles
     $core/IT_stack/OpenShot
 
 - `*assets` folders can be deleted
 
-### Choose Profile
+#### Choose Profile
     ctrl+p
 
 - `HD 720p 30 fps (1280x720)`
 - `HD 1080p 30 fps (1920x1080)`
 - `VGA NTSC (640x480)` 29.97fps
 
-## projects
+### projects
     pkill openshot  # when it's struggling to find project files...
 
 fix `path` in the `*.osp`
 
-# AV - VLC Player
+## VLC Player
 - `-`  slow down by .1x
 - `+`  speed up by .1x for each press
 - `=`  returns speed to normal
@@ -75,7 +79,7 @@ fix `path` in the `*.osp`
 - `b`  to rotate through Audio tracks
 - `v`  to rotate through Subtitles
 
-## seeks
+### seeks
 - 3s: `shift+left/right`
 - 10s: `alt+left/right`
 - 1m: `ctrl+left/right`
@@ -420,7 +424,7 @@ no built in documentation for `straight.el`
 - `C-x o`  other-window
 
 # Emacs - Evil
-- `$GHrUse/emacs/emacs-evil-evil/evil-maps.el`
+- `$DCGRs/emacs/emacs-evil-evil/evil-maps.el`
 - `C-z`  toggles it
 
 # Emacs reference sheets
@@ -439,6 +443,7 @@ no built in documentation for `straight.el`
 Spacemacs documentation
 
 # encoding
+    $ITstack/CrossPlatform/dpl/hello.lua
     code-minimap <textyfile>
     yj -ty <file.toml >file.yml
 
@@ -477,6 +482,7 @@ convert mp4's first to MPEG-2 transport streams (`ffmhb -i 1.mp4 -c copy 1.ts`) 
 
 ## Git
     git -P <command>  # --no-pager
+    git branch --show-current
     git branch -a  # lists local & remote branches
     git branch -m <new_name_of_branch>
     git grep <caseSensitiveText>
@@ -513,8 +519,6 @@ in `$CrPl/networking/browsers`, `git grep activeInstall $(git rev-list --all) --
 ### configurations
     PS> gci -r .git | select fullname
     PS> gci -r .gitignore | select fullname
-    git remote -v
-    git remote rename origin gh
     $ find . -wholename '*.git'
     $ find . -wholename '*.git/config' > gitconfig-all.txt
     $ find . -wholename '*.gitignore' > gitignore-all.txt
@@ -539,7 +543,7 @@ in `$CrPl/networking/browsers`, `git grep activeInstall $(git rev-list --all) --
 ##### linux
     r ~/.ssh
 
-`$machBld/jo/gitconfig` inludes `$misc/CrossPlatform/gitconfig`
+`$machBld/jo/gitconfig` inludes `$misc/CP/gitconfig`
 
 ### GitHub CLI
     gh repo list  # handy list of your repositories
@@ -554,12 +558,16 @@ in `$CrPl/networking/browsers`, `git grep activeInstall $(git rev-list --all) --
 #### damaged
     del .git\index
     git reset
+    rm .git/index.lock
 
 ### remotes
     gh repo clone
     git clone https://github.com/... [target_directory] --depth=n  # clones only to commit depth n
     git pull --unshallow
+    git remote -v
     git remote add upstream https://github.com/...
+    git remote rename origin gh
+    git remote show  # reports name set in  .git/config
 
 ### tig
 Tig Manual
@@ -595,6 +603,7 @@ Tig Manual
     q[uit]
 
 ## Java
+    java -?
     java -version
     PS> where.exe java
 
@@ -829,6 +838,7 @@ YAML front matter
 - `c-l` (`redraw`)
 - `c-r` (`reload`)
 - `d` (`cut`)
+- `gh` (`cd ~`)
 - `i` open in pager
 - `p` (`paste`)
 - `r` (`rename`)
@@ -1014,7 +1024,7 @@ paintbrush: shift previews a new straight line from last point to current mouse 
 - tidied output in `$vfp\Win10\pulls.ps1` (`-N` = `--no-line-number`)
 
 ## filetypes
-    rg --type-list > $ITscr/CP/ripgrep.rgtl
+    $vimfiles/vim/syntax/rgtl.vim
 
 - `.dw` not known
 - no group for gitconfigs
@@ -1053,6 +1063,13 @@ paintbrush: shift previews a new straight line from last point to current mouse 
 
 # terminal - less
 greenwoodsoftware
+
+## commands
+    /pattern
+    ?pattern
+
+- `h` help
+- `n`/`N` next/previous
 
 ## PS>
     less --help

@@ -26,6 +26,7 @@ if aborted, `for f in *; do sed -i "/$f/d" zips; done`
 ## Chromium-based
     chrome://apps/
     chrome://plugins/
+    chrome://settings/cookies > See all site data and permissions
     edge://favorites/
 
 - `chrome://system > extensions > Expand` a list of Extensions
@@ -113,7 +114,7 @@ trashinbox
 mozillamessaging
 
 #### Tools
-    alt+t > a (= Add-ons and Themes)
+    alt+t > alt+a (= Add-ons and Themes)
     alt+t > e (= Edit) > a a (= Account Settings)
     alt+t > Manually sort folders
 

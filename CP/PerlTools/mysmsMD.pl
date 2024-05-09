@@ -1,10 +1,11 @@
 #!/usr/bin/perl
 
 # ----------------------------------------------------------------------
-# PS> perl $onGH\misc\PerlTools\mysmsMD.pl <aMySMSscreenscrapefile>
+# perl $onGH/misc/CP/PerlTools/mysmsMD.pl $JHt/phonish/mysmsScrape0.md
+# PS> perl $onGH\misc\CP\PerlTools\mysmsMD.pl $JHt\phonish\mysmsScrape0.md
 # when you want to convert screen-scrape from mysms into markdown format
 # ----------------------------------------------------------------------
-#  used in  $vimfiles/ftplugin/md.vim
+#  used in  $vimfiles/vim/ftplugin/md.vim
 
 use strict;  use warnings;
 use Tie::File;  # on MSWin requires  fileformat=dos

@@ -6,6 +6,11 @@
 [alias]
 	hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
     lg = log --graph --pretty=format:'%C(red bold)%h%Creset -%C(yellow bold)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative
+
+[init]
+	defaultBranch = master
+; - gets rid of the annoying query
+
 [push]
 	default = simple
 

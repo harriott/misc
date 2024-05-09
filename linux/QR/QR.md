@@ -9,8 +9,7 @@ commands here are generic, see also `$OSAB/QR.md`
     info info
     wcsf=$(wc -l <samplefile>); echo $wcsf
 
-- Make (software)
-- Pipe Viewer
+Pipe Viewer
 
 # audio
     pavucontrol
@@ -132,11 +131,20 @@ commands here are generic, see also `$OSAB/QR.md`
 
 date(1)
 
-# TeX Live
+# encoding
+    delta $OSAB/mb-i34G1TU02/jo/conkyrc $OSAB/mb-sbMb/jo/conkyrc
+    git diff $OSAB/mb-i34G1TU02/jo/conkyrc $OSAB/mb-sbMb/jo/conkyrc
+
+Make (software)
+
+# TeX
+    pdfjam --help
+
+## TeX Live
     sudo tlmgr -gui
     sudo tlmgr update -all -dry-run
 
-## tests
+### tests
     pdflatex sample2e.tex
     tex --version
 
@@ -156,6 +164,7 @@ date(1)
 
 # file contents
     cat
+    diff $OSAB/mb-i34G1TU02/jo/conkyrc $OSAB/mb-sbMb/jo/conkyrc
     tac
     shuf
     sort -ro <file> <file>  # reverse sort in place
@@ -184,6 +193,7 @@ GNU Awk
     grep -P '[\p{Devanagari}]' **/*.md  # finds Devanagari characters
 
 - `-A num` (`--after-context=num`)
+- `-i` ('--ignore-case)
 - `-F` (interpret patterns as `--fixed-strings`, not regex)
 - GNU Grep Manual
 
@@ -586,30 +596,6 @@ can play omv's
     ip link
     networkctl list
 
-## email
-    thunderbird -addressbook
-
-### clm - neomutt
-    neomutt -v
-    sidebar_format
-
-### clm - notmuch
-    notmuch config get database.path
-
-#### search
-    nmse ...
-    notmuch search '"the Pennines"' # finds exactly that
-    notmuch search tag:attachment | wc -l
-    notmuch search tag:cz | wc -l
-    notmuch search tag:fm | wc -l
-    notmuch search tag:gmail | wc -l
-    notmuch search tag:trohib | wc -l
-    notmuch search tag:zou | wc -l
-    notmuch search tag:zou and tag:inbox | wc -l
-
-- NOTMUCH-SEARCH-TERMS(7)
-- seems to not find emails that're included in subsequent ones
-
 ## hostname
     hostname
     hostnamectl
@@ -682,12 +668,6 @@ requires a `DHCP` client to get an IP address
 #### exit
     exit
     ~.
-## transmission-cli
-    http://localhost:9091/transmission/web/
-    transmission-daemon --dump-settings
-    transmission-remote -a some.iso.torrent
-    transmission-remote -l
-
 # npm
     npm ls -g
     npm un[install] -g [<package>]
@@ -846,9 +826,11 @@ command substitution `$(...)`
     [ -z "$a" ] && echo zero_string; [ -n "$a" ] && echo string
     [ true ] && echo y
     [ "y" ] && echo y
+    [[ "hello" =~ "ll" ]] && o ll
     c=1; [[ $c == 1 ]] && echo "true"
     if <condition1>; then <action1>; elif ... else ... fi
     t="y"; if [ $t ]; then echo $t; fi
+    v=value; [[ ! $v =~ val ]] && echo val
 
 ### file manage
     echo */  # lists directories
@@ -897,7 +879,7 @@ jobs(1p)
     for i in bee fly wasp; do echo $i; done
 
 ### managing commands
-    echo $?  # exit code of last command, 0 if command succeeded
+    o $?  # exit code of last command, 0 if command succeeded
     eval $Command
     vi mode: v  => edit a command in $EDITOR
 
@@ -916,6 +898,10 @@ jobs(1p)
     2 = stderr file descriptor
     >& = redirect to a file descriptor
     1>&2 = 2>&1
+
+### online code check
+- <https://explainshell.com/>
+- ShellCheck <https://www.shellcheck.net/>
 
 ### $PATH
     echo "${PATH//:/$'\n'}"
@@ -947,7 +933,8 @@ substitute user identity
 
 #### arrays
     array=(element1 element2  element3)
-    echo ${#array[@]}  # length
+    echo ${#array[@]}  # number of elements
+    echo ${array[-1]}  # last element
     firstElement=${array[0]}
     mapfile -t found < <(find .)
     mapfile -t GreekArray < <(printf "Alpha\nBeta\nGamma"); echo ${GreekArray[@]}
@@ -1207,7 +1194,32 @@ tr (Unix)
     file "$(command -v vim)"
 
 # WAN
+    if wget -q --spider google.com; then echo online; fi
     pkill radio; radio -K  # quit & kill instances of  radio-active
+
+## email
+    thunderbird -addressbook
+
+### clm - neomutt
+    neomutt -v
+    sidebar_format
+
+### clm - notmuch
+    notmuch config get database.path
+
+#### search
+    nmse ...
+    notmuch search '"the Pennines"' # finds exactly that
+    notmuch search tag:attachment | wc -l
+    notmuch search tag:cz | wc -l
+    notmuch search tag:fm | wc -l
+    notmuch search tag:gmail | wc -l
+    notmuch search tag:trohib | wc -l
+    notmuch search tag:zou | wc -l
+    notmuch search tag:zou and tag:inbox | wc -l
+
+- NOTMUCH-SEARCH-TERMS(7)
+- seems to not find emails that're included in subsequent ones
 
 ## firewall
     sudo iptables -L
@@ -1238,6 +1250,12 @@ tr (Unix)
 ## rdrview
     i rdrview
     rdrview http://harriott.github.io -M
+
+## transmission-cli
+    http://localhost:9091/transmission/web/
+    transmission-daemon --dump-settings
+    transmission-remote -a some.iso.torrent
+    transmission-remote -l
 
 ## w3m
     w3m http://harriott.github.io  # showing images
