@@ -7,6 +7,11 @@
 # ----------------------------------------------------------------------
 #  used in  $vimfiles/vim/ftplugin/md.vim
 
+# Test timestamp marking:
+#  m='Céline MARKULIC: Merci pour la nouvelle ! 17:53'
+#  m='Me:Ça va ? 7:09 PM'
+#  o $m | perl -pe 's/ (\d*:\d\d [AP]M|\d\d:\d\d)$/ ▲$1/'
+
 use strict;  use warnings;
 use Tie::File;  # on MSWin requires  fileformat=dos
 use Data::Printer;
@@ -19,8 +24,10 @@ tie my @mysms, 'Tie::File', "$ARGV[0]" or die "Can't read file: $!\n";
 
 # get the day headings, and mark those lines
 # ------------------------------------------
-foreach my $weekday ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday") {
-  s/^$weekday,( \w+)( \d+),/▶# $weekday$2$1/ for @mysms }
+foreach my $weekday ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+  { s/^$weekday,( \w+)( \d+),/▶# $weekday$2$1/ for @mysms } # Monday, January 1,
+foreach my $jds ("lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche")
+  { s/^($jds \d+ [,a-zéû]+ \d\d\d\d$)/▶# $1/ for @mysms } # lundi 1 janvier 2024
 
 # mark, and join up carriage returns in messages
 # ----------------------------------------------
@@ -40,8 +47,8 @@ while (@mysms) {
   }
   # mark and remove carriage returns
   $lineCR = "$scrapeLine";
-  until ( $lineCR =~ s/(\d*:\d\d [AP]M$)/▲$1/ ) {
-  # (until we've marked the timestamped last line of a message)
+  until ( $lineCR =~ s/ (\d*:\d\d [AP]M|\d\d:\d\d)$/ ▲$1/ ) {
+  # (until we've marked the timestamped (en/fr) last line of a message)
     $scrapeLine = shift @mysms;
     $lineCR .= "◙$scrapeLine";  # concatenate lines with ◙ marker between
   } # endless if last line isn't dated...
@@ -55,7 +62,7 @@ while (@mysms) {
       $scrapeLine = shift @mysms;
     }
     if ( $mysms[0] =~ /^.*\.3gpp|pdf$/ ) {
-      # a PDF was sent
+      # another attachement was sent
       $MStype = quotemeta("MMS");
       $scrapeLine = shift @mysms;
       $scrapeLine = shift @mysms;

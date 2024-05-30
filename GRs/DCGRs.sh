@@ -34,6 +34,7 @@ gc='git clone --depth 1'
 # $gc https://github.com/mfcc64/mpv-scripts $CITGRs/CP/mpv/mfcc64-mpv-scripts
 # $gc https://github.com/sharkdp/bat $CITGRs/CP/sharkdp-bat
 # $gc https://github.com/catppuccin/latex $CITGRs/CP/catppuccin/latex
+# $gc https://github.com/tjdevries/config_manager $CITGRs/CP/tjdevries-config_manager
 
 #===> Go-Hugo
 # $gc https://github.com/LukeSmithxyz/lugo $CITGRs/CP/Hugo/LukeSmithxyz-lugo
@@ -65,7 +66,9 @@ gc='git clone --depth 1'
 # $gc https://github.com/LunarVim/LunarVim $CITGRs/CP/Nvim/LunarVim-LunarVim
 # $gc https://github.com/kevinfengcs88/nvim $CITGRs/CP/Nvim/kevinfengcs88-nvim
 # $gc https://github.com/neovim/nvim-lspconfig $CITGRs/CP/Nvim/neovim-nvim-lspconfig
+# $gc https://github.com/neovim/neovim $CITGRs/CP/Nvim/neovim-neovim
 # $gc https://github.com/williamboman/mason.nvim $CITGRs/CP/Nvim/williamboman-mason.nvim
+# $gc https://github.com/alextricity25/nvim_weekly_plugin_configs $CITGRs/CP/Nvim/alextricity25-nvim_weekly_plugin_configs
 
 #===> Ruby
 # $gc https://github.com/rouge-ruby/rouge $CITGRs/CP/Ruby/rouge-ruby-rouge
@@ -93,6 +96,8 @@ gc='git clone --depth 1'
 # $gc https://github.com/Konfekt/vim-unicode-homoglyphs $CITGRs/CP/Vim/Konfekt-vim-unicode-homoglyphs
 # $gc https://github.com/vim-utils/vim-troll-stopper $CITGRs/CP/Vim/vim-utils-vim-troll-stopper
 # $gc https://github.com/nblock/vim-dokuwiki $CITGRs/CP/Vim/nblock-vim-dokuwiki
+# $gc https://github.com/junegunn/vim-plug $CITGRs/CP/Vim/junegunn-vim-plug
+# $gc https://github.com/Konfekt/complete-common-words.vim $CITGRs/CP/Vim/Konfekt-complete-common-words.vim
 
 #==> 0 emacs
 # $gc https://git.sr.ht/~bzg/worg $CITGRs/emacs/_bzg-worg
@@ -113,6 +118,7 @@ gc='git clone --depth 1'
 # $gc https://gitlab.com/rwxrob/dotfiles $CITGRs/unix/rwxrob-dotfiles
 # $gc https://github.com/simmel/urxvt-resize-font $CITGRs/unix/simmel-urxvt-resize-font
 # $gc https://github.com/jstkdng/ueberzugpp $CITGRs/unix/jstkdng-ueberzugpp
+# $gc https://github.com/brndnmtthws/conky $CITGRs/unix/brndnmtthws-conky
 
 #===> linux
 # $gc https://github.com/boysetsfrog/vimpc $CITGRs/linux/boysetsfrog-vimpc
@@ -125,7 +131,7 @@ gc='git clone --depth 1'
 # $gc https://github.com/rsnapshot/rsnapshot $CITGRs/linux/rsnapshot-rsnapshot
 # $gc https://github.com/simmel/urxvt-resize-font $CITGRs/linux/tmux-fontSize/simmel-urxvt-resize-font
 # $gc https://github.com/stefano-m/awesome-capslock_widget $CITGRs/linux/wm-awesome/stefano-m-awesome-capslock_widget
-# $gc https://github.com/streetturtle/awesome-wm-widgets $CITGRs/linux/wm-awesome/streetturtle-awesome-wm-widgets
+# $gc https://github.com/streetturtle/awesome-wm-widgets $CITGRs/unix/linux/wm-awesome/streetturtle-awesome-wm-widgets
 # $gc https://github.com/tats/w3m $CITGRs/linux/tats-w3m
 # $gc https://github.com/gsamokovarov/jump $CITGRs/linux/gsamokovarov-jump
 # $gc https://github.com/lukesmithxyz/voidrice $CITGRs/unix/linux/lukesmithxyz-voidrice
@@ -188,8 +194,11 @@ gc='git clone --depth 1'
 # sf='./linux/leo-arch-clifm'
 # sf='./unix/linux/BrodieRobertson-dotfiles'
 # sf='./unix/rwxrob-dotfiles'
+# sf=hugo-module-site
+# sf='no_repository'
+# sf='tjdevries-config_manager'
 # once=yes
-. $misc/GRs/update-depth1.sh
+. $misc/GRs/update-depth1.sh $misc/GRs/update-fixes.sh
 
 #=> 3 symlinks in  $CITGRs
 # because Dropbox doesn't like symlinks...
@@ -215,8 +224,6 @@ rsync -iLrtv --delete $CITGRs/ $DCGRs
 echo "${tpf3b}2nd rsync to highlight any errors${tpfn}"
 rsync -iLrtv --delete $CITGRs/ $DCGRs
 echo ${tpfn}
-
-cp $DCGRs/CP/wfxr-code-minimap/completions/powershell/_code-minimap.ps1 $ITscc/forMSWin/code-minimap/_code-minimap.ps1
 
 #=> 5 advise to check for symlinks
 echo 'now maybe  bash $misc/linux/slJH.sh'

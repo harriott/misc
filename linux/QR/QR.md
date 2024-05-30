@@ -8,6 +8,7 @@ commands here are generic, see also `$OSAB/QR.md`
     dotnet --list-sdks
     info info
     wcsf=$(wc -l <samplefile>); echo $wcsf
+    $ITscr/unix-like/usr_lib_X11_rgb.txt  # colours
 
 Pipe Viewer
 
@@ -102,7 +103,8 @@ Pipe Viewer
 - can be inaccurate
 
 # CopyQ
-    copyq tab  # lists them
+    copyq tab  # lists the tab headings
+    copyq tab clipboard read 0  # pastes the first one
     ctrl+home -> move_to_top
     pkill copyq; copyq &
 
@@ -585,7 +587,7 @@ can play omv's
 - `*` `0` increase
 
 # networking
-    arp-scan -lx
+    arp-scan -lx  # lists subnet hosts
     bluetoothctl -- devices
     sudo iptraf-ng  # ncurses network statistic monitoring utility
     sudo lshw -c network
@@ -603,13 +605,13 @@ can play omv's
 
 ## iproute2
     ip a  # ip address show
-    ip l  # lists ethernet devices
-    ip neigh
+    ip l  # lists machine's ethernet devices
+    ip neigh  # subnet hosts
     ip r  # ip route show - compactly shows my internal ip address
 
 ## iwd
     man iwd
-    sudo ls /var/lib/iwd
+    sudo ls /var/lib/iwd  # reports internet source
     systemctl status iwd.service
 
 ### iwctl
@@ -669,9 +671,6 @@ requires a `DHCP` client to get an IP address
     exit
     ~.
 # npm
-    npm ls -g
-    npm un[install] -g [<package>]
-    npm up[date] -g [<package>]
     which npm
 
 ## cspell
@@ -798,6 +797,7 @@ zathura man page
     shopt dotglob  # reports back its status
     shopt -u nullglob  # incase  t=$'\?'; echo $t
     xdg-open $cIThul/linux/bash.pdf
+    za $ITscr/unix-like/linux/bash.pdf
     ~/Arch/bash_history
 
 command substitution `$(...)`
@@ -946,6 +946,7 @@ don't export them
     echo ${array[@]}
     for ((index=0; index<${#array[@]}; ++index)); do echo "$index" "${array[index]}"; done
     for item in "${array[@]}"; do echo; echo "$item"; done
+    printf '%s\n' "${array[@]}" | grep 'match'
 
 #### integers
     (( $1 == 1 || $1 == 2 )) && echo "number 1 or 2"
@@ -983,8 +984,7 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     ${string/#substringAtStart/replacement}
     ${string/%substringAtEnd/replacement}
     ${string:position:length}
-
-    a=12345; a=${a:2}; echo $a
+    a=12345; echo ${a:2}; echo ${a:1:2}
     b="a(b(c(d"; o ${b##*\(}
     t=lkj; echo ${t:0:${#t}-1}
 
@@ -1019,7 +1019,7 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
 
 - lsmod(8) show what kernel modules are currently loaded
 - maximum 255 bytes per filename & 4096 per path
-- `uname -a` (= `--all`) handy list of system info
+- `uname -a` (= `--all`) handy line of system info
 
 ## awesome wm
 - maximized (horizontally or vertically) are indicated by (horizontal or vertical) double arrow, and break tiling

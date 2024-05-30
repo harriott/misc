@@ -91,8 +91,10 @@ fix `path` in the `*.osp`
 
 # colours
 - Closest Named Web Colors
+- CSS Colors
 - Shades of black
 - web colors
+- X11 color names
 
 # documenting - eBook - Calibre
     ~/CalibreLibrary
@@ -228,7 +230,7 @@ after filename changes in `$tex`
 
 - `alt+f12` = `Tools > Options`
 - `alt+t e` = `Tools > Extensions` = `ctrl+alt+e`
-- `alt+t` (= `Format`) `> p` (= `Style de page...`)
+- `alt+o`/`alt-t` (= `Format`) `> p` (= `Page style...`/`Style de page...`)
 - `ctrl+alt+e` = `Tools > Extension Manager...`
 - Writer: right-click on a hyperlink for `Remove Hyperlink`
 
@@ -444,7 +446,8 @@ Spacemacs documentation
 
 # encoding
     $ITstack/CrossPlatform/dpl/hello.lua
-    code-minimap <textyfile>
+    code-minimap $misc/CP/QR/QR.md
+    wiki/JSON
     yj -ty <file.toml >file.yml
 
 - `*.oma` = Sony OpenMG
@@ -488,7 +491,6 @@ convert mp4's first to MPEG-2 transport streams (`ffmhb -i 1.mp4 -c copy 1.ts`) 
     git grep <caseSensitiveText>
     git init -b gh  # --initial-branch=<branch_name>
     git push gh +master  # force push to remote
-    git rev-parse --short HEAD  # the short commit hash
     git rev-parse --show-toplevel  # print the top level directory of the current repository
     git show <pathToFile>  # highlights the changes
     git submodule
@@ -499,8 +501,6 @@ convert mp4's first to MPEG-2 transport streams (`ffmhb -i 1.mp4 -c copy 1.ts`) 
 - <https://ndpsoftware.com/git-cheatsheet.html>
 
 ### commits
-    git checkout <commit>  # go back to the commit (hash or tag)
-    git checkout master  # return to current state of project
     git log -- *pdf  # shows if any PDF's have been inadvertently included
     git log --follow *spacemacs*
     git log --follow '*cmusq.vim'
@@ -509,6 +509,7 @@ convert mp4's first to MPEG-2 transport streams (`ffmhb -i 1.mp4 -c copy 1.ts`) 
     git log -3 --pretty="format:%C(auto)%h %as" -- */syntax/sh.vim  # last 3 dates of change
     git log -S<change_string>  # reports commits that added or removed it
     git reset HEAD~1  # throw away last commit, keeping changes for a better one
+    git rev-parse --short HEAD  # the short commit hash
     gitk &  # GUI showing files in each commit
 
 #### grep
@@ -516,14 +517,23 @@ convert mp4's first to MPEG-2 transport streams (`ffmhb -i 1.mp4 -c copy 1.ts`) 
 
 in `$CrPl/networking/browsers`, `git grep activeInstall $(git rev-list --all) -- 'browsers.txt'`
 
+#### move around
+    git checkout -q HEAD^1  # go back one commit
+    git checkout -q HEAD~9; git rev-parse --short HEAD  # go back 9 commits and print the short hash
+    git checkout <commit>  # go back to the commit (hash or tag)
+    git checkout master  # return to current state of project
+
 ### configurations
     PS> gci -r .git | select fullname
     PS> gci -r .gitignore | select fullname
+    $ fd -HI -tf ^config$ | xargs rg -l 'remote = gh'  # ripgrep
     $ find . -wholename '*.git'
     $ find . -wholename '*.git/config' > gitconfig-all.txt
     $ find . -wholename '*.gitignore' > gitignore-all.txt
     $ find . -wholename '*.git/config' | wc -l
     $ grep -rl --include "config" harriott . > gitconfig-harriott.txt
+    $machBld\gitconfig
+    :%s#https://github.com/#git@github.com:#g
 
 #### lf
 - `autocrlf = input`  warning: CRLF will be replaced by LF
@@ -568,6 +578,8 @@ in `$CrPl/networking/browsers`, `git grep activeInstall $(git rev-list --all) --
     git remote add upstream https://github.com/...
     git remote rename origin gh
     git remote show  # reports name set in  .git/config
+
+git-fetch
 
 ### tig
 Tig Manual
@@ -616,8 +628,12 @@ Tig Manual
 - <https://www.markdownguide.org/extended-syntax/>
 
 ## npm
+    npm ls -g
+    npm un[install] -g [<package>]
+    npm up[date] -g [<package>]
     npm prefix -g  # =  npm config get prefix
     npm -v  # --version
+    npx cowsay goodbye!''
 
 ## Pandoc
     $core/IT_stack/CP/Pandoc/monofont.md
@@ -631,6 +647,8 @@ Tig Manual
     \end{document}
 
 ## Perl
+    $ echo sample_text | perl -pe 's/(sample).*/$1/'  # double quotes wouldn't work here
+    $ITstack/CP/encoding/dpl/Perl/scratch.pl
     cpanm --help
     echo "my_string" | perl -pe 's/my/your/g'
     echo 'hello  there' | perl -pe 's/ +/ /'
@@ -638,6 +656,7 @@ Tig Manual
     for ...  # = foreach ...
     perl -de 0  # debug
     perl -e 'print reverse <>' <file_to_reverse>
+    perl -h  # summary of options
     perl -le 'print a..z'
     perl -v  # version
 
@@ -692,6 +711,10 @@ Tig Manual
 - `^abc|abc$` abc at start or end
 
 <https://jkorpela.fi/perl/regexp.html>
+
+#### accented characters
+    $ echo 'aà cç eé eè' | perl -pe 's/[^\P{Latin}A-Za-z]/-/g'
+    $ echo 'aà cç eé eè' | perl -pe 's/\p{Latin}/-/g'
 
 ### say
     say scalar @array;  # number of elements
@@ -810,6 +833,8 @@ YAML front matter
 - sharkdp/bat
 
 ## fd
+    im fd
+
 - recursive by default
 - sharkdp/fd
 
@@ -971,7 +996,7 @@ paintbrush: shift previews a new straight line from last point to current mouse 
     montage <left> <right> -geometry +9+9 -tile 2x1 <lr>
     montage <upper> <lower> -geometry +0+0 -tile 1x2 <ul>
 
-### convert
+### magick
     -background <color>
     -border 20x20
     -draw 'text xpixels,ypixels "label"'
@@ -980,7 +1005,7 @@ paintbrush: shift previews a new straight line from last point to current mouse 
     -gravity center
     -pointsize 48
     -size 640x480
-    convert -flatten img.png img-white.png
+    magick -flatten img.png img-white.png
     label:"some text"
 
 - anisotropic resize
@@ -1007,7 +1032,7 @@ paintbrush: shift previews a new straight line from last point to current mouse 
     gci -r *.tiff | rm
 
 ### gravity
-    convert -list gravity
+    magick -list gravity
 
 `-gravity northwest`  the default
 
@@ -1033,13 +1058,16 @@ paintbrush: shift previews a new straight line from last point to current mouse 
     rg '<someText>|<otherText>'  # searches recursively in files
     rg '\.emacs\.d'
     rg --no-ignore 'sometext'  # allows searching into gitignored places
+    rg --type-list
     rg -i <case-insensitive>
+    rg -tconfig  # search in *.config's
     rg -thtml -tcss <webish>
     rg -tmd '[\p{Devanagari}]'  # finds Devanagari characters
     rg -tmd '\$Sig'
     rg -tmd '\{TNW}'
     rg -uu <someText>  # ignores ignore files, and searches in hidden stuff
     rg <someText> **/*.ext
+    rg 'url = ' **\*.git\config
 
 # Stack Exchange Network
 - `@petersmith` = Peter Smith
@@ -1089,6 +1117,7 @@ messes up if terminal is resized
 
 # text wrangling
     ! " # $ % & ' ( ) * + , - . /
+    ----10--------20--------30--------40--------50--------60--------70--------80--------90-------100-------110-------120-------130-------140-------150-------160
     ansifilter <file_to_strip_of_ANSI_terminal_escape_codes>
 
 - carriage return (U+000D) returns the cursor to the left of the line (usually just before line feed on MSWin)
@@ -1096,6 +1125,7 @@ messes up if terminal is resized
 
 ## vim
     $HOME/_viminfo
+    ----10--------20--------30--------40--------50--------60--------70--------80--------90-------10
     echo $MYVIMRC
     gci -r tags -force | where { ! $_.PSIsContainer } | select -expandProperty fullname > tags-Win10.txt
     [g]vim .  # will open netrw on current directory

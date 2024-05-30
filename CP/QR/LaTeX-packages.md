@@ -98,7 +98,11 @@ vim: nospell:
 might require `[article]`
 
 # pdfpages
+    \usepackage{pdfpages}
+    ...
     \includepdf[options]{<pdf>}
+
+    rg -ttex '\\usepackage\{pdfpages\}' -l > rg-tex-pdfpages.fetl
 
 - doesn't respect `geometry` margins, so `\includepdfset{offset=<fromInnerEdge> <fromTop>}`
 - if business cards aren't sized right, go through images

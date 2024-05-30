@@ -33,6 +33,7 @@ if aborted, `for f in *; do sed -i "/$f/d" zips; done`
 - `ctrl+h` (= `chrome://history`)
 - `ctrl+shift+o` (= `Bookmarks`) `> Organise > Export`
 - `ctrl+u` view page source in new tab
+- `Microsoft Edge`
 
 ## Firefox
     about:config > caret
@@ -62,8 +63,9 @@ trashinbox
     Menu > File > Compact Folders
     right-click on folder > Properties > Repair Folder
 
-- `alt+e > e` (= `Settings`) `> Config Editor...` (= `Advanced Preferences`)
-- `ctrl+shft+b` (= `Address Book`)
+- `alt+e > e` (= `Settings`) `> Config Editor...` = `Advanced Preferences`
+- `ctrl+shft+b` = `Address Book`
+- `ctrl+u` = show all of the message
 
 #### Affichage
 - `alt+a` (= `Affichage`) `> o` (= `Corps de message en`)

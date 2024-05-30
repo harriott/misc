@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# $misc/GRs/update-fixes.sh  sourced by  $misc/GRs/update-depth1.sh
+
 # Joseph Harriott  Thu 09 May 2024
 
 # fix some awkward nodes : fickle tricky stuff left in other people's remotes
@@ -21,6 +23,9 @@ elif [[ $repository =~ LaTeX-examples ]]; then
     for cc in $sy/AE $sy/O; do
         [ -s $cc.pdf ] && mv $cc.pdf $cc-caps.pdf
     done
+elif [[ $repository =~ "tjdevries-config_manager" ]]; then
+    # Case conflicts...
+    [ -s "xdg_config/nvim/README.md" ] && mv xdg_config/nvim/README.md xdg_config/nvim/README_caps.md
 fi
 cd $DCGRs
 

@@ -151,7 +151,7 @@ gdisk(8)
     cdrecord dev=/dev/sr0 -checkdrive  # Vendor_info etc
     cdrecord -v -sao dev=/dev/sr0 linux.iso
     sudo wipefs [-a] /dev/sdx  # [wipe] signatures
-    whipper -h
+    whipper cd rip
     whipper drive list
 
 ### tray
