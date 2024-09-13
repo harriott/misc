@@ -67,7 +67,7 @@ automatically selects the best orientation for filling the page
     -o orientation-requested=6 - reverse portrait or upside-down orientation (180 degrees)
 
 # printing - HPLIP
-    hp-info
+    hp-info  # reports version and pops up info
     hp-levels  # takes a little while to show the ink levels (after "Using device : ...")
     hp-printsettings  # dialog pop-up
     hp-setup -h
@@ -88,6 +88,7 @@ mount(8)
 ## non-optical
     df -h [<disk>]
     du -sh [<bigDirectory>]
+    sudo wipefs [-a] /dev/sdx  # [wipe] signatures
 
 ### permissions
     ---------- 	0000  no permissions
@@ -108,7 +109,8 @@ mount(8)
 e2fsck(8)
 
 ### lsblk
-    lsblk -f
+    lsblk -f  # --fs
+    lsblk -l  # --list
 
 lsblk(8)
 
@@ -134,10 +136,13 @@ gdisk(8)
 ##### interactive mode
     sudo parted <device>
 
-`mklabel <label>` destroys existing partitions
+###### commands
+- `mklabel <label>` destroys existing partitions
+- `p` (= `print`)
+- `q` (= `quit`)
 
 ##### script mode
-    sudo parted -l | grep sdl -B 1 -A 6  # --list
+    sudo parted -l | grep sdf -B 1 -A 6  # --list
     sudo parted /dev/sda -s mklabel msdos mkpart primary 0% 100%  # also creates an MBR
 
 `-s` (`--script`) never prompts for user intervention
@@ -150,7 +155,6 @@ gdisk(8)
     cd-drive  # info
     cdrecord dev=/dev/sr0 -checkdrive  # Vendor_info etc
     cdrecord -v -sao dev=/dev/sr0 linux.iso
-    sudo wipefs [-a] /dev/sdx  # [wipe] signatures
     whipper cd rip
     whipper drive list
 

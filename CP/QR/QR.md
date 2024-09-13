@@ -2,7 +2,7 @@ vim: nospell:
 
     $misc/CP/QR; m4ps 0 1
 
-syntax of this file is ensured in `$vimfiles/filetype.vim`
+syntax of this file is ensured in `$vfv/filetype.vim`
 
     $JHt/IT/CP/fonts-SE595756-fontcharlist
     fzf -h
@@ -13,7 +13,7 @@ syntax of this file is ensured in `$vimfiles/filetype.vim`
 - Software Engineering Stack Exchange
 
 # audio
-    exiftool -ver
+    exiftool -ver  # https://sno.phy.queensu.ca/~phil/exiftool/
 
 ## text-to-speech
     espeak "Hello World!"
@@ -72,17 +72,23 @@ crossfades are created in overlaps
 fix `path` in the `*.osp`
 
 ## VLC Player
-- `-`  slow down by .1x
-- `+`  speed up by .1x for each press
-- `=`  returns speed to normal
-- `A`  to Change Aspect ratio
-- `b`  to rotate through Audio tracks
-- `v`  to rotate through Subtitles
+- `a`  cycle through aspect ratios
+- `b`  to rotate through audio tracks
+- `f`  toggle fullscreen
+- `j`/`k`  decrease/increase audio delay
+- `v`  cycle through subtitles
+- `ctrl+j` codec info
+- `ctrl+p` Preferences
 
 ### seeks
 - 3s: `shift+left/right`
 - 10s: `alt+left/right`
 - 1m: `ctrl+left/right`
+
+### speed
+- `-`  slow down by .1x
+- `+`  speed up by .1x for each press
+- `=`  returns speed to normal
 
 # BBCode
     $vimfiles/ftplugin/bbcode.vim
@@ -96,14 +102,10 @@ fix `path` in the `*.osp`
 - web colors
 - X11 color names
 
-# documenting - eBook - Calibre
+# documenting - Calibre
     ~/CalibreLibrary
 
-E-book viewer `<esc>` brings up the controls
-
-# documenting - eBook - Foliate
-- `ctrl-q` = quit
-- right-click
+E-book viewer `<esc>`/`<right_click>` brings up the controls
 
 # documenting - LaTeX
     $DJH/search/dts-tex.fetl  # for my files
@@ -135,6 +137,13 @@ functionality included in Memoir
     \usepackage{soul}  % Hyphenation for letterspacing, underlining, and more
     \usepackage{titlesec}  % incompatible with memoir
     \vfill
+
+```
+\begin{tabular}{ c|l|r }
+  \hline
+  centred & left & right \\
+\end{tabular}
+```
 
 ### font styles
     \textit{...}
@@ -217,6 +226,7 @@ after filename changes in `$tex`
     \rightarrow
 
 ## tabular environment
+    \hline
     \multicolumn{num_cols}{alignment}{contents}
     \renewcommand{\arraystretch}{1.5}  % tabular (default 1.0)
 
@@ -246,12 +256,23 @@ after filename changes in `$tex`
     \user\config
     ~\AppData\Roaming\LibreOffice\4\user\registrymodifications.xcu
 
+# documenting - PDFs
+use Google Chrome to break out just some pages into a reduced copy
+
+## PDFtk
+    pdftk in.pdf burst  # breaks into individual pages
+    pdftk in*.pdf cat output out.pdf  # concatenate a sequence of PDFs
+    pdftk secure.pdf input_pw <password> output normal.pdf
+
+## fix rotations
+    pdftk leftRotated.pdf cat 1-endeast output horizontal.pdf
+    pdftk leftRotated-rightRotated.pdf cat 1east 2west output horizontal.pdf
+
 # Emacs - commands
 - `C-*`  calc-dispatch
 - `C-g`  keyboard-quit
 - `C-x C-c`  quit
 - `M-w`  copy
-- `M-x calendar`
 - `M-x display-time-world`  times around the world
 - `M-x kill-emacs`  force quit
 - `W`  browse-url-of-dired-file
@@ -265,6 +286,7 @@ after filename changes in `$tex`
 ## calendar
 - `C-@`  set mark
 - `M-=`  days to or from mark
+- `M-x calendar`
 - `q`  quit
 
 ### diary
@@ -447,6 +469,7 @@ Spacemacs documentation
 # encoding
     $ITstack/CrossPlatform/dpl/hello.lua
     code-minimap $misc/CP/QR/QR.md
+    rustc -V  # --version
     wiki/JSON
     yj -ty <file.toml >file.yml
 
@@ -457,10 +480,20 @@ Spacemacs documentation
     alt+e (= Edit) > s (= Preferences...)
     bluefish -v
 
-## ffmpeg
+## doku/highlight
+    highlight --syntax=bash <script_without_shebang>
+    highlight --version
+    highlight -h
+
+### supported languages
+- <http://www.andre-simon.de/doku/highlight/en/langs.php>
+- no `csv`
+
+## FFmpeg
     -vf crop=iw:ih-80:0:0
     ffmhb -i <video> -vf 'scale=iw/2:ih/2' <same_video_with_half_the_frame_size>
     ffmhb -i <video> -vframes 1 frame.jpg  # extracts a single frame
+    ffmpeg -version | xcol --enable-libvidstab
     ffmpeg -version | xcol --enable-libvorbis
 
 - `-filter:a afftdn=nr=90:nf=-20` removes white noise
@@ -495,6 +528,7 @@ convert mp4's first to MPEG-2 transport streams (`ffmhb -i 1.mp4 -c copy 1.ts`) 
     git show <pathToFile>  # highlights the changes
     git submodule
     git version
+    onefetch -h
 
 - GitLab Markdown
 - <https://github.com/github/linguist/blob/master/lib/linguist/languages.yml>
@@ -524,36 +558,16 @@ in `$CrPl/networking/browsers`, `git grep activeInstall $(git rev-list --all) --
     git checkout master  # return to current state of project
 
 ### configurations
-    PS> gci -r .git | select fullname
-    PS> gci -r .gitignore | select fullname
-    $ fd -HI -tf ^config$ | xargs rg -l 'remote = gh'  # ripgrep
-    $ find . -wholename '*.git'
-    $ find . -wholename '*.git/config' > gitconfig-all.txt
-    $ find . -wholename '*.gitignore' > gitignore-all.txt
-    $ find . -wholename '*.git/config' | wc -l
-    $ grep -rl --include "config" harriott . > gitconfig-harriott.txt
-    $machBld\gitconfig
     :%s#https://github.com/#git@github.com:#g
 
 #### lf
 - `autocrlf = input`  warning: CRLF will be replaced by LF
 - `eol = lf`
 
-#### settings for MSWin
-    fgrep -rl --include "config" 'harriott' | xargs fgrep -rl 'symlinks'
-    grep -rl --include "config" ignorecase . | wc -l
-    grep -rl --include "config" symlinks . | wc -l
-
 #### gitconfig
-    $machBld\gitconfig
     git config -l
     git hist
     git lg
-
-##### linux
-    r ~/.ssh
-
-`$machBld/jo/gitconfig` inludes `$misc/CP/gitconfig`
 
 ### GitHub CLI
     gh repo list  # handy list of your repositories
@@ -568,7 +582,6 @@ in `$CrPl/networking/browsers`, `git grep activeInstall $(git rev-list --all) --
 #### damaged
     del .git\index
     git reset
-    rm .git/index.lock
 
 ### remotes
     gh repo clone
@@ -638,6 +651,7 @@ Tig Manual
 ## Pandoc
     $core/IT_stack/CP/Pandoc/monofont.md
     $core/IT_stack/CP/Pandoc/weird.gfm
+    pandoc --version
 
 `--fail-if-warnings`  exit with error status if there are any warnings
 
@@ -723,46 +737,47 @@ Tig Manual
 replaces `print "$var\n";`
 
 ## Python
-    o $WORKON_HOME
-    pew ls
+    $ITstack/CP/encoding/dpl/Python/scratch.py
+    python -h  # --help
+
+### code
+    quit()
+    python -c "print(__import__('sys').version)"
+    python -c "print(__import__('platform').python_version())"
+
+#### sys
+    python -c "import sys; print (sys.path)"
+
+```
+for arg in sys.argv[1:]: print(arg)
+print(sys.argv[0])  # the full pathname of the program
+```
+
+### modules
+    py -m pip install -U pip
     pip -V (--version)
     pip list --outdated
+    python -m pip install -U pip
     yaml2toml <yaml> <toml>
 
-### MSWin
-    C:\Windows\py.exe
-    C:\Windows\pyw.exe
-
-#### versions
-    PS> .'C:\Program Files\Python310\python.exe' --version
-    PS> C:\Users\troin\AppData\Local\Programs\Python\Python310-32\python.exe  # reports "32 bit"
-    PS> where.exe python
-
-### pipx
+#### pipx
     pipx list
     pipx run pycowsay moo
     pipx uninstall -h
     pipx upgrade-all
 
-### sys
-```python
-for arg in sys.argv[1:]: print(arg)
-print(sys.argv[0])  # the full pathname of the program
-```
-
-    python -c "import sys; print (sys.path)"
-
 ### versions
-    ~\.pyenv
     pyenv rehash
-    py  # reports "64 bit"
-    py -h  # --help
-    py -V  # --version
+    python -V  # --version
 
 ### virtualenv
     cdvirtualenv  # goto the package directory
     deactivate
     lsvirtualenv  # lists the known environments
+
+#### pew
+    o $WORKON_HOME
+    pew ls
 
 #### virtualenvwrapper
     deactivate
@@ -821,14 +836,17 @@ print(sys.argv[0])  # the full pathname of the program
     hugo serve -D  # includes drafts
 
 ### ssg - Jekyll
-    [a post]({% post_url 2010-07-21-a-post %})
-    [link to post]({% post_url 20xx-xx-xx-name-of-post %})
     bundle exec jekyll build
     bundle exec jekyll s  # serve locally
 
-YAML front matter
+- `[description of a post]({% post_url 20xx-xx-xx-name-of-post %})` provides a clickable link
+- <https://github.com/rouge-ruby/rouge/wiki/List-of-supported-languages-and-lexers>
+- YAML front matter
 
 # file manage
+    zoxide -h  # --help
+    zoxide -V  # --version
+
 - `7-Zip`: `7z x <pw'd_zip>`
 - sharkdp/bat
 
@@ -837,16 +855,19 @@ YAML front matter
 
 - recursive by default
 - sharkdp/fd
+- Ubuntu: `fdfind -V`
 
 ### man
 - `-d1` = depth 1 (current dir)
-- `-E` (= `--exclude`) `<glob>`
+- `-E` (= `--exclude`) `<unquoted_glob>`
 - `-H` (`--hidden`)
 - `-I` = `--no-ignore` = don't respect `.(fd|git)ignore`
 - `-L` follow links into symlinked directories
 - `-td` type dir
 - `-tf` type file
-- `-u` = `--unrestricted` = `--hidden --no-ignore`
+- `-u` (not listed in `-h`) = `--unrestricted` = `-HI`
+- `-x` (= `--exec`) <cmd>  # for each search result
+- `-X` (= `--exec-batch`) <cmd>  # all search results at once
 
 ### recents
     fd --changed-within 3h
@@ -856,7 +877,6 @@ YAML front matter
     fd --max-depth 1 -Hl -tl
     fd -H -tl  # only found targets, broken ones with red background
     fd -Hl -tl  # show supposed link source
-    fd -tl -HL -X rm  # removes dead links
 
 ## lf file manager
 - `c` (`clear` paths in buffer)
@@ -960,6 +980,8 @@ The GNU Privacy Handbook
 - printed pages come out head first (= upside down, printed face up)
 
 ### Epson EcoTank ET-5170 - feed tray
+    $ITscr/HW/EpsonEcoTankET5170
+
 - downside is printed
 - landscape top is to right
 - portrait top is to back of printer
@@ -1006,6 +1028,7 @@ paintbrush: shift previews a new straight line from last point to current mouse 
     -pointsize 48
     -size 640x480
     magick -flatten img.png img-white.png
+    magick -version
     label:"some text"
 
 - anisotropic resize
@@ -1044,12 +1067,16 @@ paintbrush: shift previews a new straight line from last point to current mouse 
 - `Save` pads out right & bottom images that aren't up to 1024x512...
 
 # ripgrep
+    rg -help
+
+- `-N` (= `--no-line-number`)
 - in JH: `$DJH/search/searches.md`
 - outer whitespaces get ignored
-- tidied output in `$vfp\Win10\pulls.ps1` (`-N` = `--no-line-number`)
 
 ## filetypes
     $vimfiles/vim/syntax/rgtl.vim
+    rg --type-list
+    rg <options> <pattern> [<path>]
 
 - `.dw` not known
 - no group for gitconfigs
@@ -1058,7 +1085,6 @@ paintbrush: shift previews a new straight line from last point to current mouse 
     rg '<someText>|<otherText>'  # searches recursively in files
     rg '\.emacs\.d'
     rg --no-ignore 'sometext'  # allows searching into gitignored places
-    rg --type-list
     rg -i <case-insensitive>
     rg -tconfig  # search in *.config's
     rg -thtml -tcss <webish>
@@ -1117,6 +1143,7 @@ messes up if terminal is resized
 
 # text wrangling
     ! " # $ % & ' ( ) * + , - . /
+    ----10--------20--------30--------40--------50--------60--------70--------80--------90-------10
     ----10--------20--------30--------40--------50--------60--------70--------80--------90-------100-------110-------120-------130-------140-------150-------160
     ansifilter <file_to_strip_of_ANSI_terminal_escape_codes>
 

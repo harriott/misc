@@ -18,7 +18,7 @@ for ((ii=0; ii<${#i2s[@]}; ++ii)); do echo "$ii" "${i2s[ii]}"; done
 # m1-image = intermediate montage
 # m2-image = final montage
 
-#==> $Cfzd/manage/expenses/mine/n6m-/noReceipts
+#==> $CzMa/expenses/mine/n6m-/noReceipts
 montage ${i2s[0]} ${i2s[1]} ${i2s[3]} -geometry +9+9 -tile 1x3 m1.jpg
 montage m1.jpg ${i2s[2]} -geometry +9+9 -tile 2x1 m2.jpg
 

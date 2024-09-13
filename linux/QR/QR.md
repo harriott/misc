@@ -2,13 +2,14 @@ vim: nospell:
 
     $misc/linux/QR; m4ps 0 1
 
-commands here are generic, see also `$OSAB/QR.md`
+commands here are generic, except for those under the Ubuntu heading, see also `$OSAB/QR.md`
 
     dotnet --list-runtimes
     dotnet --list-sdks
     info info
     wcsf=$(wc -l <samplefile>); echo $wcsf
     $ITscr/unix-like/usr_lib_X11_rgb.txt  # colours
+    $OSL/bashrc-generic
 
 Pipe Viewer
 
@@ -19,7 +20,6 @@ Pipe Viewer
     cmus_notify -h
 
 - C* Music Player
-- can't play oma's omv's
 
 ### commands
     7        settings
@@ -47,6 +47,10 @@ Pipe Viewer
 
     -        vol -10%
     + =      vol +10%
+
+### media
+- can play: `mka`, `ogg`
+- can't play: `oma`, `omv`
 
 ## convert
     for f in *.flac; do ffi "$f" -c:a libvorbis -aq 4 "${f%.*}.ogg" ; done
@@ -133,11 +137,68 @@ Pipe Viewer
 
 date(1)
 
+# documenting - Foliate
+- `ctrl-q` = quit
+- mouse to bottom for scrollbar
+- mouse to top for adjustments
+
+# documenting - PDFs
+    Outline = the hyperref bookmarks that correspond to headings of a LaTeX document
+
+`Firefox` shows `Document Outline`
+
+## C5 printing
+- `Firefox` can't figure it's portrait
+- `LibreOffice Writer` gets it right
+- Ubuntu's `qpdfview` gets it almost right
+
+## Poppler
+    pdfimages -h
+    pdfimages [-j/-png] pdfNam3.pdf imageName  # pulls out images (default ppm) separated (if there are any)
+
+## qpdfview
+    F6 = View > Docks > Outline (such as the headings of a LaTeX document)
+    F8 = Thumnails
+
+## sizes
+    pdfinfo <a_pdf_file>  # A5 = 420x595. See GSview for more sizes.
+
+1 PostScript point = 0.3528 mm
+
+## XpdfReader
+    [-f <firstPage>] [-l <lastPage>]
+    pdftoppm -png -r 300 <pdf> <basename_for_png_sequence>
+    pdftoppm -jpeg -r 300 <pdf> <basename_for_jpeg_sequence>
+
+## Zathura
+    <tab> => toggles Outline view
+    +/-/= => zoom in/out/original
+    f11   => toggle fullscreen
+    r     => rotate by 90 degrees
+    R     => reload document
+    zathura --mode=fullscreen a.pdf &
+
+zathura man page
+
 # encoding
     delta $OSAB/mb-i34G1TU02/jo/conkyrc $OSAB/mb-sbMb/jo/conkyrc
     git diff $OSAB/mb-i34G1TU02/jo/conkyrc $OSAB/mb-sbMb/jo/conkyrc
+    ~\.pyenv
 
 Make (software)
+
+## Git - configurations
+    $ fd -HI -tf ^config$ | xargs rg -l 'remote = gh'  # ripgrep
+    $ find . -wholename '*.git'
+    $ find . -wholename '*.git/config' > gitconfig-all.txt
+    $ find . -wholename '*.gitignore' > gitignore-all.txt
+    $ find . -wholename '*.git/config' | wc -l
+    $ grep -rl --include "config" harriott . > gitconfig-harriott.txt
+
+### gitconfig
+    r ~/.ssh
+
+`$machBld/jo/gitconfig` inludes `$misc/CP/gitconfig`
 
 # TeX
     pdfjam --help
@@ -167,10 +228,19 @@ Make (software)
 # file contents
     cat
     diff $OSAB/mb-i34G1TU02/jo/conkyrc $OSAB/mb-sbMb/jo/conkyrc
+    dos2unix -i *
     tac
     shuf
     sort -ro <file> <file>  # reverse sort in place
     wc -l <file>  # counts lines
+
+sharkdp/bat
+
+## file
+    fd -Itf -x file
+
+- "CRLF line terminators"
+- Vim fileencoding utf8 reported as ASCII
 
 ## awk
     awk -i inplace -F, '{print $3,$2,$1}' OFS='┊' toReorder.csv
@@ -178,7 +248,8 @@ Make (software)
     v=variable; awk -v var="$v" 'BEGIN {print var}'
     za $cIThul/gawk.pdf
 
-GNU Awk
+- GAWK(1)
+- GNU Awk
 
 ### built-in variables
 - `FILENAME` name of the current input-file
@@ -202,6 +273,7 @@ GNU Awk
 ## sed
     $cIThul/sed
     [[:alpha:]] = [[:lower:]] + [[:upper:]] = [A-Za-z]
+    echo "blia blib bou blf" | sed -E 's/bl(ia|f)//g'
     sed --version
     sed 5q <file> prints first 5 lines
 
@@ -240,6 +312,7 @@ GNU Awk
     mkdir -p  # --parents = make parent directories as needed (no error if existing)
     sudo chown -R <user>:<group> <dir>
     tar -xzf archive.tar.gz [-C <target_directory>]
+    $OSL/bashrc-console-fm
 
 - `chmod 600 file` - owner can read and write
 - `chmod 644 file` - owner can change it, everyone else can read it
@@ -249,6 +322,7 @@ GNU Awk
 - `chmod 711 file` - `drwx--x--x`
 - `chmod 755 file` - `drwxr-xr-x`
 - `chmod 777 file` - all can read, write and execute
+- FILE(1)
 - install(1)
 - ln(1)
 - rm(1)
@@ -274,8 +348,13 @@ GNU Awk
     F4        -> Konsole  attached below
     Shift+F4  -> Konsole  in a new window
 
+## fd rm
+    fd -tl -HL -X rm  # removes dead links
+    fd -tf stderr.txt -X rm
+
 ## find
     find $PWD -name <file>  # gets full path
+    find -regex ".*a.*\|.*b.*"
     find . -maxdepth 1 -mindepth 1 -type f -name "*"  # those in working directory
     find . -name "*" -type f ! -path '*/.git/*'
     find . -name '*.txt' ! -name 'build*'  # excluding build*
@@ -341,7 +420,10 @@ du(1)
 tree(1)
 
 ## ls
-    dircolors --print-ls-colors
+    dircolors  # LS_COLORS=...
+    dircolors --help
+    dircolors --version
+    dircolors -p  # --print-database
     ls -l
 
 - `-d` (= `--directory`)
@@ -461,9 +543,9 @@ up/down => zoom in/out
     mouse right-click to find them
 
 ## Pinta
-- can't send to printer...
-- shows precise cursor position in pixels
+- attempts to shows cursor position in pixels, but underestimates - use GIMP
 - `backspace` (= `Edit > Erase Selection`)
+- can't send to printer...
 - `Rectangle Select > Cut > Paint Bucket` to replace an area with a solid colour fill
 
 ## pqiv
@@ -702,53 +784,6 @@ requires a `DHCP` client to get an IP address
 
 pass(1)
 
-# PDFs
-    Outline = the hyperref bookmarks that correspond to headings of a LaTeX document
-
-`Firefox` shows `Document Outline`
-
-## C5 printing
-- `Firefox` can't figure it's portrait
-- `LibreOffice Writer` gets it right
-- Ubuntu's `qpdfview` gets it almost right
-
-## pdftk
-    pdftk in.pdf burst  # breaks into individual pages
-    pdftk in*.pdf cat output out.pdf  # concatenate a sequence of PDFs
-    pdftk secure.pdf input_pw <password> output normal.pdf
-
-### fix rotations
-    pdftk leftRotated.pdf cat 1-endeast output horizontal.pdf
-    pdftk leftRotated-rightRotated.pdf cat 1east 2west output horizontal.pdf
-
-## Poppler
-    pdfimages -h
-    pdfimages [-j/-png] pdfNam3.pdf imageName  # pulls out images (default ppm) separated (if there are any)
-
-## qpdfview
-    F6 = View > Docks > Outline (such as the headings of a LaTeX document)
-    F8 = Thumnails
-
-## sizes
-    pdfinfo <a_pdf_file>  # A5 = 420x595. See GSview for more sizes.
-
-1 PostScript point = 0.3528 mm
-
-## XpdfReader
-    [-f <firstPage>] [-l <lastPage>]
-    pdftoppm -png -r 300 <pdf> <basename_for_png_sequence>
-    pdftoppm -jpeg -r 300 <pdf> <basename_for_jpeg_sequence>
-
-## Zathura
-    <tab> => toggles Outline view
-    +/-/= => zoom in/out/original
-    f11   => toggle fullscreen
-    r     => rotate by 90 degrees
-    R     => reload document
-    zathura --mode=fullscreen a.pdf &
-
-zathura man page
-
 # processes
     lsof -i
     niceness: -19 = lowest priority, 20 = highest
@@ -785,6 +820,7 @@ zathura man page
     /etc/profile
     <somecommand> | xcol <keyword1> <keyword2> ... # for highlighting
     bash --version
+    date +%y%m%d -d 'now day'
     echo "$floatingpointnumber-$another" | bc  # FP math
     echo "$PS1"
     echo $PWD
@@ -801,15 +837,6 @@ zathura man page
     ~/Arch/bash_history
 
 command substitution `$(...)`
-
-### echo
-`-n` no trailing newline
-
-#### backslash escapes
-    echo -e "\\t" word_after_tab
-    echo -e '\t' word_after_tab
-
-`-E`  # (default) no interpretation
 
 ### aliases
     alias
@@ -832,6 +859,16 @@ command substitution `$(...)`
     t="y"; if [ $t ]; then echo $t; fi
     v=value; [[ ! $v =~ val ]] && echo val
 
+### echo
+`-n` no trailing newline
+
+#### backslash escapes
+    echo -e "\\t" word_after_tab
+    echo -e '\t' word_after_tab
+    echo $'aa\'bb'
+
+`-E`  # (default) no interpretation
+
 ### file manage
     echo */  # lists directories
     find -iname \*.flv -o -iname \*.mp4 -o -iname \*.ogv
@@ -842,6 +879,7 @@ command substitution `$(...)`
 
 #### tests
     [ -d "$d" ] && echo "directory $d is there"
+    [ -f "$f" ] && echo "file $f is there"
     [ -s "nohup.out" ] && echo non-zero file size
     [[ -d "$d" && ! -L "$d" ]] && echo "It's a directory and not a symbolic link"
     rm a b; touch a; sleep 1; touch b; ls -t; [ a -ot b ] && echo older
@@ -858,6 +896,15 @@ command substitution `$(...)`
 #### show code
     declare -f <function_name>  # shows its contents
     type <function_name>
+
+### Internal Field Separator - set
+    IFS=this
+    unset IFS
+    savedIFS=$IFS; ...; IFS=$savedIFS
+
+### Internal Field Separator - test
+    cat -et <<<"$IFS"
+    echo "hello$IFS"."there"
 
 ### job control
     ctrl+c
@@ -877,6 +924,8 @@ jobs(1p)
     for f in **/*; do echo $f; done
     for i in {0..9..2}; do echo $i; done
     for i in bee fly wasp; do echo $i; done
+    s=2; e=4; for (( c=$s; c<=$e; c++ )); do echo $c; done
+    while read line; do echo "$line" done <file_to_use_line_by_line
 
 ### managing commands
     o $?  # exit code of last command, 0 if command succeeded
@@ -932,7 +981,7 @@ substitute user identity
     set  # lists all variables
 
 #### arrays
-    array=(element1 element2  element3)
+    a=(1 2 3); ((a[0]++)); ((a[1]+=2)); a+=(4); echo ${a[@]}
     echo ${#array[@]}  # number of elements
     echo ${array[-1]}  # last element
     firstElement=${array[0]}
@@ -953,6 +1002,10 @@ don't export them
     ((i-=2)) # decrements $i by 2
     i=0; echo $((i+=1))
     if (( ! $n == 1 )); then echo 'not 1'; fi
+    if (( 0 > 0 )); then echo greater; fi
+    if (( 1 >= 0 )); then echo greater; fi
+    n=1; printf "%03d\n" $n
+    n=08; (( 10#$n > 7 )) && o base10  # because 08 is an impossible octal
 
 ##### comparison
     if [ "$a" -ge "$b" ]
@@ -973,6 +1026,8 @@ don't export them
     qs=$'quote\'*star'; o "$qs"
     s=12345; echo $s | awk '{print substr($1,length($1)-2) }'
     s=12345; echo $s | cut -c $((${#s}-2))-
+    s=12345; echo ${s::-2}
+    s=yes; s+=no; o $s
 
 case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
 
@@ -1003,6 +1058,7 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     cat /etc/hostname
     clamscan -r  # shows Loading & Compiling
     clamscan -r 2>&1 | tee clamscan.log
+    dunstify -?
     gtk-launch --version
     halt -p
     i hier  # detailed description of the filesystem hierarchy
@@ -1019,7 +1075,6 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
 
 - lsmod(8) show what kernel modules are currently loaded
 - maximum 255 bytes per filename & 4096 per path
-- `uname -a` (= `--all`) handy line of system info
 
 ## awesome wm
 - maximized (horizontally or vertically) are indicated by (horizontal or vertical) double arrow, and break tiling
@@ -1039,7 +1094,7 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
 
 ## Dunst
     dunstctl close-all
-    dunstctl history-pop
+    dunstctl history-pop  # repeat for previous messages
     dunstify -u critical "Read this now!"
 
 ## groups
@@ -1067,10 +1122,18 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     last reboot
     saidar -c
 
+## Qt
+    qmake -query QT_VERSION
+
+
+`qmake -v` also reports `Qt` version
+
 ## systemd
     systemctl halt
     systemctl reboot
     systemctl suspend
+    systemd-analyze --system unit-paths
+    systemd-analyze --user unit-paths
 
 ### info
     systemctl  # list running Systemd units
@@ -1081,6 +1144,13 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     systemctl list-timers
     systemctl list-unit-files
     systemd-analyze blame  # time taken for boot processes
+
+## uname
+`uname -a` (= `--all`) handy line of system info
+
+### --kernel-release
+    [[ $(uname -r) =~ 'arch' ]] && echo 'Arch Linux'
+    [[ $(uname -r) =~ 'microsoft' ]] && echo 'WSL2'
 
 ## users
     echo $EUID
@@ -1187,6 +1257,26 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
 
 tr (Unix)
 
+# Ubuntu
+    lsb_release -a
+    sensible-browser https://manpages.ubuntu.com/manpages/jammy/man1/sensible-browser.1.html
+    sudo updatedb
+
+`sed -i` will change `fileformat` to `dos`
+
+## package manage
+    apt-cache pkgnames <package>
+    apt-get download <package>  # to current directory
+    dpkg -l
+    dpkg-deb -x <package> <directory>  # --extract
+
+- `sudo apt update` [the package index]
+- `sudo ls /etc/apt/sources.list.d/` repositories
+
+### upgrade packages
+    sudo apt upgrade
+    sudo apt-get dist-upgrade  # better, riskier
+
 # vim
     $HOME/.viminfo
     find . -type f -name tags
@@ -1201,7 +1291,9 @@ tr (Unix)
     thunderbird -addressbook
 
 ### clm - neomutt
-    neomutt -v
+    neomutt -D  # dump settings
+    neomutt -h  # help
+    neomutt -v  # version
     sidebar_format
 
 ### clm - notmuch

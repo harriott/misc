@@ -59,11 +59,15 @@ trashinbox
 
 `$DJH/TP-default-release/compatibility.ini` for LastVersion
 
+### attachments Deleted
+- Gmail: immediately propagated
+- Zourit: wasn't propagated - fix was to temporarily move 160 messages into process folder
+
 ### internal commands
-    Menu > File > Compact Folders
     right-click on folder > Properties > Repair Folder
 
 - `alt+e > e` (= `Settings`) `> Config Editor...` = `Advanced Preferences`
+- `alt+f > f` = `Compact Folders`
 - `ctrl+shft+b` = `Address Book`
 - `ctrl+u` = show all of the message
 
@@ -203,10 +207,10 @@ file formats
 Keyboard shortcuts for YouTube
 
 # yt-dlp
-    i yt-dlp
     yt-dlp -F <videoURL>
     yt-dlp -f "[height<=?720]" <videoURL>
     yt-dlp -f best <videoURL>
     yt-dlp -f ba <videoURL>  # bestaudio (= best*[vcodec=none])
+    yt-dlp -h
     yt-dlp --version
 

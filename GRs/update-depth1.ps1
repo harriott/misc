@@ -7,14 +7,15 @@
 
 # & $misc\GRs\update-depth1.ps1
 #  sourced from
-#   $vfvp\get-win64\updates.ps1
-# clone repositories destined for  $CITGRs ($Bash/export-jo) to $Drpbx\JH\dev-Sh\HPEB840G37
+#   $vfv/packs\get-win64\updates.ps1
+#   $misc/GRs/DCGRs.ps1
+# clone repositories destined for  $CITGRs ($AjB/export-jo) to $Drpbx\JH\dev-Sh\HPEB840G37
 
-# Test for  $vfvp:
-#  robocopy /mir $vfvp                            $home\Play0\packs
-#  robocopy /mir $vfvp\packs-cp\opt\nerdcommenter $home\Play0\nerdcommenter
-#  robocopy /mir $vfvp\packs-cp\opt\nerdtree      $home\Play0\nerdtree
-#  robocopy /mir $vimfiles\vim\plugin\fzf         $home\Play0\fzf
+# Test for  $vfv/packs:
+#  robocopy /mir $vfv/packs                            $home\Play0\packs
+#  robocopy /mir $vfv/packs\packs-cp\opt\nerdcommenter $home\Play0\nerdcommenter
+#  robocopy /mir $vfv/packs\packs-cp\opt\nerdtree      $home\Play0\nerdtree
+#  robocopy /mir $vfv/plugin\fzf                       $home\Play0\fzf
 
 if ( !$rd ) { $rd = [string]$pwd } # root directory
 $rd
