@@ -91,7 +91,7 @@ fix `path` in the `*.osp`
 - `=`  returns speed to normal
 
 # BBCode
-    $vimfiles/ftplugin/bbcode.vim
+    $vfv/ftplugin/bbcode.vim
     [code]some_code[/code]
     [quote]quote[/quote]
 
@@ -162,11 +162,6 @@ functionality included in Memoir
     \LARGE
     \huge
     \Huge
-
-### geometry
-    hmargin={<left margin>,<right margin>}
-    vmargin={<top margin>,<bottom margin>}
-    top=20mm
 
 ### horizontal spaces in text or math mode
     \enspace =>.5em
@@ -239,18 +234,15 @@ after filename changes in `$tex`
     r ~/.config/libreoffice/4/user/
 
 - `alt+f12` = `Tools > Options`
-- `alt+t e` = `Tools > Extensions` = `ctrl+alt+e`
 - `alt+o`/`alt-t` (= `Format`) `> p` (= `Page style...`/`Style de page...`)
+    - `Page` is where can set borders
+- `alt+t e` = `Tools > Extensions` = `ctrl+alt+e`
 - `ctrl+alt+e` = `Tools > Extension Manager...`
 - Writer: right-click on a hyperlink for `Remove Hyperlink`
 
 ## Draw
 - curve: `left-click > [shift] move > left-click > move > double-left-click`
 - `F2` (= `Insert > Text Box`)
-
-## Page Style
-- `alt+o p` = `shft+alt+p` = `Format > Page Style`
-- `Page` is where can set borders
 
 ## porting
     \user\config
@@ -858,7 +850,9 @@ print(sys.argv[0])  # the full pathname of the program
 - Ubuntu: `fdfind -V`
 
 ### man
+- `-a` (=`--absolute-path`)
 - `-d1` = depth 1 (current dir)
+- `-e <ext>` (= `--extension`)
 - `-E` (= `--exclude`) `<unquoted_glob>`
 - `-H` (`--hidden`)
 - `-I` = `--no-ignore` = don't respect `.(fd|git)ignore`
@@ -872,6 +866,8 @@ print(sys.argv[0])  # the full pathname of the program
 ### recents
     fd --changed-within 3h
     fd -tf --changed-within 2d
+
+in JH: `$DJH/search/searches.md`
 
 ### symlinks
     fd --max-depth 1 -Hl -tl
@@ -998,6 +994,7 @@ Sony Xperia 10 II: 1080x2520 = 21:9
 # images
 - 72 dpi = 18.3 dots per mm
 - COLOR TOOLS <http://html-color-codes.info/>
+- JPEG compression: `.jfif` `.jif` `.jpe` `.jpeg` `.jpg`
 
 ## GIMP
 paintbrush: shift previews a new straight line from last point to current mouse cursor location
@@ -1074,8 +1071,7 @@ paintbrush: shift previews a new straight line from last point to current mouse 
 - outer whitespaces get ignored
 
 ## filetypes
-    $vimfiles/vim/syntax/rgtl.vim
-    rg --type-list
+    rg --type-list  # $vfv/syntax/rgtl.vim
     rg <options> <pattern> [<path>]
 
 - `.dw` not known

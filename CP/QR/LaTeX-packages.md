@@ -7,8 +7,13 @@ vim: nospell:
     tlmgr info pgfplots
     tlmgr update --list
 
-- `datetime2`
+- `datetime2`: `\DTMnow{}`
 - `ifplatform`: `\ifwindows ... \else ... \fi`
+
+# graphicx
+    \usepackage{graphicx}
+    \graphicspath{<path>}
+    \includegraphics[width=8cm]{plot}
 
 # blindtext
     \blinddocument
@@ -22,8 +27,9 @@ vim: nospell:
     \setmonofont{...}
 
 # geometry
-- `hmargin` `left` `right`
-- `vmargin` `top` `bottom`
+    \usepackage[hmargin=21mm,vmargin={24mm,26mm}]{geometry}
+    \usepackage[margin=1.4cm]{geometry}
+    \usepackage[top=1cm,bottom=8mm,left=5mm,right=1cm,paperwidth=21cm,paperheight=120mm]{geometry}
 
 # hyperref
     \href{...}

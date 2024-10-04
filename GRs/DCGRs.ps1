@@ -6,10 +6,6 @@
 # robocopy /mir $DCGRs D:\CITGRs
 
 #=> 0 clones
-function gcd1 { git clone --depth 1 $args[0] $args[1] }
-# git clone --depth 1 https://github.com/simmel/urxvt-resize-font D:\CITGRs\urxvtFontSize/simmel-urxvt-resize-font
-
-#==> clone
 $clones = gc $misc/GRs/all.clones
 foreach ($clone in $clones) {
   $rrp = $clone -replace ' .*', ''  # repository relative path

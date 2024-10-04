@@ -120,9 +120,9 @@ trashinbox
 mozillamessaging
 
 #### Tools
+    alt+o > Paramètres des comptes  can then drag account folders into order
     alt+t > alt+a (= Add-ons and Themes)
     alt+t > e (= Edit) > a a (= Account Settings)
-    alt+t > Manually sort folders
 
 #### View
 - `alt+v > l` (= `Layout`) `> f` (= `Folder Pane`) to toggle it

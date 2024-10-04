@@ -143,9 +143,8 @@ date(1)
 - mouse to top for adjustments
 
 # documenting - PDFs
-    Outline = the hyperref bookmarks that correspond to headings of a LaTeX document
-
-`Firefox` shows `Document Outline`
+- `Firefox` shows `Document Outline`
+- Outline = the hyperref bookmarks that correspond to headings of a LaTeX document
 
 ## C5 printing
 - `Firefox` can't figure it's portrait
@@ -171,14 +170,17 @@ date(1)
     pdftoppm -jpeg -r 300 <pdf> <basename_for_jpeg_sequence>
 
 ## Zathura
+    zathura --mode=fullscreen a.pdf &
+
+zathura man page
+
+### commands
+    :info
     <tab> => toggles Outline view
     +/-/= => zoom in/out/original
     f11   => toggle fullscreen
     r     => rotate by 90 degrees
     R     => reload document
-    zathura --mode=fullscreen a.pdf &
-
-zathura man page
 
 # encoding
     delta $OSAB/mb-i34G1TU02/jo/conkyrc $OSAB/mb-sbMb/jo/conkyrc
@@ -228,19 +230,12 @@ Make (software)
 # file contents
     cat
     diff $OSAB/mb-i34G1TU02/jo/conkyrc $OSAB/mb-sbMb/jo/conkyrc
-    dos2unix -i *
     tac
     shuf
     sort -ro <file> <file>  # reverse sort in place
     wc -l <file>  # counts lines
 
 sharkdp/bat
-
-## file
-    fd -Itf -x file
-
-- "CRLF line terminators"
-- Vim fileencoding utf8 reported as ASCII
 
 ## awk
     awk -i inplace -F, '{print $3,$2,$1}' OFS='┊' toReorder.csv
@@ -260,6 +255,18 @@ sharkdp/bat
 - `OFS` output field separator (default = <space>)
 - `ORS` output record separator (default = <newline>)
 - `RS` record separator (default = newline)
+
+## dos2unix
+    dos2unix -i *
+    fd -tf -x dos2unix -ic  # list files that would be converted
+
+`-e` (=`--add-eol`) not on `WSL Ubuntu`
+
+## file
+    fd -Itf -x file
+
+- "CRLF line terminators"
+- Vim fileencoding utf8 reported as ASCII
 
 ## grepping
     grep -c '^PatternAtStartOfLine' <file>  # returns count of occurances
@@ -348,7 +355,7 @@ sharkdp/bat
     F4        -> Konsole  attached below
     Shift+F4  -> Konsole  in a new window
 
-## fd rm
+## fd
     fd -tl -HL -X rm  # removes dead links
     fd -tf stderr.txt -X rm
 
@@ -360,7 +367,7 @@ sharkdp/bat
     find . -name '*.txt' ! -name 'build*'  # excluding build*
     find . -newer oldFile
     find . -path 'exclude*these*paths' -prune -o -name '<filename>' -print
-    find . -type f -exec du -h {} + | sort -r -h > sizes.txt
+    find . -type f -exec du -h {} + | sort -hr > descendingSizes.txt
     find . -xtype l -delete  # quickly removes broken symlinks
 
 find(1)
@@ -707,7 +714,7 @@ requires a `DHCP` client to get an IP address
 ## NetworkManager
     nmcli device  # list of networking devices
     nmcli device wifi list | cat  # paged list of SSIDs, with those IN-USE starred
-    nmcli device wifi connect <SSID> password <password>
+    nmcli device wifi connect <SSID> password <pw>
 
 ### saved connections
     nmcli connection delete <SSID>  # can help
@@ -853,10 +860,12 @@ command substitution `$(...)`
     [ -z "$a" ] && echo zero_string; [ -n "$a" ] && echo string
     [ true ] && echo y
     [ "y" ] && echo y
-    [[ "hello" =~ "ll" ]] && o ll
     c=1; [[ $c == 1 ]] && echo "true"
     if <condition1>; then <action1>; elif ... else ... fi
     t="y"; if [ $t ]; then echo $t; fi
+
+#### =~
+    [[ "hello" =~ "ll" ]] && o ll
     v=value; [[ ! $v =~ val ]] && echo val
 
 ### echo
@@ -1002,8 +1011,6 @@ don't export them
     ((i-=2)) # decrements $i by 2
     i=0; echo $((i+=1))
     if (( ! $n == 1 )); then echo 'not 1'; fi
-    if (( 0 > 0 )); then echo greater; fi
-    if (( 1 >= 0 )); then echo greater; fi
     n=1; printf "%03d\n" $n
     n=08; (( 10#$n > 7 )) && o base10  # because 08 is an impossible octal
 
@@ -1013,6 +1020,11 @@ don't export them
     if [ "$a" -le "$b" ]
     if [ "$a" -lt "$b" ]
     if [ "$a" -ne "$b" ]
+
+##### (( > ))
+    (( 1 > 0 )) && o 1
+    if (( 1 > 0 )); then echo greater; fi
+    if (( 1 >= 0 )); then echo greater; fi
 
 #### empty or undefined
     $undefined && echo 'Eh! $undefined true!'
@@ -1044,6 +1056,15 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     t=lkj; echo ${t:0:${#t}-1}
 
     name=polish.ostrich.racing.champion; o ${name#*.}; o ${name##*.}; o ${name%%.*}; o ${name%.*}
+
+# sort
+- `-h` (`--human-numeric-sort`)
+- `-n` (`--numeric-sort`)
+- `-r` (`--reverse`)
+- `-o` (`--output=FILE`)
+- `-u` (`--unique`)
+- `--help`
+- `--version`
 
 # sound
     pactl set-sink-mute 0 toggle
@@ -1200,13 +1221,17 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
 
 ## tmux
     bind  --> alias for  bind-key
-    C-a z --> toggle zoom
+    C-a : --> command prompt
     C-a < --> display-menu
     C-a > --> display-menu
+    C-a t --> time (q to quit)
+    C-a z --> toggle zoom
+    C-a ~ --> messages (q to quit)
     if [ $TERM == 'screen-256color' ]; then echo "you're in tmux"; fi
     pgrep tmux -l
-    set synchronize-panes
-    tmux send ls enter  # ls  in the currently active pane
+    set synchronize-panes  # (set-option)
+    tmux send ls enter  # (send-keys) ls  in the currently active pane
+    tmux show -g prefix  # (show-options)
 
 ### buffers
     C-a ]     --> paste-buffer -p
