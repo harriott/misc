@@ -19,7 +19,7 @@ Pipe Viewer
 ## cmus
     cmus_notify -h
 
-- C* Music Player
+C* Music Player
 
 ### commands
     7        settings
@@ -33,6 +33,7 @@ Pipe Viewer
     p        win-mv-after
 
     b        player-next
+    x        player-play
     v        player-stop
     z        player-prev
 
@@ -50,11 +51,12 @@ Pipe Viewer
 
 ### media
 - can play: `mka`, `ogg`
-- can't play: `oma`, `omv`
+- can't play: `oma`, `omv`, `rmj`
 
 ## convert
     for f in *.flac; do ffi "$f" -c:a libvorbis -aq 4 "${f%.*}.ogg" ; done
     for f in *.oma; do ffi "$f" -c:a libvorbis "${f%.*}.ogg" ; done  # default VBR quality 3
+    for f in *.rmj; do ffi "$f" -c:a libvorbis -aq 4 "${f%.*}.ogg" ; done
     for f in *.wav; do ffi "$f" -c:a libvorbis -aq 4 "${f%.*}.ogg"; rm "$f"; done
     for f in *; do ffi "$f" -b:a 128K -vn "${f%.*}.mp3" ; done
 
