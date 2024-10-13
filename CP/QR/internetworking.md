@@ -125,13 +125,18 @@ mozillamessaging
     alt+t > e (= Edit) > a a (= Account Settings)
 
 #### View
+- `alt+a` (= `Affichage`)
 - `alt+v > l` (= `Layout`) `> f` (= `Folder Pane`) to toggle it
 - `alt+v > s` (= `Sort by`) `> h` (= `Unthreaded`)
 
 ##### body
 - `b` (= `Message Body As`)
     - `h` (= `Original HTML`)
-    - `p` (= `Plain Text`)  - can then export & Delete inline images
+    - `p` (= `Plain Text`)
+- `o` (= `Corps du message en`)
+    - `x` (= `Texte seul`)
+
+view as plain text allows deletion of inline images
 
 #### tbkeys-lite Main key bindings
     j: cmd:cmd_nextMsg
@@ -207,8 +212,8 @@ file formats
 Keyboard shortcuts for YouTube
 
 # yt-dlp
-    yt-dlp -F <videoURL>
-    yt-dlp -f "[height<=?720]" <videoURL>
+    $AjB/bashrc-wm
+    $MSWin10\PSProfile.ps1
     yt-dlp -f best <videoURL>
     yt-dlp -f ba <videoURL>  # bestaudio (= best*[vcodec=none])
     yt-dlp -h

@@ -166,7 +166,11 @@ gdisk(8)
 
 # webcam
     cameractrls
+
+## Guvcview
     guvcview &
+
+`Logitech B525`: `Audio Controls > Audio API > PULSEAUDIO`
 
 ## V4l-utils
     qv4l2 &
