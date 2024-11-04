@@ -169,6 +169,7 @@ gdisk(8)
 
 ## Guvcview
     guvcview &
+    ~/my_video-n.mkv
 
 `Logitech B525`: `Audio Controls > Audio API > PULSEAUDIO`
 

@@ -8,12 +8,8 @@ vim: nospell:
     tlmgr update --list
 
 - `datetime2`: `\DTMnow{}`
+- `enumitem`: `\begin{description}` used in `$JHw/CV-LaTeX/parts/*.tex`
 - `ifplatform`: `\ifwindows ... \else ... \fi`
-
-# graphicx
-    \usepackage{graphicx}
-    \graphicspath{<path>}
-    \includegraphics[width=8cm]{plot}
 
 # blindtext
     \blinddocument
@@ -21,6 +17,12 @@ vim: nospell:
     \blindtext
     \Blindtext[5]
     \usepackage[bible]{blindtext}
+
+# Currvita
+    $JHw/CV/LaTeX/JH-CV.tex
+
+    \UsePackage[LabelsAligned]{currvita}
+    \setlength{\cvlabelwidth}{50mm} % defaults to that of "88/8888-88/8888"
 
 # fontspec
     \setmainfont{...}
@@ -31,9 +33,17 @@ vim: nospell:
     \usepackage[margin=1.4cm]{geometry}
     \usepackage[top=1cm,bottom=8mm,left=5mm,right=1cm,paperwidth=21cm,paperheight=120mm]{geometry}
 
+# graphicx
+    \usepackage{graphicx}
+    \graphicspath{<path>}
+    \includegraphics[width=8cm]{plot}
+
 # hyperref
-    \href{...}
     \pdfstringdefDisableCommands{...}  % to fix "token not allowed"
+
+## URLs
+    \url{https://www.wikibooks.org}
+    \href{https://www.wikibooks.org}{Wikibooks home}
 
 # pifont
     \ding{80}  % a little star

@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# $misc/GRs/update-fixes.sh  sourced by  $misc/GRs/update-depth1.sh
+# $misc/GRs/DCGRs-ud1-fixes.sh
+#  passed in  $misc/GRs/DCGRs.sh  as argument to  $misc/GRs/update-depth1.sh
 
 # Joseph Harriott  Thu 09 May 2024
 

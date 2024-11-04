@@ -57,7 +57,7 @@ trashinbox
 ## Thunderbird
     $CrPl/networking/Thunderbird/builds.txt
 
-`$DJH/TP-default-release/compatibility.ini` for LastVersion
+`$Thb/compatibility.ini` for LastVersion
 
 ### attachments Deleted
 - Gmail: immediately propagated
@@ -120,9 +120,10 @@ trashinbox
 mozillamessaging
 
 #### Tools
-    alt+o > Paramètres des comptes  can then drag account folders into order
     alt+t > alt+a (= Add-ons and Themes)
     alt+t > e (= Edit) > a a (= Account Settings)
+
+`alt+o (= Outils) > m > m (= Paramètres des comptes)` can then drag account folders into order
 
 #### View
 - `alt+a` (= `Affichage`)

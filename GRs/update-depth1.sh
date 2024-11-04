@@ -1,23 +1,23 @@
 #!/bin/bash
 
-# Joseph Harriott  Mon 20 May 2024
+# Joseph Harriott  Mon 21 Oct 2024
 
 # depth=1 update a load of cloned  Git  repositories from their remotes
 
 # $misc/GRs/update-depth1.sh
 #  sourced from
 #   $misc/GRs/DCGRs.sh
-#   $vimfiles/packsGet-unix/updates.sh
+#   $vfv/getRepos/unix/get.sh
 
 [ $rd ] || rd=$PWD  # root directory
-echo '' > repositories
+[ -f repos ] && rm repos
 [ $sf ] || update=GO  # start from  echo $sf
 dotgits=$(find . -name '.git' | sort)
 for dotgit in $dotgits; do
     cd $rd
     rrp=${dotgit%/*}
     repository=${rrp:2}
-    echo $repository >> repositories
+    echo $repository >> repos
     [[ $repository =~ "$sf" ]] && update=GO
     if [[ $update == GO ]]; then
         echo "fetch ${tpf3b}$repository${tpfn}"
@@ -35,4 +35,5 @@ for dotgit in $dotgits; do
     [[ $update == GO ]] && [ $once ] && exit
 done
 cd $rd
+sort -uo repos repos
 

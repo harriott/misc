@@ -204,14 +204,14 @@ Make (software)
 
 `$machBld/jo/gitconfig` inludes `$misc/CP/gitconfig`
 
-# TeX
+## TeX
     pdfjam --help
 
-## TeX Live
+### TeX Live
     sudo tlmgr -gui
     sudo tlmgr update -all -dry-run
 
-### tests
+#### tests
     pdflatex sample2e.tex
     tex --version
 
@@ -275,7 +275,7 @@ sharkdp/bat
     grep -P '[\p{Devanagari}]' **/*.md  # finds Devanagari characters
 
 - `-A num` (`--after-context=num`)
-- `-i` ('--ignore-case)
+- `-i` (`--ignore-case`)
 - `-F` (interpret patterns as `--fixed-strings`, not regex)
 - GNU Grep Manual
 
@@ -317,11 +317,12 @@ sharkdp/bat
     sed -n '2,$p' <file>  # prints from the 2nd line
 
 # file manage
+    $DCGRs/unix/ranger-ranger
+    $OSL/bashrc-console-fm
     fuseiso <ISO_image> <mountDirectory>
     mkdir -p  # --parents = make parent directories as needed (no error if existing)
     sudo chown -R <user>:<group> <dir>
     tar -xzf archive.tar.gz [-C <target_directory>]
-    $OSL/bashrc-console-fm
 
 - `chmod 600 file` - owner can read and write
 - `chmod 644 file` - owner can change it, everyone else can read it
@@ -333,7 +334,6 @@ sharkdp/bat
 - `chmod 777 file` - all can read, write and execute
 - FILE(1)
 - install(1)
-- ln(1)
 - rm(1)
 
 ## compressed
@@ -368,7 +368,7 @@ sharkdp/bat
     find . -name "*" -type f ! -path '*/.git/*'
     find . -name '*.txt' ! -name 'build*'  # excluding build*
     find . -newer oldFile
-    find . -path 'exclude*these*paths' -prune -o -name '<filename>' -print
+    find . -path '*exclude_path*' -prune -o -name 'partial_filename*' -print
     find . -type f -exec du -h {} + | sort -hr > descendingSizes.txt
     find . -xtype l -delete  # quickly removes broken symlinks
 
@@ -428,6 +428,10 @@ du(1)
 
 tree(1)
 
+## ln
+- `-s` (`--symbolic`) not hard
+- ln(1)
+
 ## ls
     dircolors  # LS_COLORS=...
     dircolors --help
@@ -476,6 +480,11 @@ output info: `>` = the item is received
     - `-p` (`--perms`) keep permissions
 - `-X` (`--xattrs`) keep extended attributes
 
+# Flatpak
+    flatpak list
+    flatpak remotes  # list added repositories
+    flatpak uninstall <pkg>
+
 # get at root on tty2
     Ctrl+Alt+F2 > root + pw
 
@@ -523,7 +532,22 @@ fingerprint: `xxxx xxxx xxxx xxxx xxxx  xxxx xxxx xxxx xxxx xxxx`
 up/down => zoom in/out
 ```
 
+## ImageMagick
+    convert -flatten transparent.png white_background.png
+    convert -list
+    convert -list gravity
+    convert <colourimage> -colorspace Gray <grayimage>
+    convert <people> -paint 9 <people-oil>
+    convert <positive> -negate <negative>
+    for i in $(ls); do convert -resize 10% $i r$i; done
+    for i in $(ls); do convert -resize 15% $i r$i; done
+    for i in $(ls); do convert -resize 25% $i r$i; done
+    for i in $(ls); do convert -resize 50% $i r$i; done
+
 ## nomacs
+    nomacs -h
+    nomacs -v
+
 - can only fill page for printing
 - can't open `webp`
 
@@ -843,7 +867,7 @@ pass(1)
     shopt -u nullglob  # incase  t=$'\?'; echo $t
     xdg-open $cIThul/linux/bash.pdf
     za $ITscr/unix-like/linux/bash.pdf
-    ~/Arch/bash_history
+    ~/.bash_history
 
 command substitution `$(...)`
 
@@ -1058,6 +1082,11 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     t=lkj; echo ${t:0:${#t}-1}
 
     name=polish.ostrich.racing.champion; o ${name#*.}; o ${name##*.}; o ${name%%.*}; o ${name%.*}
+    u=.git.git.git; o ${u%.git}
+
+## flow control
+- `ctrl+q` continue
+    - `ctrl+s` stop
 
 # sort
 - `-h` (`--human-numeric-sort`)
@@ -1193,6 +1222,8 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
 
 ## Alacritty
     $OSAB/terminal/alacritty.toml
+    alacritty -h  # --help
+    alacritty -V  # --version
 
 - `Ctrl+Shift+b` = `SearchBackward`, then `Esc`
 - `Ctrl+Shift+space` = `ToggleViMode`
@@ -1292,10 +1323,13 @@ tr (Unix)
 `sed -i` will change `fileformat` to `dos`
 
 ## package manage
-    apt-cache pkgnames <package>
+    apt-cache -h
+    apt-cache showpkg <package>  # report includes dependencies and reverse dependencies
     apt-get download <package>  # to current directory
     dpkg -l
     dpkg-deb -x <package> <directory>  # --extract
+    sudo apt install <package1> <package2> ...
+    sudo apt remove <package1> <package2> ...
 
 - `sudo apt update` [the package index]
 - `sudo ls /etc/apt/sources.list.d/` repositories

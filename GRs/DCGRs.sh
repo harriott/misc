@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# Joseph Harriott  Thu 09 May 2024
+# Joseph Harriott  Mon 04 Nov 2024
 
 # manage my downloaded collection of  Git  repositories
 
 # $CITGRs  is exported in  $machBld/export-machine
-# $DCGRs  is exported in  $AjB/export-jo
+# $DCGRs  is exported in  $OSL/export-jo
 
-# bash $misc/GRs/DCGRs.sh
+# cd $CITGRs; bash $misc/GRs/DCGRs.sh
 
 # du -hs $DCGRs
 
@@ -15,41 +15,32 @@
 
 set -e  # quits on error
 
-cd $CITGRs; pwd
+#=> 1 clones 0 update  all.clones
+. $misc/GRs/getClones.sh $misc/GRs/all.clones
 
-#=> 0 clones
-# gc='git clone'
-gc='git clone --depth 1'
-# gc='git clone --filter=blob:none'  # seems to cause too many errors on pulls
+#=> 1 clones 1 remove
+# some repositories that don't update easily
 
-#==> 0 clone
-
-#==> 1 re-clone
 # sudo rm -r $CITGRs/CP/emacs/daviwil-dotfiles
-# $gc https://github.com/daviwil/dotfiles $CITGRs/CP/emacs/daviwil-dotfiles
-
 # sudo rm -r $CITGRs/CP-emacs-emacs-mirror-emacs
-# $gc https://github.com/emacs-mirror/emacs $CITGRs/CP-emacs-emacs-mirror-emacs
-
 # sudo rm -r $CITGRs/CP/emacs/syl20bnr-spacemacs
-# $gc https://github.com/syl20bnr/spacemacs $CITGRs/CP/emacs/syl20bnr-spacemacs
-
 # sudo rm -r $CITGRs/CP/Go/Hugo/gohugoio-hugo
-# $gc https://github.com/gohugoio/hugo $CITGRs/CP/Go/Hugo/gohugoio-hugo
-
 # sudo rm -r $CITGRs/CP/jgm-pandoc
-# $gc https://github.com/jgm/pandoc $CITGRs/CP/jgm-pandoc
-
 # sudo rm -r $CITGRs/CP/nomacs-nomacs
-# $gc https://github.com/nomacs/nomacs $CITGRs/CP/nomacs-nomacs
-
 # sudo rm -r $CITGRs/CP/pypa-pipx
-# $gc https://github.com/pypa/pipx $CITGRs/CP/pypa-pipx
-
 # sudo rm -r $CITGRs/unix/linux/BrodieRobertson-dotfiles
-# $gc https://github.com/BrodieRobertson/dotfiles $CITGRs/unix/linux/BrodieRobertson-dotfiles
 
-#=> 2 updates  $CITGRs
+#=> 1 clones 2 get
+while read cloneLine; do
+  clone="${cloneLine%% *}"
+  if ! [ -d $clone ]; then
+    gcc="git clone --depth 1 ${cloneLine#* } ${cloneLine%% *}"
+    echo "${tpf3b}$clone${tpfn}  not there, so"
+    $gcc
+  fi
+done <"$misc/GRs/all.clones"  # can prefix  test https://github.com/test
+
+#=> 2 update  $CITGRs
 # sf='StartFrom'
 # sf='./CP-emacs-emacs-mirror-emacs'
 # sf='./CP/emacs/syl20bnr-spacemacs'
@@ -66,7 +57,7 @@ gc='git clone --depth 1'
 # sf='no_repository'
 # sf='tjdevries-config_manager'
 # once=yes
-. $misc/GRs/update-depth1.sh $misc/GRs/update-fixes.sh
+# . $misc/GRs/update-depth1.sh $misc/GRs/DCGRs-ud1-fixes.sh
 
 #=> 3 symlinks in  $CITGRs
 # because Dropbox doesn't like symlinks...

@@ -1,13 +1,13 @@
 
 # vim: set fdl=2:
 
-# Joseph Harriott - lun 13 mai 2024
+# Joseph Harriott - Mon 21 Oct 2024
 
 # depth=1 update a load of cloned  Git  repositories from their remotes
 
-# & $misc\GRs\update-depth1.ps1
+# & $misc/GRs/update-depth1.ps1
 #  sourced from
-#   $vfv/packs\get-win64\updates.ps1
+#   $vfv/packs/get-win64/updates.ps1
 #   $misc/GRs/DCGRs.ps1
 # clone repositories destined for  $CITGRs ($AjB/export-jo) to $Drpbx\JH\dev-Sh\HPEB840G37
 
@@ -45,5 +45,5 @@ fd -utd '\.git$' | %{
   }
 }
 cd $rd
-$repositories > repositories
+$repositories > repos
 

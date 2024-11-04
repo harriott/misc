@@ -92,8 +92,12 @@ fix `path` in the `*.osp`
 
 # BBCode
     $vfv/ftplugin/bbcode.vim
+    [b]bolded[/b]
     [code]some_code[/code]
+    [h]heading[/h]
+    [ins]inserted[/ins]
     [quote]quote[/quote]
+    [url=https://en.wikipedia.org]English Wikipedia[/url]
 
 # colours
 - Closest Named Web Colors
@@ -123,6 +127,7 @@ functionality included in Memoir
     \centred{\rule{9cm}{0.4pt}}  % horizontal line
     \listfiles  in preamble gets package versions in  .log
     \newenvironment{<envName>}[<n>][<default>]{<beginEnv>}{<endEnv>}
+    \overfullrule=2mm  % adds a black bar to locate an overfull hbox
     \pagebreak
     \pagestyle{empty}  % no headers or footers from here
     \raggedleftSomeText\par}
@@ -137,13 +142,6 @@ functionality included in Memoir
     \usepackage{soul}  % Hyphenation for letterspacing, underlining, and more
     \usepackage{titlesec}  % incompatible with memoir
     \vfill
-
-```
-\begin{tabular}{ c|l|r }
-  \hline
-  centred & left & right \\
-\end{tabular}
-```
 
 ### font styles
     \textit{...}
@@ -211,7 +209,10 @@ after filename changes in `$tex`
     miktex --verbose packages check-update
     miktex packages list | measure | select -expand Count
 
-## fonts - Indic
+## fonts
+style `\textnormal`
+
+### Indic
     FreeFont
 
 `Lohit` used by Wikipedia
@@ -221,9 +222,15 @@ after filename changes in `$tex`
     \rightarrow
 
 ## tabular environment
-    \hline
     \multicolumn{num_cols}{alignment}{contents}
     \renewcommand{\arraystretch}{1.5}  % tabular (default 1.0)
+
+```
+\begin{tabular}{ c|l|r }
+  \hline
+  centred & left & right \\
+\end{tabular}
+```
 
 ### multirow
     \multirow{<num_rows>}{<width>}{<contents>} % * for default width
@@ -459,7 +466,6 @@ no built in documentation for `straight.el`
 Spacemacs documentation
 
 # encoding
-    $ITstack/CrossPlatform/dpl/hello.lua
     code-minimap $misc/CP/QR/QR.md
     rustc -V  # --version
     wiki/JSON
@@ -624,6 +630,10 @@ Tig Manual
     java -version
     PS> where.exe java
 
+## Lua
+    $DCGRs/CP/Vim/vim-vim/src/testdir/testluaplugin/lua/testluaplugin/hello.lua
+    lua -v
+
 ## markdown
 - <https://github.com/github/linguist/blob/master/lib/linguist/languages.yml> dosini
 - <http://daringfireball.net/projects/markdown/syntax>
@@ -731,6 +741,7 @@ replaces `print "$var\n";`
 ## Python
     $ITstack/CP/encoding/dpl/Python/scratch.py
     python -h  # --help
+    python -V
 
 ### code
     quit()
@@ -757,6 +768,13 @@ print(sys.argv[0])  # the full pathname of the program
     pipx run pycowsay moo
     pipx uninstall -h
     pipx upgrade-all
+
+### site-packages
+    pip show six | grep "Location:" | cut -d " " -f2
+    python -c "import os; print(os.path.dirname(os.__file__) + '/site-packages')"
+    python -c 'import site; print(site.getsitepackages())'
+    python -c 'import sysconfig; print(sysconfig.get_paths()["purelib"])'
+    python -m site --user-site
 
 ### versions
     pyenv rehash
@@ -970,8 +988,9 @@ The GNU Privacy Handbook
     duf (--all)  # storage devices info
 
 ## for paper
-`HP ENVY 5532 > Wireless Settings > Settings > Advanced > IP Settings > OK > Manual` allows tweaking of printer's address
+`HP Envy Inspire 7220e`: landscape top is to right
 
+### HP ENVY 5532
 - place DL envelopes with the open side to the left
 - printed pages come out head first (= upside down, printed face up)
 
@@ -1010,8 +1029,8 @@ paintbrush: shift previews a new straight line from last point to current mouse 
 `alt+f` (= `File`) > `x` (= `Export As...`)
 
 ## ImageMagick
-    $CrPl/IMclf-sbMb.txt
     identify -format '%w %h %f \n' *  # images listed by size
+    magick <image> -background azure -gravity south -splice 0x80 <SBordered>
     montage <left> <right> -geometry +9+9 -tile 2x1 <lr>
     montage <upper> <lower> -geometry +0+0 -tile 1x2 <ul>
 
@@ -1031,26 +1050,6 @@ paintbrush: shift previews a new straight line from last point to current mouse 
 - anisotropic resize
 - can convert from WebP
 
-#### Bash
-    convert -flatten transparent.png white_background.png
-    convert -list
-    convert -list gravity
-    convert <colourimage> -colorspace Gray <grayimage>
-    convert <people> -paint 9 <people-oil>
-    convert <positive> -negate <negative>
-    for i in $(ls); do convert -resize 10% $i r$i; done
-    for i in $(ls); do convert -resize 15% $i r$i; done
-    for i in $(ls); do convert -resize 25% $i r$i; done
-    for i in $(ls); do convert -resize 50% $i r$i; done
-
-#### Powershell - biz card backgrounds
-    magick -size 924x568 plasma: plasma1.jpg
-    magick -size 924x568 xc:'rgba(0, 0, 0)' black.jpg
-
-#### Powershell - tiff -> jpg recursively convert
-    gci -r *.tiff | %{ magick $_ $_'.jpg' }
-    gci -r *.tiff | rm
-
 ### gravity
     magick -list gravity
 
@@ -1067,7 +1066,6 @@ paintbrush: shift previews a new straight line from last point to current mouse 
     rg -help
 
 - `-N` (= `--no-line-number`)
-- in JH: `$DJH/search/searches.md`
 - outer whitespaces get ignored
 
 ## filetypes
@@ -1090,6 +1088,8 @@ paintbrush: shift previews a new straight line from last point to current mouse 
     rg -uu <someText>  # ignores ignore files, and searches in hidden stuff
     rg <someText> **/*.ext
     rg 'url = ' **\*.git\config
+
+in JH: `$DJH/search/searches.md`
 
 # Stack Exchange Network
 - `@petersmith` = Peter Smith
@@ -1146,7 +1146,7 @@ messes up if terminal is resized
 - carriage return (U+000D) returns the cursor to the left of the line (usually just before line feed on MSWin)
 - finding characters
 
-## vim
+## Vim
     $HOME/_viminfo
     ----10--------20--------30--------40--------50--------60--------70--------80--------90-------10
     echo $MYVIMRC
