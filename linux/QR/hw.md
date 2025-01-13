@@ -80,6 +80,10 @@ automatically selects the best orientation for filling the page
     umount /dev/sdxx
     umount /mountpoint
 
+## ioping
+    ioping
+    sudo ioping /dev/sda
+
 ## mount
     mount | grep /dev/sd
 
@@ -134,7 +138,7 @@ gdisk(8)
 - parted(8)
 
 ##### interactive mode
-    sudo parted <device>
+    sudo parted /dev/sdx
 
 ###### commands
 - `mklabel <label>` destroys existing partitions
@@ -144,12 +148,18 @@ gdisk(8)
 ##### script mode
     sudo parted -l | grep sdf -B 1 -A 6  # --list
     sudo parted /dev/sda -s mklabel msdos mkpart primary 0% 100%  # also creates an MBR
+    sudo parted /dev/sdf p  # quick print of device info
 
 `-s` (`--script`) never prompts for user intervention
 
 ### Trash
     du -hs ~/.local/share/Trash
     rm -rf ~/.local/share/Trash
+
+#### trash-cli
+    $OSL/bashrc-console-fm
+    trash-empty  # lists before query
+    trash-put
 
 ## optical
     cd-drive  # info

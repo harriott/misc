@@ -9,6 +9,7 @@ commands here are generic, except for those under the Ubuntu heading, see also `
     info info
     wcsf=$(wc -l <samplefile>); echo $wcsf
     $ITscr/unix-like/usr_lib_X11_rgb.txt  # colours
+    $misc/GRs/DCGRs.sh
     $OSL/bashrc-generic
 
 Pipe Viewer
@@ -50,7 +51,7 @@ C* Music Player
     + =      vol +10%
 
 ### media
-- can play: `mka`, `ogg`
+- can play: `mka`, `ogg`, `wma`
 - can't play: `oma`, `omv`, `rmj`
 
 ## convert
@@ -153,10 +154,6 @@ date(1)
 - `LibreOffice Writer` gets it right
 - Ubuntu's `qpdfview` gets it almost right
 
-## Poppler
-    pdfimages -h
-    pdfimages [-j/-png] pdfNam3.pdf imageName  # pulls out images (default ppm) separated (if there are any)
-
 ## qpdfview
     F6 = View > Docks > Outline (such as the headings of a LaTeX document)
     F8 = Thumnails
@@ -178,42 +175,16 @@ zathura man page
 
 ### commands
     :info
-    <tab> => toggles Outline view
-    +/-/= => zoom in/out/original
-    f11   => toggle fullscreen
-    r     => rotate by 90 degrees
-    R     => reload document
 
-# encoding
-    delta $OSAB/mb-i34G1TU02/jo/conkyrc $OSAB/mb-sbMb/jo/conkyrc
-    git diff $OSAB/mb-i34G1TU02/jo/conkyrc $OSAB/mb-sbMb/jo/conkyrc
-    ~\.pyenv
+- `<tab>` toggles Outline view
+- `f11` toggle fullscreen
+- `r` rotate by 90 degrees
+- `R` reload document
 
-Make (software)
-
-## Git - configurations
-    $ fd -HI -tf ^config$ | xargs rg -l 'remote = gh'  # ripgrep
-    $ find . -wholename '*.git'
-    $ find . -wholename '*.git/config' > gitconfig-all.txt
-    $ find . -wholename '*.gitignore' > gitignore-all.txt
-    $ find . -wholename '*.git/config' | wc -l
-    $ grep -rl --include "config" harriott . > gitconfig-harriott.txt
-
-### gitconfig
-    r ~/.ssh
-
-`$machBld/jo/gitconfig` inludes `$misc/CP/gitconfig`
-
-## TeX
-    pdfjam --help
-
-### TeX Live
-    sudo tlmgr -gui
-    sudo tlmgr update -all -dry-run
-
-#### tests
-    pdflatex sample2e.tex
-    tex --version
+#### resizing
+- `+/-/=` zoom in/out/original
+- `a` best-fit mode
+- `s` width mode
 
 # Emacs
     ctrl-x > ctrl-c => quit
@@ -224,6 +195,43 @@ Make (software)
     alt-v => scroll up
     ctrl-l => centre text in view
     ctrl-v => scroll down
+
+# encoding
+    delta $OSAB/mb-i34G1TU02/jo/conkyrc $OSAB/mb-sbMb/jo/conkyrc
+    git diff $OSAB/mb-i34G1TU02/jo/conkyrc $OSAB/mb-sbMb/jo/conkyrc
+    ~\.pyenv
+
+Make (software)
+
+## Git
+    :Man git
+
+### Git - configurations
+    $ fd -HI -tf ^config$ | xargs rg -l 'remote = gh'  # ripgrep
+    $ find . -wholename '*.git'
+    $ find . -wholename '*.git/config' > gitconfig-all.txt
+    $ find . -wholename '*.gitignore' > gitignore-all.txt
+    $ find . -wholename '*.git/config' | wc -l
+    $ grep -rl --include "config" harriott . > gitconfig-harriott.txt
+
+#### gitconfig
+    r ~/.ssh
+
+`$machBld/jo/gitconfig` inludes `$misc/CP/gitconfig`
+
+## TeX
+    pdfjam --help
+
+### TeX Live
+    /etc/texmf/web2c/fmtutil.cnf
+    sudo tlmgr -gui
+    sudo tlmgr update -all -dry-run
+
+`/etc/texmf/web2c/texmf.cnf` defines variables for `kpathsea`
+
+#### tests
+    pdflatex sample2e.tex
+    tex --version
 
 # fcron
     fcrontab -l
@@ -245,8 +253,10 @@ sharkdp/bat
     v=variable; awk -v var="$v" 'BEGIN {print var}'
     za $cIThul/gawk.pdf
 
+- `-i` = `--include`
 - GAWK(1)
 - GNU Awk
+- `gsub(/old/,"new"[,target])` returns the number of substitutions made
 
 ### built-in variables
 - `FILENAME` name of the current input-file
@@ -281,7 +291,6 @@ sharkdp/bat
 
 ## sed
     $cIThul/sed
-    [[:alpha:]] = [[:lower:]] + [[:upper:]] = [A-Za-z]
     echo "blia blib bou blf" | sed -E 's/bl(ia|f)//g'
     sed --version
     sed 5q <file> prints first 5 lines
@@ -290,9 +299,19 @@ sharkdp/bat
 - GNU sed
 - stream editor
 
+### bracket expressions
+    echo ' a' | sed 's/[^[:space:]]/!/'
+    echo 'gray, grey' | sed 's/gr[ae]y/blue/g'
+
+#### character classes
+- `[:alpha:]`=`[:lower:]`+`[:upper:]`=`[A-Za-z]`
+- `[:digit:]` catches 0-9
+
 ### make changes
     echo -e '1\n2\n3' | sed $'s/.*/\t&/g'  # inserting tabs
     echo "don't forget that" | sed 's/\x27/\"/'
+    echo "é" | sed 's/é/e/'
+    echo "Oo" | sed 's/o/a/Ig'  # case insensitive
     echo "THIS is a test!" | sed 's/.*/\L&/; s/[a-z]*/\u&/g'  # title case
     sed -i $'s/\t/tab_gone/g' <file_with_tabs>
     sed -i '/<regex>/!d' <filetoreduce>  # removes lines that don't match
@@ -363,6 +382,7 @@ sharkdp/bat
 
 ## find
     find $PWD -name <file>  # gets full path
+    find -cmin -5
     find -regex ".*a.*\|.*b.*"
     find . -maxdepth 1 -mindepth 1 -type f -name "*"  # those in working directory
     find . -name "*" -type f ! -path '*/.git/*'
@@ -374,8 +394,15 @@ sharkdp/bat
 
 find(1)
 
+## GIO
+    gio help
+    gio version
+
+(Gnome Input/Output)
+
 ## investigations
     diff --no-dereference -qr dir1 dir2
+    ls -ar | rev | cut -d'.' -f1 | rev | sort | uniq -c | sort -r  # extension counts
     stat -c '%a %n' *  # show octal permissions
 
 ### counts
@@ -386,6 +413,7 @@ find(1)
     ls **/* | wc -l  # all of the files
 
 ### mlocate
+    locate .asc | grep '\.asc$'
     locate -c <target>  # --count
     locate -h
 
@@ -550,6 +578,7 @@ up/down => zoom in/out
 
 - can only fill page for printing
 - can't open `webp`
+- PrintPreview-PageSetup-Landscape
 
 ### keybindings
     ctrl+k => keyboard Shortcuts
@@ -653,11 +682,7 @@ list open files
 
 # multimedia
     ffprobe -i <avfile> -show_format -v quiet | sed -n 's/duration=//p'  # fractional seconds
-
-## mediainfo
     mediainfo <avfile> | grep Encoded
-    mediainfo --Inform='Video;%FrameCount%' $the_file
-    mediainfo --Output='General;%Duration%' <avfile>  # milliseconds
 
 ## mpv
     mpv av://v4l2:/dev/video0
@@ -808,21 +833,24 @@ requires a `DHCP` client to get an IP address
     xargs < <file>  # cat alternative
 
 # pass
-    pass
+    pass  # pass ls
     pass help
-    pass init
-    pass insert <location> > <pw>
-    pass ls
-    pass rm -r <folder>
+    pass init <gpg-id>  # creates  ~/.password-store/.gpg-id
+    pass add [-f] <node> > <pw> # insert --force
+    pass insert <node> > <pw>
+    pass <node>
+    pass mv <node_old> <node_new>
+    pass rm [-f] [-r] <node>  # [--force] [--recursive]
 
 pass(1)
 
 # processes
     lsof -i
-    niceness: -19 = lowest priority, 20 = highest
     pidof init  # process id of  init, which is always 1
     sudo iotop -o
     xprop  # WM_CLASS(STRING) = "instance", "class"
+
+niceness: `-20` = highest priority, `19` = lowest
 
 ## kill
     kill -9 **<tab>  # fzf
@@ -853,7 +881,6 @@ pass(1)
     /etc/profile
     <somecommand> | xcol <keyword1> <keyword2> ... # for highlighting
     bash --version
-    date +%y%m%d -d 'now day'
     echo "$floatingpointnumber-$another" | bc  # FP math
     echo "$PS1"
     echo $PWD
@@ -956,6 +983,7 @@ jobs(1p)
     break  # breaks out of loop
     continue  # to next iteration of loop
     for d in */; do echo $d; done
+    for d in /mnt/*; do echo $d; done
     for f in **/*; do echo $f; done
     for i in {0..9..2}; do echo $i; done
     for i in bee fly wasp; do echo $i; done
@@ -1054,7 +1082,7 @@ don't export them
 
 #### empty or undefined
     $undefined && echo 'Eh! $undefined true!'
-    empty=''; [[ -z $empty ]] && echo empty
+    empty=''; [ -z $empty ] && echo empty
 
 #### strings
     [[ $t =~ (y|n) ]] && echo 'good answer'
@@ -1110,13 +1138,10 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     cat /etc/hostname
     clamscan -r  # shows Loading & Compiling
     clamscan -r 2>&1 | tee clamscan.log
-    dunstify -?
     gtk-launch --version
     halt -p
     i hier  # detailed description of the filesystem hierarchy
     locale
-    notify-send -u critical "test of critical notification"
-    notify-send -t 5000 -u low "Hello World"
     openbox --reconfigure
     passwd jo  # then re-login
     ps $(pgrep Xorg)  # shows which tty X is on
@@ -1144,10 +1169,10 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     du -shx
     ncdu -x  # --one-file-system
 
-## Dunst
-    dunstctl close-all
-    dunstctl history-pop  # repeat for previous messages
-    dunstify -u critical "Read this now!"
+## etckeeper
+    /etc/.gitignore
+    /etc/etckeeper/etckeeper.conf
+    sudo ls /etc/.git
 
 ## groups
     /etc/group  # to see them all
@@ -1167,12 +1192,32 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     systeroid -T  # list parameters in a tree
 
 ## monitoring
+    atop
     free -h
     glances
     gtop
     htop
+    iostat -dm -p sda2 3
     last reboot
     saidar -c
+
+### dool
+    dool --help
+    dool -dD sda  # --disk
+    dool -n  # --net
+    dool -s  # --swap
+    i dool
+
+## notification - Dunst
+    dunstctl close-all
+    dunstctl history-pop  # repeat for previous messages
+    dunstify -?
+    dunstify -u critical "Read this now!"
+
+## notification - notify-send
+    notify-send 'test of notify-send'
+    notify-send -u critical "test of critical notification"
+    notify-send -t 5000 -u low "Hello World"
 
 ## Qt
     qmake -query QT_VERSION
@@ -1213,11 +1258,9 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
 
 # term
     sudo fgconsole  # reports tty number
-    tput colors
 
 - `Ctrl+q` resume output to screen
 - `Ctrl+s` pause output to screen
-- tput(1)
 - w(1)
 
 ## Alacritty
@@ -1237,6 +1280,13 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
 - `Shift+PageDown/Up` = `ScrollPageDown/Up`
 - `Shift+End/Home` = `ScrollToBottom/Top`
 
+## size
+    stty size  # lines columns
+
+### set (not in tmux)
+    printf '\033[8;40;100t'
+    resize -s 90 150
+
 ## terminal line settings
     stty - a
 
@@ -1245,63 +1295,88 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     ctrl-q = XON
     ctrl-s = XOFF
 
-## size
-    stty size  # lines columns
-
-### set (not in tmux)
-    printf '\033[8;40;100t'
-    resize -s 90 150
-
 ## tmux
-    bind  --> alias for  bind-key
-    C-a : --> command prompt
-    C-a < --> display-menu
-    C-a > --> display-menu
-    C-a t --> time (q to quit)
-    C-a z --> toggle zoom
-    C-a ~ --> messages (q to quit)
     if [ $TERM == 'screen-256color' ]; then echo "you're in tmux"; fi
     pgrep tmux -l
-    set synchronize-panes  # (set-option)
-    tmux send ls enter  # (send-keys) ls  in the currently active pane
-    tmux show -g prefix  # (show-options)
 
-### buffers
-    C-a ]     --> paste-buffer -p
-    C-a # --> list-buffers
-    C-a = --> choose-buffer -Z
-
-### copy mode
-    C-a [     --> copy-mode
-    C-a e --> easycopy
-    C-a P (C-p) --> quickopen (abspath, URL)
-    Enter --> quits
-    Pg Up/Dn
-    S --> copytk mode
-    s --> easymotion
-
-#### copytk mode
-    j --> easymotion forward
-    k --> easymotion backward
-    n --> easymotion lines
-    s --> easymotion
-
-### panes
-    C-a q     --> display-panes
-    C-a { / } --> swap-pane -U / -D
-    C-a Space --> next-layout (of 5 defaults)
-    :join-pane -s 2 -t 1  # move w2 as a pane to w1
-
-### sessions
-    :choose-tree -> put a pane into tree mode, can kill and select
-
+### $ tmux ...
     tmux a               # attach
     tmux a -t myname     # attach to session myname
     tmux detach
     tmux kill-server     # good for resetting
     tmux kill-session -a # kills all but current session
+    tmux list-keys | grep '~'
+    tmux list-keys | mo
     tmux ls              # list sessions
     tmux lsk -Na         # includes my rebinds
+    tmux send ls enter  # (send-keys) ls  in the currently active pane
+    tmux show -g prefix  # (show-options)
+    tmux show -s   # server
+
+### internal commands
+    :bind  # alias for  bind-key
+    :choose-tree  # put a pane into tree mode, can kill and select
+    :join-pane -s 2 -t 1  # move w2 as a pane to w1
+    :joinp -s 2 [-t 1 ]  # join-pane, joining pane in window 2 [to that in window 1]
+    :set synchronize-panes  # (set-option)
+
+### key binds
+    $OSL/tmux/tmux.conf
+    C-a :  # command prompt
+    C-a ?  # list-keys -Na
+    C-a [  # copy-mode
+    C-a <  # display-menu
+    C-a >  # display-menu
+    C-a ~  # show-messages (q to quit)
+    C-a t  # time (q to quit)
+
+#### buffers
+    C-a ]  # paste-buffer -p
+    C-a #  # list-buffers
+    C-a =  # choose-buffer -Z
+
+#### copy mode
+    C-a [  # copy-mode
+    C-a e  # easycopy
+    C-a P (C-p)  # quickopen (abspath, URL)
+    Enter  # quits
+    Pg Up/Dn
+    S  # copytk mode
+    s  # easymotion
+
+##### copytk mode
+    j  # easymotion forward
+    k  # easymotion backward
+    n  # easymotion lines
+    s  # easymotion
+
+#### session window pane
+    M-PgDn/PgUp  # (= C-a (/) ) previous/next session
+
+##### panes
+    C-a C-o  # Rotate through the panes
+    C-a M-1  # switch to even-horizontal layout
+    C-a M-2  # switch to even-vertical layout
+    C-a M-3  # switch to main-horizontal layout
+    C-a M-4  # switch to main-vertical layout
+    C-a M+arrow  # resize by 5
+    C-a q  # show numbers
+    C-a {  # swap-pane -U
+    C-a }  # swap-pane -D
+    C-a z  # toggle zoom
+    C-a q  # display-panes
+    C-a { / }  # swap-pane -U / -D
+    C-a Space  # next-layout (of 5 defaults)
+
+##### windows
+    C-a w  # choose window from a list
+    M-n  # (= C-a n ) select window n
+
+## tput
+    tput colors
+    tput cuu 2; tput el  # move back a line and clear it
+
+tput(1)
 
 ## urxvt
     urxvt --help
@@ -1338,6 +1413,11 @@ tr (Unix)
     sudo apt upgrade
     sudo apt-get dist-upgrade  # better, riskier
 
+## Pro
+    pro security-status
+    pro status
+    sudo pro attach <FPT>
+
 # vim
     $HOME/.viminfo
     find . -type f -name tags
@@ -1351,17 +1431,29 @@ tr (Unix)
 ## email
     thunderbird -addressbook
 
-### clm - neomutt
+### clm
+    $AjB/bashrc-clm
+    mbsync -v
+
+#### msmtp
+    msmtp --version
+
+"an SMTP client"
+
+#### neomutt
     neomutt -D  # dump settings
     neomutt -h  # help
     neomutt -v  # version
+    rm -r ~/.cache/mutt/*
     sidebar_format
 
-### clm - notmuch
+#### notmuch
     notmuch config get database.path
 
-#### search
+##### search
     nmse ...
+    notmuch --help
+    notmuch --version
     notmuch search '"the Pennines"' # finds exactly that
     notmuch search tag:attachment | wc -l
     notmuch search tag:cz | wc -l
@@ -1395,10 +1487,11 @@ tr (Unix)
     sudo systemctl status iptables.service
 
 ## GNU Wget
+    :Man wget
     wget -kr -A.zip https://url-to-webpage-with-pdfs/  # works from that page
     wget -r -A.pdf http://url-to-webpage-with-pdfs/  # works recursively from root page
 
-- `-O file` (`--output-document=file`)
+`-O file` (`--output-document=file`)
 
 ## rdrview
     i rdrview

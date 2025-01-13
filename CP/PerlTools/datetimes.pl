@@ -3,7 +3,7 @@
 # ----------------------------------------
 # for playing with dates
 
-# perl $misc/datetimes.pl
+# perl $misc/CP/PerlTools/datetimes.pl
 # ----------------------------------------
 
 use strict;  use warnings;

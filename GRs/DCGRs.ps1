@@ -1,12 +1,19 @@
 
-# Joseph Harriott - ven 13 sept 2024
+# Joseph Harriott - lun 11 nov 2024
 
-# & $misc/GRs/DCGRs.ps1
+# cd $DCGRs; & $misc/GRs/DCGRs.ps1
 
-# robocopy /mir $DCGRs D:\CITGRs
+# #=> 1 create  DCGRs.clones
+# . $misc/GRs/getClonesList.ps1
 
-#=> 0 clones
-$clones = gc $misc/GRs/all.clones
+#=> 2 update D:\CITGRs
+robocopy /mir $DCGRs D:\CITGRs  # because I might've made changes from another machine
+
+#=> 3 remove
+# some repositories that don't update easily
+
+#=> 4 git clone
+$clones = gc $misc/GRs/DCGRs.clones
 foreach ($clone in $clones) {
   $rrp = $clone -replace ' .*', ''  # repository relative path
   if ( ! ( test-path "$DCGRs\$rrp" ) ) {
@@ -16,14 +23,14 @@ foreach ($clone in $clones) {
   }
 } # fd -td <part_of_path>
 
-# #=> 1 updates  D:\CITGRs
+# #=> 5 update  D:\CITGRs
 # . $misc\GRs\update-depth1.ps1
 
-# #=> 2 symlinks in  D:\CITGRs
-# # because Dropbox doesn't like symlinks...
-# ls -force -s | ?{$_.linktype}
+#=> 6 symlinks in  D:\CITGRs
+# because Dropbox doesn't like symlinks...
+ls -force -s | ?{$_.linktype}
 
-# #=> 3 sync to  $DCGRs
-# read-host "going to  Robocopy  from  D:\CITGRs  to  $DCGRs"
-# robocopy /mir D:\CITGRs $DCGRs
+#=> 7 sync to  $DCGRs
+read-host "going to  Robocopy  from  D:\CITGRs  to  $DCGRs"
+robocopy /mir D:\CITGRs $DCGRs
 

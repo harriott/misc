@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Joseph Harriott  Mon 04 Nov 2024
+# Joseph Harriott  lun 11 nov 2024
 
 # manage my downloaded collection of  Git  repositories
 
@@ -15,10 +15,13 @@
 
 set -e  # quits on error
 
-#=> 1 clones 0 update  all.clones
-. $misc/GRs/getClones.sh $misc/GRs/all.clones
+#=> 1 create  DCGRs.clones
+. $misc/GRs/getClonesList.sh $misc/GRs/DCGRs.clones
 
-#=> 1 clones 1 remove
+# #=> 2 rsync  $DCGRs  to  $CITGRs
+# rsync -irtv --delete $DCGRs/ $CITGRs  # because I might've made changes from another machine
+
+#=> 3 remove
 # some repositories that don't update easily
 
 # sudo rm -r $CITGRs/CP/emacs/daviwil-dotfiles
@@ -30,7 +33,7 @@ set -e  # quits on error
 # sudo rm -r $CITGRs/CP/pypa-pipx
 # sudo rm -r $CITGRs/unix/linux/BrodieRobertson-dotfiles
 
-#=> 1 clones 2 get
+#=> 4 git clone
 while read cloneLine; do
   clone="${cloneLine%% *}"
   if ! [ -d $clone ]; then
@@ -38,9 +41,9 @@ while read cloneLine; do
     echo "${tpf3b}$clone${tpfn}  not there, so"
     $gcc
   fi
-done <"$misc/GRs/all.clones"  # can prefix  test https://github.com/test
+done <"$misc/GRs/DCGRs.clones"  # can prefix  test https://github.com/test
 
-#=> 2 update  $CITGRs
+#=> 5 update  $CITGRs
 # sf='StartFrom'
 # sf='./CP-emacs-emacs-mirror-emacs'
 # sf='./CP/emacs/syl20bnr-spacemacs'
@@ -57,9 +60,9 @@ done <"$misc/GRs/all.clones"  # can prefix  test https://github.com/test
 # sf='no_repository'
 # sf='tjdevries-config_manager'
 # once=yes
-# . $misc/GRs/update-depth1.sh $misc/GRs/DCGRs-ud1-fixes.sh
+. $misc/GRs/update-depth1.sh $misc/GRs/DCGRs-ud1-fixes.sh
 
-#=> 3 symlinks in  $CITGRs
+#=> 6 symlinks in  $CITGRs
 # because Dropbox doesn't like symlinks...
 
 echo "Broken symlinks:"
@@ -74,9 +77,7 @@ echo "- removed"
     # if [[ $repository =~ none ]]; then deref $repository fi
 # done
 
-#=> 4 sync to  $DCGRs
-# rsync -iLrtv --delete $CITGRs/ $DCGRs  # if lost...
-
+#=> 7 sync to  $DCGRs
 read -p "going to rsync from ${tpf5}$CITGRs${tpfn} to ${tpf5}$DCGRs${tpfn}"
 set +e
 rsync -iLrtv --delete $CITGRs/ $DCGRs
@@ -84,7 +85,7 @@ echo "${tpf3b}2nd rsync to highlight any errors${tpfn}"
 rsync -iLrtv --delete $CITGRs/ $DCGRs
 echo ${tpfn}
 
-#=> 5 advise to check for symlinks
+#=> 8 advise to check for symlinks
 echo 'now maybe  bash $misc/linux/slJH.sh'
 echo
 

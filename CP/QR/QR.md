@@ -15,6 +15,10 @@ syntax of this file is ensured in `$vfv/filetype.vim`
 # audio
     exiftool -ver  # https://sno.phy.queensu.ca/~phil/exiftool/
 
+### AAC
+- Advanced Audio Coding
+- `.3gp`, `.m4a`, `.m4b`, `.m4p`, `.m4r`, `.m4v`, `.mp4`
+
 ## text-to-speech
     espeak "Hello World!"
 
@@ -24,6 +28,14 @@ syntax of this file is ensured in `$vfv/filetype.vim`
 
 # AV
     $ITscr/HW/audio/BTHeadphones/JBLTune720BT
+
+## AR 16x9
+- 480x270 = 640x360 = 800x450 = 960x540 = 1920x1080
+- `720p`: `1280x720`
+
+## mediainfo
+    mediainfo --Inform='Video;%FrameCount%' $the_file
+    mediainfo --Output='General;%Duration%' <avfile>  # milliseconds
 
 ## OBS Studio Settings
     Output > Recording > Encoder > x264 low CPU usage
@@ -48,21 +60,18 @@ crossfades are created in overlaps
     Video Profile > VGA Widescreen NTSC (854x480)
 
 ### Preferences
-    ctrl+shift+p (= Edit > Preferences)
-
-#### Default Profile
-- defaults to HD 720p 30 fps
+- `ctrl+shift+p` (= `Edit > Preferences`)
 - need to `Restart` `OpenShot` when changed
 
 ### Profiles
     $core/IT_stack/OpenShot
 
-- `*assets` folders can be deleted
+`*assets` folders can be deleted
 
 #### Choose Profile
     ctrl+p
 
-- `HD 720p 30 fps (1280x720)`
+- `HD 720p 30 fps (1280x720)` the default
 - `HD 1080p 30 fps (1920x1080)`
 - `VGA NTSC (640x480)` 29.97fps
 
@@ -112,6 +121,14 @@ fix `path` in the `*.osp`
 E-book viewer `<esc>`/`<right_click>` brings up the controls
 
 # documenting - LaTeX
+    \documentclass[...twocolumn...]{<class>}
+    ...
+    \setlength{\columnsep}{1cm}
+    ...
+    \onecolumn
+    ...
+    \twocolumn
+
     $DJH/search/dts-tex.fetl  # for my files
     $JHt/IT/CP/TeX/LaTeX/  # for example code
     :s/μ/\\mu{}/g
@@ -123,25 +140,24 @@ E-book viewer `<esc>`/`<right_click>` brings up the controls
 functionality included in Memoir
 
 ## commands
-    \begin{figure}[h] \includegraphics[width=0.5\textwidth]{image} \end{figure}
-    \centred{\rule{9cm}{0.4pt}}  % horizontal line
     \listfiles  in preamble gets package versions in  .log
     \newenvironment{<envName>}[<n>][<default>]{<beginEnv>}{<endEnv>}
     \overfullrule=2mm  % adds a black bar to locate an overfull hbox
-    \pagebreak
     \pagestyle{empty}  % no headers or footers from here
-    \raggedleftSomeText\par}
-    \setlength{\columnsep}{1cm}
     \tableofcontents*  % ToC without itself listed therein
     \textsubscript{}
     \textsuperscript{}
     \the\length  % prints that length
     \title{your title} ... \begin{document} ... \maketitle
     \today
-    \usepackage[dvipsnames]{xcolor}
-    \usepackage{soul}  % Hyphenation for letterspacing, underlining, and more
-    \usepackage{titlesec}  % incompatible with memoir
-    \vfill
+
+### figure environment
+> LaTeX Warning: 'h' float specifier changed to 'ht'.
+
+    \begin{figure}[h] \includegraphics[width=0.5\textwidth]{image} \end{figure}
+
+- `h` place (approximately) here
+- `t` place at top of page
 
 ### font styles
     \textit{...}
@@ -161,17 +177,22 @@ functionality included in Memoir
     \huge
     \Huge
 
-### horizontal spaces in text or math mode
-    \enspace =>.5em
-    \quad => 1em
-    \qquad => 2em
+### horizontal - alignements
+    \centred{\rule{9cm}{0.4pt}}  % horizontal line
+    \centering
+    {\raggedleft{SomeText}\par}
 
-### indents
+### horizontal - indents
     \noindent
     \setlength{\parindent}{0pt}
     \setlength{\parindent}{-3em}  % starts left of margin
     \leftskip=1cm ... \leftskip=0cm
     \rightskip=1cm ... \rightskip=0cm
+
+### horizontal - spaces in text or math mode
+    \enspace =>.5em
+    \quad => 1em
+    \qquad => 2em
 
 ### multicols
     \usepackage{multicol}
@@ -188,26 +209,35 @@ functionality included in Memoir
 
 `titlesec`: `\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}`
 
-## engines
-    pdflatex --version
-    pdflatex <path>/<texfile>  # outputs compilation results in  <path>/
+### vertical
+    \pagebreak
+    \vfill
+    \vspace{-1cm}
 
-### MiKTeX
+## distro - MiKTeX
     initexmf --report
     miktex --version
     miktex --verbose fndb refresh
 
-#### FNDB
+### FNDB
     initexmf --update-fndb
     MiKTeX Console > Tasks > Refresh file name database
 
 after filename changes in `$tex`
 
-#### MiKTeX Package Manager
+### MiKTeX Package Manager
     C:\Users\troin\AppData\Local\MiKTeX\miktex\log\mpmcli.log
     mpm --list > "$ITstack\MSWin\MiKTeX\$Cn-packages-$(Get-Date -f yyMMdd-hhmm).txt"
     miktex --verbose packages check-update
     miktex packages list | measure | select -expand Count
+
+## distro - Tex Live
+    fmtutil --all
+    fmtutil --help
+
+## engines
+    pdflatex --version
+    pdflatex <path>/<texfile>  # outputs compilation results in  <path>/
 
 ## fonts
 style `\textnormal`
@@ -220,6 +250,12 @@ style `\textnormal`
 ## maths environments
     \longrightarrow
     \rightarrow
+
+## special characters
+- `\#`, `\$`, `\%`, `\&`, `\_`, `\{`, `\}`
+- `\^{}` because `\^a` rends â
+- `\~{}` because `\^n` rends ñ
+- `\textbackslash{}` because `\\`
 
 ## tabular environment
     \multicolumn{num_cols}{alignment}{contents}
@@ -258,6 +294,10 @@ style `\textnormal`
 # documenting - PDFs
 use Google Chrome to break out just some pages into a reduced copy
 
+## pdfimages
+    pdfimages -h
+    pdfimages [-j/-png] pdfNam3.pdf imageName  # pulls out images (default ppm) separated (if there are any)
+
 ## PDFtk
     pdftk in.pdf burst  # breaks into individual pages
     pdftk in*.pdf cat output out.pdf  # concatenate a sequence of PDFs
@@ -266,6 +306,10 @@ use Google Chrome to break out just some pages into a reduced copy
 ## fix rotations
     pdftk leftRotated.pdf cat 1-endeast output horizontal.pdf
     pdftk leftRotated-rightRotated.pdf cat 1east 2west output horizontal.pdf
+
+# documenting - Unicode
+- finding characters
+- Wingdings
 
 # Emacs - commands
 - `C-*`  calc-dispatch
@@ -472,7 +516,8 @@ Spacemacs documentation
     yj -ty <file.toml >file.yml
 
 - `*.oma` = Sony OpenMG
-- R: `q("no")`
+- `R`: `q("no")`
+- `Rust`: Crate regex: `x?` zero or one of `x` (greedy)
 
 ## Bluefish
     alt+e (= Edit) > s (= Preferences...)
@@ -488,6 +533,7 @@ Spacemacs documentation
 - no `csv`
 
 ## FFmpeg
+    $CrPl/encoding/x264_fullhelp.txt
     -vf crop=iw:ih-80:0:0
     ffmhb -i <video> -vf 'scale=iw/2:ih/2' <same_video_with_half_the_frame_size>
     ffmhb -i <video> -vframes 1 frame.jpg  # extracts a single frame
@@ -497,12 +543,37 @@ Spacemacs documentation
 - `-filter:a afftdn=nr=90:nf=-20` removes white noise
 - `-r ntsc` = 29.97 fps (= 30000/1001)
 - `-t` length of output
-- `-vf crop=width:height:x:y` height=depth below y
+- `-vf crop=width:height:x:y` where `height` = depth below y
 
 ### concatenation protocol
     ffmhb -i "concat:1.mpg|2.mpg|3.mpg" -c copy o.mpg
 
 convert mp4's first to MPEG-2 transport streams (`ffmhb -i 1.mp4 -c copy 1.ts`) and concatenate them back to an mp4
+
+### codecs
+`MPEG` can use `-q:v n` (= `-qscale:v`) where `n` is from `2` (best) to `5` (good) to `31` (worst)
+
+#### libx264
+    -c:a copy -crf 18 -preset veryfast -vf 'scale=iw/2:ih/2'
+
+> -qscale is ignored, -crf is recommended.
+
+- Advanced Video Coding (H.264, using `x264` encoder)
+- `-c:v libx264` seems to not be needed
+
+##### options
+- Constant Rate Factor (CRF)
+    - `-crf 0` = lossless
+    - `-crf 18` = minimum advised, visually perfect
+    - `-crf 20` = good compromise
+    - `-crf 23` = default
+    - `-crf 28` = maximum advised
+    - `-crf 51` = worst
+    - adding/subtracting 6 halves/doubles the bitrate
+- `- preset` speed vs compression
+    - `medium` = default
+    - `slow`
+    - `veryfast` seems fine for `OPPO A76`
 
 ### ffprobe
     ffprobe -v error -show_format -show_streams <videoFile>
@@ -524,6 +595,7 @@ convert mp4's first to MPEG-2 transport streams (`ffmhb -i 1.mp4 -c copy 1.ts`) 
     git push gh +master  # force push to remote
     git rev-parse --show-toplevel  # print the top level directory of the current repository
     git show <pathToFile>  # highlights the changes
+    git status -bs  # --branch --short
     git submodule
     git version
     onefetch -h
@@ -563,6 +635,8 @@ in `$CrPl/networking/browsers`, `git grep activeInstall $(git rev-list --all) --
 - `eol = lf`
 
 #### gitconfig
+    $CrPl/encoding/gitconfig-JH
+    $misc/CP/gitconfig
     git config -l
     git hist
     git lg
@@ -757,24 +831,35 @@ print(sys.argv[0])  # the full pathname of the program
 ```
 
 ### modules
+    python -m <module>
+    yaml2toml <yaml> <toml>
+
+#### csvkit
+    csvcut -n data.csv  # lists the headings, numbered
+    csvcut -c 2,5,6 data.csv
+    csvlook data.csv | less -S
+
+#### pip
     py -m pip install -U pip
     pip -V (--version)
     pip list --outdated
     python -m pip install -U pip
-    yaml2toml <yaml> <toml>
 
 #### pipx
+    pipx install -h
     pipx list
     pipx run pycowsay moo
     pipx uninstall -h
     pipx upgrade-all
 
 ### site-packages
+    cd $(python -m site --user-site)
+
+#### global
     pip show six | grep "Location:" | cut -d " " -f2
     python -c "import os; print(os.path.dirname(os.__file__) + '/site-packages')"
     python -c 'import site; print(site.getsitepackages())'
     python -c 'import sysconfig; print(sysconfig.get_paths()["purelib"])'
-    python -m site --user-site
 
 ### versions
     pyenv rehash
@@ -861,8 +946,11 @@ print(sys.argv[0])  # the full pathname of the program
 - sharkdp/bat
 
 ## fd
+    fd 'Chris Rea'
+    fd -utd '\.git$' | %{ rg 'url = ' $_\config }
     im fd
 
+- case insensitive until a capital is included
 - recursive by default
 - sharkdp/fd
 - Ubuntu: `fdfind -V`
@@ -883,6 +971,7 @@ print(sys.argv[0])  # the full pathname of the program
 
 ### recents
     fd --changed-within 3h
+    fd -H --changed-within 9m
     fd -tf --changed-within 2d
 
 in JH: `$DJH/search/searches.md`
@@ -895,7 +984,7 @@ in JH: `$DJH/search/searches.md`
 ## lf file manager
 - `c` (`clear` paths in buffer)
 - `c-l` (`redraw`)
-- `c-r` (`reload`)
+- `c-r` (`reload`) refresh
 - `d` (`cut`)
 - `gh` (`cd ~`)
 - `i` open in pager
@@ -929,10 +1018,12 @@ by gokcehan
     <key-id> can be the short key id = the last 8 characters
     echo "encrypt me this" | gpg -ase -r 13F327EF -o gpg.asc
     gpg --delete-key <key-id>
-    gpg --send-keys key-id  # then can never be deleted from the keyserver
+    gpg --refresh-keys  # from keyservers - useful if I've updated on another machine
+    gpg --send-keys <key-id>  # then can never be deleted from the keyserver
     gpg --verify file.asc [file]
 
-GnuPG
+- GnuPG
+- my currently active key is `13F327EF`
 
 ## command options
 `-s` (`--sign`) sign a message
@@ -960,7 +1051,7 @@ GnuPG
     gpg -ao public.asc --export <id>
 
 ## gpg-agent
-    $ABjo/gpg-agent.conf
+    $OSL/nodes/gpg-agent.conf
     gpg-agent -h
 
 ## help
@@ -987,19 +1078,21 @@ The GNU Privacy Handbook
 # HW
     duf (--all)  # storage devices info
 
-## for paper
-`HP Envy Inspire 7220e`: landscape top is to right
-
-### HP ENVY 5532
-- place DL envelopes with the open side to the left
-- printed pages come out head first (= upside down, printed face up)
-
-### Epson EcoTank ET-5170 - feed tray
+## for paper - Epson EcoTank ET-5170 - feed tray
     $ITscr/HW/EpsonEcoTankET5170
 
 - downside is printed
 - landscape top is to right
 - portrait top is to back of printer
+
+## for paper - HP ENVY 5532
+- place DL envelopes with the open side to the left
+- printed pages come out head first (= upside down, printed face up)
+
+## for paper - HP Envy Inspire 7220e
+- 300gsm occasionally jams
+- landscape top is to right
+- Paper jams cause a reprint from the beginning of a series!
 
 ## screens
 Sony Xperia 10 II: 1080x2520 = 21:9
@@ -1011,6 +1104,8 @@ Sony Xperia 10 II: 1080x2520 = 21:9
 - 1920x1080
 
 # images
+    fd -utf -e bmp -e gif -e jpeg -e jpg -e png -e svg -e tiff -e webp > images.fetl
+
 - 72 dpi = 18.3 dots per mm
 - COLOR TOOLS <http://html-color-codes.info/>
 - JPEG compression: `.jfif` `.jif` `.jpe` `.jpeg` `.jpg`
@@ -1065,7 +1160,9 @@ paintbrush: shift previews a new straight line from last point to current mouse 
 # ripgrep
     rg -help
 
+- `-g` (= `--glob=<glob>`)
 - `-N` (= `--no-line-number`)
+- Crate regex
 - outer whitespaces get ignored
 
 ## filetypes
@@ -1164,4 +1261,118 @@ messes up if terminal is resized
 #### window size
     gvim -geometry 200x55
     PS> gvim -c "set columns=217 lines=54"  # maximum on a 1600x900 screen with rhs taskbar
+
+# WAN
+    curl ifconfig.co/city
+    curl ifconfig.co/country
+    ssh-keygen -lv -f ssh_host_rsa_key.pub  # shows fingerprint & ASCII art
+    trashinbox
+
+- GPS Coordinates <https://www.gps-coordinates.net>
+- Webmasters
+
+## aria2
+    aria2c -h
+
+### input file
+    aria2c -i zips
+
+if aborted, `for f in *; do sed -i "/$f/d" zips; done`
+
+## browsing
+    $CrPl/networking/browsers/browsers.txt
+    carbonyl http://harriott.github.io
+
+`KeePassXC` "Getting Started Guide"
+
+### chromium-based
+    chrome://apps/
+    chrome://plugins/
+    chrome://settings/cookies > See all site data and permissions
+
+- `chrome://system > extensions > Expand` a list of Extensions
+- `ctrl+h` (= `chrome://history`)
+- `ctrl+shift+o` (= `Bookmarks`) `> Organise > Export`
+- `ctrl+u` view page source in new tab
+- `Microsoft Edge`: `edge://favorites/`
+
+### Firefox
+    about:config > caret
+    about:plugins
+    about:preferences#general
+    about:preferences#privacy > Cookies and Site Data
+    about:preferences#sync
+    about:processes
+    ctrl+p > Destination > Save to PDF > Save
+
+- `alt+e` (= `Edit`) `> n` (= `Settings`) `> Privacy & Security > Cookies and Site Data > Manage Data...`
+- `ctrl+shft+b` (= `toggle Bookmarks Toolbar`)
+- `ctrl+shft+o` (= `Library`)
+- `f12` (= `Web Developer Tools`)
+
+### Vivaldi
+- `alt+p` (= `Settings`) `> Search > [ Google up to top and Set as Default , DuckDuckGo next, Wikipedia third ]`
+- `ctrl+b` (= `Manage Bookmarks`)
+
+## GitHub
+    $JHm
+    gh config list
+    git diff upstream/master...HEAD
+
+- CLI: `gh`
+- `~/.ssh/known_hosts`: `AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa`
+
+## Google Sheets
+    wget https://docs.google.com/spreadsheets/d/DOCID/export?format=tsv&gid=SHEETID
+
+`Share > General access > Restricted` change to `Anyone with the link`
+
+## radio-active
+    radio --last  # run playing last station
+    radio --list  # list favourites
+    radio --remove  # launch favourite removal dialog
+    radio -S bbc  # search for BBC stations
+    radio -S fip
+
+### in-player commands
+- `f` = add to favourites
+- `q`, `ctrl+c` = quit
+- `t` = track info
+
+## WhatsApp group members
+    Firefox: Inspect (Q) > Copy > Inner HTML
+    Google Chrome: right-click > Inspect > ...
+    Microsoft Edge: alt+f > l > o
+
+## wikitext
+```mediawiki
+<code>inline monospaced</code>
+```
+
+https://en.wikipedia.org/wiki/Help:Wikitext
+
+## wttr.in
+    curl wttr.in/London
+    curl wttr.in/Newcastle
+
+## YouTube
+file formats
+
+### shortcuts
+- `0 .. 9`  jump 0% .. 90%
+- `c`  toggle captions
+- `f`  toggle full screen
+- `j/l`  seek 10s backwards or forwards
+- `m`  toggle mute
+- `when paused: ./,`  skip to next/previous frame
+
+Keyboard shortcuts for YouTube
+
+## yt-dlp
+    $AjB/bashrc-wm
+    $MSWin10\PSProfile.ps1
+    yt-dlp -f best <videoURL>
+    yt-dlp -f ba <videoURL>  # bestaudio (= best*[vcodec=none])
+    yt-dlp -h
+    yt-dlp --version
 
