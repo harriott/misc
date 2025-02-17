@@ -43,24 +43,24 @@ while read cloneLine; do
   fi
 done <"$misc/GRs/DCGRs.clones"  # can prefix  test https://github.com/test
 
-#=> 5 update  $CITGRs
-# sf='StartFrom'
-# sf='./CP-emacs-emacs-mirror-emacs'
-# sf='./CP/emacs/syl20bnr-spacemacs'
-# sf='./CP/jgm-pandoc'
-# sf='./CP/MartinThoma-LaTeX-examples'
-# sf='./CP/nomacs-nomacs'
-# sf='./CP/Ruby/Jekyll/jekyll-jekyll'
-# sf='./linux/Arch/protesilaos-dotfiles'
-# sf='./linux/dwt1-dotfiles'
-# sf='./linux/leo-arch-clifm'
-# sf='./unix/linux/BrodieRobertson-dotfiles'
-# sf='./unix/rwxrob-dotfiles'
-# sf=hugo-module-site
-# sf='no_repository'
-# sf='tjdevries-config_manager'
-# once=yes
-. $misc/GRs/update-depth1.sh $misc/GRs/DCGRs-ud1-fixes.sh
+# #=> 5 update  $CITGRs
+# # sf='StartFrom'
+# # sf='./CP-emacs-emacs-mirror-emacs'
+# # sf='./CP/emacs/syl20bnr-spacemacs'
+# # sf='./CP/jgm-pandoc'
+# # sf='./CP/MartinThoma-LaTeX-examples'
+# # sf='./CP/nomacs-nomacs'
+# # sf='./CP/Ruby/Jekyll/jekyll-jekyll'
+# # sf='./linux/Arch/protesilaos-dotfiles'
+# # sf='./linux/dwt1-dotfiles'
+# # sf='./linux/leo-arch-clifm'
+# # sf='./unix/linux/BrodieRobertson-dotfiles'
+# # sf='./unix/rwxrob-dotfiles'
+# # sf=hugo-module-site
+# # sf='no_repository'
+# # sf='tjdevries-config_manager'
+# # once=yes
+# . $misc/GRs/update-depth1.sh $misc/GRs/DCGRs-ud1-fixes.sh
 
 #=> 6 symlinks in  $CITGRs
 # because Dropbox doesn't like symlinks...

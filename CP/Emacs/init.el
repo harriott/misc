@@ -15,7 +15,7 @@
 ;; don't symlink it from Dropbox - some packages will fail to load
 ;;  just let it get populated from your  ~/.emacs.d/init.el
 ;;   (If using  straight.el  this takes a long time...)
-;; robocopy /mir $Env:AppData\.emacs.d $ITstack\MSwin-emacsd/RC /NP
+;; robocopy /mir $Env:AppData\.emacs.d $coreIT\MSwin-emacsd/RC /NP
 
 ;; I began here by adapting code from
 ;;  literatemacs  https://github.com/joseph8th/literatemacs - with thanks

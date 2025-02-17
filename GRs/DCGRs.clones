@@ -62,6 +62,7 @@ d-CP/d-Vim-Nvim/r-williamboman-mason.nvim https://github.com/williamboman/mason.
 d-CP/d-Vim-Vim/d-Lisp/r-kovisoft-slimv https://github.com/kovisoft/slimv
 d-CP/d-Vim-Vim/d-Lisp/r-vlime-vlime https://github.com/vlime/vlime
 d-CP/d-Vim-Vim/r-Eckankar-vim-latex-folding https://github.com/Eckankar/vim-latex-folding
+d-CP/d-Vim-Vim/r-HiPhish-info.vim https://gitlab.com/HiPhish/info.vim
 d-CP/d-Vim-Vim/r-junegunn-vim-plug https://github.com/junegunn/vim-plug
 d-CP/d-Vim-Vim/r-Konfekt-complete-common-words.vim https://github.com/Konfekt/complete-common-words.vim
 d-CP/d-Vim-Vim/r-Konfekt-vim-unicode-homoglyphs https://github.com/Konfekt/vim-unicode-homoglyphs
@@ -73,9 +74,14 @@ d-CP/d-Vim-Vim/r-rhysd-vim-gfm-syntax https://github.com/rhysd/vim-gfm-syntax
 d-CP/d-Vim-Vim/r-vim-utils-vim-troll-stopper https://github.com/vim-utils/vim-troll-stopper
 d-CP/d-Vim-Vim/r-vim-vim https://github.com/vim/vim
 d-CP/d-WAN-npm-Astro/r-Charca-astro-blog-template https://github.com/Charca/astro-blog-template
+d-CP/d-WAN-npm-Astro/r-ihechikara-ihechikara-blog https://github.com/ihechikara/ihechikara-blog
 d-CP/d-WAN-npm-Astro/r-johny-astro-photo-gallery-example https://github.com/johny/astro-photo-gallery-example
+d-CP/d-WAN-npm-Astro/r-nicdun-astro-tech-blog https://github.com/nicdun/astro-tech-blog
+d-CP/d-WAN-npm-Astro/r-one-aalam-astro-ink https://github.com/one-aalam/astro-ink
+d-CP/d-WAN-npm-Astro/r-robertguss-Astro-Theme-Creek https://github.com/robertguss/Astro-Theme-Creek
 d-CP/d-WAN-npm-Astro/r-withastro-astro https://github.com/withastro/astro
 d-CP/d-WAN-npm-Astro/r-withastro-starlight https://github.com/withastro/starlight
+d-CP/d-WAN-npm-Astro/r-zeon-studio-astroplate https://github.com/zeon-studio/astroplate
 d-CP/r-catppuccin-latex https://github.com/catppuccin/latex
 d-CP/r-CLI-sharkdp-bat https://github.com/sharkdp/bat
 d-CP/r-CLI-wfxr-code-minimap https://github.com/wfxr/code-minimap
@@ -126,6 +132,7 @@ d-unix/d-linux/r-jarun-nnn https://github.com/jarun/nnn
 d-unix/d-linux/r-leo-arch-clifm https://github.com/leo-arch/clifm
 d-unix/d-linux/r-lukesmithxyz-voidrice https://github.com/lukesmithxyz/voidrice
 d-unix/d-linux/r-marlam-msmtp https://github.com/marlam/msmtp
+d-unix/d-linux/r-nachoparker-xcol https://github.com/nachoparker/xcol
 d-unix/d-linux/r-ranger-ranger https://github.com/ranger/ranger
 d-unix/d-linux/r-rsnapshot-rsnapshot https://github.com/rsnapshot/rsnapshot
 d-unix/d-linux/r-seebi-dircolors-solarized https://github.com/seebi/dircolors-solarized

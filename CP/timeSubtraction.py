@@ -2,6 +2,7 @@
 # vim: set cc=80 tw=79:
 
 # python $misc/CP/timeSubtraction.py 0:12:08 0:4:08
+# python $misc/CP/timeSubtraction.py 0:20:34 0:6:15
 
 # python $misc/CP/timeSubtraction.py 0:07:11 0:0:00
 # python $misc/CP/timeSubtraction.py 0:07:07 0:0:00

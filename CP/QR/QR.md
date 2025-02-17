@@ -37,6 +37,48 @@ syntax of this file is ensured in `$vfv/filetype.vim`
     mediainfo --Inform='Video;%FrameCount%' $the_file
     mediainfo --Output='General;%Duration%' <avfile>  # milliseconds
 
+## mpv
+    mpv <audio.ogg>
+    $misc/CP/mpv.conf
+
+- can play omv's
+- mpv.io
+
+### interactive control
+    ./,      => framewise steps forward/backward
+    A        => cycle aspect ratio
+    alt+0    => halve video window size
+    alt+1    => full video window size
+    alt+2    => double video window size
+    ctrl +/- => +/-100 ms audio delay
+    f        => toggle fullscreen
+    hash     => cycle audio tracks
+    i/I      => statistics (doesn't include date)
+    s        => screenshot
+    v        => toggle subtitle
+    j/J      => cycle subtitles tracks
+
+#### OSD
+    delete => show progress bar
+    o/O    => show time/total
+
+#### playback speed
+    BACKSPACE -> reset
+    [ and ] -> decrease/increase by 10%
+    { and } -> halve/double
+
+#### seeks
+    one frame   ./,
+    1 seconds   shift left/right
+    5 seconds   left/right (or shift up/down)
+    10 seconds  mouse wheel up/down
+    1 minute    up/down
+    10 minutes  shift+pgup/pgdwn
+
+#### volume
+- `/` `9` decrease
+- `*` `0` increase
+
 ## OBS Studio Settings
     Output > Recording > Encoder > x264 low CPU usage
 
@@ -88,11 +130,18 @@ fix `path` in the `*.osp`
 - `v`  cycle through subtitles
 - `ctrl+j` codec info
 - `ctrl+p` Preferences
+- `ctrl+q` Quit
 
-### seeks
+### seeks En
 - 3s: `shift+left/right`
 - 10s: `alt+left/right`
 - 1m: `ctrl+left/right`
+
+### seeks Fr
+- 3s: `shift+left/right`
+- 10s: `alt+left/right`
+- 1m: `ctrl+left/right`
+- 5m: `altGr+left/right`
 
 ### speed
 - `-`  slow down by .1x
@@ -227,7 +276,7 @@ after filename changes in `$tex`
 
 ### MiKTeX Package Manager
     C:\Users\troin\AppData\Local\MiKTeX\miktex\log\mpmcli.log
-    mpm --list > "$ITstack\MSWin\MiKTeX\$Cn-packages-$(Get-Date -f yyMMdd-hhmm).txt"
+    mpm --list > "$coreIT\MSWin\MiKTeX\$Cn-packages-$(Get-Date -f yyMMdd-hhmm).txt"
     miktex --verbose packages check-update
     miktex packages list | measure | select -expand Count
 
@@ -273,13 +322,14 @@ style `\textnormal`
     \usepackage{multirow}
 
 # documenting - LibreOffice
-    $CrPl/documenting/LibreOffice/Buildup.txt
+    $ITsCP/documenting/LibreOffice/Buildup.txt
     r ~/.config/libreoffice/4/user/
 
-- `alt+f12` = `Tools > Options`
-- `alt+o`/`alt-t` (= `Format`) `> p` (= `Page style...`/`Style de page...`)
+- `alt+f12` = `Outils`/`Tools > Options`
+- `alt+o > l` = `Modules complémentaires et thèmes`
+- `alt+o`/`alt-t` (= `Format`) `> p` (= `Page style...`/`Style de page...` = `alt+P`)
     - `Page` is where can set borders
-- `alt+t e` = `Tools > Extensions` = `ctrl+alt+e`
+- `alt+t > e` = `Tools > Extensions` (= `ctrl+alt+e`)
 - `ctrl+alt+e` = `Tools > Extension Manager...`
 - Writer: right-click on a hyperlink for `Remove Hyperlink`
 
@@ -533,13 +583,14 @@ Spacemacs documentation
 - no `csv`
 
 ## FFmpeg
-    $CrPl/encoding/x264_fullhelp.txt
+    $ITsCP/encoding/x264_fullhelp.txt
     -vf crop=iw:ih-80:0:0
-    ffmhb -i <video> -vf 'scale=iw/2:ih/2' <same_video_with_half_the_frame_size>
-    ffmhb -i <video> -vframes 1 frame.jpg  # extracts a single frame
+    ffi <video> -vf 'scale=iw/2:ih/2' <same_video_with_half_the_frame_size>
+    ffi <video> -vframes 1 frame.jpg  # extracts a single frame
     ffmpeg -version | xcol --enable-libvidstab
     ffmpeg -version | xcol --enable-libvorbis
 
+- concat protocol `ffi 'concat:1.avi|2.avi' -c copy concatenated.avi`
 - `-filter:a afftdn=nr=90:nf=-20` removes white noise
 - `-r ntsc` = 29.97 fps (= 30000/1001)
 - `-t` length of output
@@ -619,7 +670,7 @@ convert mp4's first to MPEG-2 transport streams (`ffmhb -i 1.mp4 -c copy 1.ts`) 
 #### grep
     git grep Log $(git rev-list --all) -- '*.ps1'  # searches all  ps1  files in all commits for "Log"
 
-in `$CrPl/networking/browsers`, `git grep activeInstall $(git rev-list --all) -- 'browsers.txt'`
+in `$ITsCP/networking/browsers`, `git grep activeInstall $(git rev-list --all) -- 'browsers.txt'`
 
 #### move around
     git checkout -q HEAD^1  # go back one commit
@@ -630,16 +681,17 @@ in `$CrPl/networking/browsers`, `git grep activeInstall $(git rev-list --all) --
 ### configurations
     :%s#https://github.com/#git@github.com:#g
 
+#### gitconfig
+    $ITsCP/encoding/gitconfig-JH
+    $misc/CP/gitconfig
+    git config -l  # --list
+    git config -l --global
+    git hist
+    git lg
+
 #### lf
 - `autocrlf = input`  warning: CRLF will be replaced by LF
 - `eol = lf`
-
-#### gitconfig
-    $CrPl/encoding/gitconfig-JH
-    $misc/CP/gitconfig
-    git config -l
-    git hist
-    git lg
 
 ### GitHub CLI
     gh repo list  # handy list of your repositories
@@ -717,12 +769,28 @@ Tig Manual
 - <https://www.markdownguide.org/extended-syntax/>
 
 ## npm
+    npm install
     npm ls -g
     npm un[install] -g [<package>]
     npm up[date] -g [<package>]
     npm prefix -g  # =  npm config get prefix
     npm -v  # --version
     npx cowsay goodbye!''
+
+### Astro
+    npm run dev -- -h  # --help
+    npx astro --help
+    npx astro --version
+    npx astro docs  # launches Astro Docs
+    npx astro info  # environment
+
+#### development server
+    http://localhost:4321
+    npm run dev
+    npx astro dev
+
+- gets dev toolbar at bottom
+- HMR ensures instant updates
 
 ## Pandoc
     $core/IT_stack/CP/Pandoc/monofont.md
@@ -738,7 +806,7 @@ Tig Manual
 
 ## Perl
     $ echo sample_text | perl -pe 's/(sample).*/$1/'  # double quotes wouldn't work here
-    $ITstack/CP/encoding/dpl/Perl/scratch.pl
+    $coreIT/CP/encoding/dpl/Perl/scratch.pl
     cpanm --help
     echo "my_string" | perl -pe 's/my/your/g'
     echo 'hello  there' | perl -pe 's/ +/ /'
@@ -813,7 +881,7 @@ Tig Manual
 replaces `print "$var\n";`
 
 ## Python
-    $ITstack/CP/encoding/dpl/Python/scratch.py
+    $coreIT/CP/encoding/dpl/Python/scratch.py
     python -h  # --help
     python -V
 
@@ -932,13 +1000,14 @@ print(sys.argv[0])  # the full pathname of the program
 
 ### ssg - Jekyll
     bundle exec jekyll build
-    bundle exec jekyll s  # serve locally
+    bundle exec jekyll s  # serve locally to http://localhost:4000
 
 - `[description of a post]({% post_url 20xx-xx-xx-name-of-post %})` provides a clickable link
 - <https://github.com/rouge-ruby/rouge/wiki/List-of-supported-languages-and-lexers>
 - YAML front matter
 
 # file manage
+    openssl sha3-256 <file>
     zoxide -h  # --help
     zoxide -V  # --version
 
@@ -947,6 +1016,7 @@ print(sys.argv[0])  # the full pathname of the program
 
 ## fd
     fd 'Chris Rea'
+    fd [flags/options] [<pattern>] [<path>...]
     fd -utd '\.git$' | %{ rg 'url = ' $_\config }
     im fd
 
@@ -1280,7 +1350,7 @@ messes up if terminal is resized
 if aborted, `for f in *; do sed -i "/$f/d" zips; done`
 
 ## browsing
-    $CrPl/networking/browsers/browsers.txt
+    $ITsCP/networking-WAN/browsers/browsers.txt
     carbonyl http://harriott.github.io
 
 `KeePassXC` "Getting Started Guide"
@@ -1295,6 +1365,7 @@ if aborted, `for f in *; do sed -i "/$f/d" zips; done`
 - `ctrl+shift+o` (= `Bookmarks`) `> Organise > Export`
 - `ctrl+u` view page source in new tab
 - `Microsoft Edge`: `edge://favorites/`
+- no way to stop autoplay of videos
 
 ### Firefox
     about:config > caret
@@ -1320,6 +1391,7 @@ if aborted, `for f in *; do sed -i "/$f/d" zips; done`
     git diff upstream/master...HEAD
 
 - CLI: `gh`
+- GitHub API GET request: https://api.github.com/repos/user/repository > `sizes:`
 - `~/.ssh/known_hosts`: `AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa`
 
 ## Google Sheets
@@ -1339,7 +1411,13 @@ if aborted, `for f in *; do sed -i "/$f/d" zips; done`
 - `q`, `ctrl+c` = quit
 - `t` = track info
 
-## WhatsApp group members
+## WhatsApp
+    Settings > Chats > Enter is send
+
+- control of `disappearing messages` only by administrators: `Group info > Group permissions > Edit group settings > off`
+- controle des `messages éphémères` seul par les administrateurs: `Infos du groupe > Autorisations du groupe > Modifier les paramètres du groupe > éteint`
+
+### group members
     Firefox: Inspect (Q) > Copy > Inner HTML
     Google Chrome: right-click > Inspect > ...
     Microsoft Edge: alt+f > l > o

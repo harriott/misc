@@ -13,9 +13,15 @@ commands here are generic, except for those under the Ubuntu heading, see also `
     $OSL/bashrc-generic
 
 Pipe Viewer
-
 # audio
+    pactl set-sink-mute 0 toggle
     pavucontrol
+    pulsemixer
+
+## ALSA
+    alsamixer -V all
+    speaker-test -c 2
+    sudo alsactl store
 
 ## cmus
     cmus_notify -h
@@ -38,8 +44,8 @@ C* Music Player
     v        player-stop
     z        player-prev
 
-    h, left  seek -5
-    l, right seek +5
+    h, left  seek -5s
+    l, right seek +5s
     ,        seek -1m
     .        seek +1m
 
@@ -84,19 +90,30 @@ C* Music Player
     parecord -d 1 parecord.flac
     parecord -d 16 parecord.flac
 
-## Music Player Daemon
+## MPD
     mpd
     mpd --kill
     pgrep mpd
 
+Music Player Daemon
+
+### vimpc - normal mode
+- `-`/`+` decrease/increase volume
+- `ZZ` quits completely
+- `space` start/stop
+- `backspace`/`s` stop playlist
+
+#### song
+- `f`/`F` scroll to current song
+- `E` toggle repeat
+- `I` restart the song
+- `R` toggle random
+- `S` toggle single
+- `<`/`>` previous/next song
+
 ## SoX
     rec -c 2 sox.flac  # record in stereo
     soxi <audioFile>  # info, including duration
-
-## vimpc
-    $ABjo/wm/MPD/vimpcrc
-
-`q` stops & quits
 
 # bc
     bc -q
@@ -286,7 +303,9 @@ sharkdp/bat
 
 - `-A num` (`--after-context=num`)
 - `-i` (`--ignore-case`)
+- `-E` (`--extended-regexp`)
 - `-F` (interpret patterns as `--fixed-strings`, not regex)
+- `-o` (`--only-matching`)
 - GNU Grep Manual
 
 ## sed
@@ -407,9 +426,12 @@ find(1)
 
 ### counts
     echo `find . -type d | wc -l`-1 | bc  # counts all subdirectories
+    find . -name '.?*'  #  recursively list hidden files
     find . -type f | sed 's/.*\.//' | sort | uniq -c  # counts by extension
-    find . | wc -l  # very fast in $Drpbx
     isutf8 **/* | wc -l  # non UTF-8 files (fails when too many)
+
+#### including hidden
+    find . | wc -l  # very fast in $Drpbx
     ls **/* | wc -l  # all of the files
 
 ### mlocate
@@ -490,12 +512,14 @@ output info: `>` = the item is received
 ### options
     --exclude=PATTERN
 
+- `-h` (`--help`)
 - `-i` (`--itemize-changes`)
 - `-l` (`--links`) copy symlinks as symlinks (so no "skipping non-regular file" if the symlink's reference exists)
 - `-L` (`--copy-links`) transform symlink into referent file/dir
 - `-n` (`--dry-run`)
 - `-r` (`--recursive`)
 - `-t` (`--times`) keep modification times
+- `-V` (`--version`)
 
 #### for system files
 - `-A` (`--acls`) keep ACLs, implies `-p`
@@ -656,6 +680,10 @@ up/down => zoom in/out
     q => quit
     Return => toggle thumbnails/image
 
+### nsxiv
+    nsxiv -c  # --clean-cache
+    tree ~/.cache/nsxiv
+
 ## Vimiv
     O => switch focus
     o => toggle the library
@@ -687,44 +715,6 @@ list open files
 ## mpv
     mpv av://v4l2:/dev/video0
     mpv --start=-2 <avfile>  # starts 2 seconds from end
-    mpv <audio.ogg>
-
-can play omv's
-
-### interactive control
-    ./,      => framewise steps forward/backward
-    A        => cycle aspect ratio
-    alt+0    => halve video window size
-    alt+1    => full video window size
-    alt+2    => double video window size
-    ctrl +/- => +/-100 ms audio delay
-    f        => toggle fullscreen
-    hash     => cycle audio tracks
-    i/I      => statistics (doesn't include date)
-    s        => screenshot
-    v        => toggle subtitle
-    j/J      => cycle subtitles tracks
-
-#### OSD
-    delete => show progress bar
-    o/O    => show time/total
-
-#### playback speed
-    BACKSPACE -> reset
-    [ and ] -> decrease/increase by 10%
-    { and } -> halve/double
-
-#### seeks
-    one frame   ./,
-    1 seconds   shift left/right
-    5 seconds   left/right (or shift up/down)
-    10 seconds  mouse wheel up/down
-    1 minute    up/down
-    10 minutes  shift+pgup/pgdwn
-
-#### volume
-- `/` `9` decrease
-- `*` `0` increase
 
 # networking
     arp-scan -lx  # lists subnet hosts
@@ -889,6 +879,7 @@ niceness: `-20` = highest priority, `19` = lowest
     exit 0  # to quit script
     printf command
     read -p "hit Enter"; echo hello
+    read a b; echo $a $b
     shopt
     shopt dotglob  # reports back its status
     shopt -u nullglob  # incase  t=$'\?'; echo $t
@@ -896,7 +887,8 @@ niceness: `-20` = highest priority, `19` = lowest
     za $ITscr/unix-like/linux/bash.pdf
     ~/.bash_history
 
-command substitution `$(...)`
+- BASH(1)
+- command substitution `$(...)`
 
 ### aliases
     alias
@@ -922,6 +914,8 @@ command substitution `$(...)`
     v=value; [[ ! $v =~ val ]] && echo val
 
 ### echo
+    echo "~ stays ~ in double quotes, it's unexpanded to $HOME"
+
 `-n` no trailing newline
 
 #### backslash escapes
@@ -933,11 +927,17 @@ command substitution `$(...)`
 
 ### file manage
     echo */  # lists directories
-    find -iname \*.flv -o -iname \*.mp4 -o -iname \*.ogv
     for f in *; do mv $f ${f:2}; done
     man -h ls
     mkdir -p <aDirectoryPath>  # won't overwrite if it already exists
     pushd ~/some_path; pushd /another_path; popd; popd
+
+#### find
+    find . -maxdepth 1 -mindepth 1 -type d -name "*"  # those in working directory
+    find -iname \*.flv -o -iname \*.mp4 -o -iname \*.ogv
+    find -type f -name "[[:upper:]]*"  # files beginning with capital letter
+
+`-iregex <pattern>` = case insensitive `-regex`
 
 #### tests
     [ -d "$d" ] && echo "directory $d is there"
@@ -988,6 +988,7 @@ jobs(1p)
     for i in {0..9..2}; do echo $i; done
     for i in bee fly wasp; do echo $i; done
     s=2; e=4; for (( c=$s; c<=$e; c++ )); do echo $c; done
+    select f in apple pear grape; do echo "you chose $f"; done
     while read line; do echo "$line" done <file_to_use_line_by_line
 
 ### managing commands
@@ -1004,6 +1005,8 @@ jobs(1p)
 <somecommand> 2>&1 | tee stdout+stderr.log
 <somecommand> > /dev/null 2>&1
 ```
+
+`find ... 2> /dev/null` suppresses stderr stream
 
 ##### key
     1 = stdout file descriptor
@@ -1086,6 +1089,7 @@ don't export them
 
 #### strings
     [[ $t =~ (y|n) ]] && echo 'good answer'
+    [ 'y' == 'n' ] || echo 'nope'
     n=''; n=n; [[ -n $n ]] && echo $n
     o lkj | rev | cut -c 2- | rev
     o ljk | sed 's/.$//'
@@ -1124,15 +1128,6 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
 - `-u` (`--unique`)
 - `--help`
 - `--version`
-
-# sound
-    pactl set-sink-mute 0 toggle
-    pulsemixer
-
-## ALSA
-    alsamixer -V all
-    speaker-test -c 2
-    sudo alsactl store
 
 # system
     cat /etc/hostname
@@ -1264,7 +1259,7 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
 - w(1)
 
 ## Alacritty
-    $OSAB/terminal/alacritty.toml
+    $OSAB/nodes-terminal/alacritty.toml
     alacritty -h  # --help
     alacritty -V  # --version
 
@@ -1397,7 +1392,12 @@ tr (Unix)
 
 `sed -i` will change `fileformat` to `dos`
 
-## package manage
+## packages
+    apt-cache search .
+
+https://packages.ubuntu.com/
+
+### manage
     apt-cache -h
     apt-cache showpkg <package>  # report includes dependencies and reverse dependencies
     apt-get download <package>  # to current directory
@@ -1410,7 +1410,9 @@ tr (Unix)
 - `sudo ls /etc/apt/sources.list.d/` repositories
 
 ### upgrade packages
+    sudo apt autoremove
     sudo apt upgrade
+    sudo apt-get clean
     sudo apt-get dist-upgrade  # better, riskier
 
 ## Pro

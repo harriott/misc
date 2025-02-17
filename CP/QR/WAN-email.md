@@ -4,10 +4,11 @@ vim: nospell:
 `HTML` messages can include `.gif`, `.jpeg`, `.png`
 
 # Thunderbird
-    $CrPl/networking/Thunderbird/builds.txt
+    $ITsCP/WAN/Thunderbird/builds.txt
 
 - `$Thb/compatibility.ini` for LastVersion
 - `$Thb/ImapMail` contains incomprehensible `*.msf` files alongside mbox files with same basename. The latter are vast and chock-full of complex formatting. Deleted messages are simply marked and not removed until compaction. `*.sbd` are subfolders.
+- received message view > Autres > Personnaliser... > Style du bouton > Icônes
 
 ## attachments
 delete: `right-click on email selection > Attachment Extractor > Delete attachments > OK, wait until next OK signals it's done`
@@ -118,7 +119,7 @@ view as plain text allows deletion of inline images
     thunderbird -addressbook
 
 ## run safely
-    $OSAB/jo/wm/TS/thunderbird_safely.sh
+    $OSAB/nodes-jo/wm/TS/thunderbird_safely.sh
     $machine\T91\runSafely.ps1
 
 ## To targets
