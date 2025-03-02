@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# Joseph Harriott  Mon 21 Oct 2024
+# Joseph Harriott  Sun 02 Mar 2025
 
 # depth=1 update a load of cloned  Git  repositories from their remotes
 
 # $misc/GRs/update-depth1.sh
 #  sourced from
 #   $misc/GRs/DCGRs.sh
-#   $vfv/getRepos/unix/get.sh
+#   $vfv/getRepos/unix.sh
 
 [ $rd ] || rd=$PWD  # root directory
 [ -f repos ] && rm repos

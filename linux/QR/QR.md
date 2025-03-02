@@ -680,7 +680,10 @@ up/down => zoom in/out
     q => quit
     Return => toggle thumbnails/image
 
+No refresh of directories...
+
 ### nsxiv
+    i nsxiv
     nsxiv -c  # --clean-cache
     tree ~/.cache/nsxiv
 
