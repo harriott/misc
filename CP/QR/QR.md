@@ -80,9 +80,15 @@ syntax of this file is ensured in `$vfv/filetype.vim`
 - `*` `0` increase
 
 ## OBS Studio Settings
-    Output > Recording > Encoder > x264 low CPU usage
-
-`Alt+f` (= `File`) > `s` (= `Settings`) > `Output` > `Recording` > `Recording Path`
+- `Alt+f` (= `File`) > `s` (= `Settings`) > `Output` > `Recording`
+    - `Audio Encoder`
+        - `AAC (Default)` might be the cause of metallic artefacts
+        - `Opus` (= `libopus`) supposedly better, but less devices can play
+    - `Recording Path` > `/home/jo`
+    - `Recording Quality`
+        - `High Quality, Medium File Size` I've been using for a few years
+        - `Same as stream` - turns off `Audio Encoder` settings
+    - `Video Encoder` > `Software (x264 low CPU usage preset, increases file size)`
 
 ## OpenShot
 crossfades are created in overlaps
@@ -170,14 +176,6 @@ fix `path` in the `*.osp`
 E-book viewer `<esc>`/`<right_click>` brings up the controls
 
 # documenting - LaTeX
-    \documentclass[...twocolumn...]{<class>}
-    ...
-    \setlength{\columnsep}{1cm}
-    ...
-    \onecolumn
-    ...
-    \twocolumn
-
     $DJH/search/dts-tex.fetl  # for my files
     $JHt/IT/CP/TeX/LaTeX/  # for example code
     :s/μ/\\mu{}/g
@@ -192,7 +190,6 @@ functionality included in Memoir
     \listfiles  in preamble gets package versions in  .log
     \newenvironment{<envName>}[<n>][<default>]{<beginEnv>}{<endEnv>}
     \overfullrule=2mm  % adds a black bar to locate an overfull hbox
-    \pagestyle{empty}  % no headers or footers from here
     \tableofcontents*  % ToC without itself listed therein
     \textsubscript{}
     \textsuperscript{}
@@ -207,24 +204,6 @@ functionality included in Memoir
 
 - `h` place (approximately) here
 - `t` place at top of page
-
-### font styles
-    \textit{...}
-
-`\textbf{...}` = `{\bfseries ...}` = bold
-`\texttt{...}` = `{\ttfamily ...}` = monospaced
-
-### font sizes
-    \tiny
-    \scriptsize
-    \footnotesize
-    \small
-    \normalsize
-    \large
-    \Large
-    \LARGE
-    \huge
-    \Huge
 
 ### horizontal - alignements
     \centred{\rule{9cm}{0.4pt}}  % horizontal line
@@ -243,14 +222,6 @@ functionality included in Memoir
     \quad => 1em
     \qquad => 2em
 
-### multicols
-    \usepackage{multicol}
-    ...
-    \begin{document}
-    \begin{multicols}{3}
-    ...
-    \end{multicols}
-
 ### sections
     \section*{ unnumbered section }
     \setcounter{secnumdepth}{3} % default
@@ -259,7 +230,6 @@ functionality included in Memoir
 `titlesec`: `\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}`
 
 ### vertical
-    \pagebreak
     \vfill
     \vspace{-1cm}
 
@@ -288,7 +258,9 @@ after filename changes in `$tex`
     pdflatex --version
     pdflatex <path>/<texfile>  # outputs compilation results in  <path>/
 
-## fonts
+## fonts & glyphs
+    \textnumero
+
 style `\textnormal`
 
 ### Indic
@@ -296,9 +268,48 @@ style `\textnormal`
 
 `Lohit` used by Wikipedia
 
+### styles
+    \textit{...}
+
+`\textbf{...}` = `{\bfseries ...}` = bold
+`\texttt{...}` = `{\ttfamily ...}` = monospaced
+
+### sizes
+    \tiny
+    \scriptsize
+    \footnotesize
+    \small
+    \normalsize
+    \large
+    \Large
+    \LARGE
+    \huge
+    \Huge
+
 ## maths environments
     \longrightarrow
     \rightarrow
+
+## page
+    \pagebreak
+    \pagestyle{empty}  % no headers or footers from here
+
+### columns
+    \documentclass[...twocolumn...]{<class>}
+    ...
+    \setlength{\columnsep}{1cm}
+    ...
+    \onecolumn
+    ...
+    \twocolumn
+
+#### multicols
+    \usepackage{multicol}
+    ...
+    \begin{document}
+    \begin{multicols}{3}
+    ...
+    \end{multicols}
 
 ## special characters
 - `\#`, `\$`, `\%`, `\&`, `\_`, `\{`, `\}`
@@ -607,10 +618,12 @@ convert mp4's first to MPEG-2 transport streams (`ffmhb -i 1.mp4 -c copy 1.ts`) 
 #### libx264
     -c:a copy -crf 18 -preset veryfast -vf 'scale=iw/2:ih/2'
 
+`Advanced Video Coding` (`H.264`, using `x264` encoder)
+
+##### converting to mp4
 > -qscale is ignored, -crf is recommended.
 
-- Advanced Video Coding (H.264, using `x264` encoder)
-- `-c:v libx264` seems to not be needed
+`-c:v libx264` seems to not be needed
 
 ##### options
 - Constant Rate Factor (CRF)
@@ -1181,17 +1194,26 @@ Sony Xperia 10 II: 1080x2520 = 21:9
 - JPEG compression: `.jfif` `.jif` `.jpe` `.jpeg` `.jpg`
 
 ## GIMP
-paintbrush: shift previews a new straight line from last point to current mouse cursor location
+`t` (= `Tools` > `Text`) can then select a rectangle for a text layer
 
-### Crop
+### crop
     shift+c
 
 `Fixed Aspect ratio > 700:333` (as for `Mastodon` header image) triggers a selection box of that ratio
 
-### Export
+### export
     ctrl+shift+e
 
 `alt+f` (= `File`) > `x` (= `Export As...`)
+
+### paint tools
+- `alt+t p` (= `Tools` > `Paint Tools`)
+- `n` (= `Tools` > `Paint Tools` > `Pencil`)
+- `p` (= `Tools` > `Paint Tools` > `Paintbrush`)
+
+#### straight line
+- `mouse click` for starting point then `shift` previews a new straight line, next `mouse click` draws it
+- need to clear a remaining text layer
 
 ## ImageMagick
     identify -format '%w %h %f \n' *  # images listed by size
