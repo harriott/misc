@@ -773,6 +773,7 @@ Tig Manual
     PS> where.exe java
 
 ## Lua
+    $coreIT/CP/encoding/dpl/scratch.lua
     $DCGRs/CP/Vim/vim-vim/src/testdir/testluaplugin/lua/testluaplugin/hello.lua
     lua -v
 
