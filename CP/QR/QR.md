@@ -82,7 +82,7 @@ syntax of this file is ensured in `$vfv/filetype.vim`
 ## OBS Studio Settings
 - `Alt+f` (= `File`) > `s` (= `Settings`) > `Output` > `Recording`
     - `Audio Encoder`
-        - `AAC (Default)` might be the cause of metallic artefacts
+        - `AAC (Default)`
         - `Opus` (= `libopus`) supposedly better, but less devices can play
     - `Recording Path` > `/home/jo`
     - `Recording Quality`
@@ -312,6 +312,7 @@ style `\textnormal`
     \end{multicols}
 
 ## special characters
+- `-`, `--`, `---`
 - `\#`, `\$`, `\%`, `\&`, `\_`, `\{`, `\}`
 - `\^{}` because `\^a` rends â
 - `\~{}` because `\^n` rends ñ
@@ -337,11 +338,14 @@ style `\textnormal`
     r ~/.config/libreoffice/4/user/
 
 - `alt+f12` = `Outils`/`Tools > Options`
+    - `Apparence`
 - `alt+o > l` = `Modules complémentaires et thèmes`
 - `alt+o`/`alt-t` (= `Format`) `> p` (= `Page style...`/`Style de page...` = `alt+P`)
     - `Page` is where can set borders
 - `alt+t > e` = `Tools > Extensions` (= `ctrl+alt+e`)
 - `ctrl+alt+e` = `Tools > Extension Manager...`
+- `ctrl+S` = `File > Save As...`
+    - can then (only if changes to .ods already saved) select `Text CSV (.csv)`
 - Writer: right-click on a hyperlink for `Remove Hyperlink`
 
 ## Draw
@@ -578,7 +582,6 @@ Spacemacs documentation
 
 - `*.oma` = Sony OpenMG
 - `R`: `q("no")`
-- `Rust`: Crate regex: `x?` zero or one of `x` (greedy)
 
 ## Bluefish
     alt+e (= Edit) > s (= Preferences...)
@@ -988,6 +991,13 @@ print(sys.argv[0])  # the full pathname of the program
 
 `irb` is quit with `exit` or `ctrl+d`
 
+## Rust
+    cargo --list
+    cargo install --list
+    cargo search
+
+Crate regex: `x?` zero or one of `x` (greedy)
+
 ## Stack Exchange Network
 - Stack Overflow
 - What topics can I ask about here?
@@ -1217,7 +1227,6 @@ Sony Xperia 10 II: 1080x2520 = 21:9
 
 ## ImageMagick
     identify -format '%w %h %f \n' *  # images listed by size
-    magick <image> -background azure -gravity south -splice 0x80 <SBordered>
     montage <left> <right> -geometry +9+9 -tile 2x1 <lr>
     montage <upper> <lower> -geometry +0+0 -tile 1x2 <ul>
 
@@ -1230,8 +1239,14 @@ Sony Xperia 10 II: 1080x2520 = 21:9
     -gravity center
     -pointsize 48
     -size 640x480
+
     magick -flatten img.png img-white.png
+    magick -list format  # all of them
     magick -version
+    magick <image> -background azure -gravity south -splice 0x80 <SBordered>
+    magick wizard: wizard.jpg  # makes it
+    magick wizard.jpg wizard.png
+
     label:"some text"
 
 - anisotropic resize
@@ -1253,6 +1268,7 @@ Sony Xperia 10 II: 1080x2520 = 21:9
     rg -help
 
 - `-g` (= `--glob=<glob>`)
+- `-l` (= `--files-with-matches`)
 - `-N` (= `--no-line-number`)
 - Crate regex
 - outer whitespaces get ignored
@@ -1399,6 +1415,7 @@ if aborted, `for f in *; do sed -i "/$f/d" zips; done`
     ctrl+p > Destination > Save to PDF > Save
 
 - `alt+e` (= `Edit`) `> n` (= `Settings`) `> Privacy & Security > Cookies and Site Data > Manage Data...`
+- `ctrl+shft+a` (= `Add-ons and themes`)
 - `ctrl+shft+b` (= `toggle Bookmarks Toolbar`)
 - `ctrl+shft+o` (= `Library`)
 - `f12` (= `Web Developer Tools`)

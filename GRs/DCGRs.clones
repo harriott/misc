@@ -68,6 +68,7 @@ d-CP/d-Vim-Vim/r-Konfekt-complete-common-words.vim https://github.com/Konfekt/co
 d-CP/d-Vim-Vim/r-Konfekt-vim-unicode-homoglyphs https://github.com/Konfekt/vim-unicode-homoglyphs
 d-CP/d-Vim-Vim/r-lambdalisue-fern.vim https://github.com/lambdalisue/fern.vim
 d-CP/d-Vim-Vim/r-lervag-vimtex https://github.com/lervag/vimtex
+d-CP/d-Vim-Vim/r-lilydjwg-vim-foldtree https://github.com/lilydjwg/vim-foldtree
 d-CP/d-Vim-Vim/r-nblock-vim-dokuwiki https://github.com/nblock/vim-dokuwiki
 d-CP/d-Vim-Vim/r-preservim-tagbar https://github.com/preservim/tagbar
 d-CP/d-Vim-Vim/r-rhysd-vim-gfm-syntax https://github.com/rhysd/vim-gfm-syntax
@@ -85,6 +86,7 @@ d-CP/d-WAN-npm-Astro/r-zeon-studio-astroplate https://github.com/zeon-studio/ast
 d-CP/r-catppuccin-latex https://github.com/catppuccin/latex
 d-CP/r-CLI-sharkdp-bat https://github.com/sharkdp/bat
 d-CP/r-CLI-wfxr-code-minimap https://github.com/wfxr/code-minimap
+d-CP/r-erikflowers-weather-icons https://github.com/erikflowers/weather-icons
 d-CP/r-jgm-pandoc https://github.com/jgm/pandoc
 d-CP/r-nomacs-nomacs https://github.com/nomacs/nomacs
 d-CP/r-omerxx-dotfiles https://github.com/omerxx/dotfiles
@@ -150,6 +152,7 @@ d-unix/r-brndnmtthws-conky https://github.com/brndnmtthws/conky
 d-unix/r-email-pdobsan-oama https://github.com/pdobsan/oama
 d-unix/r-gsamokovarov-jump https://github.com/gsamokovarov/jump
 d-unix/r-jstkdng-ueberzugpp https://github.com/jstkdng/ueberzugpp
+d-unix/r-lotabout-skim https://github.com/lotabout/skim
 d-unix/r-neomutt-neomutt https://github.com/neomutt/neomutt
 d-unix/r-ranger-ranger https://github.com/ranger/ranger
 d-unix/r-rwxrob-dotfiles https://gitlab.com/rwxrob/dotfiles

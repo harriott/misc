@@ -1,18 +1,11 @@
 #!/bin/bash
 # vim: set fdl=2:
 
-# Joseph Harriott  Mon 03 Feb 2025
-# $misc/GRs/needed.sh
+# Joseph Harriott  Fri 07 Mar 2025
+# bash $misc/GRs/needed.sh
 # repositories needed for my system builds
 
 set -e  # terminate on a fail
-
-#=> unix-linux > awesome
-# elements of these repositories symlinked in  $OSAB/nodes/set/jo-1-awesome.sh
-
-rsync -irtv --delete $DCGRs/d-CP/d-encoding/r-rxi-json_lua/ $ITscc/CP/rxi-json_lua
-rsync -irtv --delete $DCGRs/d-unix/d-linux/d-wm-awesome/r-stefano-m-awesome-capslock_widget/ $ITscc/unix-linux/awesome-stefano-m-awesome-capslock_widget
-rsync -irtv --delete $DCGRs/d-unix/d-linux/d-wm-awesome/r-streetturtle-awesome-wm-widgets/ $ITscc/unix-linux/awesome-streetturtle-awesome-wm-widgets
 
 #=> code-minimap
 rsync -irtv --delete $DCGRs/d-CP/r-CLI-wfxr-code-minimap/ $ITscc/CP/wfxr-code-minimap
@@ -33,6 +26,8 @@ rsync -irtv --delete $DCGRs/d-CP/d-mpv/r-mfcc64-mpv-scripts/ $ITscc/unix-linux/m
 
 #=> tmux
 # elements of these repositories sourced in  $OSL/nodes/terminal-tmux/tmux.conf
+
+sudo rm -r $ITscc/unix-tmux/*
 
 rsync -irtv --delete $DCGRs/d-unix/d-tmux/r-tmux-plugins-tmux-logging/ $ITscc/unix-tmux/tmux-plugins-tmux-logging
 rsync -irtv --delete $DCGRs/d-unix/d-tmux/r-tmux-plugins-tmux-prefix-highlight/ $ITscc/unix-tmux/tmux-plugins-tmux-prefix-highlight
@@ -58,4 +53,15 @@ sed -i '/C-q/ s/^/# /' forArch/tmux/CrispyConductor-tmux-copy-toolkit/copytk.tmu
 
 # only URLs qre well matched:
 sed -i '/n-match-0-1/ s/^/# /' forArch/tmux/CrispyConductor-tmux-copy-toolkit/copytk.tmux
+
+#=> unix-linux > awesome
+# elements of these repositories symlinked in  $OSAB/nodes/set/jo-1-awesome.sh
+
+rsync -irtv --delete $DCGRs/d-CP/d-encoding/r-rxi-json_lua/ $ITscc/CP/rxi-json_lua
+rsync -irtv --delete $DCGRs/d-unix/d-linux/d-wm-awesome/r-stefano-m-awesome-capslock_widget/ $ITscc/unix-linux/awesome-stefano-m-awesome-capslock_widget
+rsync -irtv --delete $DCGRs/d-unix/d-linux/d-wm-awesome/r-streetturtle-awesome-wm-widgets/ $ITscc/unix-linux/awesome-streetturtle-awesome-wm-widgets
+
+# #=> vim-foldtree
+# rsync -irtv --delete $DCGRs/d-CP/d-Vim-Vim/r-lilydjwg-vim-foldtree/ $ITscc/CP/Vim-vim-foldtree
+# cp $ITscc/CP/Vim-vim-foldtree/foldtree.vim $vfv/plugin/foldtree.vim
 

@@ -471,10 +471,10 @@ du(1)
     readlink $s  # returns referenced node
 
 ### tree
-    tree -a
+    tree -a  # include hidden
     tree -d [-L n]  # directories only, maximum Level (= depth) n
-    tree -f
-    tree -fi
+    tree -f  # print path
+    tree -fi  # print path without indentation lines
 
 tree(1)
 
@@ -1390,6 +1390,7 @@ tr (Unix)
 
 # Ubuntu
     lsb_release -a
+    ods2tsv list.ods > list.tsv
     sensible-browser https://manpages.ubuntu.com/manpages/jammy/man1/sensible-browser.1.html
     sudo updatedb
 
