@@ -579,6 +579,7 @@ Spacemacs documentation
     rustc -V  # --version
     wiki/JSON
     yj -ty <file.toml >file.yml
+    zig version
 
 - `*.oma` = Sony OpenMG
 - `R`: `q("no")`
@@ -586,6 +587,10 @@ Spacemacs documentation
 ## Bluefish
     alt+e (= Edit) > s (= Preferences...)
     bluefish -v
+
+## CMake
+    cmake -h
+    cmake /V
 
 ## doku/highlight
     highlight --syntax=bash <script_without_shebang>

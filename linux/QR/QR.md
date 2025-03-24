@@ -259,6 +259,7 @@ Make (software)
     diff $OSAB/mb-i34G1TU02/jo/conkyrc $OSAB/mb-sbMb/jo/conkyrc
     tac
     shuf
+    sk --ansi -i -c 'rg --color=always --line-number "{}"'
     sort -ro <file> <file>  # reverse sort in place
     wc -l <file>  # counts lines
 
@@ -1036,7 +1037,7 @@ jobs(1p)
     echo $var1 $var2
     unset var1 var2
 
-### sudo
+### su[do]
     su -  # login shell
 
 substitute user identity
