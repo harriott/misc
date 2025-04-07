@@ -13,6 +13,7 @@ commands here are generic, except for those under the Ubuntu heading, see also `
     $OSL/bashrc-generic
 
 Pipe Viewer
+
 # audio
     pactl set-sink-mute 0 toggle
     pavucontrol
@@ -506,6 +507,7 @@ tree(1)
 > /usr/bin/rsnapshot sync: completed successfully
 
 ## rsync
+    rsync -irtv --delete $TeNo/ $Drpbx/Play1/TextNotes
     rsync -inrtv --delete --progress path1/large_file_dir1/ path2/large_file_dir2
 
 output info: `>` = the item is received
@@ -534,9 +536,13 @@ output info: `>` = the item is received
 - `-X` (`--xattrs`) keep extended attributes
 
 # Flatpak
+    du -sh /var/lib/flatpak/.removed
     flatpak list
     flatpak remotes  # list added repositories
     flatpak uninstall <pkg>
+    sudo flatpak list
+    sudo flatpak repair  # Erasing .removed
+    sudo flatpak update
 
 # get at root on tty2
     Ctrl+Alt+F2 > root + pw
@@ -859,11 +865,6 @@ niceness: `-20` = highest priority, `19` = lowest
     i pgrep
     pgrep <aprogram>  # reports it's process id
 
-# Ruby gem
-    gem env
-    gem list
-    gem update
-
 # shell
 - `dc` desk calculator (reverse-Polish)
 - `echo $SHELL` reveals flavour
@@ -874,6 +875,7 @@ niceness: `-20` = highest priority, `19` = lowest
     $ulLB/Scratch0.sh
     /etc/profile
     <somecommand> | xcol <keyword1> <keyword2> ... # for highlighting
+    bash --help
     bash --version
     echo "$floatingpointnumber-$another" | bc  # FP math
     echo "$PS1"
@@ -1320,7 +1322,7 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     :set synchronize-panes  # (set-option)
 
 ### key binds
-    $OSL/tmux/tmux.conf
+    $OSL/nodes/terminal-tmux/tmux.conf
     C-a :  # command prompt
     C-a ?  # list-keys -Na
     C-a [  # copy-mode
@@ -1328,6 +1330,10 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     C-a >  # display-menu
     C-a ~  # show-messages (q to quit)
     C-a t  # time (q to quit)
+
+- `a-m` begins `set mouse`
+- `c-a c-s` begins `easycopy` (`tmux-copy-toolkit`)
+- `send-keys` can't decode a Bash environment variable
 
 #### buffers
     C-a ]  # paste-buffer -p

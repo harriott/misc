@@ -90,6 +90,7 @@ automatically selects the best orientation for filling the page
 mount(8)
 
 ## non-optical
+    df -h /mnt/*
     df -h [<disk>]
     du -sh [<bigDirectory>]
     sudo wipefs [-a] /dev/sdx  # [wipe] signatures

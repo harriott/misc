@@ -21,7 +21,7 @@ if ( !$rd ) { $rd = [string]$pwd } # root directory
 $rd
 if ( !$sf ) { $update = 'GO' } # start from
 $repositories = @()
-fd -utd '\.git$' | %{
+fd -utd '^\.git$' | %{
   $rrp = $_.substring(0, $_.length -6) # repository relative path
   $repository = "$(split-path (split-path $_) -leaf)"
   $repositories += $repository

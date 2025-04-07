@@ -5,9 +5,9 @@
 ;; linux:
 ;;  handled in  $bSc/repeatable/Emacs.sh
 ;; MSwin10:
-;;  cpi $MSwin10\user\Emacs\init.el $Env:AppData\.emacs.d\init.el
-;;  or symlink to  ~\AppData\Roaming\.emacsd\init.el  ($MSwin10\symlinks.ps1)
-;;  or can be called by  $MSwin10\user\Emacs\initPoint.el
+;;  cpi $MSWin10\user\Emacs\init.el $Env:AppData\.emacs.d\init.el
+;;  or symlink to  ~\AppData\Roaming\.emacsd\init.el  ($MSWin10\symlinks.ps1)
+;;  or can be called by  $MSWin10\user\Emacs\initPoint.el
 
 ;; notes for the curious
 ;; ---------------------

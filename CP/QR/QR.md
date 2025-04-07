@@ -975,8 +975,12 @@ print(sys.argv[0])  # the full pathname of the program
     ruby -v
 
 ### gems
-    gem env
-    gem list
+    gem cl -d  # cleanup --dry-run
+    gem e -h  # environment
+    gem ou  # outdated
+    gem li [<gem> -d  # list --details]
+    gem uni [<gem>]  # unistall
+    gem up  # update
     rougify -h
 
 `minima` builds out the original repository copy of images that are less than 1024x512!
@@ -984,7 +988,7 @@ print(sys.argv[0])  # the full pathname of the program
 #### bundler
     bundle exec github-pages versions
     bundle install  # recreates Gemfile.lock from Gemfile
-    bundle outdated
+    bundle ou  # outdated
     bundle show
     bundle update --all
 
@@ -1047,6 +1051,7 @@ Crate regex: `x?` zero or one of `x` (greedy)
     fd 'Chris Rea'
     fd [flags/options] [<pattern>] [<path>...]
     fd -utd '\.git$' | %{ rg 'url = ' $_\config }
+    fd -H Ruby $home
     im fd
 
 - case insensitive until a capital is included
@@ -1271,20 +1276,60 @@ Sony Xperia 10 II: 1080x2520 = 21:9
 - `Save` pads out right & bottom images that aren't up to 1024x512...
 
 # ripgrep
-    rg -help
+    o $RIPGREP_CONFIG_PATH
+    rg -h  # -help
+    rg -V  # --version
 
-- `-g` (= `--glob=<glob>`)
-- `-l` (= `--files-with-matches`)
-- `-N` (= `--no-line-number`)
-- Crate regex
-- outer whitespaces get ignored
+## nodes
+- `--no-ignore`
+- `--one-file-system` don't cross file system boundaries
+- `-.` (= `--hidden`)
+- `-d NUM` (= `--max-depth=n`) `0` limits to given paths
+- `-L` (= `--follow`) symlinks
+- `-u (= `--unrestricted) = `--no-ignore`
+- `-uu` = `--no-ignore -.`
+- `-uuu` = `--binary --no-ignore -.`
 
-## filetypes
+### file types
     rg --type-list  # $vfv/syntax/rgtl.vim
     rg <options> <pattern> [<path>]
 
 - `.dw` not known
 - no group for gitconfigs
+- `-t<type>` (= `--type=<type>`
+- `-T<type>` (= `--type-not=<type>`
+
+### globs
+- `-g` (= `--glob=<glob>`)
+- `--iglob=<glob>` (like using `--glob-case-insensitive`)
+
+## output
+- `-A n` (= `--after-context=n`)
+- `-B n` (= `--before-context=n`)
+- `-C n` (= `--context=n`)
+- `--field-match-separator=' ⋮'` - avoiding the often ambiguous :
+- `--files-without-match`
+- `-l` (= `--files-with-matches`)
+- `-m n` (= `--max-count=n`) matches/file
+- `-N` (= `--no-line-number`)
+- `-r <replacement>` (= `--replace=<replacement>`) in output
+- `-v` (= `--invert-match`) prints lines that don't match
+- `--sort=<by>` `modified`, `none`, `path`
+- `--sortr=<by>` descending
+- `--trim` leading whitespace
+
+## regex
+- Crate
+- `-i` (= `--ignore-case`)
+- `-U` (= `--multiline`) searching across multiple lines
+    - `--multiline-dotall`  . matches line terminators
+- `-w` (= `--word-regexp`) use word boundaries
+- `-x` (`--line-regexp`) = `^search$`
+
+### case
+- `-i` (= `--ignore-case`)
+- `-s` (= `--case-sensitive`) default
+- `-S` (= `--smart-case`)
 
 ## searches
     rg '<someText>|<otherText>'  # searches recursively in files
@@ -1394,7 +1439,7 @@ messes up if terminal is resized
 if aborted, `for f in *; do sed -i "/$f/d" zips; done`
 
 ## browsing
-    $ITsCP/networking-WAN/browsers/browsers.txt
+    $ITsCP/WAN/browsers/browsers.txt
     carbonyl http://harriott.github.io
 
 `KeePassXC` "Getting Started Guide"
@@ -1413,7 +1458,7 @@ if aborted, `for f in *; do sed -i "/$f/d" zips; done`
 
 ### Firefox
     about:config > caret
-    about:plugins
+    about:addons
     about:preferences#general
     about:preferences#privacy > Cookies and Site Data
     about:preferences#sync

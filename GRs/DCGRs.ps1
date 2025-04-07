@@ -1,13 +1,19 @@
 
 # Joseph Harriott - lun 11 nov 2024
 
-# cd $DCGRs; & $misc/GRs/DCGRs.ps1
+# sl $DCGRs; & $misc/GRs/DCGRs.ps1
 
-# #=> 1 create  DCGRs.clones
-# . $misc/GRs/getClonesList.ps1
+#=> 0 check last update of D:\CITGRs
+$lu = "D:/CITGRs/last_update"
+gc $lu
+Read-Host "- good to continue? "
+(get-date).tostring('yyMMdd-HHmmss')+" $Cn" >> D:/CITGRs/last_update
 
-#=> 2 update D:\CITGRs
+#=> 1 optionally update D:\CITGRs
 robocopy /mir $DCGRs D:\CITGRs  # because I might've made changes from another machine
+
+# #=> 2 create  DCGRs.clones
+# . $misc/GRs/getClonesList.ps1 $misc/GRs/DCGRs.clones
 
 #=> 3 remove
 # some repositories that don't update easily
@@ -23,8 +29,8 @@ foreach ($clone in $clones) {
   }
 } # fd -td <part_of_path>
 
-# #=> 5 update  D:\CITGRs
-# . $misc\GRs\update-depth1.ps1
+#=> 5 update  D:\CITGRs
+. $misc\GRs\update-depth1.ps1
 
 #=> 6 symlinks in  D:\CITGRs
 # because Dropbox doesn't like symlinks...
