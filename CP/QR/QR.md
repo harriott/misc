@@ -15,7 +15,7 @@ syntax of this file is ensured in `$vfv/filetype.vim`
 # audio
     exiftool -ver  # https://sno.phy.queensu.ca/~phil/exiftool/
 
-### AAC
+## AAC
 - Advanced Audio Coding
 - `.3gp`, `.m4a`, `.m4b`, `.m4p`, `.m4r`, `.m4v`, `.mp4`
 
@@ -339,14 +339,18 @@ style `\textnormal`
 
 - `alt+f12` = `Outils`/`Tools > Options`
     - `Apparence`
-- `alt+o > l` = `Modules complémentaires et thèmes`
-- `alt+o`/`alt-t` (= `Format`) `> p` (= `Page style...`/`Style de page...` = `alt+P`)
+- `alt+o` (= `Format`) `> p` (= `Page style...`)
     - `Page` is where can set borders
 - `alt+t > e` = `Tools > Extensions` (= `ctrl+alt+e`)
+- `ctrl+5` = `View > Sidebar` toggle
 - `ctrl+alt+e` = `Tools > Extension Manager...`
 - `ctrl+S` = `File > Save As...`
     - can then (only if changes to .ods already saved) select `Text CSV (.csv)`
 - Writer: right-click on a hyperlink for `Remove Hyperlink`
+
+## AZERTY
+- `alt+o > l` = `Modules complémentaires et thèmes`
+- `alt-t` (= `Format`) `> p` (= `Style de page...` = `alt+P`)
 
 ## Draw
 - curve: `left-click > [shift] move > left-click > move > double-left-click`
@@ -371,6 +375,15 @@ use Google Chrome to break out just some pages into a reduced copy
 ## fix rotations
     pdftk leftRotated.pdf cat 1-endeast output horizontal.pdf
     pdftk leftRotated-rightRotated.pdf cat 1east 2west output horizontal.pdf
+
+# documenting - spelling
+    dict -D
+
+## Hunspell
+    hunspell -h
+    hunspell -D
+    hunspell -l <file>
+    nuspell -D
 
 # documenting - Unicode
 - finding characters
@@ -604,6 +617,7 @@ Spacemacs documentation
 ## FFmpeg
     $ITsCP/encoding/x264_fullhelp.txt
     -vf crop=iw:ih-80:0:0
+    ffi <audio_to_fade> -af 'afade=t=out:st=<seconds_to_start>:d=<duraton>' -t <seconds_to_end> -y <audio_faded_out>
     ffi <video> -vf 'scale=iw/2:ih/2' <same_video_with_half_the_frame_size>
     ffi <video> -vframes 1 frame.jpg  # extracts a single frame
     ffmpeg -version | xcol --enable-libvidstab
@@ -727,6 +741,10 @@ in `$ITsCP/networking/browsers`, `git grep activeInstall $(git rev-list --all) -
 #### damaged
     del .git\index
     git reset
+
+### lazygit
+- `?` adaptive help - <esc> quits it
+- `<tab>`
 
 ### remotes
     gh repo clone
@@ -1060,10 +1078,12 @@ Crate regex: `x?` zero or one of `x` (greedy)
 - Ubuntu: `fdfind -V`
 
 ### man
+- `--xdev` (= `--mount` = `--one-file-system`)
 - `-a` (=`--absolute-path`)
 - `-d1` = depth 1 (current dir)
 - `-e <ext>` (= `--extension`)
 - `-E` (= `--exclude`) `<unquoted_glob>`
+- `-p`, `--full-path` full path (instead of name only)
 - `-H` (`--hidden`)
 - `-I` = `--no-ignore` = don't respect `.(fd|git)ignore`
 - `-L` follow links into symlinked directories
@@ -1277,6 +1297,7 @@ Sony Xperia 10 II: 1080x2520 = 21:9
 
 # ripgrep
     o $RIPGREP_CONFIG_PATH
+    rg -- ---@ $DWp
     rg -h  # -help
     rg -V  # --version
 
@@ -1400,6 +1421,7 @@ messes up if terminal is resized
     ansifilter <file_to_strip_of_ANSI_terminal_escape_codes>
 
 - carriage return (U+000D) returns the cursor to the left of the line (usually just before line feed on MSWin)
+- `chmln.sd`
 - finding characters
 
 ## Vim

@@ -172,8 +172,8 @@ gdisk(8)
 ### tray
     eject  # opens tray
     eject -h
-    eject -t  # closes tray
-    eject -T sr1  # toggles tray of sr1
+    eject -t  # closes tray (might fail)
+    eject -T  # toggles tray
 
 # webcam
     cameractrls

@@ -21,7 +21,7 @@ if ($a0) {
     $ru = "$ru" -replace '\.git$',''
     $repos += "$ru"
   }
-  $repos | sort > $a0
+  $repos | sort -Unique > $a0
   $a0
 }
 

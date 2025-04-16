@@ -1,7 +1,7 @@
 #!/bin/bash
 # vim: set fdl=2:
 
-# Joseph Harriott  Fri 07 Mar 2025
+# Joseph Harriott  Wed 09 Apr 2025
 # bash $misc/GRs/needed.sh
 # repositories needed for my system builds
 
@@ -11,6 +11,9 @@ set -e  # terminate on a fail
 rsync -irtv --delete $DCGRs/d-CP/r-CLI-wfxr-code-minimap/ $ITscc/CP/wfxr-code-minimap
 # resourced from  $MSn\PS\Profile.ps1
 # sourced in  $OSAB/nodes/Bash/bashrc-generic
+
+#=> <esc> <esc> prefixes sudo
+cp $DCGRs/d-unix/r-ohmybash-oh-my-bash/plugins/sudo/sudo.plugin.sh $ITscc/CP/ohmybash-sudo.plugin.sh
 
 #=> emacs
 rsync -irtv --delete $DCGRs/d-CP/d-emacs/r-domtronn-all-the-icons.el/ $ITscc/CP/Emacs-domtronn-all-the-icons.el

@@ -158,40 +158,43 @@ Music Player Daemon
 
 date(1)
 
-# documenting - Foliate
+# documenting
+    aspell dicts
+
+## Foliate
 - `ctrl-q` = quit
 - mouse to bottom for scrollbar
 - mouse to top for adjustments
 
-# documenting - PDFs
+## PDFs
 - `Firefox` shows `Document Outline`
 - Outline = the hyperref bookmarks that correspond to headings of a LaTeX document
 
-## C5 printing
+### C5 printing
 - `Firefox` can't figure it's portrait
 - `LibreOffice Writer` gets it right
 - Ubuntu's `qpdfview` gets it almost right
 
-## qpdfview
+### qpdfview
     F6 = View > Docks > Outline (such as the headings of a LaTeX document)
     F8 = Thumnails
 
-## sizes
+### sizes
     pdfinfo <a_pdf_file>  # A5 = 420x595. See GSview for more sizes.
 
 1 PostScript point = 0.3528 mm
 
-## XpdfReader
+### XpdfReader
     [-f <firstPage>] [-l <lastPage>]
     pdftoppm -png -r 300 <pdf> <basename_for_png_sequence>
     pdftoppm -jpeg -r 300 <pdf> <basename_for_jpeg_sequence>
 
-## Zathura
+### Zathura
     zathura --mode=fullscreen a.pdf &
 
 zathura man page
 
-### commands
+#### commands
     :info
 
 - `<tab>` toggles Outline view
@@ -199,7 +202,7 @@ zathura man page
 - `r` rotate by 90 degrees
 - `R` reload document
 
-#### resizing
+##### resizing
 - `+/-/=` zoom in/out/original
 - `a` best-fit mode
 - `s` width mode
@@ -309,6 +312,20 @@ sharkdp/bat
 - `-F` (interpret patterns as `--fixed-strings`, not regex)
 - `-o` (`--only-matching`)
 - GNU Grep Manual
+
+### igrep
+    ig
+
+#### commands
+- `?` toggle help
+- `f5` toggle search pattern
+- `<enter>` edit the file on the line
+- `<esc>`/`q` quit
+
+##### context view
+- `s`  toggle horizontal
+- `v`  toggle vertical
+- `-`/`+` decrease/increase size
 
 ## sed
     $cIThul/sed
@@ -1102,7 +1119,6 @@ don't export them
     qs=$'quote\'*star'; o "$qs"
     s=12345; echo $s | awk '{print substr($1,length($1)-2) }'
     s=12345; echo $s | cut -c $((${#s}-2))-
-    s=12345; echo ${s::-2}
     s=yes; s+=no; o $s
 
 case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
@@ -1117,6 +1133,7 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     ${string:position:length}
     a=12345; echo ${a:2}; echo ${a:1:2}
     b="a(b(c(d"; o ${b##*\(}
+    s=12345; echo ${s::-2}
     t=lkj; echo ${t:0:${#t}-1}
 
     name=polish.ostrich.racing.champion; o ${name#*.}; o ${name##*.}; o ${name%%.*}; o ${name%.*}
@@ -1127,6 +1144,8 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     - `ctrl+s` stop
 
 # sort
+    sort -o <file> <file>  # in-place
+
 - `-h` (`--human-numeric-sort`)
 - `-n` (`--numeric-sort`)
 - `-r` (`--reverse`)
