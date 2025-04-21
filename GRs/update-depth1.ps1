@@ -21,6 +21,7 @@ if ( !$rd ) { $rd = [string]$pwd } # root directory
 $rd
 if ( !$sf ) { $update = 'GO' } # start from
 $repositories = @()
+$a0 = $args[0]
 fd -utd '^\.git$' | %{
   $rrp = $_.substring(0, $_.length -6) # repository relative path
   $repository = "$(split-path (split-path $_) -leaf)"
@@ -43,6 +44,7 @@ fd -utd '^\.git$' | %{
         git clean -dfx
       }
   }
+  if ($a0) { . $a0 } # possible fixes
 }
 cd $rd
 $repositories > repos

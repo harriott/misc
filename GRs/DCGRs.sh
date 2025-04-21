@@ -15,13 +15,20 @@
 
 set -e  # quits on error
 
-#=> 1 update  DCGRs.clones
-. $misc/GRs/getClonesList.sh $misc/GRs/DCGRs.clones
+#=> 0 last_update check
+cat "$DCGRs/last_update"
+read -p "- good to continue? "
 
-# #=> 2 rsync  $DCGRs  to  $CITGRs
+# #=> 1 optionally  rsync  $DCGRs  to  $CITGRs
 # rsync -irtv --delete $DCGRs/ $CITGRs  # because I might've made changes from another machine
 
-#=> 3 remove
+#=> 2 last_update append
+"$(date +%y%m%d-%H%M%S)$Cn" >> $CITGRs/last_update
+
+#=> 3 update  DCGRs.clones
+. $misc/GRs/getClonesList.sh $misc/GRs/DCGRs.clones
+
+#=> 4 remove
 # some repositories that don't update easily
 
 # sudo rm -r $CITGRs/CP/emacs/daviwil-dotfiles
@@ -33,7 +40,7 @@ set -e  # quits on error
 # sudo rm -r $CITGRs/CP/pypa-pipx
 # sudo rm -r $CITGRs/unix/linux/BrodieRobertson-dotfiles
 
-#=> 4 git clone
+#=> 5 git clone
 while read cloneLine; do
   clone="${cloneLine%% *}"
   if ! [ -d $clone ]; then
@@ -43,7 +50,7 @@ while read cloneLine; do
   fi
 done <"$misc/GRs/DCGRs.clones"  # can prefix  test https://github.com/test
 
-#=> 5 update  $CITGRs
+#=> 6 update  $CITGRs
 # sf='StartFrom'
 # sf='./CP-emacs-emacs-mirror-emacs'
 # sf='./CP/emacs/syl20bnr-spacemacs'
@@ -62,7 +69,7 @@ done <"$misc/GRs/DCGRs.clones"  # can prefix  test https://github.com/test
 # once=yes
 . $misc/GRs/update-depth1.sh $misc/GRs/DCGRs-ud1-fixes.sh
 
-#=> 6 symlinks in  $CITGRs
+#=> 7 symlinks in  $CITGRs
 # because Dropbox doesn't like symlinks...
 
 echo "Broken symlinks:"
@@ -77,7 +84,7 @@ echo "- removed"
     # if [[ $repository =~ none ]]; then deref $repository fi
 # done
 
-#=> 7 sync to  $DCGRs
+#=> 8 sync to  $DCGRs
 read -p "going to rsync from ${tpf5}$CITGRs${tpfn} to ${tpf5}$DCGRs${tpfn}"
 set +e
 rsync -iLrtv --delete $CITGRs/ $DCGRs
@@ -85,7 +92,7 @@ echo "${tpf3b}2nd rsync to highlight any errors${tpfn}"
 rsync -iLrtv --delete $CITGRs/ $DCGRs
 echo ${tpfn}
 
-#=> 8 advise to check for symlinks
+#=> 9 advise to check for symlinks
 echo 'now maybe  bash $misc/linux/slJH.sh'
 echo
 

@@ -9,8 +9,7 @@
 
 $a0 = $args[0]
 if ($a0) {
-  if ( test-path $a0 ) { ri $a0 }
-  $repos = @()
+  if ( test-path $a0 ) { $repos = gc $a0; ri $a0 } else { $repos = @() }
   fd -utd '^\.git$' | %{
     $repo = $_.substring(0, $_.length -6) # repository relative path
     $repo = $repo.replace('\','/')

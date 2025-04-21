@@ -617,7 +617,7 @@ Spacemacs documentation
 ## FFmpeg
     $ITsCP/encoding/x264_fullhelp.txt
     -vf crop=iw:ih-80:0:0
-    ffi <audio_to_fade> -af 'afade=t=out:st=<seconds_to_start>:d=<duraton>' -t <seconds_to_end> -y <audio_faded_out>
+    ffi <audio_to_fade> -af 'afade=t=out:st=<seconds_to_start>:d=<seconds_duration>' -t <seconds_to_end> -y <audio_faded_out>  # <seconds_to_start> + <seconds_duration> = <seconds_to_end>
     ffi <video> -vf 'scale=iw/2:ih/2' <same_video_with_half_the_frame_size>
     ffi <video> -vframes 1 frame.jpg  # extracts a single frame
     ffmpeg -version | xcol --enable-libvidstab
@@ -1020,9 +1020,15 @@ print(sys.argv[0])  # the full pathname of the program
 `irb` is quit with `exit` or `ctrl+d`
 
 ## Rust
+    rustup help
+    rustup update
+
+### Cargo
     cargo --list
     cargo install --list
     cargo search
+    cargo version
+    g $HOME/.cargo/bin
 
 Crate regex: `x?` zero or one of `x` (greedy)
 
@@ -1061,6 +1067,7 @@ Crate regex: `x?` zero or one of `x` (greedy)
     openssl sha3-256 <file>
     zoxide -h  # --help
     zoxide -V  # --version
+    zoxide edit  # <esc>
 
 - `7-Zip`: `7z x <pw'd_zip>`
 - sharkdp/bat
@@ -1388,6 +1395,10 @@ in JH: `$DJH/search/searches.md`
 - `Shift+PageDown/Up` = `ScrollPageDown/Up`
 - `Shift+End/Home` = `ScrollToBottom/Top`
 
+# terminal - Chafa
+    chafa -h  # --help
+    chafa --version
+
 # terminal - less
 greenwoodsoftware
 
@@ -1413,6 +1424,12 @@ messes up if terminal is resized
 ### search
 - `/ ?`  search forward backward
 - `n N`  next previous
+
+# terminal - WezTerm - key assignents
+- `alt+enter` ToggleFullScreen
+- `ctrl -/+` DecreaseFontSize/IncreaseFontSize
+- `ctrl+alt+"` split down
+- `ctrl+arrow` move to pane
 
 # text wrangling
     ! " # $ % & ' ( ) * + , - . /
