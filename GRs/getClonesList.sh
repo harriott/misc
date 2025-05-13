@@ -19,6 +19,8 @@ if [ $1 ]; then
       url=${url%.git}
       echo "${repo:2} ${url:7}" >> $1  # adding to, so not obliterating my manual additions
     done
+    echo "$1"
+    sed -i 's/\r//' $1  # remove CRLF
     sort -uo $1 $1  # tidy up
   else
     echo "$1  should exist"

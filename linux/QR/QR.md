@@ -58,7 +58,7 @@ C* Music Player
     + =      vol +10%
 
 ### media
-- can play: `mka`, `ogg`, `wma`
+- can play: `mka`, `ogg`, `opus`, `wma`
 - can't play: `oma`, `omv`, `rmj`
 
 ## convert
@@ -254,6 +254,10 @@ Make (software)
     pdflatex sample2e.tex
     tex --version
 
+# Fcitx Clipboard
+- `fcitx5-configtool & > Addons > Clipboard > Configure > Trigger Key` defaults to `ctrl+;`
+- works in `Firefox`, `WezTerm`
+
 # fcron
     fcrontab -l
     systemctl status fcron.service
@@ -261,6 +265,7 @@ Make (software)
 # file contents
     cat
     diff $OSAB/mb-i34G1TU02/jo/conkyrc $OSAB/mb-sbMb/jo/conkyrc
+    enca -l surfaces
     tac
     shuf
     sk --ansi -i -c 'rg --color=always --line-number "{}"'
@@ -356,6 +361,7 @@ sharkdp/bat
     sed -i '/match/,+2d' <file>  # removes matched line and 2 after
     sed -i '0~2 a\\' <fileToAddBlankLineAfterEach2ndLine>
     sed -i '1s/^/vim: ft=<filetype>:\n\n/' $cslF
+    sed -i 's/\r//' <file_to_remove_CRLF_from>
     sed G <file>  # outputs <file> with blank lines added
     sed '1i\newFirstLineText' <fileToPrependTo>
 
@@ -440,13 +446,15 @@ find(1)
 
 ## investigations
     diff --no-dereference -qr dir1 dir2
+    find . -name '.?*'  #  recursively list hidden files
     ls -ar | rev | cut -d'.' -f1 | rev | sort | uniq -c | sort -r  # extension counts
     stat -c '%a %n' *  # show octal permissions
 
 ### counts
     echo `find . -type d | wc -l`-1 | bc  # counts all subdirectories
-    find . -name '.?*'  #  recursively list hidden files
+    find . -name "*" -type f -path '*/.git/*' | wc
     find . -type f | sed 's/.*\.//' | sort | uniq -c  # counts by extension
+    for d in $(fd -d1 -td); do find "$d" | o "$(wc -l) : $d"; done  # files in directories
     isutf8 **/* | wc -l  # non UTF-8 files (fails when too many)
 
 #### including hidden
@@ -551,6 +559,10 @@ output info: `>` = the item is received
     - `-o` (`--owner`) if super-user
     - `-p` (`--perms`) keep permissions
 - `-X` (`--xattrs`) keep extended attributes
+
+## zoxide
+    declare -f z
+    zoxide -h
 
 # Flatpak
     du -sh /var/lib/flatpak/.removed
@@ -953,6 +965,7 @@ niceness: `-20` = highest priority, `19` = lowest
     for f in *; do mv $f ${f:2}; done
     man -h ls
     mkdir -p <aDirectoryPath>  # won't overwrite if it already exists
+    mktemp temp-XXX  # can add more X's, touch's a randomised filename
     pushd ~/some_path; pushd /another_path; popd; popd
 
 #### find
@@ -1012,7 +1025,7 @@ jobs(1p)
     for i in bee fly wasp; do echo $i; done
     s=2; e=4; for (( c=$s; c<=$e; c++ )); do echo $c; done
     select f in apple pear grape; do echo "you chose $f"; done
-    while read line; do echo "$line" done <file_to_use_line_by_line
+    while read line; do echo "$line"; done <file_to_use_line_by_line
 
 ### managing commands
     o $?  # exit code of last command, 0 if command succeeded
@@ -1279,8 +1292,10 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
 # term
     sudo fgconsole  # reports tty number
 
-- `Ctrl+q` resume output to screen
-- `Ctrl+s` pause output to screen
+- `^\` = `SIGQUIT`
+- `^c` = `SIGINT`
+- `^q` resume output to screen
+- `^s` pause output to screen
 - w(1)
 
 ## Alacritty
@@ -1460,6 +1475,18 @@ https://packages.ubuntu.com/
     if wget -q --spider google.com; then echo online; fi
     pkill radio; radio -K  # quit & kill instances of  radio-active
 
+## Chawan
+    cha -V
+    cha https://en.wikipedia.org
+    mancha cha
+
+### key bindings
+- `alt+i` toggle images
+- `q` quits
+- `v` toggles select
+- `y` yank to clipboard
+- vim-like
+
 ## email
     thunderbird -addressbook
 
@@ -1560,7 +1587,7 @@ https://packages.ubuntu.com/
 - vim-like
 
 #### navigation
-- `B` (= `BACK`)
+`B` (= `BACK`)
 
 ##### URLs
 - `c` (= `PEEK`) reveals the url

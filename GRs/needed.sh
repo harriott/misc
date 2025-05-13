@@ -2,15 +2,16 @@
 # vim: set fdl=2:
 
 # Joseph Harriott  Wed 09 Apr 2025
-# bash $misc/GRs/needed.sh
+# bash $misc/GRs/needed.sh  see  $ITscc/readme.md
 # repositories needed for my system builds
 
 set -e  # terminate on a fail
 
 #=> code-minimap
 rsync -irtv --delete $DCGRs/d-CP/r-CLI-wfxr-code-minimap/ $ITscc/CP/wfxr-code-minimap
-# resourced from  $MSn\PS\Profile.ps1
-# sourced in  $OSAB/nodes/Bash/bashrc-generic
+sed -i 's/\r//' $ITscc/CP/wfxr-code-minimap/completions/bash/code-minimap.bash  # ensure no CRLFs
+# resourced from  $MSn/PS/Profile.ps1
+# sourced in  $OSAB/nodes-Bash/bashrc-generic
 
 #=> <esc> <esc> prefixes sudo
 cp $DCGRs/d-unix/r-ohmybash-oh-my-bash/plugins/sudo/sudo.plugin.sh $ITscc/CP/ohmybash-sudo.plugin.sh
@@ -21,6 +22,7 @@ rsync -irtv --delete $DCGRs/d-CP/d-emacs/r-domtronn-all-the-icons.el/ $ITscc/CP/
 
 #=> LS_COLORS
 rsync -irtv --delete $DCGRs/d-unix/d-linux/r-trapd00r-LS_COLORS/ $ITscc/unix-linux/trapd00r-LS_COLORS
+sed -i 's/\r//' $ITscc/unix-linux/trapd00r-LS_COLORS/lscolors.sh  # ensure no CRLFs
 # lscolors.sh  sourced in  $MSn/WSL/bashrc  $OSAB/nodes/Bash/bashrc-generic
 
 #=> mpv
@@ -41,21 +43,21 @@ rsync -irtv --delete $DCGRs/d-unix/d-tmux/r-CrispyConductor-tmux-copy-toolkit/ $
 
 #===> tweak
 # my preferred entry:
-sed -i 's/x S/x e/' forArch/tmux/CrispyConductor-tmux-copy-toolkit/copytk.tmux
+sed -i 's/x S/x e/' $ITscc/unix-tmux/CrispyConductor-tmux-copy-toolkit/copytk.tmux
 
 # conflicts with  tmux-resurrect:
-sed -i '/C-s/ s/^/# /' forArch/tmux/CrispyConductor-tmux-copy-toolkit/copytk.tmux
+sed -i '/C-s/ s/^/# /' $ITscc/unix-tmux/CrispyConductor-tmux-copy-toolkit/copytk.tmux
 
 # selections aren't visible:
-sed -i '/k S/ s/^/# /' forArch/tmux/CrispyConductor-tmux-copy-toolkit/copytk.tmux
-sed -i '/Y/ s/^/# /' forArch/tmux/CrispyConductor-tmux-copy-toolkit/copytk.tmux
+sed -i '/k S/ s/^/# /' $ITscc/unix-tmux/CrispyConductor-tmux-copy-toolkit/copytk.tmux
+sed -i '/Y/ s/^/# /' $ITscc/unix-tmux/CrispyConductor-tmux-copy-toolkit/copytk.tmux
 
 # not useful for me:
-sed -i '/Q/ s/^/# /' forArch/tmux/CrispyConductor-tmux-copy-toolkit/copytk.tmux
-sed -i '/C-q/ s/^/# /' forArch/tmux/CrispyConductor-tmux-copy-toolkit/copytk.tmux
+sed -i '/Q/ s/^/# /' $ITscc/unix-tmux/CrispyConductor-tmux-copy-toolkit/copytk.tmux
+sed -i '/C-q/ s/^/# /' $ITscc/unix-tmux/CrispyConductor-tmux-copy-toolkit/copytk.tmux
 
 # only URLs qre well matched:
-sed -i '/n-match-0-1/ s/^/# /' forArch/tmux/CrispyConductor-tmux-copy-toolkit/copytk.tmux
+sed -i '/n-match-0-1/ s/^/# /' $ITscc/unix-tmux/CrispyConductor-tmux-copy-toolkit/copytk.tmux
 
 #=> unix-linux > awesome
 # elements of these repositories symlinked in  $OSAB/nodes/set/jo-1-awesome.sh

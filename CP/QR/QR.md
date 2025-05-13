@@ -728,10 +728,6 @@ in `$ITsCP/networking/browsers`, `git grep activeInstall $(git rev-list --all) -
 - `autocrlf = input`  warning: CRLF will be replaced by LF
 - `eol = lf`
 
-### GitHub CLI
-    gh repo list  # handy list of your repositories
-    gh repo view  # in a repository, returns the README
-
 ### the index
     git checkout-index -f <somefile>  # overwrite from the index's copy
     git ls-files
@@ -795,6 +791,33 @@ Tig Manual
     java -version
     PS> where.exe java
 
+## JavaScript - package manage
+`Yarn`: `corepack -h`
+
+### Node.js - npm
+    npm install
+    npm ls -g
+    npm un[install] -g [<package>]
+    npm up[date] -g [<package>]
+    npm prefix -g  # =  npm config get prefix
+    npm -v  # --version
+    npx cowsay goodbye!''
+
+#### Astro
+    npm run dev -- -h  # --help
+    npx astro --help
+    npx astro --version
+    npx astro docs  # launches Astro Docs
+    npx astro info  # environment
+
+##### development server
+    http://localhost:4321
+    npm run dev
+    npx astro dev
+
+- gets dev toolbar at bottom
+- HMR ensures instant updates
+
 ## Lua
     $coreIT/CP/encoding/dpl/scratch.lua
     $DCGRs/CP/Vim/vim-vim/src/testdir/testluaplugin/lua/testluaplugin/hello.lua
@@ -807,30 +830,6 @@ Tig Manual
 ### Markdown Guide
 - <https://www.markdownguide.org/basic-syntax/>
 - <https://www.markdownguide.org/extended-syntax/>
-
-## npm
-    npm install
-    npm ls -g
-    npm un[install] -g [<package>]
-    npm up[date] -g [<package>]
-    npm prefix -g  # =  npm config get prefix
-    npm -v  # --version
-    npx cowsay goodbye!''
-
-### Astro
-    npm run dev -- -h  # --help
-    npx astro --help
-    npx astro --version
-    npx astro docs  # launches Astro Docs
-    npx astro info  # environment
-
-#### development server
-    http://localhost:4321
-    npm run dev
-    npx astro dev
-
-- gets dev toolbar at bottom
-- HMR ensures instant updates
 
 ## Pandoc
     $core/IT_stack/CP/Pandoc/monofont.md
@@ -1075,7 +1074,6 @@ Crate regex: `x?` zero or one of `x` (greedy)
 ## fd
     fd 'Chris Rea'
     fd [flags/options] [<pattern>] [<path>...]
-    fd -utd '\.git$' | %{ rg 'url = ' $_\config }
     fd -H Ruby $home
     im fd
 
@@ -1144,6 +1142,20 @@ by gokcehan
 - `ZQ`  `:quit!`
 - `ZZ`  `:quit`
 - `<space>`/`<tab>` switches pane
+
+## Yazi
+- `.` = `hidden toggle`
+- `enter`/`o` = `open`
+- `a` = `create` directory/ or file
+- `d` = `remove` to trash
+- `r` = `rename` selected files
+- `z` = `plugin fzf`
+- `Z` = `plugin zoxide`
+
+### searching
+- `c-s` = `escape --search`
+- `s` = `search --via=fd`
+- `S` = `search --via=rg`
 
 # gpg
     <key-id> can be the short key id = the last 8 characters
@@ -1426,10 +1438,29 @@ messes up if terminal is resized
 - `n N`  next previous
 
 # terminal - WezTerm - key assignents
-- `alt+enter` ToggleFullScreen
-- `ctrl -/+` DecreaseFontSize/IncreaseFontSize
-- `ctrl+alt+"` split down
-- `ctrl+arrow` move to pane
+- `alt+enter` = `ToggleFullScreen`
+- `ctrl -/+` = `DecreaseFontSize`/`IncreaseFontSize`
+- `shift PageDown` = `ScrollByPage=1`
+- `shift PageUp` = `ScrollByPage=-1`
+
+## copy/paste
+- `ctrl shift c` = `CopyTo="Clipboard"`
+- `ctrl shift v` = `CopyFrom="Clipboard"`
+- `ctrl shift x` = `ActivateCopyMode`
+- mouse select
+
+## panes
+- `ctrl alt "` = `SplitVertical...` down
+- `ctrl alt %` = `SplitHorizontal...` right
+- `ctrl shift arrow` = move to pane
+- `ctrl shift z` = `TogglePaneZoomState` get `[Z]` prefixed in window title
+
+## tabs
+- `ctrl PageDown` = `ActivateTabRelative=-1`
+- `ctrl PageUp` = `ActivateTabRelative=1`
+- `ctrl shift t` = `SpawnTab="CurrentPaneDomain"`
+- `ctrl shift tab` = `ActivateTabRelative=-1`
+- `ctrl tab` = `ActivateTabRelative=1`
 
 # text wrangling
     ! " # $ % & ' ( ) * + , - . /
@@ -1479,9 +1510,24 @@ if aborted, `for f in *; do sed -i "/$f/d" zips; done`
 
 ## browsing
     $ITsCP/WAN/browsers/browsers.txt
-    carbonyl http://harriott.github.io
 
 `KeePassXC` "Getting Started Guide"
+
+### Browsh
+    browsh https://www.brow.sh
+
+- better page layout than `w3m`
+- `ctrl+q` quits
+- doesn't work from `Neovide`
+- only one connection through Firefox allowed
+
+### Carbonyl
+    carbonyl -h
+    carbonyl http://harriott.github.io
+
+- arrow keys & mouse
+- `ctrl+c` to exit
+- images are crudely represented
 
 ### chromium-based
     chrome://apps/
@@ -1510,18 +1556,33 @@ if aborted, `for f in *; do sed -i "/$f/d" zips; done`
 - `ctrl+shft+o` (= `Library`)
 - `f12` (= `Web Developer Tools`)
 
+### lynx
+    lynx http://invisible-island.net/lynx
+
+- `?`/`h` help screen
+- `qq` quits
+
 ### Vivaldi
 - `alt+p` (= `Settings`) `> Search > [ Google up to top and Set as Default , DuckDuckGo next, Wikipedia third ]`
 - `ctrl+b` (= `Manage Bookmarks`)
 
 ## GitHub
-    $JHm
+`~/.ssh/known_hosts`: `AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa`
+
+### CLI
+    gh browse  # opens the repository root in web browser
     gh config list
+    gh extension list
+    gh repo list  # handy list of your repositories
+    gh repo view  # in a repository, returns the README
+    gh status  # of me on other's repositories
     git diff upstream/master...HEAD
 
-- CLI: `gh`
-- GitHub API GET request: https://api.github.com/repos/user/repository > `sizes:`
-- `~/.ssh/known_hosts`: `AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa`
+#### gh s
+    gh s -E -u @me
+    gh s yarnpkg/berry
+
+`Enter` quits, printing that URL
 
 ## Google Sheets
     wget https://docs.google.com/spreadsheets/d/DOCID/export?format=tsv&gid=SHEETID
@@ -1575,11 +1636,14 @@ file formats
 
 Keyboard shortcuts for YouTube
 
-## yt-dlp
+## yt-dlp - Linux
     $AjB/bashrc-wm
-    $MSWin10\PSProfile.ps1
     yt-dlp -f best <videoURL>
     yt-dlp -f ba <videoURL>  # bestaudio (= best*[vcodec=none])
     yt-dlp -h
     yt-dlp --version
+
+## yt-dlp - MSWin10
+    $MSn\PS\Profile.ps1
+    y --version
 

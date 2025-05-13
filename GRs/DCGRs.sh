@@ -20,12 +20,15 @@ cat "$DCGRs/last_update"
 read -p "- good to continue? "
 
 # #=> 1 optionally  rsync  $DCGRs  to  $CITGRs
+# read -p "going to rsync from ${tpf5}$DCGRs${tpfn} to ${tpf5}$CITGRs${tpfn}"
 # rsync -irtv --delete $DCGRs/ $CITGRs  # because I might've made changes from another machine
+# exit
 
 #=> 2 last_update append
-"$(date +%y%m%d-%H%M%S)$Cn" >> $CITGRs/last_update
+echo "$(date +%y%m%d-%H%M%S) $host" >> $CITGRs/last_update
 
 #=> 3 update  DCGRs.clones
+echo 'updating  $misc/GRs/DCGRs.clones'
 . $misc/GRs/getClonesList.sh $misc/GRs/DCGRs.clones
 
 #=> 4 remove
@@ -38,6 +41,8 @@ read -p "- good to continue? "
 # sudo rm -r $CITGRs/CP/jgm-pandoc
 # sudo rm -r $CITGRs/CP/nomacs-nomacs
 # sudo rm -r $CITGRs/CP/pypa-pipx
+# sudo rm -r $CITGRs/d-MSWin/r-jdhitsolutions-PSScriptTools
+# sudo rm -r $CITGRs/d-unix/d-linux/d-mail/r-rpuntaie-mailwizard
 # sudo rm -r $CITGRs/unix/linux/BrodieRobertson-dotfiles
 
 #=> 5 git clone
@@ -58,6 +63,8 @@ done <"$misc/GRs/DCGRs.clones"  # can prefix  test https://github.com/test
 # sf='./CP/MartinThoma-LaTeX-examples'
 # sf='./CP/nomacs-nomacs'
 # sf='./CP/Ruby/Jekyll/jekyll-jekyll'
+# sf='./d-MSWin/r-jdhitsolutions-PSScriptTools'
+# sf='./d-unix/d-linux/d-mail/r-rpuntaie-mailwizard'
 # sf='./linux/Arch/protesilaos-dotfiles'
 # sf='./linux/dwt1-dotfiles'
 # sf='./linux/leo-arch-clifm'
