@@ -10,7 +10,7 @@
 find $Drpbx -type l -ls > $Drpbx/symlinks
 log="$Drpbx/links.slJH"
 echo "" > $log
-echo "Symlinks that will fail to sync from Dropbox to Win10 Pro:" >> $log
+echo "Symlinks that will fail to sync from Dropbox to Win10 Pro or that Insync will refuse:" >> $log
 echo "" >> $log
 awk '{print $11, $12, $13}' $Drpbx/symlinks >> $log
 # - using  >>  instead of  ->  allows for simpler  $vimfiles/syntax/symlinks.vim

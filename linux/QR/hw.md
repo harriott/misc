@@ -166,14 +166,18 @@ gdisk(8)
     cd-drive  # info
     cdrecord dev=/dev/sr0 -checkdrive  # Vendor_info etc
     cdrecord -v -sao dev=/dev/sr0 linux.iso
-    whipper cd rip
-    whipper drive list
 
 ### tray
     eject  # opens tray
     eject -h
     eject -t  # closes tray (might fail)
     eject -T  # toggles tray
+
+### Whipper
+    whipper -h
+    whipper cd rip
+    whipper drive list
+    ~/.config/whipper/whipper.conf
 
 # webcam
     cameractrls

@@ -218,8 +218,8 @@ zathura man page
     ctrl-v => scroll down
 
 # encoding
-    delta $OSAB/mb-i34G1TU02/jo/conkyrc $OSAB/mb-sbMb/jo/conkyrc
-    git diff $OSAB/mb-i34G1TU02/jo/conkyrc $OSAB/mb-sbMb/jo/conkyrc
+    delta <file1> <file2>
+    git diff <file1> <file2>
     ~\.pyenv
 
 Make (software)
@@ -264,7 +264,7 @@ Make (software)
 
 # file contents
     cat
-    diff $OSAB/mb-i34G1TU02/jo/conkyrc $OSAB/mb-sbMb/jo/conkyrc
+    diff <file1> <file2>
     enca -l surfaces
     tac
     shuf
@@ -455,6 +455,7 @@ find(1)
     find . -name "*" -type f -path '*/.git/*' | wc
     find . -type f | sed 's/.*\.//' | sort | uniq -c  # counts by extension
     for d in $(fd -d1 -td); do find "$d" | o "$(wc -l) : $d"; done  # files in directories
+    for n in *; do find "$n" | echo "$n"; done
     isutf8 **/* | wc -l  # non UTF-8 files (fails when too many)
 
 #### including hidden
@@ -964,7 +965,6 @@ niceness: `-20` = highest priority, `19` = lowest
     echo */  # lists directories
     for f in *; do mv $f ${f:2}; done
     man -h ls
-    mkdir -p <aDirectoryPath>  # won't overwrite if it already exists
     mktemp temp-XXX  # can add more X's, touch's a randomised filename
     pushd ~/some_path; pushd /another_path; popd; popd
 
@@ -1174,6 +1174,7 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     gtk-launch --version
     halt -p
     i hier  # detailed description of the filesystem hierarchy
+    killall -SIGUSR1 conky  # brings it back up
     locale
     openbox --reconfigure
     passwd jo  # then re-login
@@ -1266,13 +1267,12 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     systemd-analyze --user unit-paths
 
 ### info
-    systemctl  # list running Systemd units
     systemctl --failed
-    systemctl --no-pager
+    systemctl --user --no-pager  # list running Systemd units
     systemctl --version
     systemctl is-enabled <service>
     systemctl list-timers
-    systemctl list-unit-files
+    systemctl list-unit-files --no-pager
     systemd-analyze blame  # time taken for boot processes
 
 ## uname
@@ -1289,6 +1289,32 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     who  # lists users active on terminals
     whoami
 
+## Xfce
+- `GTK`
+- `Terminal` (`xfce4-terminal`)
+    - `ctrl+shift+c` = copy
+    - `ctrl+shift+v` = paste
+
+### keyboard shortcuts
+- `Ctrl+Alt+Del` = `xfce4-session-logout`
+- `Ctrl+Alt+Escape` = `xkill` (right-click abandons)
+- `Ctrl+Alt+L` = `xflock4`
+- `HomePage` = `XF86HomePage` = `exo-open --launch WebBrowser`
+- `Shift+Ctrl+Esc` = `xfce4-taskmanager`
+- `Super+e` = `thunar`
+
+#### windows
+- `Applications > Settings > Window Manager`
+    - `Alt+F9` = minimise
+    - `Alt+F10` = toggle maximise
+    - `F11` = full screen
+    - `super+1` = move to left monitor
+    - `super+2` = move to right monitor
+
+### Xfce Notify Daemon
+    systemctl --user status xfce4-notifyd
+    xfce4-notifyd-config &
+
 # term
     sudo fgconsole  # reports tty number
 
@@ -1299,7 +1325,6 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
 - w(1)
 
 ## Alacritty
-    $OSAB/nodes-terminal/alacritty.toml
     alacritty -h  # --help
     alacritty -V  # --version
 

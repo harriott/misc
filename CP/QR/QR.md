@@ -588,6 +588,7 @@ no built in documentation for `straight.el`
 Spacemacs documentation
 
 # encoding
+    /* a single-line CSS comment */
     code-minimap $misc/CP/QR/QR.md
     rustc -V  # --version
     wiki/JSON
@@ -1072,6 +1073,7 @@ Crate regex: `x?` zero or one of `x` (greedy)
 - sharkdp/bat
 
 ## fd
+    fd ' \(2\)'  # as created by  Insync
     fd 'Chris Rea'
     fd [flags/options] [<pattern>] [<path>...]
     fd -H Ruby $home

@@ -156,13 +156,14 @@ d-unix/d-linux/r-tats-w3m https://github.com/tats/w3m
 d-unix/d-linux/r-trapd00r-LS_COLORS https://github.com/trapd00r/LS_COLORS
 d-unix/d-linux/r-Ubuntu-ferdinandyb-dotfiles https://github.com/ferdinandyb/dotfiles
 d-unix/d-linux/r-valr-cbatticon https://github.com/valr/cbatticon
-d-unix/d-tmux/r-CrispyConductor-tmux-copy-toolkit https://github.com/CrispyConductor/tmux-copy-toolkit
-d-unix/d-tmux/r-jakobwesthoff-tmux-from-scratch https://github.com/jakobwesthoff/tmux-from-scratch
-d-unix/d-tmux/r-tmux-plugins-tmux-logging https://github.com/tmux-plugins/tmux-logging
-d-unix/d-tmux/r-tmux-plugins-tmux-prefix-highlight https://github.com/tmux-plugins/tmux-prefix-highlight
-d-unix/d-tmux/r-tmux-plugins-tmux-resurrect https://github.com/tmux-plugins/tmux-resurrect
-d-unix/d-urxvtFontSize/r-majutsushi-urxvt-font-size https://github.com/majutsushi/urxvt-font-size
-d-unix/d-urxvtFontSize/r-simmel-urxvt-resize-font https://github.com/simmel/urxvt-resize-font
+d-unix/d-terminal-tmux/r-CrispyConductor-tmux-copy-toolkit https://github.com/CrispyConductor/tmux-copy-toolkit
+d-unix/d-terminal-tmux/r-jakobwesthoff-tmux-from-scratch https://github.com/jakobwesthoff/tmux-from-scratch
+d-unix/d-terminal-tmux/r-tmux-plugins-tmux-logging https://github.com/tmux-plugins/tmux-logging
+d-unix/d-terminal-tmux/r-tmux-plugins-tmux-prefix-highlight https://github.com/tmux-plugins/tmux-prefix-highlight
+d-unix/d-terminal-tmux/r-tmux-plugins-tmux-resurrect https://github.com/tmux-plugins/tmux-resurrect
+d-unix/d-terminal-urxvt/d-fontSize/r-majutsushi-urxvt-font-size https://github.com/majutsushi/urxvt-font-size
+d-unix/d-terminal-urxvt/d-fontSize/r-simmel-urxvt-resize-font https://github.com/simmel/urxvt-resize-font
+d-unix/d-terminal-urxvt/r-Vifon-autocomplete-ALL-the-things https://github.com/Vifon/autocomplete-ALL-the-things
 d-unix/r-brndnmtthws-conky https://github.com/brndnmtthws/conky
 d-unix/r-cmus-cmus https://github.com/cmus/cmus
 d-unix/r-email-pdobsan-oama https://github.com/pdobsan/oama
@@ -173,5 +174,4 @@ d-unix/r-neomutt-neomutt https://github.com/neomutt/neomutt
 d-unix/r-ohmybash-oh-my-bash https://github.com/ohmybash/oh-my-bash
 d-unix/r-ranger-ranger https://github.com/ranger/ranger
 d-unix/r-rwxrob-dotfiles https://gitlab.com/rwxrob/dotfiles
-d-unix/r-simmel-urxvt-resize-font https://github.com/simmel/urxvt-resize-font
 d-unix/r-skim-rs-skim https://github.com/lotabout/skim
