@@ -569,7 +569,7 @@ no built in documentation for `straight.el`
 - `C-x o`  other-window
 
 # Emacs - Evil
-- `$DCGRs/emacs/emacs-evil-evil/evil-maps.el`
+- `$cGRs/emacs/emacs-evil-evil/evil-maps.el`
 - `C-z`  toggles it
 
 # Emacs reference sheets
@@ -821,7 +821,7 @@ Tig Manual
 
 ## Lua
     $coreIT/CP/encoding/dpl/scratch.lua
-    $DCGRs/CP/Vim/vim-vim/src/testdir/testluaplugin/lua/testluaplugin/hello.lua
+    $cGRs/CP/Vim/vim-vim/src/testdir/testluaplugin/lua/testluaplugin/hello.lua
     lua -v
 
 ## markdown

@@ -11,5 +11,5 @@ if ( $repository -match 'nonexistant' ) { return }
 elseif ( $repository -match 'withastro-astro' )
   { sl packages\astro\test\fixtures\special-chars-in-component-imports\src\components
     mi and-rockets-🚀 and-rockets-_ }
-cd $DCGRs
+cd $cGRs
 

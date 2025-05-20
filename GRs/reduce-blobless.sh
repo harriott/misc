@@ -5,7 +5,7 @@
 
 # Recursively find all  *.git  directories, remove them and re-clone  --filter=blob:none
 
-# reduced my  $DCGRs  from  8.6G  down to  4.9G
+# reduced my  $cGRs  from  8.6G  down to  4.9G
 # reduced my  $vfp  from  295M  down to  116M
 
 # bash $misc/GHreposBlobless.sh
@@ -21,15 +21,15 @@ dotgits=$(find . -name '.git' | sort)
     done
 
 # These repositories:
-#  $DCGRs/CP/MartinThoma-LaTeX-examples
-#  $DCGRs/CP/OpenShot-openshot-qt
-#  $DCGRs/CP-Ruby-Jekyll/cloudify-cosmo-getcloudify.org
-#  $DCGRs/CP-Ruby-Jekyll/jasonemiller-jasonemiller.github.io
-#  $DCGRs/CP-Ruby-Jekyll/qian256-qian256_github_io
-#  $DCGRs/CP-Ruby-Jekyll/rfong-rflog
-#  $DCGRs/MSWin/jdhitsolutions-PSScriptTools
-#  $DCGRs/unix/linux/Arch/makccr-dot
-#  $DCGRs/unix/linux/wm-awesome/WillPower3309-awesome-dotfiles
+#  $cGRs/CP/MartinThoma-LaTeX-examples
+#  $cGRs/CP/OpenShot-openshot-qt
+#  $cGRs/CP-Ruby-Jekyll/cloudify-cosmo-getcloudify.org
+#  $cGRs/CP-Ruby-Jekyll/jasonemiller-jasonemiller.github.io
+#  $cGRs/CP-Ruby-Jekyll/qian256-qian256_github_io
+#  $cGRs/CP-Ruby-Jekyll/rfong-rflog
+#  $cGRs/MSWin/jdhitsolutions-PSScriptTools
+#  $cGRs/unix/linux/Arch/makccr-dot
+#  $cGRs/unix/linux/wm-awesome/WillPower3309-awesome-dotfiles
 # got this:
 #  warning: Clone succeeded, but checkout failed.
 #  You can inspect what was checked out with 'git status'

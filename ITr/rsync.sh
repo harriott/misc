@@ -1,7 +1,7 @@
 #!/bin/bash
-# vim: set fdl=1:
+# vim: set fdl=2:
 
-# Joseph Harriott  Mon 19 May 2025
+# Joseph Harriott  Tue 20 May 2025
 
 # need a fast drive for this to be realistic
 
@@ -13,21 +13,30 @@
 cat "$misc/ITr/last_update"
 read -p "- good to continue? "
 
-#=> 1 last_update append
-echo "$(date +%y%m%d-%H%M%S) $host TOSHIBA" >> $misc/ITr/last_update
+# #=> 1 make targets
+# cd $ITr; mkdir coreIT GRs jtIT tIs
 
-#=> 2 target
-Ufm="/run/media/jo/TOSHIBA/ITr"
+# #=> 2 coreIT rsync's to external drive
+# for s in $coreIT $ITr/coreIT; do find "$s" | echo "$(wc -l) $s"; done
+# echo "coreIT: $(date +%y%m%d-%H%M%S) $host -> TOSHIBA" >> $misc/ITr/last_update
+# read -p "Begin the rsync ? "
+# rsync -irtv --delete $coreIT/ $ITr/coreIT
 
-#=> 3 counts
-cd $Ufm; echo "Counts in  $ufm:"; for s in *; do echo " $(find $s | wc -l) $s"; done
-for s in $coreIT $DCGRs $jtIT $tIs; do find "$s" | echo "$(wc -l) $s"; done
+# #=> 2 cGRs rsync's to external drive
+# for s in $cGRs $ITr/GRs; do find "$s" | echo "$(wc -l) $s"; done
+# echo "GRs: $(date +%y%m%d-%H%M%S) $host -> TOSHIBA" >> $misc/ITr/last_update
+# read -p "Enter to begin the rsync ? "
+# rsync -iLrtv --delete $cGRs/ $ITr/GRs
 
-#=> 4 sync to drive
-read -p "going to rsync to ${tpf5}$Ufm${tpfn}"
-# cd $Ufm; mkdir coreIT GRs jtIT tIs
-echo 'coreIT'; rsync -irtv --delete $coreIT/ $Ufm/coreIT
-echo 'GRs';    rsync -irtv --delete $DCGRs/  $Ufm/GRs
-echo 'jtIT';   rsync -irtv --delete $jtIT/   $Ufm/jtIT
-echo 'tIs';    rsync -irtv --delete $tIs/    $Ufm/tIs
+# #=> 2 jtIT rsync's to external drive
+# for s in $jtIT $ITr/jtIT; do find "$s" | echo "$(wc -l) $s"; done
+# echo "jtIT: $(date +%y%m%d-%H%M%S) $host -> TOSHIBA" >> $misc/ITr/last_update
+# read -p "Enter to begin the rsync ? "
+# rsync -iLrtv --delete $jtIT/ $ITr/jtIT
+
+#=> 2 tIs rsync's to external drive
+for s in $tIs $ITr/tIs; do find "$s" | echo "$(wc -l) $s"; done
+echo "tIs: $(date +%y%m%d-%H%M%S) $host -> TOSHIBA" >> $misc/ITr/last_update
+read -p "Enter to begin the rsync ? "
+rsync -iLrtv --delete $tIs/ $ITr/tIs
 

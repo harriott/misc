@@ -380,7 +380,7 @@ sharkdp/bat
     sed -n '2,$p' <file>  # prints from the 2nd line
 
 # file manage
-    $DCGRs/unix/ranger-ranger
+    $cGRs/unix/ranger-ranger
     $OSL/bashrc-console-fm
     fuseiso <ISO_image> <mountDirectory>
     mkdir -p  # --parents = make parent directories as needed (no error if existing)
@@ -536,7 +536,7 @@ tree(1)
     rsync -irtv --delete $TeNo/ $Drpbx/Play1/TextNotes
     rsync -inrtv --delete --progress path1/large_file_dir1/ path2/large_file_dir2
 
-output info: `>` = the item is received
+output info: `YXcstpoguax`
 
 ### options
     --exclude=PATTERN
