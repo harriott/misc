@@ -14,8 +14,8 @@
 
 set -e  # quits on error
 
-#=> 0 last_update check
-cat "$cGRs/last_update"
+#=> 0 last update check
+cat "/$misc/GRs/cGRs-lu"
 read -p "- good to continue? "
 
 # #=> 1 optionally  rsync  $ITr/GRs  to  $cGRs
@@ -23,8 +23,8 @@ read -p "- good to continue? "
 # rsync -irtv --delete $ITr/GRs/ $cGRs  # because I might've made changes from another machine
 # exit
 
-#=> 2 last_update append
-echo "$(date +%y%m%d-%H%M%S) $host" >> $cGRs/last_update
+#=> 2 last update append
+echo "$(date +%y%m%d-%H%M%S) $host" >> /$misc/GRs/cGRs-lu
 
 #=> 3 update  cGRs.clones
 echo 'updating  $misc/GRs/cGRs.clones'
