@@ -90,15 +90,12 @@ echo "- removed"
     # if [[ $repository =~ none ]]; then deref $repository fi
 # done
 
-#=> 8 sync to  $ITr/GRs
+# #=> 8 syncs to external drives
+# source $misc/ITr/rsync.sh
 read -p "going to rsync from ${tpf5}$cGRs${tpfn} to ${tpf5}$ITr/GRs${tpfn}"
 set +e
 rsync -iLrtv --delete $cGRs/ $ITr/GRs
 echo "${tpf3b}2nd rsync to highlight any errors${tpfn}"
 rsync -iLrtv --delete $cGRs/ $ITr/GRs
 echo ${tpfn}
-
-#=> 9 advise to check for symlinks
-echo 'now maybe  bash $misc/linux/slJH.sh'
-echo
 

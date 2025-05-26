@@ -87,11 +87,11 @@ maybe `git config --global core.compression 0` - see `$misc/CP/gitconfig`
 not yet
 
 ## 1 use - bin/scripts
-    bash nerd-fonts/bin/scripts/cheatsheet.sh > cheatsheet.txt  # all of them listed
-    bash nerd-fonts/bin/scripts/test-fonts.sh
-    bash nerd-fonts/bin/scripts/test-powerlines.sh
+    $tricky/GR-NF/ryanoasis-nerd-fonts/bin/scripts/README.md
 
-    nerd-fonts/bin/scripts/README.md
+    bash $tricky/GR-NF/ryanoasis-nerd-fonts/bin/scripts/cheatsheet.sh > cheatsheet.txt  # all of them listed
+    bash $tricky/GR-NF/ryanoasis-nerd-fonts/bin/scripts/test-fonts.sh
+    bash $tricky/GR-NF/ryanoasis-nerd-fonts/bin/scripts/test-powerlines.sh
 
 ## 1 use - lists
     tree $pf > $tricky/GR-NF/patched-fonts.tree

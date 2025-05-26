@@ -548,6 +548,7 @@ output info: `YXcstpoguax`
 - `-n` (`--dry-run`)
 - `-r` (`--recursive`)
 - `-t` (`--times`) keep modification times
+- `-v` (`--verbose`)
 - `-V` (`--version`)
 
 #### for system files
