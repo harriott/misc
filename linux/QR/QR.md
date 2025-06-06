@@ -14,22 +14,17 @@ commands here are generic, except for those under the Ubuntu heading, see also `
 
 Pipe Viewer
 
-# audio
-    pactl set-sink-mute 0 toggle
-    pavucontrol
-    pulsemixer
-
-## ALSA
+# audio - ALSA
     alsamixer -V all
     speaker-test -c 2
     sudo alsactl store
 
-## cmus
+# audio - cmus
     cmus_notify -h
 
 C* Music Player
 
-### commands
+## commands
     7        settings
 
     ^c       echo Type :quit<enter> to exit cmus.
@@ -41,7 +36,7 @@ C* Music Player
     p        win-mv-after
 
     b        player-next
-    x        player-play
+    x        player-play (from start)
     v        player-stop
     z        player-prev
 
@@ -57,21 +52,21 @@ C* Music Player
     -        vol -10%
     + =      vol +10%
 
-### media
+## media
 - can play: `mka`, `ogg`, `opus`, `wma`
 - can't play: `oma`, `omv`, `rmj`
 
-## convert
+# audio - convert
     for f in *.flac; do ffi "$f" -c:a libvorbis -aq 4 "${f%.*}.ogg" ; done
     for f in *.oma; do ffi "$f" -c:a libvorbis "${f%.*}.ogg" ; done  # default VBR quality 3
     for f in *.rmj; do ffi "$f" -c:a libvorbis -aq 4 "${f%.*}.ogg" ; done
     for f in *.wav; do ffi "$f" -c:a libvorbis -aq 4 "${f%.*}.ogg"; rm "$f"; done
     for f in *; do ffi "$f" -b:a 128K -vn "${f%.*}.mp3" ; done
 
-## gst123
+# audio - gst123
     gst123 -Z .  # play random audio files recursively forever
 
-### control
+## control
     left/right -> seek 10 seconds
     down/up -> seek 1 minute
     PgDn/Up -> seek 10 minute
@@ -82,29 +77,20 @@ C* Music Player
     q -> quit
     ? -> help
 
-## libpulse
-    pacat --list-file-formats
-    pactl list sinks short
-    pactl list sources short
-    pactl set-sink-volume 0 60%  # master volume to reasonable level
-    parecord -d 0 parecord.flac
-    parecord -d 1 parecord.flac
-    parecord -d 16 parecord.flac
-
-## MPD
+# audio - MPD
     mpd
     mpd --kill
     pgrep mpd
 
 Music Player Daemon
 
-### vimpc - normal mode
+## vimpc - normal mode
 - `-`/`+` decrease/increase volume
 - `ZZ` quits completely
 - `space` start/stop
 - `backspace`/`s` stop playlist
 
-#### song
+### song
 - `f`/`F` scroll to current song
 - `E` toggle repeat
 - `I` restart the song
@@ -112,7 +98,22 @@ Music Player Daemon
 - `S` toggle single
 - `<`/`>` previous/next song
 
-## SoX
+# audio - PulseAudio
+    pgrep -af pulseaudio
+    pulsemixer
+
+## libpulse
+    pacat --list-file-formats
+    pactl list sinks short
+    pactl list sources short
+    pactl set-sink-mute 0 toggle
+    pactl set-sink-volume 0 60%  # master volume to reasonable level
+    parecord -d 0 parecord.flac
+    parecord -d 1 parecord.flac
+    parecord -d 16 parecord.flac
+    pavucontrol
+
+# audio - SoX
     rec -c 2 sox.flac  # record in stereo
     soxi <audioFile>  # info, including duration
 
@@ -248,11 +249,14 @@ Make (software)
     sudo tlmgr -gui
     sudo tlmgr update -all -dry-run
 
-`/etc/texmf/web2c/texmf.cnf` defines variables for `kpathsea`
-
 #### tests
     pdflatex sample2e.tex
     tex --version
+
+#### texmf.cnf
+    $ABjo/texmf.cnf
+
+defines variables for `kpathsea`
 
 # Fcitx Clipboard
 - `fcitx5-configtool & > Addons > Clipboard > Configure > Trigger Key` defaults to `ctrl+;`
@@ -903,7 +907,7 @@ niceness: `-20` = highest priority, `19` = lowest
 
 ## Bash
     $misc/linux/QR/script.sh
-    $ulLB/Scratch0.sh
+    $culLB/Scratch0.sh
     /etc/profile
     <somecommand> | xcol <keyword1> <keyword2> ... # for highlighting
     bash --help
