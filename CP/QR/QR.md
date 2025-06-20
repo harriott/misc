@@ -30,7 +30,7 @@ syntax of this file is ensured in `$vfv/filetype.vim`
     $ITscr/HW/audio/BTHeadphones/JBLTune720BT
 
 ## AR 16x9
-- 480x270 = 640x360 = 800x450 = 960x540 = 1920x1080
+- 480x270 = 640x360 = 800x450 = 960x540 = 1920x1080 (`1080p`)
 - `720p`: `1280x720`
 
 ## mediainfo
@@ -346,6 +346,13 @@ style `\textnormal`
 - `ctrl+alt+e` = `Tools > Extension Manager...`
 - `ctrl+S` = `File > Save As...`
     - can then (only if changes to .ods already saved) select `Text CSV (.csv)`
+- open a `.csv` with `Calc` and numbers get prefixed with apostrophe, so
+    1. select the range
+    1. `ctrl+h`
+        - Find: `.+`
+        - Replace: `$0`
+        - other options: Current selection only, Regular expressions
+    1. `Replace All`
 - Writer: right-click on a hyperlink for `Remove Hyperlink`
 
 ## AZERTY
@@ -929,6 +936,7 @@ replaces `print "$var\n";`
     quit()
     python -c "print(__import__('sys').version)"
     python -c "print(__import__('platform').python_version())"
+    shutil.copyfile ( src , dest )
 
 #### sys
     python -c "import sys; print (sys.path)"
@@ -1282,6 +1290,8 @@ Sony Xperia 10 II: 1080x2520 = 21:9
     montage <left> <right> -geometry +9+9 -tile 2x1 <lr>
     montage <upper> <lower> -geometry +0+0 -tile 1x2 <ul>
 
+imagemagick.org/Color
+
 ### magick
     -background <color>
     -border 20x20
@@ -1349,7 +1359,7 @@ Sony Xperia 10 II: 1080x2520 = 21:9
 - `-A n` (= `--after-context=n`)
 - `-B n` (= `--before-context=n`)
 - `-C n` (= `--context=n`)
-- `--field-match-separator=' ⋮'` - avoiding the often ambiguous :
+- `--field-match-separator=':::'` - avoiding the often ambiguous :
 - `--files-without-match`
 - `-l` (= `--files-with-matches`)
 - `-m n` (= `--max-count=n`) matches/file
@@ -1454,6 +1464,7 @@ messes up if terminal is resized
 ## panes
 - `ctrl alt "` = `SplitVertical...` down
 - `ctrl alt %` = `SplitHorizontal...` right
+- `ctrl alt shift arrow` = resize pane
 - `ctrl shift arrow` = move to pane
 - `ctrl shift z` = `TogglePaneZoomState` get `[Z]` prefixed in window title
 
@@ -1540,8 +1551,12 @@ if aborted, `for f in *; do sed -i "/$f/d" zips; done`
 - `ctrl+h` (= `chrome://history`)
 - `ctrl+shift+o` (= `Bookmarks`) `> Organise > Export`
 - `ctrl+u` view page source in new tab
-- `Microsoft Edge`: `edge://favorites/`
 - no way to stop autoplay of videos
+
+#### Microsoft Edge
+    edge://favorites/
+
+`mouse hover over an image > ctr ctrl` = `right-click > magnify`
 
 ### Firefox
     about:config > caret

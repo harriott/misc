@@ -98,8 +98,22 @@ Music Player Daemon
 - `S` toggle single
 - `<`/`>` previous/next song
 
+# audio - playerctl
+    playerctl  # quick guide
+    playerctl -l  # (--list-all) available players - firefox, mpd
+    playerctl metadata  # from the current player
+    playerctl pause
+    playerctl play
+    playerctl play-pause  # toggles
+    playerctl status
+    playerctl stop
+
 # audio - PulseAudio
+    pactl -h
+    pactl info
+    pactl list short
     pgrep -af pulseaudio
+    pulseaudio -k  # --kill
     pulsemixer
 
 ## libpulse
@@ -928,6 +942,13 @@ niceness: `-20` = highest priority, `19` = lowest
     za $ITscr/unix-like/linux/bash.pdf
     ~/.bash_history
 
+```bash
+case 'one' in
+  one) echo 1;;
+  two) echo 2;;
+esac
+```
+
 - BASH(1)
 - command substitution `$(...)`
 
@@ -1138,6 +1159,7 @@ don't export them
     s=12345; echo $s | awk '{print substr($1,length($1)-2) }'
     s=12345; echo $s | cut -c $((${#s}-2))-
     s=yes; s+=no; o $s
+    s+=new; o $s
 
 case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
 
@@ -1149,7 +1171,7 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     ${string/#substringAtStart/replacement}
     ${string/%substringAtEnd/replacement}
     ${string:position:length}
-    a=12345; echo ${a:2}; echo ${a:1:2}
+    a=12345; echo ${a:2}; echo ${a:1:2}; echo ${a:2:1}
     b="a(b(c(d"; o ${b##*\(}
     s=12345; echo ${s::-2}
     t=lkj; echo ${t:0:${#t}-1}
@@ -1187,8 +1209,10 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     swapon --show
     w  # list users and load on system
     whereis <executable>
+    xrdb -query -all  # shows loaded X resources
     xset q  # shows a variety of IO settings
 
+- awesomewm: floating window: `winkey+left_mouse_drag`
 - lsmod(8) show what kernel modules are currently loaded
 - maximum 255 bytes per filename & 4096 per path
 
@@ -1214,11 +1238,14 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     sudo ls /etc/.git
 
 ## groups
-    /etc/group  # to see them all
-    gpasswd [-a <user> <group_to_add_to>]
-    groups jo
-    sudo groupadd <group_to_create>
-    sudo groupdel <group_to_delete>
+    /etc/group  # all of them
+
+```bash
+gpasswd [-a <user> <group_to_add_to>]
+groups jo
+sudo groupadd <group_to_create>
+sudo groupdel <group_to_delete>
+```
 
 ## GRUB
     grub-install --version
@@ -1258,9 +1285,14 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     notify-send -u critical "test of critical notification"
     notify-send -t 5000 -u low "Hello World"
 
+## Plasma
+    Ctrl+Alt+Shift+Del -> exit KDE without saving
+    Ctrl+Alt+Del       -> logout screen
+    Ctrl+Alt+T         -> Konsole
+    Win+PageUp/Down    -> maximises or returns to normal a window
+
 ## Qt
     qmake -query QT_VERSION
-
 
 `qmake -v` also reports `Qt` version
 
@@ -1301,6 +1333,7 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     - `ctrl+shift+v` = paste
 
 ### keyboard shortcuts
+- `Ctrl+Alt+D` = minimize all
 - `Ctrl+Alt+Del` = `xfce4-session-logout`
 - `Ctrl+Alt+Escape` = `xkill` (right-click abandons)
 - `Ctrl+Alt+L` = `xflock4`
@@ -1497,9 +1530,11 @@ https://packages.ubuntu.com/
 
 # vim
     $HOME/.viminfo
-    find . -type f -name tags
     e -la /usr/bin/vim
+    find . -type f -name tags
     file "$(command -v vim)"
+    gvim &
+    neovide &
 
 # WAN
     if wget -q --spider google.com; then echo online; fi
@@ -1638,15 +1673,4 @@ https://packages.ubuntu.com/
 - `T` (= `NEW_TAB`) re-opens current tab, new
 - `{` (= `PREV_TAB`)
 - `}` (= `NEXT_TAB`)
-
-# windows
-    xrdb -query -all  # shows loaded X resources
-
-awesomewm: floating window: `winkey+left_mouse_drag`
-
-## Plasma
-    Ctrl+Alt+Shift+Del -> exit KDE without saving
-    Ctrl+Alt+Del       -> logout screen
-    Ctrl+Alt+T         -> Konsole
-    Win+PageUp/Down    -> maximises or returns to normal a window
 

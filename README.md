@@ -1,5 +1,7 @@
     vim:set fdl=1:
 
+    $misc/README.md
+
 # miscellaneous configurations and small tools that I use
 nothing special
 

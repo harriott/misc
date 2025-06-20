@@ -15,7 +15,7 @@ elif [[ $repository =~ clifm ]]; then
         mv misc/codecov/aux.c.gcov misc/codecov/aux-rNT.c.gcov
     [ -s "src/aux.c" ] && mv src/aux.c src/aux-rNT.c
     [ -s "src/aux.h" ] && mv src/aux.h src/aux-rNT.h
-    # fd aux $cGRs
+    # fd aux $GRs
 elif [[ $repository =~ (jekyll|protesilaos) ]]; then
     fd -tl -HL -x unlink {} \; -x touch {}
 elif [[ $repository =~ LaTeX-examples ]]; then
@@ -28,5 +28,5 @@ elif [[ $repository =~ "tjdevries-config_manager" ]]; then
     # Case conflicts...
     [ -s "xdg_config/nvim/README.md" ] && mv xdg_config/nvim/README.md xdg_config/nvim/README_caps.md
 fi
-cd $cGRs
+cd $GRs
 
