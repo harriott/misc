@@ -302,6 +302,7 @@ sharkdp/bat
 - GAWK(1)
 - GNU Awk
 - `gsub(/old/,"new"[,target])` returns the number of substitutions made
+- no backreferences
 
 ### built-in variables
 - `FILENAME` name of the current input-file
@@ -312,6 +313,17 @@ sharkdp/bat
 - `OFS` output field separator (default = <space>)
 - `ORS` output record separator (default = <newline>)
 - `RS` record separator (default = newline)
+
+### octal codes
+- `\047` = '
+- `\057` = /
+
+### input field separation
+- `F'\t'`
+
+#### csv
+- `F,`
+- `-vFPAT='([^,]*)|("[^"]+")'` f1,"f2a, f2b",f3
 
 ## dos2unix
     dos2unix -i *
@@ -352,6 +364,7 @@ sharkdp/bat
 
 ## sed
     $cIThul/sed
+    :Man sed
     echo "blia blib bou blf" | sed -E 's/bl(ia|f)//g'
     sed --version
     sed 5q <file> prints first 5 lines
@@ -366,7 +379,12 @@ sharkdp/bat
 
 #### character classes
 - `[:alpha:]`=`[:lower:]`+`[:upper:]`=`[A-Za-z]`
-- `[:digit:]` catches 0-9
+
+##### [:digit:]
+    echo '12' | sed 's/[[:digit:]]//'
+    echo '20230516' | sed -r 's/(20[[:digit:]][[:digit:]])([[:digit:]][[:digit:]])/\1-\2-/' # 2023-05-16
+
+catches 0-9
 
 ### make changes
     echo -e '1\n2\n3' | sed $'s/.*/\t&/g'  # inserting tabs
@@ -378,10 +396,11 @@ sharkdp/bat
     sed -i '/<regex>/!d' <filetoreduce>  # removes lines that don't match
     sed -i '/match/,+2d' <file>  # removes matched line and 2 after
     sed -i '0~2 a\\' <fileToAddBlankLineAfterEach2ndLine>
-    sed -i '1s/^/vim: ft=<filetype>:\n\n/' $cslF
+    sed -i '1s/^/vim: ft=<filetype>:\n\n/' <file_to_prepend_vim_modeline>
     sed -i 's/\r//' <file_to_remove_CRLF_from>
     sed G <file>  # outputs <file> with blank lines added
     sed '1i\newFirstLineText' <fileToPrependTo>
+    sed -e '0,/first/ s/first/this_first_only/' -i <file_to_make_just_one_single_change_to>
 
 - `&` whole matched pattern
 - replace a string in multiple files
@@ -403,7 +422,6 @@ sharkdp/bat
     fuseiso <ISO_image> <mountDirectory>
     mkdir -p  # --parents = make parent directories as needed (no error if existing)
     sudo chown -R <user>:<group> <dir>
-    tar -xzf archive.tar.gz [-C <target_directory>]
 
 - `chmod 600 file` - owner can read and write
 - `chmod 644 file` - owner can change it, everyone else can read it
@@ -418,9 +436,18 @@ sharkdp/bat
 - rm(1)
 
 ## compressed
-    tar -xvf tar.gz.tar
+    :Man gzip
 
 `7-Zip`: `for z in *.zip; do 7z x $z; done`
+
+### tar
+    :Man tar
+    tar -xvf tar.gz.tar
+    tar -xzf archive.tar.gz [-C <target_directory>]
+
+- `--gunzip` (or `--ungzip`)
+- `-v` (`--verbose`)
+- `-z` (`--gzip`)
 
 ## cp
     cp -r <sourceDir> .
@@ -1327,10 +1354,17 @@ sudo groupdel <group_to_delete>
     whoami
 
 ## Xfce
+    xfce4-panel -r  # reloads
+    xfce4-settings-manager &
+
 - `GTK`
 - `Terminal` (`xfce4-terminal`)
     - `ctrl+shift+c` = copy
     - `ctrl+shift+v` = paste
+
+### Clipman
+- `~/.cache/xfce4/clipman/textsrc` semicolon-separated list
+- clickable `Panel` icon
 
 ### keyboard shortcuts
 - `Ctrl+Alt+D` = minimize all
@@ -1348,6 +1382,10 @@ sudo groupdel <group_to_delete>
     - `F11` = full screen
     - `super+1` = move to left monitor
     - `super+2` = move to right monitor
+
+### Thunar
+    ~/.config/Thunar
+    ~/.config/xfce4/xfconf/xfce-perchannel-xml/thunar.xml
 
 ### Xfce Notify Daemon
     systemctl --user status xfce4-notifyd
@@ -1615,7 +1653,8 @@ https://packages.ubuntu.com/
     wget -kr -A.zip https://url-to-webpage-with-pdfs/  # works from that page
     wget -r -A.pdf http://url-to-webpage-with-pdfs/  # works recursively from root page
 
-`-O file` (`--output-document=file`)
+- `-E` (`--adjust-extension`)
+- `-O file` (`--output-document=file`)
 
 ## rdrview
     i rdrview

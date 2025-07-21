@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Joseph Harriott  Thu 12 Jun 2025
+# Joseph Harriott - Thu 10 Jul 2025
 
 # manage my downloaded collection of  Git  repositories
 
@@ -16,44 +16,43 @@ set -e  # quits on error
 echo '$GRs' " is  $GRs"
 
 #=> 0 last update check
-cat "/$misc/GRs/cGRs-lu"
+cat "$misc/GRs/cGRs-lu"
 read -p "- good to continue? "
 
 # #=> 1 optionally  rsync  $ITr/GRs  to  $cGRs
 # read -p "going to rsync from ${tpf5}$ITr/GRs${tpfn} to ${tpf5}$cGRs${tpfn}"
-# rsync -irtv --delete $ITr/GRs/ $cGRs  # because I might've made changes from another machine
-# exit
+# rsync -ilrtv --delete $ITr/GRs/ $cGRs  # because I might've made changes from another machine
 
 #=> 2 last update append
-echo "$(date +%y%m%d-%H%M%S) $host $PWD" >> /$misc/GRs/cGRs-lu
+echo "$(date +%y%m%d-%H%M%S) $host $PWD" >> $misc/GRs/cGRs-lu
 
-# #=> 3 update  cGRs.clones
-# echo 'updating  $misc/GRs/cGRs.clones'
-# . $misc/GRs/getClonesList.sh $misc/GRs/cGRs.clones
+#=> 3 update  cGRs.clones
+echo 'updating  $misc/GRs/cGRs.clones'
+. $misc/GRs/getClonesList.sh $misc/GRs/cGRs.clones
 
-#=> 4 remove
-# some repositories that don't update easily
+# #=> 4 remove
+# # some repositories that don't update easily
 
-# sudo rm -r $GRs/CP/emacs/daviwil-dotfiles
-# sudo rm -r $GRs/CP-emacs-emacs-mirror-emacs
-# sudo rm -r $GRs/CP/emacs/syl20bnr-spacemacs
-# sudo rm -r $GRs/CP/Go/Hugo/gohugoio-hugo
-# sudo rm -r $GRs/CP/jgm-pandoc
-# sudo rm -r $GRs/CP/nomacs-nomacs
-# sudo rm -r $GRs/CP/pypa-pipx
-# sudo rm -r $GRs/d-MSWin/r-jdhitsolutions-PSScriptTools
-# sudo rm -r $GRs/d-unix/d-linux/d-mail/r-rpuntaie-mailwizard
-# sudo rm -r $GRs/unix/linux/BrodieRobertson-dotfiles
+# # sudo rm -r $GRs/CP/emacs/daviwil-dotfiles
+# # sudo rm -r $GRs/CP-emacs-emacs-mirror-emacs
+# # sudo rm -r $GRs/CP/emacs/syl20bnr-spacemacs
+# # sudo rm -r $GRs/CP/Go/Hugo/gohugoio-hugo
+# # sudo rm -r $GRs/CP/jgm-pandoc
+# # sudo rm -r $GRs/CP/nomacs-nomacs
+# # sudo rm -r $GRs/CP/pypa-pipx
+# # sudo rm -r $GRs/d-MSWin/r-jdhitsolutions-PSScriptTools
+# # sudo rm -r $GRs/d-unix/d-linux/d-mail/r-rpuntaie-mailwizard
+# # sudo rm -r $GRs/unix/linux/BrodieRobertson-dotfiles
 
-# #=> 5 git clone
-# while read cloneLine; do
-#   clone="${cloneLine%% *}"
-#   if ! [ -d $clone ]; then
-#     gcc="git clone --depth 1 ${cloneLine#* } ${cloneLine%% *}"
-#     echo "${tpf3b}$clone${tpfn}  not there, so"
-#     $gcc
-#   fi
-# done <"$misc/GRs/cGRs.clones"  # can prefix  test https://github.com/test
+#=> 5 git clone
+while read cloneLine; do
+  clone="${cloneLine%% *}"
+  if ! [ -d $clone ]; then
+    gcc="git clone --depth 1 ${cloneLine#* } ${cloneLine%% *}"
+    echo "${tpf3b}$clone${tpfn}  not there, so"
+    $gcc
+  fi
+done <"$misc/GRs/cGRs.clones"  # can prefix  test https://github.com/test
 
 #=> 6 update  $GRs
 # sf='StartFrom'

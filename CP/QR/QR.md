@@ -176,7 +176,7 @@ fix `path` in the `*.osp`
 E-book viewer `<esc>`/`<right_click>` brings up the controls
 
 # documenting - LaTeX
-    $DJH/search/dts-tex.fetl  # for my files
+    $DJH/search/dts-tex.ffl  # for my files
     $JHt/IT/CP/TeX/LaTeX/  # for example code
     :s/μ/\\mu{}/g
     xc
@@ -318,12 +318,15 @@ style `\textnormal`
 - `\~{}` because `\^n` rends ñ
 - `\textbackslash{}` because `\\`
 
-## tabular environment
+## tables
+    $jtCP/TeX/LaTeX/Memoir/tabular_in_twocolumn.tex
+
+### tabular environment
     \multicolumn{num_cols}{alignment}{contents}
     \renewcommand{\arraystretch}{1.5}  % tabular (default 1.0)
 
 ```
-\begin{tabular}{ c|l|r }
+\begin{tabular}{c|l|r}
   \hline
   centred & left & right \\
 \end{tabular}
@@ -341,11 +344,13 @@ style `\textnormal`
     - `Apparence`
 - `alt+o` (= `Format`) `> p` (= `Page style...`)
     - `Page` is where can set borders
+- `alt+t` (= `Format`) `> p` (= `Style de page...`)
 - `alt+t > e` = `Tools > Extensions` (= `ctrl+alt+e`)
 - `ctrl+5` = `View > Sidebar` toggle
 - `ctrl+alt+e` = `Tools > Extension Manager...`
-- `ctrl+S` = `File > Save As...`
-    - can then (only if changes to .ods already saved) select `Text CSV (.csv)`
+- `shift+ctrl+S` = `Fichier > Enregistre sous` / `File > Save As...`
+    - `Document texte ODF XML plat (*.fodt)`
+    - (only if changes to `.ods` already saved) select `Text CSV (.csv)`
 - open a `.csv` with `Calc` and numbers get prefixed with apostrophe, so
     1. select the range
     1. `ctrl+h`
@@ -366,6 +371,14 @@ style `\textnormal`
 ## porting
     \user\config
     ~\AppData\Roaming\LibreOffice\4\user\registrymodifications.xcu
+
+## Writer margins
+1. save as `*.fodt`
+2. open that `*.fodt` in a `Vim` variant
+    1. `/orientation` - there might be more than one
+    2. `:s!2cm!4cm!g`
+    3. `:w`
+3. back in `Writer`, `alt+f` (= `Fichier`) > `r` (= `Recharger`)
 
 # documenting - PDFs
 use Google Chrome to break out just some pages into a reduced copy
@@ -750,6 +763,8 @@ in `$ITsCP/networking/browsers`, `git grep activeInstall $(git rev-list --all) -
 - `?` adaptive help - <esc> quits it
 - `<tab>`
 
+no search functionality
+
 ### remotes
     gh repo clone
     git clone https://github.com/... [target_directory] --depth=n  # clones only to commit depth n
@@ -852,27 +867,62 @@ Tig Manual
     \end{document}
 
 ## Perl
-    $ echo sample_text | perl -pe 's/(sample).*/$1/'  # double quotes wouldn't work here
     $coreIT/CP/encoding/dpl/Perl/scratch.pl
     cpanm --help
-    echo "my_string" | perl -pe 's/my/your/g'
-    echo 'hello  there' | perl -pe 's/ +/ /'
-    echo hello | perl -nle 'print uc'
-    for ...  # = foreach ...
-    perl -de 0  # debug
-    perl -e 'print reverse <>' <file_to_reverse>
-    perl -h  # summary of options
-    perl -le 'print a..z'
-    perl -v  # version
+    $jtCP/coding/Perl
 
-### conditionals
+- command prompt, `set TERM=dumb` allows Perl stuff to run without Terminal Size warnings
+- `q(a b c)` = `a b c`
+- `qq(a b c)` = `"a b c"`
+- `qw(a b c)` = `('a', 'b', 'c')`
+
+### arrays
+    @array = (1, 2, 3, 4, 5);
+    print $array[0];   # Prints 1
+    print $array[3];   # Prints 4
+    print $array[-1];  # Prints 5
+
+### commands
+    die('died for debugging');
+    for ...  # = foreach ...
+
+#### conditionals
     if ( expr ) { action }
     if ( expr ) { action } else { action }
     if ( expr ) { action } elsif ( expr  ) { action } ... else { action }
     unless ( expr ) { action }
 
-### Commant Prompt
-    set TERM=dumb  # allows Perl stuff to run without Terminal Size warnings
+#### loops
+    last;  # break
+    next;  # continue
+    while ($boolean) {...}
+
+#### regex
+- `*`  0 or more times
+- `+`  1 or more times
+- `\d`  `[0-9]`
+- `\n`  newline
+- `\s`  space, tab, newline
+- `\w`  alphanumeric or _
+- `a{m,n}`  between m & n a's
+- `^abc|abc$` abc at start or end
+
+<https://jkorpela.fi/perl/regexp.html>
+
+##### accented characters
+    $ echo 'aà cç eé eè' | perl -pe 's/[^\P{Latin}A-Za-z]/-/g'
+    $ echo 'aà cç eé eè' | perl -pe 's/\p{Latin}/-/g'
+
+#### say
+    say scalar @array;  # number of elements
+    use feature 'say';
+
+replaces `print "$var\n";`
+
+### Data::Printer
+    perl -e 'use DDP; p @{[ one, two, three ]};'
+
+arrays containing tabbed values can get messy: `perl -e 'my @tabbedArray = ( "short1st\tlong_second_item", "super_extra_long_first_item\tshort2nd", "12\textra_long_second_item" ); use DDP; p @tabbedArray;'`
 
 ### inform
     perl -h  # summary of options
@@ -894,38 +944,20 @@ Tig Manual
     cpan -l > $machine\troin\cpanList.txt
     instmodsh  # followed by l
 
-### loops
-    last;  # break
-    next;  # continue
-    while ($boolean) {...}
+### one-liners
+    $ echo sample_text | perl -pe 's/(sample).*/$1/'  # double quotes wouldn't work here
+    echo "my_string" | perl -pe 's/my/your/g'
+    echo 'hello  there' | perl -pe 's/ +/ /'
+    echo hello | perl -nle 'print uc'
+    perl -de 0  # debug
+    perl -e 'print reverse <>' <file_to_reverse>
+    perl -le 'print a..z'
 
-### PS
+### PS>
     perl -e 'print \"Hello World\"'
     perl -e "print qq(Hello, world!)"
     perl -i -ne 'printf q(%04d %s), $., $_' <file_needing_linenumbers>
     perl -ne 'printf' <file_to_print>
-
-### regex
-- `*`  0 or more times
-- `+`  1 or more times
-- `\d`  `[0-9]`
-- `\n`  newline
-- `\s`  space, tab, newline
-- `\w`  alphanumeric or _
-- `a{m,n}`  between m & n a's
-- `^abc|abc$` abc at start or end
-
-<https://jkorpela.fi/perl/regexp.html>
-
-#### accented characters
-    $ echo 'aà cç eé eè' | perl -pe 's/[^\P{Latin}A-Za-z]/-/g'
-    $ echo 'aà cç eé eè' | perl -pe 's/\p{Latin}/-/g'
-
-### say
-    say scalar @array;  # number of elements
-    use feature 'say';
-
-replaces `print "$var\n";`
 
 ## Python
     $coreIT/CP/encoding/dpl/Python/scratch.py
@@ -1077,8 +1109,11 @@ Crate regex: `x?` zero or one of `x` (greedy)
     zoxide -V  # --version
     zoxide edit  # <esc>
 
-- `7-Zip`: `7z x <pw'd_zip>`
-- sharkdp/bat
+sharkdp/bat
+
+## 7-Zip
+    7z
+    7z x <pw'd_zip>
 
 ## fd
     fd ' \(2\)'  # as created by  Insync
@@ -1582,6 +1617,10 @@ if aborted, `for f in *; do sed -i "/$f/d" zips; done`
 ### Vivaldi
 - `alt+p` (= `Settings`) `> Search > [ Google up to top and Set as Default , DuckDuckGo next, Wikipedia third ]`
 - `ctrl+b` (= `Manage Bookmarks`)
+
+## cloud storage - rclone
+    $misc/CP/rclone.md
+    rclone config file  # shows path
 
 ## GitHub
 `~/.ssh/known_hosts`: `AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa`
