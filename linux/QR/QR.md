@@ -171,7 +171,8 @@ Music Player Daemon
     date -R
     date -r <fileToGetDateOf>
 
-date(1)
+- `%j` day of year (001..366)
+- date(1)
 
 # documenting
     aspell dicts
@@ -290,14 +291,16 @@ defines variables for `kpathsea`
     sort -ro <file> <file>  # reverse sort in place
     wc -l <file>  # counts lines
 
-sharkdp/bat
+- sharkdp/bat
+- `uniq -c` (`--count`) prefix lines by counts
 
 ## awk
     awk -i inplace -F, '{print $3,$2,$1}' OFS='┊' toReorder.csv
-    awk '{ print ($1 % 2 == 0) ? "even" : "odd" }' numbers.txt
+    awk '{print $1}' ORS='\t' <file_with_column_to_print_tsv>
     v=variable; awk -v var="$v" 'BEGIN {print var}'
     za $cIThul/gawk.pdf
 
+- `-F` = `--field-separator`
 - `-i` = `--include`
 - GAWK(1)
 - GNU Awk
@@ -319,11 +322,19 @@ sharkdp/bat
 - `\057` = /
 
 ### input field separation
+- `F,`
 - `F'\t'`
 
 #### csv
 - `F,`
 - `-vFPAT='([^,]*)|("[^"]+")'` f1,"f2a, f2b",f3
+
+### numbers
+    awk -F, '{ if ( $1+0 > 2025 ) print $1 }" <first_column_could_be_year.csv> # only those > 2025
+    awk '{ print ($1 % 2 == 0) ? "even" : "odd" }' numbers.txt
+    awk '{printf("%06.2f\n", $1)}' <<< -9.111111
+
+- `$1 ~ /^[0-9]+$/` checks if first field is an integer
 
 ## dos2unix
     dos2unix -i *
@@ -340,12 +351,14 @@ sharkdp/bat
 ## grepping
     grep -c '^PatternAtStartOfLine' <file>  # returns count of occurances
     grep -P '[\p{Devanagari}]' **/*.md  # finds Devanagari characters
+    if grep -q '‡' <file_that_may_contain_‡>; then o ‡; fi
 
 - `-A num` (`--after-context=num`)
 - `-i` (`--ignore-case`)
 - `-E` (`--extended-regexp`)
 - `-F` (interpret patterns as `--fixed-strings`, not regex)
 - `-o` (`--only-matching`)
+- `-q` (`--quiet`, `--silent`) no standard out
 - GNU Grep Manual
 
 ### igrep
@@ -375,16 +388,13 @@ sharkdp/bat
 
 ### bracket expressions
     echo ' a' | sed 's/[^[:space:]]/!/'
+    echo '20230516' | sed -r 's/(20[0-9][0-9])([0-9][0-9])/\1-\2-/' # 2023-05-16
     echo 'gray, grey' | sed 's/gr[ae]y/blue/g'
 
 #### character classes
 - `[:alpha:]`=`[:lower:]`+`[:upper:]`=`[A-Za-z]`
-
-##### [:digit:]
-    echo '12' | sed 's/[[:digit:]]//'
-    echo '20230516' | sed -r 's/(20[[:digit:]][[:digit:]])([[:digit:]][[:digit:]])/\1-\2-/' # 2023-05-16
-
-catches 0-9
+- `[:alnum:]` alphanumerics (`[:alpha:]`+`[:digit:]` = `[0-9A-Za-z]`)
+- `[:digit:]`: could `echo '12' | sed 's/[[:digit:]]//'`, but `echo '12' | sed 's/[0-9]//'` is more compact
 
 ### make changes
     echo -e '1\n2\n3' | sed $'s/.*/\t&/g'  # inserting tabs
@@ -396,10 +406,8 @@ catches 0-9
     sed -i '/<regex>/!d' <filetoreduce>  # removes lines that don't match
     sed -i '/match/,+2d' <file>  # removes matched line and 2 after
     sed -i '0~2 a\\' <fileToAddBlankLineAfterEach2ndLine>
-    sed -i '1s/^/vim: ft=<filetype>:\n\n/' <file_to_prepend_vim_modeline>
     sed -i 's/\r//' <file_to_remove_CRLF_from>
     sed G <file>  # outputs <file> with blank lines added
-    sed '1i\newFirstLineText' <fileToPrependTo>
     sed -e '0,/first/ s/first/this_first_only/' -i <file_to_make_just_one_single_change_to>
 
 - `&` whole matched pattern
@@ -408,6 +416,10 @@ catches 0-9
 #### delete lines
     sed -i '1,4d' <file>
     sed -i '2d' <file>
+
+#### prepend
+    sed '1i\nNewFirstLineText' <fileToPrependTo>
+    sed -i '1s/^/vim: ft=<filetype>:\n\n/' <file_to_prepend_vim_modeline>
 
 ### show file contents
     sed '/pattern/q' <file>  # cat's  <file>  until  pattern
@@ -421,7 +433,7 @@ catches 0-9
     $OSL/bashrc-console-fm
     fuseiso <ISO_image> <mountDirectory>
     mkdir -p  # --parents = make parent directories as needed (no error if existing)
-    sudo chown -R <user>:<group> <dir>
+    sudo chown -R <user>:<group> <dir> # --recursive
 
 - `chmod 600 file` - owner can read and write
 - `chmod 644 file` - owner can change it, everyone else can read it
@@ -492,16 +504,18 @@ find(1)
 ## investigations
     diff --no-dereference -qr dir1 dir2
     find . -name '.?*'  #  recursively list hidden files
-    ls -ar | rev | cut -d'.' -f1 | rev | sort | uniq -c | sort -r  # extension counts
     stat -c '%a %n' *  # show octal permissions
 
 ### counts
     echo `find . -type d | wc -l`-1 | bc  # counts all subdirectories
     find . -name "*" -type f -path '*/.git/*' | wc
-    find . -type f | sed 's/.*\.//' | sort | uniq -c  # counts by extension
     for d in $(fd -d1 -td); do find "$d" | o "$(wc -l) : $d"; done  # files in directories
     for n in *; do find "$n" | echo "$n"; done
     isutf8 **/* | wc -l  # non UTF-8 files (fails when too many)
+
+#### by extension
+    find . -type f | sed 's/.*\.//' | sort | uniq -c
+    ls -ar | rev | cut -d'.' -f1 | rev | sort | uniq -c | sort -r
 
 #### including hidden
     find . | wc -l  # very fast in $Drpbx
@@ -996,6 +1010,7 @@ esac
     [ "y" ] && echo y
     c=1; [[ $c == 1 ]] && echo "true"
     if <condition1>; then <action1>; elif ... else ... fi
+    if [ "$a" ]; then echo '$a is defined'; fi
     t="y"; if [ $t ]; then echo $t; fi
 
 #### =~
@@ -1016,6 +1031,7 @@ esac
 
 ### file manage
     echo */  # lists directories
+    echo <file>
     for f in *; do mv $f ${f:2}; done
     man -h ls
     mktemp temp-XXX  # can add more X's, touch's a randomised filename
@@ -1132,13 +1148,16 @@ substitute user identity
     trap read debug  # puts a read request after each executable line
 
 ### variables
+    echo $((2*2))
     export  # lists environment variables
     set  # lists all variables
 
 #### arrays
     a=(1 2 3); ((a[0]++)); ((a[1]+=2)); a+=(4); echo ${a[@]}
+    a=(1 2 3); echo ${a[-1]}  # last element
+    a=(1 2 3); b=("${a[@]}"); b+=("${a[@]}"); echo ${b[@]}
+    echo 'a b c' > l; s=$(<l); a=(${s//'\n'/,}); echo ${a[@]} # so l is a file containing a space-separated list
     echo ${#array[@]}  # number of elements
-    echo ${array[-1]}  # last element
     firstElement=${array[0]}
     mapfile -t found < <(find .)
     mapfile -t GreekArray < <(printf "Alpha\nBeta\nGamma"); echo ${GreekArray[@]}
@@ -1156,16 +1175,16 @@ don't export them
     (( $1 == 1 || $1 == 2 )) && echo "number 1 or 2"
     ((i-=2)) # decrements $i by 2
     i=0; echo $((i+=1))
-    if (( ! $n == 1 )); then echo 'not 1'; fi
+    n=2; if ! (( $n == 1 )); then echo 'not 1'; fi
     n=1; printf "%03d\n" $n
     n=08; (( 10#$n > 7 )) && o base10  # because 08 is an impossible octal
 
 ##### comparison
-    if [ "$a" -ge "$b" ]
-    if [ "$a" -gt "$b" ]
-    if [ "$a" -le "$b" ]
-    if [ "$a" -lt "$b" ]
-    if [ "$a" -ne "$b" ]
+    if [ "$a" -ge 2 ]
+    if [ "$a" -gt 2 ]
+    if [ "$a" -le 2 ]
+    if [ "$a" -lt 2 ]
+    if [ "$a" -ne 2 ]
 
 ##### (( > ))
     (( 1 > 0 )) && o 1
@@ -1187,14 +1206,15 @@ don't export them
     s=12345; echo $s | cut -c $((${#s}-2))-
     s=yes; s+=no; o $s
     s+=new; o $s
+    ${x}and$y
 
 case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
 
 ##### parameter expansion
     file=a.b.c; echo ${file##*.}; echo ${file%.*}
 
+    s='strong string'; o ${s//str/p} # all matches
     ${string/substring/firstMatchReplacement}
-    ${string//substring/allMatchesReplacement}
     ${string/#substringAtStart/replacement}
     ${string/%substringAtEnd/replacement}
     ${string:position:length}

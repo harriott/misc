@@ -799,12 +799,16 @@ Tig Manual
 - "Page Not Found" if no theme...
 
 ## gnuplot
+    $ITscr/CP/gnuplot
+    $jtCP/gnuplot
     gnuplot -e 'set terminal'  # lists those available
     gnuplot -e 'show datafile commentschars'
     gnuplot -e 'show loadpath'
     gnuplot -e 'show palette'
+    gnuplot -e 'test' -persist  # terminal
+    gnuplot -e 'test palette' -persist
+    gnuplot -h
     gnuplot -V
-    r $jtCP/gnuplot  # sample code
 
 ### commands
     q[uit]

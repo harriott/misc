@@ -11,7 +11,8 @@ rm "$JHw/hours/roles-copy.md"
 bCcg="$JHw/hours/barChart-chart.gpi"
 cp $misc/CP/workHours/barChart-y2014.gpi $bCcg
 sed -i '1,4d' $bCcg
-# exit  # when testing just  2014
+gnuplot $bCcg
+exit  # when testing just  2014
 sed -i 's/14/15/' $bCcg; gnuplot $bCcg
 sed -i 's/15/16/' $bCcg; gnuplot $bCcg
 sed -i 's/16/17/' $bCcg; gnuplot $bCcg

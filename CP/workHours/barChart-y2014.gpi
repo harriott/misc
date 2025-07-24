@@ -1,9 +1,10 @@
 
-# tweaked from  $jtCP/gnuplot_sourceforge-Demos/histograms4gnu.gpi
+# tweaked from  $jtCP/gnuplot/gnuplot_sourceforge-Demos/histograms4gnu.gpi
 
 # gnuplot $misc/CP/workHours/barChart-y2014.gpi
 
-set terminal png; set output 'y2014.png'
+set terminal png
+set output 'y2014.png'
 set xtics font ", 8"
 
 set boxwidth 0.75 absolute
@@ -42,4 +43,6 @@ set linetype 12 lc rgb '#87ceeb' # skyblue
 
 set datafile separator ",\t"
 plot 'y2014.dat' using 2:xtic(1), for [i=3:13] '' using i
+# - using x-axis tick labels from column 1
+# - using data from columns 2-13 (ignoring totals from column 14)
 
