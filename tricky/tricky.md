@@ -5,7 +5,7 @@
 this file is symlinked in `$OSAB/nodes-set/jo-0.sh`
 
 # $tricky directory
-- `$tricky` is defined in `$OSL/nodes/jo/export`
+- `$tricky` is defined in `$MSn\PS\Env.ps1` & `$OSL/nodes/jo/export`
 - contains some directories that are tricky for `Dropbox`
 
 ## GRs
@@ -27,4 +27,28 @@ this file is symlinked in `$OSAB/nodes-set/jo-0.sh`
 ### npm-Astro-ext4
 - `JH`: `$tricky/npm-Astro-ext4/JH/tm/README.md`
 - some Astro tests: `$tricky/npm-Astro-ext4` full of damned symlinks...
+
+## Zourit Nextcloud
+    $misc/CP/rclone.md
+
+- can't recall where I got the `pass` from
+- WebDAV <https://cloud6.zourit.net/remote.php/dav/files/0db3dcd2-559e-103c-85dd-b3e96c5fa175/>
+
+### commands
+    rclone lsd ZCzNc:  # quick list of top-level directories
+
+#### 0 get clone
+    $ find $tricky/ZN-rcl | wc -l
+    rclone sync -P ZCzNc: $tricky/ZN-rcl
+
+#### 1 get usable 0 sync to  ZN-use
+    $ rsync -irtv --delete $tricky/ZN-rcl/ $CzMa/online/ZNc/ZN-use
+
+    PS> robocopy /mir $tricky/ZN-rcl $tricky/ZN-rcl-RCd
+
+    cd $tricky/ZN-rcl-RCd
+    perl $onGH/FM-underscores/underscores.pl
+
+#### 2 get usable 1 clean up  ZN-use
+    cd $CzMa/online/ZNc/ZN-use
 

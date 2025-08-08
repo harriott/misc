@@ -3,6 +3,8 @@
     $misc/README.md
 
 # miscellaneous configurations and small tools that I use
+    git clone https://github.com/harriott/misc/tree/master
+
 nothing special
 
 # possible Desktop arts

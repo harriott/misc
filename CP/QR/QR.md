@@ -187,6 +187,7 @@ E-book viewer `<esc>`/`<right_click>` brings up the controls
 functionality included in Memoir
 
 ## commands
+    \documentclass[a5paper]{article} % smallest
     \listfiles  in preamble gets package versions in  .log
     \newenvironment{<envName>}[<n>][<default>]{<beginEnv>}{<endEnv>}
     \overfullrule=2mm  % adds a black bar to locate an overfull hbox
@@ -200,7 +201,7 @@ functionality included in Memoir
 ### figure environment
 > LaTeX Warning: 'h' float specifier changed to 'ht'.
 
-    \begin{figure}[h] \includegraphics[width=0.5\textwidth]{image} \end{figure}
+    \begin{figure}[h] ... \end{figure}
 
 - `h` place (approximately) here
 - `t` place at top of page
@@ -299,9 +300,9 @@ style `\textnormal`
     ...
     \setlength{\columnsep}{1cm}
     ...
-    \onecolumn
+    \onecolumn  % triggers newpage
     ...
-    \twocolumn
+    \twocolumn  % triggers newpage
 
 #### multicols
     \usepackage{multicol}
@@ -718,10 +719,13 @@ convert mp4's first to MPEG-2 transport streams (`ffmhb -i 1.mp4 -c copy 1.ts`) 
     git log --follow *Colette*
     git log -1  # credentials of last commit
     git log -3 --pretty="format:%C(auto)%h %as" -- */syntax/sh.vim  # last 3 dates of change
-    git log -S<change_string>  # reports commits that added or removed it
     git reset HEAD~1  # throw away last commit, keeping changes for a better one
     git rev-parse --short HEAD  # the short commit hash
     gitk &  # GUI showing files in each commit
+
+#### diff-options
+    git log -p -Sfoo --output=pickaxe  # then open that file & search for foo
+    git log -S<change_string>  # reports commits that added or removed it
 
 #### grep
     git grep Log $(git rev-list --all) -- '*.ps1'  # searches all  ps1  files in all commits for "Log"
@@ -810,6 +814,8 @@ Tig Manual
     gnuplot -h
     gnuplot -V
 
+`.gpi` can't parse Bash environment variables
+
 ### commands
     q[uit]
 
@@ -871,14 +877,17 @@ Tig Manual
     \end{document}
 
 ## Perl
-    $coreIT/CP/encoding/dpl/Perl/scratch.pl
-    cpanm --help
+    $coreIT/CP/encoding/dpl/Perl/scratch0.pl
     $jtCP/coding/Perl
+    cpanm --help
+    perl -?
 
 - command prompt, `set TERM=dumb` allows Perl stuff to run without Terminal Size warnings
 - `q(a b c)` = `a b c`
 - `qq(a b c)` = `"a b c"`
 - `qw(a b c)` = `('a', 'b', 'c')`
+- `File::Find` - `$onGH/FM-underscores/underscores.pl`
+- `ppm` Perl Package Management
 
 ### arrays
     @array = (1, 2, 3, 4, 5);
@@ -889,12 +898,32 @@ Tig Manual
 ### commands
     die('died for debugging');
     for ...  # = foreach ...
+    print lc("String to Lowercase")
+    print length($string)."\n";
 
 #### conditionals
     if ( expr ) { action }
     if ( expr ) { action } else { action }
     if ( expr ) { action } elsif ( expr  ) { action } ... else { action }
     unless ( expr ) { action }
+
+##### comparison Operators
+    numeric string
+    ==      eq
+    !=      ne
+    <       lt
+    >       tt
+    <=      le
+    >=      ge
+    <=>     cmp
+
+#### file tests
+- `-e $node` exists
+- `-z $node` zero size
+- `-s $node` returns size in bytes
+- `-f $node` is a file
+- `-d $node` is a directory
+- `-l $node` is a symlink
 
 #### loops
     last;  # break
@@ -908,7 +937,7 @@ Tig Manual
 - `\n`  newline
 - `\s`  space, tab, newline
 - `\w`  alphanumeric or _
-- `a{m,n}`  between m & n a's
+- `a{m,n}`  between  m  &  n  a's
 - `^abc|abc$` abc at start or end
 
 <https://jkorpela.fi/perl/regexp.html>
@@ -919,7 +948,7 @@ Tig Manual
 
 #### say
     say scalar @array;  # number of elements
-    use feature 'say';
+    perl -e 'use feature "say"; say "said";'
 
 replaces `print "$var\n";`
 
@@ -956,12 +985,8 @@ arrays containing tabbed values can get messy: `perl -e 'my @tabbedArray = ( "sh
     perl -de 0  # debug
     perl -e 'print reverse <>' <file_to_reverse>
     perl -le 'print a..z'
-
-### PS>
-    perl -e 'print \"Hello World\"'
-    perl -e "print qq(Hello, world!)"
-    perl -i -ne 'printf q(%04d %s), $., $_' <file_needing_linenumbers>
-    perl -ne 'printf' <file_to_print>
+    perl -ne 'print if $. == 2' <file> # line 2
+    time perl -e 'sleep(1)'
 
 ## Python
     $coreIT/CP/encoding/dpl/Python/scratch.py
@@ -1113,8 +1138,6 @@ Crate regex: `x?` zero or one of `x` (greedy)
     zoxide -V  # --version
     zoxide edit  # <esc>
 
-sharkdp/bat
-
 ## 7-Zip
     7z
     7z x <pw'd_zip>
@@ -1177,6 +1200,10 @@ by gokcehan
     pt
     pt /version
     pt Solange .
+
+## sharkdp/bat
+    bat --list-themes
+    bat -h
 
 ## Vifm help
 - can't quit to current directory
@@ -1296,6 +1323,7 @@ Sony Xperia 10 II: 1080x2520 = 21:9
 - 1920x1080
 
 # images
+    $ITscc/CP/svg-flags-flat-png
     fd -utf -e bmp -e gif -e jpeg -e jpg -e png -e svg -e tiff -e webp > images.fetl
 
 - 72 dpi = 18.3 dots per mm
@@ -1627,7 +1655,7 @@ if aborted, `for f in *; do sed -i "/$f/d" zips; done`
     rclone config file  # shows path
 
 ## GitHub
-`~/.ssh/known_hosts`: `AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa`
+`$HOME/.ssh/known_hosts`: `AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa`
 
 ### CLI
     gh browse  # opens the repository root in web browser

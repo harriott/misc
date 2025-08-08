@@ -57,6 +57,7 @@ C* Music Player
 - can't play: `oma`, `omv`, `rmj`
 
 # audio - convert
+    f=sox.flac; ffi $f -c:a libvorbis -aq 4 ${f%.*}.ogg
     for f in *.flac; do ffi "$f" -c:a libvorbis -aq 4 "${f%.*}.ogg" ; done
     for f in *.oma; do ffi "$f" -c:a libvorbis "${f%.*}.ogg" ; done  # default VBR quality 3
     for f in *.rmj; do ffi "$f" -c:a libvorbis -aq 4 "${f%.*}.ogg" ; done
@@ -295,11 +296,16 @@ defines variables for `kpathsea`
 - `uniq -c` (`--count`) prefix lines by counts
 
 ## awk
+    awk -h  # --help
     awk -i inplace -F, '{print $3,$2,$1}' OFS='┊' toReorder.csv
+    awk -V  # --version
+    awk '{print $0}' # prints all columns - doesn't work with  OFS
     awk '{print $1}' ORS='\t' <file_with_column_to_print_tsv>
     v=variable; awk -v var="$v" 'BEGIN {print var}'
     za $cIThul/gawk.pdf
+    {print $1,sprintf("%08d",$2)} # 2nd field is 0-padded to length 8
 
+- `'{if($1==2){if(gsub(/┊/,"┊")<1){$3=$3"┊"}}}{print $1,$2,$3}'` adds a ┊ if there aren't 2
 - `-F` = `--field-separator`
 - `-i` = `--include`
 - GAWK(1)
@@ -333,8 +339,14 @@ defines variables for `kpathsea`
     awk -F, '{ if ( $1+0 > 2025 ) print $1 }" <first_column_could_be_year.csv> # only those > 2025
     awk '{ print ($1 % 2 == 0) ? "even" : "odd" }' numbers.txt
     awk '{printf("%06.2f\n", $1)}' <<< -9.111111
+    o -e "a 1\nb 2\nc 3" | awk '{s+=$2;}END{print s;}' # sum of column 2
+    o -e "a 1\nb 2\nc 3" | awk '{print $2}' ORS=' ' | sed 's/ $/\n/'
 
-- `$1 ~ /^[0-9]+$/` checks if first field is an integer
+`$1 ~ /^[0-9]+$/` checks if first field is an integer
+
+### select lines
+    awk 'FNR==2 {print}' <file>  # line 2
+    awk '{if(NR>=2){print}}' <file>  # lines from 2
 
 ## dos2unix
     dos2unix -i *
@@ -450,16 +462,31 @@ defines variables for `kpathsea`
 ## compressed
     :Man gzip
 
-`7-Zip`: `for z in *.zip; do 7z x $z; done`
+`gzip -r *` will recursively convert all files to `*.gz`
+
+### 7-Zip
+    7z -h  # -mhe (metadata encryption) not there
+    7z.exe a -mhe -p<pw> dir.zip dir
+    for z in *.zip; do 7z x $z; done
+
+#### compression level
+- `-mx0` less than no option
+- `-mx1` seems optimal
 
 ### tar
     :Man tar
-    tar -xvf tar.gz.tar
     tar -xzf archive.tar.gz [-C <target_directory>]
 
 - `--gunzip` (or `--ungzip`)
 - `-v` (`--verbose`)
 - `-z` (`--gzip`)
+
+### zip
+    :Man zip
+    zip -qr dir.zip dir
+
+- `-q` (`--quiet`)
+- `-r` (`--recurse-paths`)
 
 ## cp
     cp -r <sourceDir> .
@@ -523,6 +550,7 @@ find(1)
 
 ### mlocate
     locate .asc | grep '\.asc$'
+    locate .dat | grep '/\.dat'
     locate -c <target>  # --count
     locate -h
 
@@ -621,6 +649,10 @@ output info: `YXcstpoguax`
     - `-p` (`--perms`) keep permissions
 - `-X` (`--xattrs`) keep extended attributes
 
+## touch
+- `-c` (`--no-create`)
+- change file timestamps
+
 ## zoxide
     declare -f z
     zoxide -h
@@ -652,8 +684,6 @@ fingerprint: `xxxx xxxx xxxx xxxx xxxx  xxxx xxxx xxxx xxxx xxxx`
 
 # imagey
     colorpicker --one-shot --preview
-    for i in *.bmp; do convert $i ${i%.*}.jpg; done  # no spaces in names
-    for i in *.jpeg; do convert $i jpg/${i%.*}.jpg; done  # gets them into subfolder jpg
     gphoto2 --auto-detect  # list detected cameras
     gphoto2 -DR  # delete all files in all folders
     gphoto2 -l  # list folders
@@ -682,16 +712,19 @@ up/down => zoom in/out
 ```
 
 ## ImageMagick
-    convert -flatten transparent.png white_background.png
-    convert -list
-    convert -list gravity
-    convert <colourimage> -colorspace Gray <grayimage>
-    convert <people> -paint 9 <people-oil>
-    convert <positive> -negate <negative>
-    for i in $(ls); do convert -resize 10% $i r$i; done
-    for i in $(ls); do convert -resize 15% $i r$i; done
-    for i in $(ls); do convert -resize 25% $i r$i; done
-    for i in $(ls); do convert -resize 50% $i r$i; done
+    magick -flatten transparent.png white_background.png
+    magick -list
+    magick -list gravity
+    magick <colourimage> -colorspace Gray <grayimage>
+    magick <people> -paint 9 <people-oil>
+    magick <positive> -negate <negative>
+    for i in $(ls); do magick -resize 10% $i r$i; done
+    for i in $(ls); do magick -resize 15% $i r$i; done
+    for i in $(ls); do magick -resize 25% $i r$i; done
+    for i in $(ls); do magick -resize 50% $i r$i; done
+    for i in *.bmp; do magick $i ${i%.*}.jpg; done  # no spaces in names
+    for i in *.svg; do magick $i ${i%.*}.png; done  # no spaces in names
+    for i in *.jpeg; do magick $i jpg/${i%.*}.jpg; done  # gets them into subfolder jpg
 
 ## nomacs
     nomacs -h
@@ -1036,6 +1069,8 @@ esac
     man -h ls
     mktemp temp-XXX  # can add more X's, touch's a randomised filename
     pushd ~/some_path; pushd /another_path; popd; popd
+    >f  # creates/empties file  f
+    >>f  # creates file  f  if necessary
 
 #### find
     find . -maxdepth 1 -mindepth 1 -type d -name "*"  # those in working directory
@@ -1156,14 +1191,17 @@ substitute user identity
     a=(1 2 3); ((a[0]++)); ((a[1]+=2)); a+=(4); echo ${a[@]}
     a=(1 2 3); echo ${a[-1]}  # last element
     a=(1 2 3); b=("${a[@]}"); b+=("${a[@]}"); echo ${b[@]}
-    echo 'a b c' > l; s=$(<l); a=(${s//'\n'/,}); echo ${a[@]} # so l is a file containing a space-separated list
     echo ${#array[@]}  # number of elements
     firstElement=${array[0]}
-    mapfile -t found < <(find .)
-    mapfile -t GreekArray < <(printf "Alpha\nBeta\nGamma"); echo ${GreekArray[@]}
     string='My string'; [[ $string =~ "My" ]] && echo success
 
 don't export them
+
+##### from file
+    aff=$(<$f); aff=(${aff//'\n'/,}) # array from file  $f
+    mapfile -t found < <(find .)
+    mapfile -t array < <(cat file)
+    mapfile -t GreekArray < <(printf "Alpha\nBeta\nGamma"); echo ${GreekArray[@]}
 
 ##### list
     echo ${array[@]}
@@ -1201,6 +1239,7 @@ don't export them
     n=''; n=n; [[ -n $n ]] && echo $n
     o lkj | rev | cut -c 2- | rev
     o ljk | sed 's/.$//'
+    s='long'; o ${#s} # length
     qs=$'quote\'*star'; o "$qs"
     s=12345; echo $s | awk '{print substr($1,length($1)-2) }'
     s=12345; echo $s | cut -c $((${#s}-2))-
@@ -1450,6 +1489,10 @@ sudo groupdel <group_to_delete>
     [-]ixon = the setting
     ctrl-q = XON
     ctrl-s = XOFF
+
+## Termux
+    if ! [ $TERMUX_VERSION ]; then echo 'not in Termux'; fi
+    termux-info
 
 ## tmux
     if [ $TERM == 'screen-256color' ]; then echo "you're in tmux"; fi
