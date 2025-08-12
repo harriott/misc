@@ -1325,13 +1325,10 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
 
 ## groups
     /etc/group  # all of them
-
-```bash
-gpasswd [-a <user> <group_to_add_to>]
-groups jo
-sudo groupadd <group_to_create>
-sudo groupdel <group_to_delete>
-```
+    gpasswd [-a <user> <group_to_add_to>]
+    groups jo
+    sudo groupadd <group_to_create>
+    sudo groupdel <group_to_delete>
 
 ## GRUB
     grub-install --version
@@ -1608,6 +1605,7 @@ https://packages.ubuntu.com/
 
 ### manage
     apt-cache -h
+    apt-cache show <package>  # info
     apt-cache showpkg <package>  # report includes dependencies and reverse dependencies
     apt-get download <package>  # to current directory
     dpkg -l

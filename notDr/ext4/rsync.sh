@@ -3,10 +3,10 @@
 
 # Joseph Harriott  Mon 26 May 2025
 
-# rsync  $tricky  directories to/from external ext4
+# rsync  $notDr  directories to/from external ext4
 
-# bash $misc/tricky/ext4/rsync.sh
-# see  $misc/tricky/tricky.md
+# bash $misc/notDr/ext4/rsync.sh
+# see  $misc/notDr/notDr.md
 
 t="/run/media/jo/KDT100G3B/"
 
@@ -14,7 +14,7 @@ mkdir -p /run/media/jo/KDT100G3B/tricky-GRNF-rnf
 mkdir -p /run/media/jo/KDT100G3B/tricky-npmAstro
 
 #=> 0 last_update check
-cat "$misc/tricky/ext4/last_update"
+cat "$misc/notDr/ext4/last_update"
 read -p "- good to continue? "
 
 #=> 1 GR-NF/ryanoasis-nerd-fonts & GRNF-rnf

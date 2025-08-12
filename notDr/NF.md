@@ -1,15 +1,15 @@
     vim: se fdl=1:
 
-    $misc/tricky/NF.md
+    $misc/notDr/NF.md
 
-- this file is symlinked in `$OSAB/nodes-set/jo-0.sh` into `$tricky/GR-NF` directory
+- this file is symlinked in `$OSAB/nodes-set/jo-0.sh` into `$notDr/GR-NF` directory
 - Nerd Fonts
 
 # manage
 maybe disable call to `git-prompt.sh` in `$AjB/bashrc-console` before entering this directory
 
 ## 0 get
-    git clone --depth 1 https://github.com/ryanoasis/nerd-fonts/ $tricky/GR-NF/ryanoasis-nerd-fonts
+    git clone --depth 1 https://github.com/ryanoasis/nerd-fonts/ $notDr/GR-NF/ryanoasis-nerd-fonts
 
 maybe `git config --global core.compression 0` - see `$misc/CP/gitconfig`
 
@@ -20,7 +20,7 @@ maybe `git config --global core.compression 0` - see `$misc/CP/gitconfig`
 
 ## 1 use - for Arch 0
     fA="$ITscc/unix-linux-forArch-fonts/nerd-fonts"
-    pf="$tricky/GR-NF/ryanoasis-nerd-fonts/patched-fonts"
+    pf="$notDr/GR-NF/ryanoasis-nerd-fonts/patched-fonts"
 
 ## 1 use - for Arch 1
     $ITscc/unix-linux-forArch-fonts/readme.md
@@ -87,13 +87,13 @@ maybe `git config --global core.compression 0` - see `$misc/CP/gitconfig`
 not yet
 
 ## 1 use - bin/scripts
-    $tricky/GR-NF/ryanoasis-nerd-fonts/bin/scripts/README.md
+    $notDr/GR-NF/ryanoasis-nerd-fonts/bin/scripts/README.md
 
-    bash $tricky/GR-NF/ryanoasis-nerd-fonts/bin/scripts/cheatsheet.sh > cheatsheet.txt  # all of them listed
-    bash $tricky/GR-NF/ryanoasis-nerd-fonts/bin/scripts/test-fonts.sh
-    bash $tricky/GR-NF/ryanoasis-nerd-fonts/bin/scripts/test-powerlines.sh
+    bash $notDr/GR-NF/ryanoasis-nerd-fonts/bin/scripts/cheatsheet.sh > cheatsheet.txt  # all of them listed
+    bash $notDr/GR-NF/ryanoasis-nerd-fonts/bin/scripts/test-fonts.sh
+    bash $notDr/GR-NF/ryanoasis-nerd-fonts/bin/scripts/test-powerlines.sh
 
 ## 1 use - lists
-    tree $pf > $tricky/GR-NF/patched-fonts.tree
-    tree -fi $pf > $tricky/GR-NF/patched-fonts-paths
+    tree $pf > $notDr/GR-NF/patched-fonts.tree
+    tree -fi $pf > $notDr/GR-NF/patched-fonts-paths
 

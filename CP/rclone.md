@@ -10,5 +10,5 @@
     cpi $Enc/Secure1/rclone.conf $Env:AppData\rclone\rclone.conf
 
 # Zourit Nextcloud
-    $misc/tricky/tricky.md
+    $misc/notDr/notDr.md
     $TeNo/md-JH-DailyLife/roles/Cafezoide/online/cc.md
