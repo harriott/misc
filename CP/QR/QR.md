@@ -1165,7 +1165,10 @@ Crate regex: `x?` zero or one of `x` (greedy)
 - `-I` = `--no-ignore` = don't respect `.(fd|git)ignore`
 - `-L` follow links into symlinked directories
 - `-td` type dir
+- `-te` type empty file
 - `-tf` type file
+- `-tl` type symlink
+- `-tx` type executable
 - `-u` (not listed in `-h`) = `--unrestricted` = `-HI`
 - `-x` (= `--exec`) <cmd>  # for each search result
 - `-X` (= `--exec-batch`) <cmd>  # all search results at once
@@ -1233,7 +1236,7 @@ by gokcehan
 - `s` = `search --via=fd`
 - `S` = `search --via=rg`
 
-# gpg
+# GnuPG
     <key-id> can be the short key id = the last 8 characters
     echo "encrypt me this" | gpg -ase -r 13F327EF -o gpg.asc
     gpg --delete-key <key-id>
@@ -1241,8 +1244,7 @@ by gokcehan
     gpg --send-keys <key-id>  # then can never be deleted from the keyserver
     gpg --verify file.asc [file]
 
-- GnuPG
-- my currently active key is `13F327EF`
+my currently active key is `13F327EF`
 
 ## command options
 `-s` (`--sign`) sign a message
@@ -1734,4 +1736,8 @@ Keyboard shortcuts for YouTube
 ## yt-dlp - MSWin10
     $MSn\PS\Profile.ps1
     y --version
+
+## Zimbra Modern Web App
+- All Applications > `m` Move items
+- Preferences > Zimbra Keyboard Shortcuts
 

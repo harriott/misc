@@ -2,16 +2,14 @@
 
     $misc/notDr/notDr.md
 
-this file is symlinked in `$OSAB/nodes-set/jo-0.sh`
+this file is symlinked in `$MSn/PS/Profile.ps1` & `$OSAB/nodes-set/jo-0.sh`
 
 # $notDr directory
 - `$notDr` is defined in `$MSn\PS\Env.ps1` & `$OSL/nodes/jo/export`
 - contains some directories that are tricky for `Dropbox`
 
 ## GRs
-- `$cGRs` over 150k files...
-- managed in  `$misc/GRs`
-- synced to external drive in `$misc/ITr/rsync.sh`
+    $misc/GRs/GRs.md
 
 ## best on ext4
 - directory `$notDr/GR-NF/ryanoasis-nerd-fonts` is huge, and rarely needed - see `$misc/notDr/NF.md`

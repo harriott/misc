@@ -14,12 +14,12 @@
 cat "$misc/ITr/last_update"
 read -p "- good to continue? "
 
-#=> 2 $coreIT  rsync's to external drive
-for s in $coreIT $ITr/coreIT; do find "$s" | echo "$(wc -l) $s"; done
-echo "\$coreIT: $(date +%y%m%d-%H%M%S), $host -> TOSHIBA" >> $misc/ITr/last_update
-read -p "Enter to begin the rsync ? "
-rsync -irtv --delete $coreIT/ $ITr/coreIT
-echo
+# #=> 2 $coreIT  rsync's to external drive
+# for s in $coreIT $ITr/coreIT; do find "$s" | echo "$(wc -l) $s"; done
+# echo "\$coreIT: $(date +%y%m%d-%H%M%S), $host -> TOSHIBA" >> $misc/ITr/last_update
+# read -p "Enter to begin the rsync ? "
+# rsync -irtv --delete $coreIT/ $ITr/coreIT
+# echo
 
 #=> 2 $cGRs  rsync's
 for s in $cGRs $ITr/GRs; do find "$s" | echo "$(wc -l) $s"; done
@@ -44,20 +44,21 @@ echo
 # rsync -iLrtv --delete $ITr/GRs/ $cGRs
 # echo "${tpf3b}2nd rsync to highlight any errors${tpfn}"
 # rsync -iLrtv --delete $ITr/GRs/ $cGRs
+# echo
 
-#=> 2 $DJH/Cop-code  rsync's
-for s in $DJH/Cop-code $ITr/Cop-code; do find "$s" | echo "$(wc -l) $s"; done
-echo "\$DJH/Cop-code: $(date +%y%m%d-%H%M%S), $host -> TOSHIBA" >> $misc/ITr/last_update
-read -p "Enter to begin the rsync ? "
-rsync -irtv --delete $DJH/Cop-code/ $ITr/Cop-code
-echo
+# #=> 2 $DJH/Cop-code  rsync's to external drive
+# for s in $DJH/Cop-code $ITr/Cop-code; do find "$s" | echo "$(wc -l) $s"; done
+# echo "\$DJH/Cop-code: $(date +%y%m%d-%H%M%S), $host -> TOSHIBA" >> $misc/ITr/last_update
+# read -p "Enter to begin the rsync ? "
+# rsync -irtv --delete $DJH/Cop-code/ $ITr/Cop-code
+# echo
 
-#=> 2 $jtIT  rsync's to external drive
-for s in $jtIT $ITr/jtIT; do find "$s" | echo "$(wc -l) $s"; done
-echo "\$jtIT: $(date +%y%m%d-%H%M%S), $host -> TOSHIBA" >> $misc/ITr/last_update
-read -p "Enter to begin the rsync ? "
-rsync -irtv --delete $jtIT/ $ITr/jtIT
-echo
+# #=> 2 $jtIT  rsync's to external drive
+# for s in $jtIT $ITr/jtIT; do find "$s" | echo "$(wc -l) $s"; done
+# echo "\$jtIT: $(date +%y%m%d-%H%M%S), $host -> TOSHIBA" >> $misc/ITr/last_update
+# read -p "Enter to begin the rsync ? "
+# rsync -irtv --delete $jtIT/ $ITr/jtIT
+# echo
 
 # #=> 2 $jtIT-MSWinUser  rsync's to external drive
 # for s in $jtIT-MSWinUser $ITr/jtIT-MSWinUser; do find "$s" | echo "$(wc -l) $s"; done
@@ -65,16 +66,17 @@ echo
 # read -p "Enter to begin the rsync ? "
 # rsync -irtv --delete $jtIT-MSWinUser/ $ITr/jtIT-MSWinUser
 
-#=> 2 $tIs  rsync's to external drive
-for s in $tIs $ITr/tIs; do find "$s" | echo "$(wc -l) $s"; done
-echo "\$tIs: $(date +%y%m%d-%H%M%S), $host -> TOSHIBA" >> $misc/ITr/last_update
-read -p "Enter to begin the rsync ? "
-rsync -irtv --delete $tIs/ $ITr/tIs
+# #=> 2 $tIs  rsync's to external drive
+# for s in $tIs $ITr/tIs; do find "$s" | echo "$(wc -l) $s"; done
+# echo "\$tIs: $(date +%y%m%d-%H%M%S), $host -> TOSHIBA" >> $misc/ITr/last_update
+# read -p "Enter to begin the rsync ? "
+# rsync -irtv --delete $tIs/ $ITr/tIs
+# echo
 
-#=> 2 $ZN-rc  rsync's to external drive
-for s in $notDr/ZN-rc $ITr/ZN-rc; do find "$s" | echo "$(wc -l) $s"; done
-echo "\$notDr/ZN-rc: $(date +%y%m%d-%H%M%S), $host -> TOSHIBA" >> $misc/ITr/last_update
-read -p "Enter to begin the rsync ? "
-rsync -irtv --delete $notDr/ZN-rc/ $ITr/ZN-rc
-echo
+# #=> 2 $ZN-rc  rsync's to external drive
+# for s in $notDr/ZN-rc $ITr/ZN-rc; do find "$s" | echo "$(wc -l) $s"; done
+# echo "\$notDr/ZN-rc: $(date +%y%m%d-%H%M%S), $host -> TOSHIBA" >> $misc/ITr/last_update
+# read -p "Enter to begin the rsync ? "
+# rsync -irtv --delete $notDr/ZN-rc/ $ITr/ZN-rc
+# echo
 

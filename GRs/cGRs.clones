@@ -70,13 +70,15 @@ d-CP/d-Vim-Nvim/r-J03JB/nvim_config https://github.com/J03JB/nvim_config
 d-CP/d-Vim-Nvim/r-jdhao-nvim-config https://github.com/jdhao/nvim-config
 d-CP/d-Vim-Nvim/r-kevinfengcs88-nvim https://github.com/kevinfengcs88/nvim
 d-CP/d-Vim-Nvim/r-LunarVim-LunarVim https://github.com/LunarVim/LunarVim
+d-CP/d-Vim-Nvim/r-mason-org-mason-lspconfig_nvim https://github.com/mason-org/mason-lspconfig.nvim
+d-CP/d-Vim-Nvim/r-mason-org-mason_nvim https://github.com/mason-org/mason.nvim
+d-CP/d-Vim-Nvim/r-mason-org-mason-registry https://github.com/mason-org/mason-registry
 d-CP/d-Vim-Nvim/r-neovim-neovim https://github.com/neovim/neovim
 d-CP/d-Vim-Nvim/r-neovim-nvim-lspconfig https://github.com/neovim/nvim-lspconfig
 d-CP/d-Vim-Nvim/r-nvim-lua-kickstart.nvim https://github.com/nvim-lua/kickstart.nvim
 d-CP/d-Vim-Nvim/r-pgosar-CyberNvim https://github.com/pgosar/CyberNvim
 d-CP/d-Vim-Nvim/r-rafi/vim-config https://github.com/rafi/vim-config
 d-CP/d-Vim-Nvim/r-spatoon-nvim-config https://gitlab.com/spatoon/nvim-config
-d-CP/d-Vim-Nvim/r-williamboman-mason.nvim https://github.com/williamboman/mason.nvim
 d-CP/d-Vim-Vim/d-Lisp/r-kovisoft-slimv https://github.com/kovisoft/slimv
 d-CP/d-Vim-Vim/d-Lisp/r-vlime-vlime https://github.com/vlime/vlime
 d-CP/d-Vim-Vim/r-Eckankar-vim-latex-folding https://github.com/Eckankar/vim-latex-folding
@@ -124,6 +126,7 @@ d-MSWin/r-Windos-BurntToast https://github.com/Windos/BurntToast
 d-unix/d-linux/d-Arch/d-gitlab_archlinux_org-archlinux-packaging-packages/r-pacman https://gitlab.archlinux.org/archlinux/packaging/packages/pacman
 d-unix/d-linux/d-Arch/d-gitlab_archlinux_org-archlinux-packaging-packages/r-texlive-core https://gitlab.archlinux.org/archlinux/packaging/packages/texlive-core
 d-unix/d-linux/d-Arch/r-alfunx-_dotfiles https://github.com/alfunx/.dotfiles
+d-unix/d-linux/d-Arch/r-archlinux-packaging-packages-thunderbird https://gitlab.archlinux.org/archlinux/packaging/packages/thunderbird
 d-unix/d-linux/d-Arch/r-denisse-dev-dotfiles https://github.com/denisse-dev/dotfiles
 d-unix/d-linux/d-Arch/r-Eredarion-dotfiles https://github.com/Eredarion/dotfiles
 d-unix/d-linux/d-Arch/r-folke-dot https://github.com/folke/dot

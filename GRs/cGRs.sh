@@ -4,11 +4,10 @@
 
 # manage my downloaded collection of  Git  repositories
 
-# $cGRs, $ITr  exported in  $OSL/nodes/jo/export
-# $GRs  exported in  $machBld/export-GRs
-
-#  du -hs $GRs
-#  cd $GRs; bash $misc/GRs/cGRs.sh
+# $cGRs  exported in  $OSL/nodes/jo/export
+#  $GRs, the machine-local directory, is exported in  $machBld/export-GRs ($OSAB > mb-...)
+#   cd $GRs; bash $misc/GRs/cGRs.sh
+#   du -hs $GRs
 
 # du -s **/.git > dot_git_sizes.txt  then  :%s/\t/  /  then  :sort n
 
@@ -19,9 +18,9 @@ echo '$GRs' " is  $GRs"
 cat "$misc/GRs/cGRs-lu"
 read -p "- good to continue? "
 
-# #=> 1 optionally  rsync  $ITr/GRs  to  $cGRs
-# read -p "going to rsync from ${tpf5}$ITr/GRs${tpfn} to ${tpf5}$cGRs${tpfn}"
-# rsync -ilrtv --delete $ITr/GRs/ $cGRs  # because I might've made changes from another machine
+# #=> 1 optionally sync from external drive
+# # because I might've made changes from another machine
+# echo 'tweak & run  $misc/ITr/rsync.sh'; exit
 
 #=> 2 last update append
 echo "$(date +%y%m%d-%H%M%S) $host $PWD" >> $misc/GRs/cGRs-lu
@@ -90,6 +89,6 @@ echo "- removed"
     # if [[ $repository =~ none ]]; then deref $repository fi
 # done
 
-#=> 8 syncs to external drives
-echo 'now maybe  bash $misc/ITr/rsync.sh'
+#=> 8 suggest sync to external drive
+echo 'now maybe  tweak & run  $misc/ITr/rsync.sh'
 

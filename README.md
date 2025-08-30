@@ -7,6 +7,12 @@
 
 nothing special
 
+## GRs get/update
+    $misc/GRs/cGRs.md
+
+## ITr manage
+    $misc/ITr/ITr.md
+
 # possible Desktop arts
     $Drpbx/Cop/OutThere/territories/Americas-USA/art-2D/SteveHickok
     $Drpbx/JH/stack/Artist/JoanMiro-merge

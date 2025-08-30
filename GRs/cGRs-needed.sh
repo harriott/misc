@@ -1,10 +1,9 @@
 #!/bin/bash
-# vim: set fdl=1:
 
 # Joseph Harriott  Wed 09 Apr 2025
-# bash $misc/GRs/needed.sh  see  $ITscc/readme.md
+# bash $misc/GRs/needed.sh
 # repositories needed for my system builds
-# $GRs  exported in  $machBld/export-GRs
+# $GRs, the machine-local directory, is exported in  $machBld/export-GRs ($OSAB > mb-...)
 
 set -e  # terminate on a fail
 
@@ -21,12 +20,12 @@ sed -i 's/\r//' $ITscc/CP/wfxr-code-minimap/completions/bash/code-minimap.bash  
 # resourced from  $MSn/PS/Profile.ps1
 # sourced in  $OSAB/nodes-Bash/bashrc-generic
 
-#=> <esc> <esc> prefixes sudo
-cp $GRs/d-unix/r-ohmybash-oh-my-bash/plugins/sudo/sudo.plugin.sh $ITscc/CP/ohmybash-sudo.plugin.sh
-
 #=> emacs
 rsync -irtv --delete $GRs/d-CP/d-emacs/r-domtronn-all-the-icons.el/ $ITscc/CP/Emacs-domtronn-all-the-icons.el
 # elements are symlinked in  $OSAB/nodes-set/root.sh
+
+#=> <esc> <esc> prefixes sudo
+cp $GRs/d-unix/r-ohmybash-oh-my-bash/plugins/sudo/sudo.plugin.sh $ITscc/CP/ohmybash-sudo.plugin.sh
 
 #=> LS_COLORS
 rsync -irtv --delete $GRs/d-unix/d-linux/r-trapd00r-LS_COLORS/ $ITscc/unix-linux/trapd00r-LS_COLORS

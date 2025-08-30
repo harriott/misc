@@ -243,6 +243,7 @@ Make (software)
 
 ## Git
     :Man git
+    fd -tf -u index.lock -x rm
 
 ### Git - configurations
     $ fd -HI -tf ^config$ | xargs rg -l 'remote = gh'  # ripgrep
@@ -393,6 +394,7 @@ defines variables for `kpathsea`
     echo "blia blib bou blf" | sed -E 's/bl(ia|f)//g'
     sed --version
     sed 5q <file> prints first 5 lines
+    sed G <file>  # double-spaced
 
 - `-E`/`-r` (`--regexp-extended`) extended regular expressions
 - GNU sed
@@ -419,7 +421,6 @@ defines variables for `kpathsea`
     sed -i '/match/,+2d' <file>  # removes matched line and 2 after
     sed -i '0~2 a\\' <fileToAddBlankLineAfterEach2ndLine>
     sed -i 's/\r//' <file_to_remove_CRLF_from>
-    sed G <file>  # outputs <file> with blank lines added
     sed -e '0,/first/ s/first/this_first_only/' -i <file_to_make_just_one_single_change_to>
 
 - `&` whole matched pattern
@@ -442,7 +443,7 @@ defines variables for `kpathsea`
 
 # file manage
     $cGRs/unix/ranger-ranger
-    $OSL/bashrc-console-fm
+    $OSL/nodes/bashrc-console-fm
     fuseiso <ISO_image> <mountDirectory>
     mkdir -p  # --parents = make parent directories as needed (no error if existing)
     sudo chown -R <user>:<group> <dir> # --recursive
@@ -512,6 +513,7 @@ defines variables for `kpathsea`
     find $PWD -name <file>  # gets full path
     find -cmin -5
     find -regex ".*a.*\|.*b.*"
+    find . ! -wholename '*/.git/*'  # excluding contents of  .git
     find . -maxdepth 1 -mindepth 1 -type f -name "*"  # those in working directory
     find . -name "*" -type f ! -path '*/.git/*'
     find . -name '*.txt' ! -name 'build*'  # excluding build*
@@ -665,6 +667,10 @@ output info: `YXcstpoguax`
     sudo flatpak list
     sudo flatpak repair  # Erasing .removed
     sudo flatpak update
+
+# fortune
+    fortune -a
+    fortune -f
 
 # get at root on tty2
     Ctrl+Alt+F2 > root + pw
@@ -1257,7 +1263,7 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     ${string/#substringAtStart/replacement}
     ${string/%substringAtEnd/replacement}
     ${string:position:length}
-    a=12345; echo ${a:2}; echo ${a:1:2}; echo ${a:2:1}
+    a=12345; o ${a:0:2}; o ${a:2}; o ${a:1:2}; o ${a:2:1}
     b="a(b(c(d"; o ${b##*\(}
     s=12345; echo ${s::-2}
     t=lkj; echo ${t:0:${#t}-1}
