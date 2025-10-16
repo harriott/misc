@@ -3,15 +3,17 @@
     $misc/README.md
 
 # miscellaneous configurations and small tools that I use
-    git clone https://github.com/harriott/misc/tree/master
+    git clone https://github.com/harriott/misc
 
 nothing special
 
-## GRs get/update
-    $misc/GRs/cGRs.md
+## nodes - other
+- GRs get/update: `$misc/GRs/cGRs.md`
+- ITr manage: `$misc/ITr/ITr.md`
 
-## ITr manage
-    $misc/ITr/ITr.md
+### other
+- `$coreIT/ulAndroid/phones.md`
+- `Cop-IT` (`$onGH/FM-rsync-drives/rsync0-WD30EZRZ.sh`)
 
 # possible Desktop arts
     $Drpbx/Cop/OutThere/territories/Americas-USA/art-2D/SteveHickok

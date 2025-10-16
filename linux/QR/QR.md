@@ -53,16 +53,21 @@ C* Music Player
     + =      vol +10%
 
 ## media
-- can play: `mka`, `ogg`, `opus`, `wma`
+- can play: `m4a`, `mka`, `ogg`, `opus`, `wma`
 - can't play: `oma`, `omv`, `rmj`
 
 # audio - convert
     f=sox.flac; ffi $f -c:a libvorbis -aq 4 ${f%.*}.ogg
     for f in *.flac; do ffi "$f" -c:a libvorbis -aq 4 "${f%.*}.ogg" ; done
-    for f in *.oma; do ffi "$f" -c:a libvorbis "${f%.*}.ogg" ; done  # default VBR quality 3
+    for f in *.oma; do ffi "$f" -c:a libvorbis "${f%.*}.ogg" ; done  # at default VBR quality 3
     for f in *.rmj; do ffi "$f" -c:a libvorbis -aq 4 "${f%.*}.ogg" ; done
     for f in *.wav; do ffi "$f" -c:a libvorbis -aq 4 "${f%.*}.ogg"; rm "$f"; done
     for f in *; do ffi "$f" -b:a 128K -vn "${f%.*}.mp3" ; done
+
+## m4a
+    for f in *.m4a; do ffi "$f" -c:a libvorbis -aq 4 "${f%.*}.ogg" ; done
+
+VBR quality 4 is closer to the original size
 
 # audio - gst123
     gst123 -Z .  # play random audio files recursively forever
@@ -146,8 +151,11 @@ Music Player Daemon
 # CopyQ
     copyq tab  # lists the tab headings
     copyq tab clipboard read 0  # pastes the first one
-    ctrl+home -> move_to_top
     pkill copyq; copyq &
+
+## internal commands
+- `Ctrl+Home` = `move_to_top`
+- `Ctrl+p` = `Preferences`
 
 # datetime
     strftime
@@ -162,11 +170,11 @@ Music Player Daemon
 
 ## date
     date '+%F %a %H:%M'
-    date +%y%m%d-%H%M%S
     date +%j-%H%M
     date +%s; sleep 1; date +%s
     date +%Y%m%d
     date +%y%m%d-%H%M
+    date +%y%m%d-%H%M%S
     date -d 'now -1 year'
     date -d @<unixTimeToConvert>
     date -R
@@ -281,12 +289,14 @@ defines variables for `kpathsea`
 
 # fcron
     fcrontab -l
+    sudo systemctl restart fcron.service
     systemctl status fcron.service
 
 # file contents
     cat
     diff <file1> <file2>
     enca -l surfaces
+    pygmentize -O style=<style> <code_file>
     tac
     shuf
     sk --ansi -i -c 'rg --color=always --line-number "{}"'
@@ -297,6 +307,7 @@ defines variables for `kpathsea`
 - `uniq -c` (`--count`) prefix lines by counts
 
 ## awk
+    awk -f script.awk input.txt
     awk -h  # --help
     awk -i inplace -F, '{print $3,$2,$1}' OFS='┊' toReorder.csv
     awk -V  # --version
@@ -309,7 +320,6 @@ defines variables for `kpathsea`
 - `'{if($1==2){if(gsub(/┊/,"┊")<1){$3=$3"┊"}}}{print $1,$2,$3}'` adds a ┊ if there aren't 2
 - `-F` = `--field-separator`
 - `-i` = `--include`
-- GAWK(1)
 - GNU Awk
 - `gsub(/old/,"new"[,target])` returns the number of substitutions made
 - no backreferences
@@ -375,7 +385,7 @@ defines variables for `kpathsea`
 - GNU Grep Manual
 
 ### igrep
-    ig
+    ig -h  # --help
 
 #### commands
 - `?` toggle help
@@ -443,11 +453,11 @@ defines variables for `kpathsea`
 
 # file manage
     $cGRs/unix/ranger-ranger
-    $OSL/nodes/bashrc-console-fm
     fuseiso <ISO_image> <mountDirectory>
     mkdir -p  # --parents = make parent directories as needed (no error if existing)
     sudo chown -R <user>:<group> <dir> # --recursive
 
+- `$OSL/nodes/bashrc-console-fm` `nnn`
 - `chmod 600 file` - owner can read and write
 - `chmod 644 file` - owner can change it, everyone else can read it
 - `chmod 660 file` - owner can read and write, and group members
@@ -535,6 +545,13 @@ find(1)
     find . -name '.?*'  #  recursively list hidden files
     stat -c '%a %n' *  # show octal permissions
 
+### by extension
+    find . -name '*.?*' -type f | rev | cut -d. -f1 | rev  | tr '[:upper:]' '[:lower:]' | sort | uniq --count | sort -rn > ext_counts
+    find . -type f -name "*.*" | grep -o -E "\.[^\.]+$" | grep -o -E "[[:alpha:]]{2,16}" | awk '{print tolower($0)}' | sort -u
+    find . -type f | grep -oE '\.(\w+)$' | sort -u
+    find . -type f | sed -rn 's|.*/[^/]+\.([^/.]+)$|\1|p' | sort -u  # extensions list (no hiddens)
+    for f in **/*.*; do echo "${f##*.}"; done | sort -u
+
 ### counts
     echo `find . -type d | wc -l`-1 | bc  # counts all subdirectories
     find . -name "*" -type f -path '*/.git/*' | wc
@@ -542,13 +559,13 @@ find(1)
     for n in *; do find "$n" | echo "$n"; done
     isutf8 **/* | wc -l  # non UTF-8 files (fails when too many)
 
-#### by extension
-    find . -type f | sed 's/.*\.//' | sort | uniq -c
-    ls -ar | rev | cut -d'.' -f1 | rev | sort | uniq -c | sort -r
-
 #### including hidden
     find . | wc -l  # very fast in $Drpbx
     ls **/* | wc -l  # all of the files
+
+##### by extension
+    find . -type f | sed 's/\.\/.*\.//' | sort | uniq -c
+    ls -ar | rev | cut -d'.' -f1 | rev | sort | uniq -c | sort -r
 
 ### mlocate
     locate .asc | grep '\.asc$'
@@ -1018,6 +1035,7 @@ niceness: `-20` = highest priority, `19` = lowest
     shopt
     shopt dotglob  # reports back its status
     shopt -u nullglob  # incase  t=$'\?'; echo $t
+    tail -n 1 <file>  # last line
     xdg-open $cIThul/linux/bash.pdf
     za $ITscr/unix-like/linux/bash.pdf
     ~/.bash_history
@@ -1364,13 +1382,15 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     i dool
 
 ## notification - Dunst
-    dunstctl close-all
+    dunstctl close  # the last one
+    dunstctl close-all  # if no luck, kill the  Xfce Notify Daemon
     dunstctl history-pop  # repeat for previous messages
-    dunstify -?
+    dunstify --help
     dunstify -u critical "Read this now!"
 
 ## notification - notify-send
     notify-send 'test of notify-send'
+    notify-send --help
     notify-send -u critical "test of critical notification"
     notify-send -t 5000 -u low "Hello World"
 
@@ -1423,12 +1443,15 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
 - `Terminal` (`xfce4-terminal`)
     - `ctrl+shift+c` = copy
     - `ctrl+shift+v` = paste
+- `xfwm4-tweaks-settings &` = `Windows Manager Tweaks`
 
 ### Clipman
 - `~/.cache/xfce4/clipman/textsrc` semicolon-separated list
 - clickable `Panel` icon
 
 ### keyboard shortcuts
+- `Alt+F3` = `Application Finder`
+- `Alt+scrollwheel` = `zoom_desktop`
 - `Ctrl+Alt+D` = minimize all
 - `Ctrl+Alt+Del` = `xfce4-session-logout`
 - `Ctrl+Alt+Escape` = `xkill` (right-click abandons)
@@ -1436,6 +1459,7 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
 - `HomePage` = `XF86HomePage` = `exo-open --launch WebBrowser`
 - `Shift+Ctrl+Esc` = `xfce4-taskmanager`
 - `Super+e` = `thunar`
+- `Applications > Settings > Keyboard > Application Shortcuts` can take a bash script path
 
 #### windows
 - `Applications > Settings > Window Manager`
@@ -1445,11 +1469,17 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     - `super+1` = move to left monitor
     - `super+2` = move to right monitor
 
+#### workspaces
+- `Ctrl+Alt+Home/End` = move window to left/right workspace
+- `Ctrl+Alt+left/right arrow` = left/right workspace
+- `Ctrl+Fn` = goto workspace n
+
 ### Thunar
     ~/.config/Thunar
     ~/.config/xfce4/xfconf/xfce-perchannel-xml/thunar.xml
 
 ### Xfce Notify Daemon
+    pkill xfce4-notifyd  # might clears all old notifications - if not use dunstctl
     systemctl --user status xfce4-notifyd
     xfce4-notifyd-config &
 
@@ -1479,14 +1509,16 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
 - `Shift+End/Home` = `ScrollToBottom/Top`
 
 ## size
+    echo $COLUMNS $LINES
     stty size  # lines columns
+    tput cols lines
 
 ### set (not in tmux)
     printf '\033[8;40;100t'
     resize -s 90 150
 
 ## terminal line settings
-    stty - a
+    stty -a
 
 ### flow control
     [-]ixon = the setting
@@ -1685,15 +1717,20 @@ https://packages.ubuntu.com/
     notmuch --version
     notmuch search '"the Pennines"' # finds exactly that
     notmuch search tag:attachment | wc -l
-    notmuch search tag:cz | wc -l
     notmuch search tag:fm | wc -l
-    notmuch search tag:gmail | wc -l
-    notmuch search tag:trohib | wc -l
     notmuch search tag:zou | wc -l
     notmuch search tag:zou and tag:inbox | wc -l
+    notmuch tag -cz -- tag:zou  # removes all cz tags
 
+- case-insensitive
+- `date:DD-MM[-[YY]YY]`
+- `date:D[D].M[M][.[YY]YY]`
+- `date:YYYY-MM[-DD]`
+- `from:`
 - NOTMUCH-SEARCH-TERMS(7)
 - seems to not find emails that're included in subsequent ones
+- `subject:(pizza free)` (= `subject:pizza and subject:free`) matching "Free Delicious Pizza" (while `subject:"pizza free"` won't)
+- `to:`
 
 ## firewall
     sudo iptables -L

@@ -53,26 +53,26 @@ while read cloneLine; do
   fi
 done <"$misc/GRs/cGRs.clones"  # can prefix  test https://github.com/test
 
-#=> 6 update  $GRs
-# sf='StartFrom'
-# sf='./CP-emacs-emacs-mirror-emacs'
-# sf='./CP/emacs/syl20bnr-spacemacs'
-# sf='./CP/jgm-pandoc'
-# sf='./CP/MartinThoma-LaTeX-examples'
-# sf='./CP/nomacs-nomacs'
-# sf='./CP/Ruby/Jekyll/jekyll-jekyll'
-# sf='./d-MSWin/r-jdhitsolutions-PSScriptTools'
-# sf='./d-unix/d-linux/d-mail/r-rpuntaie-mailwizard'
-# sf='./linux/Arch/protesilaos-dotfiles'
-# sf='./linux/dwt1-dotfiles'
-# sf='./linux/leo-arch-clifm'
-# sf='./unix/linux/BrodieRobertson-dotfiles'
-# sf='./unix/rwxrob-dotfiles'
-# sf=hugo-module-site
-# sf='no_repository'
-# sf='tjdevries-config_manager'
-# once=yes
-. $misc/GRs/update-depth1.sh $misc/GRs/cGRs-ud1-fixes.sh
+# #=> 6 update  $GRs
+# # sf='StartFrom'
+# # sf='./CP-emacs-emacs-mirror-emacs'
+# # sf='./CP/emacs/syl20bnr-spacemacs'
+# # sf='./CP/jgm-pandoc'
+# # sf='./CP/MartinThoma-LaTeX-examples'
+# # sf='./CP/nomacs-nomacs'
+# # sf='./CP/Ruby/Jekyll/jekyll-jekyll'
+# # sf='./d-MSWin/r-jdhitsolutions-PSScriptTools'
+# # sf='./d-unix/d-linux/d-mail/r-rpuntaie-mailwizard'
+# # sf='./linux/Arch/protesilaos-dotfiles'
+# # sf='./linux/dwt1-dotfiles'
+# # sf='./linux/leo-arch-clifm'
+# # sf='./unix/linux/BrodieRobertson-dotfiles'
+# # sf='./unix/rwxrob-dotfiles'
+# # sf=hugo-module-site
+# # sf='no_repository'
+# # sf='tjdevries-config_manager'
+# # once=yes
+# . $misc/GRs/update-depth1.sh $misc/GRs/cGRs-ud1-fixes.sh
 
 #=> 7 symlinks in  $GRs
 # because Dropbox doesn't like symlinks...

@@ -18,7 +18,17 @@ vim: nospell:
     sudo turbostat --interval 2 --quiet
 
 # graphics
-    xrandr  # xrandr -q
+    cat /sys/class/graphics/*/virtual_size
+    xdpyinfo | grep dimensions: | awk '{print $2}' # combined screen resolution
+    xrandr  # all available monitor resolutions
+    xrandr | grep ' connected'
+    xvidtune -show  # Modeline-style information
+
+## fbset
+    fbset -h
+    sudo fbset
+
+framebuffer device settings
 
 ## query the card specs
     echo $(xrandr -q | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f1) $(xrandr -q | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f2)  # screen size
@@ -48,7 +58,6 @@ Command-Line Printing and Options  http://localhost:631/help/options.html
 ## lp
     lp -n <number_of_copies> <image>
     lp -o scaling=200 <image>  # prints divided across 4 pages
-    lp -o fit-to-page <image>
 
 can't center image on page
 

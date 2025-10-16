@@ -46,12 +46,12 @@ echo
 # rsync -iLrtv --delete $ITr/GRs/ $cGRs
 # echo
 
-# #=> 2 $DJH/Cop-code  rsync's to external drive
-# for s in $DJH/Cop-code $ITr/Cop-code; do find "$s" | echo "$(wc -l) $s"; done
-# echo "\$DJH/Cop-code: $(date +%y%m%d-%H%M%S), $host -> TOSHIBA" >> $misc/ITr/last_update
-# read -p "Enter to begin the rsync ? "
-# rsync -irtv --delete $DJH/Cop-code/ $ITr/Cop-code
-# echo
+#=> 2 $DJH/Cop-code  rsync's to external drive
+for s in $DJH/Cop-code $ITr/Cop-code; do find "$s" | echo "$(wc -l) $s"; done
+echo "\$DJH/Cop-code: $(date +%y%m%d-%H%M%S), $host -> TOSHIBA" >> $misc/ITr/last_update
+read -p "Enter to begin the rsync ? "
+rsync -irtv --delete $DJH/Cop-code/ $ITr/Cop-code
+echo
 
 # #=> 2 $jtIT  rsync's to external drive
 # for s in $jtIT $ITr/jtIT; do find "$s" | echo "$(wc -l) $s"; done

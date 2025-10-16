@@ -29,10 +29,6 @@ syntax of this file is ensured in `$vfv/filetype.vim`
 # AV
     $ITscr/HW/audio/BTHeadphones/JBLTune720BT
 
-## AR 16x9
-- 480x270 = 640x360 = 800x450 = 960x540 = 1920x1080 (`1080p`)
-- `720p`: `1280x720`
-
 ## mediainfo
     mediainfo --Inform='Video;%FrameCount%' $the_file
     mediainfo --Output='General;%Duration%' <avfile>  # milliseconds
@@ -170,10 +166,17 @@ fix `path` in the `*.osp`
 - web colors
 - X11 color names
 
-# documenting - Calibre
+# documenting - ebook
+    7z x document.epub
+
+## Calibre
     ~/CalibreLibrary
 
-E-book viewer `<esc>`/`<right_click>` brings up the controls
+E-book viewer
+
+### keyboard shortcuts
+- `<esc>`/`<right_click>` brings up the controls
+- `Ctrl+Q` Quit calibre
 
 # documenting - LaTeX
     $DJH/search/dts-tex.ffl  # for my files
@@ -343,9 +346,6 @@ style `\textnormal`
 
 - `alt+f12` = `Outils`/`Tools > Options`
     - `Apparence`
-- `alt+o` (= `Format`) `> p` (= `Page style...`)
-    - `Page` is where can set borders
-- `alt+t` (= `Format`) `> p` (= `Style de page...`)
 - `alt+t > e` = `Tools > Extensions` (= `ctrl+alt+e`)
 - `ctrl+5` = `View > Sidebar` toggle
 - `ctrl+alt+e` = `Tools > Extension Manager...`
@@ -355,10 +355,10 @@ style `\textnormal`
 - open a `.csv` with `Calc` and numbers get prefixed with apostrophe, so
     1. select the range
     1. `ctrl+h`
-        - Find: `.+`
-        - Replace: `$0`
-        - other options: Current selection only, Regular expressions
-    1. `Replace All`
+        1. Find: `.+`
+        1. Replace: `$0`
+        1. other options: Current selection only, Regular expressions
+        1. `Replace All`
 - Writer: right-click on a hyperlink for `Remove Hyperlink`
 
 ## AZERTY
@@ -368,6 +368,12 @@ style `\textnormal`
 ## Draw
 - curve: `left-click > [shift] move > left-click > move > double-left-click`
 - `F2` (= `Insert > Text Box`)
+
+## page style
+- `alt+o` (= `Format`) `> p` (= `Page style...`)
+    - `Page` is where can set borders
+- `alt+t` (= `Format`) `> p` (= `Style de page...`)
+- No icon for the toolbars...
 
 ## porting
     \user\config
@@ -399,6 +405,9 @@ use Google Chrome to break out just some pages into a reduced copy
 
 # documenting - spelling
     dict -D
+    typos -h
+    typos -*  # in a directory
+    typos --files
 
 ## Hunspell
     hunspell -h
@@ -411,9 +420,12 @@ use Google Chrome to break out just some pages into a reduced copy
 - Wingdings
 
 # Emacs - commands
+    $misc/CP/Emacs/init.el
+
 - `C-*`  calc-dispatch
 - `C-g`  keyboard-quit
 - `C-x C-c`  quit
+- `M` = `Alt` on Windows keyboards
 - `M-w`  copy
 - `M-x display-time-world`  times around the world
 - `M-x kill-emacs`  force quit
@@ -593,7 +605,9 @@ no built in documentation for `straight.el`
 - `$cGRs/emacs/emacs-evil-evil/evil-maps.el`
 - `C-z`  toggles it
 
-# Emacs reference sheets
+# Emacs - reference sheets
+    $DWp/pn/unix-like/linux/gnu_project/emacs/emacs.dw
+
 - <http://www.rgrjr.com/emacs/emacs_cheat.html>
 - <https://www.emacswiki.org/emacs/Reference_Sheet_by_Aaron_Hawley>
 
@@ -638,7 +652,6 @@ Spacemacs documentation
 
 ## FFmpeg
     $ITsCP/encoding/x264_fullhelp.txt
-    -vf crop=iw:ih-80:0:0
     ffi <audio_to_fade> -af 'afade=t=out:st=<seconds_to_start>:d=<seconds_duration>' -t <seconds_to_end> -y <audio_faded_out>  # <seconds_to_start> + <seconds_duration> = <seconds_to_end>
     ffi <video> -vf 'scale=iw/2:ih/2' <same_video_with_half_the_frame_size>
     ffi <video> -vframes 1 frame.jpg  # extracts a single frame
@@ -1186,6 +1199,12 @@ in JH: `$DJH/search/searches.md`
     fd -Hl -tl  # show supposed link source
 
 ## lf file manager
+    lf -help
+    lf -version
+
+by gokcehan
+
+### commands
 - `c` (`clear` paths in buffer)
 - `c-l` (`redraw`)
 - `c-r` (`reload`) refresh
@@ -1196,8 +1215,6 @@ in JH: `$DJH/search/searches.md`
 - `r` (`rename`)
 - `y` (`copy`)
 - `zh` (`set hidden!`) toggles
-
-by gokcehan
 
 ## The Platinum Searcher
     pt
@@ -1237,7 +1254,7 @@ by gokcehan
 - `S` = `search --via=rg`
 
 # GnuPG
-    <key-id> can be the short key id = the last 8 characters
+    <key-id> can be the short key id = the last 8 characters, or part of the email
     echo "encrypt me this" | gpg -ase -r 13F327EF -o gpg.asc
     gpg --delete-key <key-id>
     gpg --refresh-keys  # from keyservers - useful if I've updated on another machine
@@ -1293,7 +1310,7 @@ The GNU Privacy Handbook
     gpg --export-ownertrust  # shows trust settings
     gpg --fingerprint jh  # neater fingerprint output
     gpg --list-sigs  # --list-keys --with-sig-list
-    gpg -k  # --list-keys
+    gpg -k [<key-id>]  # --list-keys
     gpg -K  # --list-secret-keys
 
 # HW
@@ -1319,9 +1336,6 @@ The GNU Privacy Handbook
 Sony Xperia 10 II: 1080x2520 = 21:9
 
 ### widescreen 16:9
-- 854x480
-- 1280x720 = 720p = "HD Ready"
-- 1600x900
 - 1920x1080
 
 # images
@@ -1368,13 +1382,14 @@ imagemagick.org/Color
     -fill blue -draw 'rectangle x1,y1 x2,y2'  - the coordinates are diagonal opposites
     -font Arcon
     -gravity center
-    -pointsize 48
     -size 640x480
 
+    magick -pointsize 72 label:inch_high  inch_high.gif
     magick -flatten img.png img-white.png
     magick -list format  # all of them
     magick -version
     magick <image> -background azure -gravity south -splice 0x80 <SBordered>
+    magick rose: -background blue -splice 20x10+40+30 splice.gif
     magick wizard: wizard.jpg  # makes it
     magick wizard.jpg wizard.png
 
@@ -1394,6 +1409,27 @@ imagemagick.org/Color
 - `f` = `Brush > Increase Brush Size`
 - `z` = undo
 - `Save` pads out right & bottom images that aren't up to 1024x512...
+
+## resolutions
+    resolution |              name |    FFmpeg | aspect ratio
+       480x270 |                   |           |         16:9
+       640x360 |                   |           |         16:9
+       640x480 |                   | sntsc/vga
+       800x450 |                   |           |         16:9
+       852x480 |                   |      wvga
+       854x480 |             FWVGA |           |         16:9
+       960x540 |                   |       qhd |         16:9
+      1280x720 |              720p |     hd720 |         16:9
+      1366x768 |                   |      wxga |         16:9
+      1600x900 |               HD+ |      wxga |         16:9
+     1920x1080 |     1080p Full HD |    hd1080 |         16:9
+     1920×1200 |                   |           |        16:10
+     1920×1440 |                   |           |          4:3
+     2560x1440 |                   |           |         16:9
+
+## aspect ratios
+- `1.3∙:1` =`4:3`
+- `1.7∙:1` =`16:9` = `widescreen`
 
 # ripgrep
     o $RIPGREP_CONFIG_PATH
@@ -1617,9 +1653,9 @@ if aborted, `for f in *; do sed -i "/$f/d" zips; done`
     chrome://settings/cookies > See all site data and permissions
 
 - `chrome://system > extensions > Expand` a list of Extensions
-- `ctrl+h` (= `chrome://history`)
-- `ctrl+shift+o` (= `Bookmarks`) `> Organise > Export`
-- `ctrl+u` view page source in new tab
+- `Ctrl+h` (= `chrome://history`)
+- `Ctrl+Shift+o` (= `Bookmarks`) `> Organise > Export`
+- `Ctrl+u` view page source in new tab
 - no way to stop autoplay of videos
 
 #### Microsoft Edge
@@ -1637,10 +1673,10 @@ if aborted, `for f in *; do sed -i "/$f/d" zips; done`
     ctrl+p > Destination > Save to PDF > Save
 
 - `alt+e` (= `Edit`) `> n` (= `Settings`) `> Privacy & Security > Cookies and Site Data > Manage Data...`
-- `ctrl+shft+a` (= `Add-ons and themes`)
-- `ctrl+shft+b` (= `toggle Bookmarks Toolbar`)
-- `ctrl+shft+o` (= `Library`)
-- `f12` (= `Web Developer Tools`)
+- `Ctrl+Shft+a` (= `Add-ons and themes`)
+- `Ctrl+Shft+b` (= `toggle Bookmarks Toolbar`)
+- `Ctrl+Shft+o` (= `Library`)
+- `F12` (= `Web Developer Tools`)
 
 ### lynx
     lynx http://invisible-island.net/lynx
@@ -1660,6 +1696,9 @@ if aborted, `for f in *; do sed -i "/$f/d" zips; done`
 `$HOME/.ssh/known_hosts`: `AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa`
 
 ### CLI
+    gh --version
+    gh -?
+    gh api -X PUT /notifications  # cleared my ghost notifications
     gh browse  # opens the repository root in web browser
     gh config list
     gh extension list
@@ -1729,6 +1768,7 @@ Keyboard shortcuts for YouTube
 ## yt-dlp - Linux
     $AjB/bashrc-wm
     yt-dlp -f best <videoURL>
+    yt-dlp --cookies-from-browser Firefox -S "height:720" https://youtu.be/xxxxxxxxxxx  # if age-restricted
     yt-dlp -f ba <videoURL>  # bestaudio (= best*[vcodec=none])
     yt-dlp -h
     yt-dlp --version

@@ -1,8 +1,9 @@
 #!/bin/bash
 # vim: set et tw=0:
 
+# bash $misc/linux/oggConv.sh
+
 # Joseph Harriott
-# http://momentary.eu/
 # Last updated: Mon 20 Feb 2017
 
 # ogg-convert all wav files in the directory, and move out all original files to a subdirectlry.

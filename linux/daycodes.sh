@@ -1,6 +1,8 @@
 #!/bin/bash
 # vim: set et tw=0:
 
+# bash $misc/linux/daycodes.sh
+
 # https://harriott.github.io/ - Fri 20 Jun 2025
 
 # convert files from my compact daycodes to more generally usable - eg  ac-f.ext -> 1012-f.ext

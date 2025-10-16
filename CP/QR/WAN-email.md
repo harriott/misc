@@ -8,7 +8,8 @@ vim: nospell:
 
 - `$Thb/compatibility.ini` for LastVersion
 - `$Thb/ImapMail` contains incomprehensible `*.msf` files alongside mbox files with same basename. The latter are vast and chock-full of complex formatting. Deleted messages are simply marked and not removed until compaction. `*.sbd` are subfolders.
-- received message view > Autres > Personnaliser... > Style du bouton > Icônes
+- `received message view > Autres > Personnaliser... > Style du bouton > Icônes`
+- `Ctrl+k` search is done with `Gloda`
 
 ## attachments
 delete: `right-click on email selection > Attachment Extractor > Delete attachments > OK, wait until next OK signals it's done`
@@ -97,8 +98,6 @@ delete: `right-click on email selection > Attachment Extractor > Delete attachme
 - `b` (= `Message Body As`)
     - `h` (= `Original HTML`)
     - `p` (= `Plain Text`)
-- `o` (= `Corps du message en`)
-    - `x` (= `Texte seul`)
 
 view as plain text allows deletion of inline images
 
@@ -121,9 +120,4 @@ view as plain text allows deletion of inline images
 ## run safely
     $OSAB/nodes-jo/wm/TS/thunderbird_safely.sh
     $machine\T91\runSafely.ps1
-
-## To targets
-    jharr@ftml.net, trohib@gmail.com
-    <jharr@ftml.net>, <trohib@gmail.com>
-    Joseph HARRIOTT <jharr@ftml.net>, Joseph HARRIOTT <trohib@gmail.com>
 

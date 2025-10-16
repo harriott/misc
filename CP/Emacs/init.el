@@ -3,7 +3,7 @@
 ;; $misc/CP/Emacs/init.el
 ;; ------------------------
 ;; linux:
-;;  handled in  $bSc/repeatable/Emacs.sh
+;;  handled in  $OSAB/nodes-set/jo-2-whenWM-0.sh
 ;; MSwin10:
 ;;  cpi $MSWin10\user\Emacs\init.el $Env:AppData\.emacs.d\init.el
 ;;  or symlink to  ~\AppData\Roaming\.emacsd\init.el  ($MSWin10\symlinks.ps1)
