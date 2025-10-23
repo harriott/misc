@@ -22,7 +22,8 @@ Pipe Viewer
 # audio - cmus
     cmus_notify -h
 
-C* Music Player
+- C* Music Player
+- sends low urgency notifications
 
 ## commands
     7        settings
@@ -523,7 +524,7 @@ defines variables for `kpathsea`
     find $PWD -name <file>  # gets full path
     find -cmin -5
     find -regex ".*a.*\|.*b.*"
-    find . ! -wholename '*/.git/*'  # excluding contents of  .git
+    find . ! -wholename '*/.git/*' -printf %TY%Tm%Td-%TH:%TM:%.2TS\ %p\\n | sort  # excluding contents of  .git
     find . -maxdepth 1 -mindepth 1 -type f -name "*"  # those in working directory
     find . -name "*" -type f ! -path '*/.git/*'
     find . -name '*.txt' ! -name 'build*'  # excluding build*
@@ -1382,16 +1383,28 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     i dool
 
 ## notification - Dunst
-    dunstctl close  # the last one
-    dunstctl close-all  # if no luck, kill the  Xfce Notify Daemon
     dunstctl history-pop  # repeat for previous messages
     dunstify --help
     dunstify -u critical "Read this now!"
+    dunstify "First test message."; dunstify "Second test message, which is longer."
+    pgrep dunst
+
+`dunstrc` allows tweaks that I can't see available in `Xfce Notify Daemon`
+
+### kill
+    pkill dunst  # and gets rerun whenever a notification is sent
+
+#### close notifications
+    dunstctl close  # the last one
+    dunstctl close-all
+
+if no luck, can also kill the `Xfce Notify Daemon`
 
 ## notification - notify-send
     notify-send 'test of notify-send'
     notify-send --help
     notify-send -u critical "test of critical notification"
+    notify-send -u low "test of low urgency notification"
     notify-send -t 5000 -u low "Hello World"
 
 ## Plasma

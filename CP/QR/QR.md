@@ -53,6 +53,7 @@ syntax of this file is ensured in `$vfv/filetype.vim`
     s        => screenshot
     v        => toggle subtitle
     j/J      => cycle subtitles tracks
+    ?        => toggle some help
 
 #### OSD
     delete => show progress bar
@@ -74,6 +75,10 @@ syntax of this file is ensured in `$vfv/filetype.vim`
 #### volume
 - `/` `9` decrease
 - `*` `0` increase
+
+### not in PS
+    mpv -h  # --help
+    mpv -V  # --version
 
 ## OBS Studio Settings
 - `Alt+f` (= `File`) > `s` (= `Settings`) > `Output` > `Recording`
@@ -837,10 +842,11 @@ Tig Manual
     java -version
     PS> where.exe java
 
-## JavaScript - package manage
-`Yarn`: `corepack -h`
+## JavaScript - Node.js
+    node -h  # --help
+    node -v  # --version
 
-### Node.js - npm
+### npm
     npm install
     npm ls -g
     npm un[install] -g [<package>]
@@ -848,6 +854,8 @@ Tig Manual
     npm prefix -g  # =  npm config get prefix
     npm -v  # --version
     npx cowsay goodbye!''
+
+package manager
 
 #### Astro
     npm run dev -- -h  # --help
@@ -1160,7 +1168,6 @@ Crate regex: `x?` zero or one of `x` (greedy)
     fd 'Chris Rea'
     fd [flags/options] [<pattern>] [<path>...]
     fd -H Ruby $home
-    im fd
 
 - case insensitive until a capital is included
 - recursive by default
@@ -1390,18 +1397,20 @@ imagemagick.org/Color
     magick -version
     magick <image> -background azure -gravity south -splice 0x80 <SBordered>
     magick rose: -background blue -splice 20x10+40+30 splice.gif
-    magick wizard: wizard.jpg  # makes it
-    magick wizard.jpg wizard.png
+    magick wizard: wizard.png  # makes it
 
     label:"some text"
 
-- anisotropic resize
-- can convert from WebP
+can convert from WebP
 
 ### gravity
     magick -list gravity
 
 `-gravity northwest`  the default
+
+### resize
+    magick <image> -resize wxh! <image_forced>  # anisotropic resize (ignore original aspect ratio)
+    magick <image> -resize xh <width_automagically_scaled_to_height>
 
 ## MyPaint
 - `ctrl+s` = `File > Save`
@@ -1772,6 +1781,8 @@ Keyboard shortcuts for YouTube
     yt-dlp -f ba <videoURL>  # bestaudio (= best*[vcodec=none])
     yt-dlp -h
     yt-dlp --version
+
+desideratus
 
 ## yt-dlp - MSWin10
     $MSn\PS\Profile.ps1

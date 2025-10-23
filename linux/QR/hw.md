@@ -6,6 +6,7 @@ vim: nospell:
     sudo chmod 644 $Obc/autostart/urxvtl.sh
     uname -m  # reports eg  x86_64
     xbacklight -set 50
+    :e /run/media/jo
 
 # battery
     acpi -h
@@ -129,6 +130,7 @@ e2fsck(8)
 lsblk(8)
 
 ### partitions
+    sudo exfatlabel /dev/sdxx <new_label>
     sudo mkfs.exfat -n <label> /dev/sdxx
     sudo mkfs.ext4 -L <label> /dev/sdxx
 
