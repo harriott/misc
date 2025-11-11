@@ -15,6 +15,7 @@ set -e  # quits on error
 echo '$GRs' " is  $GRs"
 
 #=> 0 last update check
+echo
 cat "$misc/GRs/cGRs-lu"
 read -p "- good to continue? "
 

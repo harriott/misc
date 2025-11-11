@@ -399,6 +399,8 @@ use Google Chrome to break out just some pages into a reduced copy
     pdfimages -h
     pdfimages [-j/-png] pdfNam3.pdf imageName  # pulls out images (default ppm) separated (if there are any)
 
+from `poppler-utils`
+
 ## PDFtk
     pdftk in.pdf burst  # breaks into individual pages
     pdftk in*.pdf cat output out.pdf  # concatenate a sequence of PDFs
@@ -727,7 +729,6 @@ convert mp4's first to MPEG-2 transport streams (`ffmhb -i 1.mp4 -c copy 1.ts`) 
     onefetch -h
 
 - GitLab Markdown
-- <https://github.com/github/linguist/blob/master/lib/linguist/languages.yml>
 - <https://ndpsoftware.com/git-cheatsheet.html>
 
 ### commits
@@ -754,6 +755,7 @@ in `$ITsCP/networking/browsers`, `git grep activeInstall $(git rev-list --all) -
     git checkout -q HEAD^1  # go back one commit
     git checkout -q HEAD~9; git rev-parse --short HEAD  # go back 9 commits and print the short hash
     git checkout <commit>  # go back to the commit (hash or tag)
+    git checkout master  # return to current state of project
     git checkout master  # return to current state of project
 
 ### configurations
@@ -782,8 +784,9 @@ in `$ITsCP/networking/browsers`, `git grep activeInstall $(git rev-list --all) -
     git reset
 
 ### lazygit
+- `Tab`/`left-arrow` & `Shift-Tab`/`right-arrow` rotates through the left column of panes
 - `?` adaptive help - <esc> quits it
-- `<tab>`
+- `q` quits
 
 no search functionality
 
@@ -886,8 +889,9 @@ package manager
 - <https://www.markdownguide.org/extended-syntax/>
 
 ## Pandoc
-    $core/IT_stack/CP/Pandoc/monofont.md
-    $core/IT_stack/CP/Pandoc/weird.gfm
+    $cGRs/d-CP/r-jgm-pandoc
+    $core/IT/CP/Pandoc/monofont.md
+    $core/IT/CP/Pandoc/weird.gfm
     pandoc --version
 
 `--fail-if-warnings`  exit with error status if there are any warnings
@@ -1513,6 +1517,16 @@ can convert from WebP
 
 in JH: `$DJH/search/searches.md`
 
+# sqlite3
+    sqlite3 <db.db>
+    sqlite3 -help
+    sqlite3 -version
+
+## internal commands
+    .exit
+    .help
+    .quit
+
 # Stack Exchange Network
 - `@petersmith` = Peter Smith
 - CommonMark Implementations
@@ -1704,10 +1718,13 @@ if aborted, `for f in *; do sed -i "/$f/d" zips; done`
 ## GitHub
 `$HOME/.ssh/known_hosts`: `AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa`
 
+<https://github.com/github/linguist/blob/master/lib/linguist/languages.yml>
+
 ### CLI
     gh --version
     gh -?
     gh api -X PUT /notifications  # cleared my ghost notifications
+    gh auth status
     gh browse  # opens the repository root in web browser
     gh config list
     gh extension list
@@ -1755,7 +1772,7 @@ if aborted, `for f in *; do sed -i "/$f/d" zips; done`
 <code>inline monospaced</code>
 ```
 
-https://en.wikipedia.org/wiki/Help:Wikitext
+<https://en.wikipedia.org/wiki/Help:Wikitext>
 
 ## wttr.in
     curl wttr.in/London

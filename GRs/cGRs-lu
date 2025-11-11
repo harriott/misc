@@ -1,5 +1,6 @@
-updated from  $misc/GRs/cGRs.sh
-can periodically remove old entries
+$misc/GRs/cGRs.lu
+	updated from  $misc/GRs/cGRs.sh
+	can periodically remove old entries
 
 250421-200818 HPEB840G38
 250519-183054 sbMb
@@ -27,3 +28,4 @@ can periodically remove old entries
 250930-093017 sbMb /mnt/SDU3D1TB/notDr/GRs
 250930-093325 sbMb /mnt/SDU3D1TB/notDr/GRs
 251016-172850 sbMb /mnt/SDU3D1TB/notDr/GRs
+251110-065305 sbMb /mnt/SDU3D1TB/notDr/GRs

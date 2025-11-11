@@ -6,10 +6,8 @@ vim: nospell:
 # Thunderbird
     $ITsCP/WAN/Thunderbird/builds.txt
 
-- `$Thb/compatibility.ini` for LastVersion
-- `$Thb/ImapMail` contains incomprehensible `*.msf` files alongside mbox files with same basename. The latter are vast and chock-full of complex formatting. Deleted messages are simply marked and not removed until compaction. `*.sbd` are subfolders.
-- `received message view > Autres > Personnaliser... > Style du bouton > Icônes`
 - `Ctrl+k` search is done with `Gloda`
+- `received message view > Autres > Personnaliser... > Style du bouton > Icônes`
 
 ## attachments
 delete: `right-click on email selection > Attachment Extractor > Delete attachments > OK, wait until next OK signals it's done`
@@ -113,9 +111,36 @@ view as plain text allows deletion of inline images
     c: func:MsgNewMessage
     u: tbkeys:closeMessageAndRefresh
 
-## run addressbook
-    PS> C:\MozillaThunderbird\thunderbird.exe -addressbook
-    thunderbird -addressbook
+## profile
+- `$Thb/compatibility.ini` for LastVersion
+- `$Thb/ImapMail` contains incomprehensible `*.msf` files alongside mbox files with same basename. The latter are vast and chock-full of complex formatting. Deleted messages are simply marked and not removed until compaction. `*.sbd` are subfolders.
+
+### sqlite files
+    fd -tf -e db . $Thb -x du -h
+    fd -tf -e sqlite . $Thb -x du -h
+
+#### dumps
+    sqlite3 $Thb/abook.db .dump > $jtCP/WAN/Thunderbird/db_dumps/abook.sql
+    sqlite3 $Thb/abook.v2.db .dump > $jtCP/WAN/Thunderbird/db_dumps/abook_v2.sql
+    sqlite3 $Thb/abook.v3.db .dump > $jtCP/WAN/Thunderbird/db_dumps/abook_v3.sql
+    sqlite3 $Thb/cert9.db .dump > $jtCP/WAN/Thunderbird/db_dumps/cert9.sql
+    sqlite3 $Thb/content-prefs.sqlite .dump > $jtCP/WAN/Thunderbird/db_dumps/content-prefs.sql
+    sqlite3 $Thb/cookies.db .dump > $jtCP/WAN/Thunderbird/db_dumps/cookies.sql
+    sqlite3 $Thb/key4.db .dump > $jtCP/WAN/Thunderbird/db_dumps/key4.sql
+    sqlite3 $Thb/impab.v3.db .dump > $jtCP/WAN/Thunderbird/db_dumps/impab_v3.sql
+    sqlite3 $Thb/openpgp.sqlite .dump > $jtCP/WAN/Thunderbird/db_dumps/openpgp.sql
+    sqlite3 $Thb/places.sqlite .dump > $jtCP/WAN/Thunderbird/db_dumps/places.sql
+
+##### global-messages-db - *_content
+    sqlite3 $Thb/global-messages-db.sqlite '.dump conversationsText_content' > $jtCP/WAN/Thunderbird/db_dumps/global-messages-db-conversationsText_content.sql  # message subject lines
+    sqlite3 $Thb/global-messages-db.sqlite '.dump messagesText_content' > $jtCP/WAN/Thunderbird/db_dumps/global-messages-db-messagesText_content.sql  # message contents
+
+partially intelligible, can't correlate them
+
+##### global-messages-db - full dump
+    sqlite3 $Thb/global-messages-db.sqlite .dump > $jtCP/WAN/Thunderbird/db_dumps/global-messages-db.sql
+
+over 200k lines, so not finding a sufficiently large `redrawtime`
 
 ## run safely
     $OSAB/nodes-jo/wm/TS/thunderbird_safely.sh

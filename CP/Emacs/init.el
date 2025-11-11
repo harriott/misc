@@ -105,7 +105,7 @@
 
 ;; local lisp
 (add-to-list 'load-path "~/.emacs.d/lisp/")
-(add-to-list 'load-path "~/.emacs.d/harriott-zenburn-emacs/")
+(add-to-list 'load-path "~/.emacs.d/zenburn-emacs/")
 
 ;;;; 5 settings 1
 ;; Calendar

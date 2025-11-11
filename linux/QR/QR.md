@@ -679,8 +679,13 @@ output info: `YXcstpoguax`
 
 # Flatpak
     du -sh /var/lib/flatpak/.removed
+    flatpak config -h
+    flatpak config --list
+    flatpak info -h
     flatpak list
     flatpak remotes  # list added repositories
+    flatpak history
+    flatpak install ... # recovers from network outages
     flatpak uninstall <pkg>
     sudo flatpak list
     sudo flatpak repair  # Erasing .removed
@@ -755,7 +760,7 @@ up/down => zoom in/out
     nomacs -v
 
 - can only fill page for printing
-- can't open `webp`
+- can't open `avif`, `webp`
 - PrintPreview-PageSetup-Landscape
 
 ### keybindings
@@ -793,8 +798,10 @@ up/down => zoom in/out
     pqiv --auto-montage-mode * &  # flat recursive view of all imagies
     pqiv --show-bindings
 
+- can open `avif`
 - changes aren't saved
 - plays mp4's
+- only sees specified images
 - powerful quick image viewer
 - recursive
 - shows size in status bar tab
@@ -829,36 +836,43 @@ up/down => zoom in/out
 - can't send to printer
 - Simple X Image Viewer
 
-### commands
-    b => toggle infobar
-    q => quit
-    Return => toggle thumbnails/image
-
-No refresh of directories...
-
 ### nsxiv
     i nsxiv
+    nsxiv *
     nsxiv -c  # --clean-cache
     tree ~/.cache/nsxiv
 
-## Vimiv
-    O => switch focus
-    o => toggle the library
-    w => write changes
+- can open `avif`
+- only sees specified images
 
+### sxiv commands
+    b => toggle infobar
+    f => toggle fullscreen
+    q => quit
+
+No refresh of directories...
+
+## Vimiv
     vimiv &
 
-can't open a gif
+- can open `avif`
+- can't open a gif
+- doesn't pick up changes in the directory
+
+### commands
+    O => switch focus
+    o => toggle the library (the current directory)
+    w => write changes
+
+#### thumbnails
+    +/- => size
+    t => toggle
 
 ### tagged file list manipulation
     :tag_remove tagname
     :tag_write tagname
     cat ~/.local/share/vimiv/Tags/tagname | while read i; do mv $i .; done
     rm -r ~/.local/share/vimiv/Tags/tagname
-
-### thumbnails
-    +/- => size
-    t => toggle
 
 # lsof
     [sudo] lsof -i
@@ -1024,12 +1038,15 @@ niceness: `-20` = highest priority, `19` = lowest
     <somecommand> | xcol <keyword1> <keyword2> ... # for highlighting
     bash --help
     bash --version
+    bind -P
     echo "$floatingpointnumber-$another" | bc  # FP math
     echo "$PS1"
     echo $PWD
     echo $SHELL
     env | grep SHELL
     exit 0  # to quit script
+    help compgen
+    kill -9 **<tab> # invokes  fzf (if no  ble.sh)
     printf command
     read -p "hit Enter"; echo hello
     read a b; echo $a $b
@@ -1055,6 +1072,17 @@ esac
     alias
     compgen -A alias | awk '{print}' ORS=' : '; echo  # compact list
     unalias
+
+### Atuin
+    ~/.config/atuin/config.toml
+    ~/.local/share/atuin
+
+### ble.sh - Vim mode
+    ble-bind -P  # --print  the keybinds
+
+- `f1` = `command-help`
+- insert-mode: `Ctrl-x Ctrl-v` = `display-shell-version`
+- normal-mode: `K` = `command-help`
 
 ### clear screen (saving scrollback)
     clear -x  # erase the all lines not in scrollback
@@ -1197,6 +1225,7 @@ jobs(1p)
     var1=1; var2=2
     echo $var1 $var2
     unset var1 var2
+    unset **<tab> # invokes  fzf (if no  ble.sh)
 
 ### su[do]
     su -  # login shell
@@ -1690,6 +1719,14 @@ https://packages.ubuntu.com/
     if wget -q --spider google.com; then echo online; fi
     pkill radio; radio -K  # quit & kill instances of  radio-active
 
+## Carburetor
+    flatpak info io.frama.tractor.carburetor
+
+### commands
+- `Ctrl+,` = `Preferences`
+- `Ctrl+?` = `Shortcuts`
+- `Main Menu > Set Proxy` then https://check.torproject.org/
+
 ## Chawan
     cha -V
     cha https://en.wikipedia.org
@@ -1702,29 +1739,26 @@ https://packages.ubuntu.com/
 - `y` yank to clipboard
 - vim-like
 
-## email
-    thunderbird -addressbook
-
-### clm
+## email - clm
     $AjB/bashrc-clm
     mbsync -v
 
-#### msmtp
+### msmtp
     msmtp --version
 
 "an SMTP client"
 
-#### neomutt
+### neomutt
     neomutt -D  # dump settings
     neomutt -h  # help
     neomutt -v  # version
     rm -r ~/.cache/mutt/*
     sidebar_format
 
-#### notmuch
+### notmuch
     notmuch config get database.path
 
-##### search
+#### search
     nmse ...
     notmuch --help
     notmuch --version
@@ -1744,6 +1778,14 @@ https://packages.ubuntu.com/
 - seems to not find emails that're included in subsequent ones
 - `subject:(pizza free)` (= `subject:pizza and subject:free`) matching "Free Delicious Pizza" (while `subject:"pizza free"` won't)
 - `to:`
+
+## email - Thunderbird
+    thunderbird -addressbook
+    thunderbird -h  ## --help
+
+### version
+    thunderbird --full-version
+    thunderbird -v  ## --version
 
 ## firewall
     sudo iptables -L
