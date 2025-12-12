@@ -19,11 +19,11 @@ maybe `git config --global core.compression 0` - see `$misc/CP/gitconfig`
     rg -l DejaVu
 
 ## 1 use - for Arch 0
-    fA="$ITscc/unix-linux-forArch-fonts/nerd-fonts"
+    fA="$cITcc/unix-linux-forArch-fonts/nerd-fonts"
     pf="$notDr/GR-NF/ryanoasis-nerd-fonts/patched-fonts"
 
 ## 1 use - for Arch 1
-    $ITscc/unix-linux-forArch-fonts/readme.md
+    $cITcc/unix-linux-forArch-fonts/readme.md
 
 ### patched Arimo
     cp $pf/Arimo/Regular/ArimoNerdFont-Regular.ttf $fA

@@ -2,7 +2,7 @@ vim: nospell:
 
     $misc/CP/QR; m4ps 0 1
 
-syntax of this file is ensured in `$vfv/filetype.vim`
+syntax of this long file is ensured in `$vfv/filetype.vim`
 
     $JHt/IT/CP/fonts-SE595756-fontcharlist
     fzf -h
@@ -27,13 +27,15 @@ syntax of this file is ensured in `$vfv/filetype.vim`
     espeak -v fr+f2 "Bonjour tout le monde"
 
 # AV
-    $ITscr/HW/audio/BTHeadphones/JBLTune720BT
+    $cITcr/HW/audio/BTHeadphones/JBLTune720BT
 
 ## mediainfo
     mediainfo --Inform='Video;%FrameCount%' $the_file
     mediainfo --Output='General;%Duration%' <avfile>  # milliseconds
 
 ## mpv
+    $cITcc/forMSWin/AV/mpv-x86_64-v3-20251207-git-dbd7a90/doc
+
     mpv <audio.ogg>
     $misc/CP/mpv.conf
 
@@ -346,7 +348,7 @@ style `\textnormal`
     \usepackage{multirow}
 
 # documenting - LibreOffice
-    $ITsCP/documenting/LibreOffice/Buildup.txt
+    $cITCP/documenting/LibreOffice/Buildup.txt
     r ~/.config/libreoffice/4/user/
 
 - `alt+f12` = `Outils`/`Tools > Options`
@@ -384,7 +386,7 @@ style `\textnormal`
     \user\config
     ~\AppData\Roaming\LibreOffice\4\user\registrymodifications.xcu
 
-## Writer margins
+## Writer - margins
 1. save as `*.fodt`
 2. open that `*.fodt` in a `Vim` variant
     1. `/orientation` - there might be more than one
@@ -524,7 +526,7 @@ from `poppler-utils`
 
 variables: `system-type`, `window-system`
 
-## fonts
+## fonts in GUI
 - `C-u C-x <equals>`  details of face under cursor
 - `M-: (face-attribute 'default :font)`
 - `M-: (print (font-family-list))`
@@ -568,7 +570,10 @@ variables: `system-type`, `window-system`
 ## packages
     M-x describe-package <package>
 
-no built in documentation for `straight.el`
+### straight.el
+- can deleted `~/.emacs.d/straight/*` - it'll be rebuilt
+- can deleted `build` - it'll be rebuilt from `repos`
+- no built in documentation
 
 ### list-packages
     M-x list-packages
@@ -658,7 +663,7 @@ Spacemacs documentation
 - no `csv`
 
 ## FFmpeg
-    $ITsCP/encoding/x264_fullhelp.txt
+    $cITCP/encoding/x264_fullhelp.txt
     ffi <audio_to_fade> -af 'afade=t=out:st=<seconds_to_start>:d=<seconds_duration>' -t <seconds_to_end> -y <audio_faded_out>  # <seconds_to_start> + <seconds_duration> = <seconds_to_end>
     ffi <video> -vf 'scale=iw/2:ih/2' <same_video_with_half_the_frame_size>
     ffi <video> -vframes 1 frame.jpg  # extracts a single frame
@@ -704,7 +709,9 @@ convert mp4's first to MPEG-2 transport streams (`ffmhb -i 1.mp4 -c copy 1.ts`) 
     - `veryfast` seems fine for `OPPO A76`
 
 ### ffprobe
+    ffprobe -h  # vast
     ffprobe -v error -show_format -show_streams <videoFile>
+    ffprobe -version
     man ffprobe
 
 ### transpose
@@ -721,6 +728,7 @@ convert mp4's first to MPEG-2 transport streams (`ffmhb -i 1.mp4 -c copy 1.ts`) 
     git grep <caseSensitiveText>
     git init -b gh  # --initial-branch=<branch_name>
     git push gh +master  # force push to remote
+    git restore .  # from index into cwd
     git rev-parse --show-toplevel  # print the top level directory of the current repository
     git show <pathToFile>  # highlights the changes
     git status -bs  # --branch --short
@@ -732,12 +740,12 @@ convert mp4's first to MPEG-2 transport streams (`ffmhb -i 1.mp4 -c copy 1.ts`) 
 - <https://ndpsoftware.com/git-cheatsheet.html>
 
 ### commits
+    $vimfiles; git log -3 --pretty="format:%C(auto)%h %as" -- */syntax/sh.vim  # last 3 dates of change
     git log -- *pdf  # shows if any PDF's have been inadvertently included
     git log --follow *spacemacs*
     git log --follow '*cmusq.vim'
     git log --follow *Colette*
     git log -1  # credentials of last commit
-    git log -3 --pretty="format:%C(auto)%h %as" -- */syntax/sh.vim  # last 3 dates of change
     git reset HEAD~1  # throw away last commit, keeping changes for a better one
     git rev-parse --short HEAD  # the short commit hash
     gitk &  # GUI showing files in each commit
@@ -749,7 +757,7 @@ convert mp4's first to MPEG-2 transport streams (`ffmhb -i 1.mp4 -c copy 1.ts`) 
 #### grep
     git grep Log $(git rev-list --all) -- '*.ps1'  # searches all  ps1  files in all commits for "Log"
 
-in `$ITsCP/networking/browsers`, `git grep activeInstall $(git rev-list --all) -- 'browsers.txt'`
+in `$cITCP/networking/browsers`, `git grep activeInstall $(git rev-list --all) -- 'browsers.txt'`
 
 #### move around
     git checkout -q HEAD^1  # go back one commit
@@ -762,7 +770,7 @@ in `$ITsCP/networking/browsers`, `git grep activeInstall $(git rev-list --all) -
     :%s#https://github.com/#git@github.com:#g
 
 #### gitconfig
-    $ITsCP/encoding/gitconfig-JH
+    $cITCP/encoding/gitconfig-JH
     $misc/CP/gitconfig
     git config -l  # --list
     git config -l --global
@@ -824,7 +832,7 @@ Tig Manual
 - "Page Not Found" if no theme...
 
 ## gnuplot
-    $ITscr/CP/gnuplot
+    $cITcr/CP/gnuplot
     $jtCP/gnuplot
     gnuplot -e 'set terminal'  # lists those available
     gnuplot -e 'show datafile commentschars'
@@ -876,7 +884,7 @@ package manager
 - HMR ensures instant updates
 
 ## Lua
-    $coreIT/CP/encoding/dpl/scratch.lua
+    $cITCP/encoding/dpl/scratch.lua
     $cGRs/CP/Vim/vim-vim/src/testdir/testluaplugin/lua/testluaplugin/hello.lua
     lua -v
 
@@ -902,7 +910,7 @@ package manager
     \end{document}
 
 ## Perl
-    $coreIT/CP/encoding/dpl/Perl/scratch0.pl
+    $cITCP/encoding/dpl/Perl/scratch0.pl
     $jtCP/coding/Perl
     cpanm --help
     perl -?
@@ -1013,8 +1021,13 @@ arrays containing tabbed values can get messy: `perl -e 'my @tabbedArray = ( "sh
     perl -ne 'print if $. == 2' <file> # line 2
     time perl -e 'sleep(1)'
 
+## Pygments
+    pygmentize -h
+    pygmentize -L | less
+    pygmentize -O style=<style> <code_file>
+
 ## Python
-    $coreIT/CP/encoding/dpl/Python/scratch.py
+    $cITCP/encoding/dpl/Python/scratch.py
     python -h  # --help
     python -V
 
@@ -1043,8 +1056,10 @@ print(sys.argv[0])  # the full pathname of the program
 
 #### pip
     py -m pip install -U pip
-    pip -V (--version)
+    pip -h  # --help
+    pip -V  # --version
     pip list --outdated
+    pip show <package>
     python -m pip install -U pip
 
 #### pipx
@@ -1163,6 +1178,8 @@ Crate regex: `x?` zero or one of `x` (greedy)
     zoxide -V  # --version
     zoxide edit  # <esc>
 
+`PeaZip`: `Ctrl+l` = `Extract all`
+
 ## 7-Zip
     7z
     7z x <pw'd_zip>
@@ -1212,6 +1229,7 @@ in JH: `$DJH/search/searches.md`
 ## lf file manager
     lf -help
     lf -version
+    $HADL/lf/lfrc
 
 by gokcehan
 
@@ -1251,6 +1269,8 @@ by gokcehan
 - `<space>`/`<tab>` switches pane
 
 ## Yazi
+    yazi --debug
+
 - `.` = `hidden toggle`
 - `enter`/`o` = `open`
 - `a` = `create` directory/ or file
@@ -1328,7 +1348,7 @@ The GNU Privacy Handbook
     duf (--all)  # storage devices info
 
 ## for paper - Epson EcoTank ET-5170 - feed tray
-    $ITscr/HW/EpsonEcoTankET5170
+    $cITcr/HW/EpsonEcoTankET5170
 
 - downside is printed
 - landscape top is to right
@@ -1350,7 +1370,7 @@ Sony Xperia 10 II: 1080x2520 = 21:9
 - 1920x1080
 
 # images
-    $ITscc/CP/svg-flags-flat-png
+    $cITcc/CP/svg-flags-flat-png
     fd -utf -e bmp -e gif -e jpeg -e jpg -e png -e svg -e tiff -e webp > images.fetl
 
 - 72 dpi = 18.3 dots per mm
@@ -1470,7 +1490,7 @@ can convert from WebP
 - `-T<type>` (= `--type-not=<type>`
 
 ### globs
-- `-g` (= `--glob=<glob>`)
+- `-g` (= `--glob=<glob>`) `'!dir/dir'`
 - `--iglob=<glob>` (like using `--glob-case-insensitive`)
 
 ## output
@@ -1511,6 +1531,7 @@ can convert from WebP
     rg -tmd '[\p{Devanagari}]'  # finds Devanagari characters
     rg -tmd '\$Sig'
     rg -tmd '\{TNW}'
+    rg -ttxt grow
     rg -uu <someText>  # ignores ignore files, and searches in hidden stuff
     rg <someText> **/*.ext
     rg 'url = ' **\*.git\config
@@ -1550,6 +1571,7 @@ in JH: `$DJH/search/searches.md`
 # terminal - Chafa
     chafa -h  # --help
     chafa --version
+    chafa <image>
 
 # terminal - less
 greenwoodsoftware
@@ -1609,6 +1631,7 @@ messes up if terminal is resized
     ----10--------20--------30--------40--------50--------60--------70--------80--------90-------100-------110-------120-------130-------140-------150-------160
     ansifilter <file_to_strip_of_ANSI_terminal_escape_codes>
 
+- ASCII Table
 - carriage return (U+000D) returns the cursor to the left of the line (usually just before line feed on MSWin)
 - `chmln.sd`
 - finding characters
@@ -1650,7 +1673,7 @@ messes up if terminal is resized
 if aborted, `for f in *; do sed -i "/$f/d" zips; done`
 
 ## browsing
-    $ITsCP/WAN/browsers/browsers.txt
+    $cITCP/WAN/browsers/browsers.txt
 
 `KeePassXC` "Getting Started Guide"
 
@@ -1672,19 +1695,23 @@ if aborted, `for f in *; do sed -i "/$f/d" zips; done`
 
 ### chromium-based
     chrome://apps/
+    chrome://on-device-internals
     chrome://plugins/
     chrome://settings/cookies > See all site data and permissions
 
 - `chrome://system > extensions > Expand` a list of Extensions
-- `Ctrl+h` (= `chrome://history`)
 - `Ctrl+Shift+o` (= `Bookmarks`) `> Organise > Export`
 - `Ctrl+u` view page source in new tab
+- Google Chrome: `Ctrl+h` (= `chrome://history`)
 - no way to stop autoplay of videos
 
 #### Microsoft Edge
     edge://favorites/
+    edge://history/all
+    edge://settings/profiles
 
-`mouse hover over an image > ctr ctrl` = `right-click > magnify`
+- `Importer les données du navigateur maintenant`
+- `mouse hover over an image > ctr ctrl` = `right-click > magnify`
 
 ### Firefox
     about:config > caret
@@ -1693,6 +1720,7 @@ if aborted, `for f in *; do sed -i "/$f/d" zips; done`
     about:preferences#privacy > Cookies and Site Data
     about:preferences#sync
     about:processes
+    about:profiles
     ctrl+p > Destination > Save to PDF > Save
 
 - `alt+e` (= `Edit`) `> n` (= `Settings`) `> Privacy & Security > Cookies and Site Data > Manage Data...`
@@ -1768,7 +1796,7 @@ if aborted, `for f in *; do sed -i "/$f/d" zips; done`
     Microsoft Edge: alt+f > l > o
 
 ## wikitext
-```mediawiki
+```
 <code>inline monospaced</code>
 ```
 
@@ -1791,7 +1819,10 @@ file formats
 
 Keyboard shortcuts for YouTube
 
-## yt-dlp - Linux
+## yt-dlp
+    yt-dlp --dump-json video_ID_or_URL | jq --raw-output ".chapters[].title"
+
+### Linux
     $AjB/bashrc-wm
     yt-dlp -f best <videoURL>
     yt-dlp --cookies-from-browser Firefox -S "height:720" https://youtu.be/xxxxxxxxxxx  # if age-restricted
@@ -1801,11 +1832,7 @@ Keyboard shortcuts for YouTube
 
 desideratus
 
-## yt-dlp - MSWin10
+### MSWin10
     $MSn\PS\Profile.ps1
     y --version
-
-## Zimbra Modern Web App
-- All Applications > `m` Move items
-- Preferences > Zimbra Keyboard Shortcuts
 

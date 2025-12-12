@@ -1,5 +1,6 @@
 d-CP/d-CLI/r-ajeetdsouza-zoxide https://github.com/ajeetdsouza/zoxide
 d-CP/d-CLI/r-sharkdp-bat https://github.com/sharkdp/bat
+d-CP/d-CLI/r-sparklost-spectroterm https://github.com/sparklost/spectroterm
 d-CP/d-CLI/r-sxyazi-yazi https://github.com/sxyazi/yazi
 d-CP/d-CLI/r-wfxr-code-minimap https://github.com/wfxr/code-minimap
 d-CP/d-emacs/r-bbatsov-zenburn-emacs https://github.com/bbatsov/zenburn-emacs
@@ -8,6 +9,7 @@ d-CP/d-emacs/r-daviwil-dotfiles https://github.com/daviwil/dotfiles
 d-CP/d-emacs/r-domtronn-all-the-icons.el https://github.com/domtronn/all-the-icons.el
 d-CP/d-emacs/r-emacsbbatsov-prelude https://github.com/bbatsov/prelude
 d-CP/d-emacs/r-emacs-evil-evil https://github.com/emacs-evil/evil
+d-CP/d-emacs/r-emacs-mirror-emacs https://github.com/emacs-mirror/emacs
 d-CP/d-emacs/r-GChristensen-rho-emacs https://github.com/GChristensen/rho-emacs
 d-CP/d-emacs/r-greduan-emacs-theme-gruvbox https://github.com/greduan/emacs-theme-gruvbox
 d-CP/d-emacs/r-jakebox-jake-emacs https://github.com/jakebox/jake-emacs
@@ -38,6 +40,9 @@ d-CP/d-encoding/d-Go-Hugo/r-Vimux-blank https://github.com/Vimux/blank
 d-CP/d-encoding/d-Go-Hugo/r-Vimux-Mainroad https://github.com/Vimux/Mainroad
 d-CP/d-encoding/d-Go-lf/r-gokcehan-lf https://github.com/gokcehan/lf
 d-CP/d-encoding/d-Go-lf/r-tplasdio-lf-config https://codeberg.org/tplasdio/lf-config
+d-CP/d-encoding/d-Python/pygments-pygments https://github.com/pygments/pygments
+d-CP/d-encoding/d-Python/pypa-pipx https://github.com/pypa/pipx
+d-CP/d-encoding/d-Python/simonrob-email-oauth2-proxy https://github.com/simonrob/email-oauth2-proxy
 d-CP/d-encoding/d-Ruby/d-Jekyll/r-afaundez-jekyll-favicon https://github.com/afaundez/jekyll-favicon
 d-CP/d-encoding/d-Ruby/d-Jekyll/r-jekyll-jekyll https://github.com/jekyll/jekyll
 d-CP/d-encoding/d-Ruby/d-Jekyll/r-Jekyll-jekyll-minima https://github.com/jekyll/minima
@@ -50,12 +55,11 @@ d-CP/d-encoding/r-Gnuplotting-gnuplot-palettes https://github.com/Gnuplotting/gn
 d-CP/d-encoding/r-jesseduffield-lazygit https://github.com/jesseduffield/lazygit
 d-CP/d-encoding/r-LaTeX-latex-lsp/texlab https://github.com/latex-lsp/texlab
 d-CP/d-encoding/r-LaTeX-reutenauer-polyglossia https://github.com/reutenauer/polyglossia
-d-CP/d-encoding/r-Python-pypa-pipx https://github.com/pypa/pipx
-d-CP/d-encoding/r-Python-simonrob-email-oauth2-proxy https://github.com/simonrob/email-oauth2-proxy
 d-CP/d-encoding/r-Rust/kamiyaa-joshuto https://github.com/kamiyaa/joshuto
 d-CP/d-encoding/r-Rust/kyoheiu-felix https://github.com/kyoheiu/felix
 d-CP/d-encoding/r-rxi-json_lua https://github.com/rxi/json.lua
 d-CP/d-encoding/r-saalen-highlight https://gitlab.com/saalen/highlight
+d-CP/d-encoding/r-tj-git-extras https://github.com/tj/git-extras
 d-CP/d-mpv/r-mfcc64-mpv-scripts https://github.com/mfcc64/mpv-scripts
 d-CP/d-mpv/r-MikelSotomonte-mpv-waveform https://github.com/MikelSotomonte/mpv-waveform
 d-CP/d-Vim-Nvim/r-albingroen-quick.nvim https://github.com/albingroen/quick.nvim
@@ -81,6 +85,8 @@ d-CP/d-Vim-Nvim/r-nvim-lua-kickstart.nvim https://github.com/nvim-lua/kickstart.
 d-CP/d-Vim-Nvim/r-pgosar-CyberNvim https://github.com/pgosar/CyberNvim
 d-CP/d-Vim-Nvim/r-rafi-vim-config https://github.com/rafi/vim-config
 d-CP/d-Vim-Nvim/r-spatoon-nvim-config https://gitlab.com/spatoon/nvim-config
+d-CP/d-Vim-Nvim/r-tjdevries-config.nvim  https://github.com/tjdevries/config.nvim
+d-CP/d-Vim-Nvim/r-tjdevries-config.nvim https://github.com/tjdevries/config.nvim
 d-CP/d-Vim-Vim/d-Lisp/r-kovisoft-slimv https://github.com/kovisoft/slimv
 d-CP/d-Vim-Vim/d-Lisp/r-vlime-vlime https://github.com/vlime/vlime
 d-CP/d-Vim-Vim/r-Eckankar-vim-latex-folding https://github.com/Eckankar/vim-latex-folding

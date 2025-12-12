@@ -82,11 +82,13 @@ automatically selects the best orientation for filling the page
     hp-printsettings  # dialog pop-up
     hp-setup -h
     hp-setup -r  # GUI to remove printer
-    hp-systray & disown  # HPLIP Status Service tray icon (double-click to get HP Device Manager)
+    hp-systray & disown  # HPLIP Status Service tray icon (access to HP Device Manager)
     hp-testpage
     hp-toolbox &  # HP Device Manager
 
 # storage
+    ls -l --time-style=+ /dev/disk/by-id/
+    ls -l --time-style=+ /dev/disk/by-label/
     umount /dev/sdxx
     umount /mountpoint
 
@@ -100,6 +102,7 @@ automatically selects the best orientation for filling the page
 mount(8)
 
 ## non-optical
+    blockid -h  # --help
     df -h /mnt/*
     df -h [<disk>]
     du -sh [<bigDirectory>]
@@ -124,8 +127,11 @@ mount(8)
 e2fsck(8)
 
 ### lsblk
-    lsblk -f  # --fs
-    lsblk -l  # --list
+    lsblk -f  # --fs - filesystems
+    lsblk -h  # --help
+    lsblk -l  # --list - removes tree structure glyphs
+    lsblk -p  # --paths - of devices
+    lsblk -V  # --version
 
 lsblk(8)
 
@@ -144,13 +150,13 @@ lsblk(8)
 
 gdisk(8)
 
-#### parted
+#### GParted
 - can't set the volume-name
 - GNU Parted User Manual
 - parted(8)
 
 ##### interactive mode
-    sudo parted /dev/sdx
+    sudo parted /dev/sdg
 
 ###### commands
 - `mklabel <label>` destroys existing partitions
@@ -158,9 +164,9 @@ gdisk(8)
 - `q` (= `quit`)
 
 ##### script mode
-    sudo parted -l | grep sdf -B 1 -A 6  # --list
+    sudo parted -l | grep sdg -B 1 -A 6  # --list
     sudo parted /dev/sda -s mklabel msdos mkpart primary 0% 100%  # also creates an MBR
-    sudo parted /dev/sdf p  # quick print of device info
+    sudo parted /dev/sdg p  # quick print of device info
 
 `-s` (`--script`) never prompts for user intervention
 
@@ -177,6 +183,10 @@ gdisk(8)
     cd-drive  # info
     cdrecord dev=/dev/sr0 -checkdrive  # Vendor_info etc
     cdrecord -v -sao dev=/dev/sr0 linux.iso
+
+### burn ISO image
+    growisofs -dvd-compat -speed=n -Z /dev/sr0=image.iso  # n x 1385 KB/s
+    sudo pv image.iso -Yo /dev/sdx  # nice progress line, but doesn't report bytes
 
 ### tray
     eject  # opens tray

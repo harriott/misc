@@ -1,14 +1,14 @@
 vim: nospell:
 
-    $misc/linux/QR; m4ps 0 1
+    $misc/unix_like/linux/QR; m4ps 0 1
 
-commands here are generic, except for those under the Ubuntu heading, see also `$OSAB/QR.md`
+commands here are generic, except for those under the Ubuntu heading, see also `$OSAB/QR/QR.md`
 
     dotnet --list-runtimes
     dotnet --list-sdks
     info info
     wcsf=$(wc -l <samplefile>); echo $wcsf
-    $ITscr/unix-like/usr_lib_X11_rgb.txt  # colours
+    $cITcr/unix-like/usr_lib_X11_rgb.txt  # colours
     $misc/GRs/DCGRs.sh
     $OSL/bashrc-generic
 
@@ -20,6 +20,9 @@ Pipe Viewer
     sudo alsactl store
 
 # audio - cmus
+    :Man cmus
+    cmus --help
+    cmus --plugins
     cmus_notify -h
 
 - C* Music Player
@@ -54,8 +57,8 @@ Pipe Viewer
     + =      vol +10%
 
 ## media
-- can play: `m4a`, `mka`, `ogg`, `opus`, `wma`
-- can't play: `oma`, `omv`, `rmj`
+- can play: `mka`, `ogg`, `opus`
+- can't play: `m4a`, `oma`, `omv`, `rmj`, `wma`
 
 # audio - convert
     f=sox.flac; ffi $f -c:a libvorbis -aq 4 ${f%.*}.ogg
@@ -89,7 +92,8 @@ VBR quality 4 is closer to the original size
     mpd --kill
     pgrep mpd
 
-Music Player Daemon
+- can play: `m4a`, `mka`, `ogg`, `opus`, `wma`
+- Music Player Daemon
 
 ## vimpc - normal mode
 - `-`/`+` decrease/increase volume
@@ -99,6 +103,7 @@ Music Player Daemon
 
 ### song
 - `f`/`F` scroll to current song
+- `e` toggle info
 - `E` toggle repeat
 - `I` restart the song
 - `R` toggle random
@@ -237,6 +242,7 @@ zathura man page
     ctrl-x > ctrl-c => quit
     emacs -mm &  # maximized
     emacs -nw  # in terminal
+    emacs -nw --debug-init
 
 ## view movements
     alt-v => scroll up
@@ -253,6 +259,8 @@ Make (software)
 ## Git
     :Man git
     fd -tf -u index.lock -x rm
+    git extras --version
+    gitui
 
 ### Git - configurations
     $ fd -HI -tf ^config$ | xargs rg -l 'remote = gh'  # ripgrep
@@ -297,7 +305,6 @@ defines variables for `kpathsea`
     cat
     diff <file1> <file2>
     enca -l surfaces
-    pygmentize -O style=<style> <code_file>
     tac
     shuf
     sk --ansi -i -c 'rg --color=always --line-number "{}"'
@@ -508,9 +515,13 @@ defines variables for `kpathsea`
 ## digests
     md5sum -c <md5file>
     rhash -a --bsd <somefile>
+    rhash -h  # --help
+    rhash -M  # --md5
     rhash --list-hashes => list names of all supported hashes
     rhash --sha256 <file>
     rhash --sha256 *  # to see if files are identical
+    rhash --sha512 <file>
+    shasum -a 256 <file>
 
 ## Dolphin
     F4        -> Konsole  attached below
@@ -522,7 +533,7 @@ defines variables for `kpathsea`
 
 ## find
     find $PWD -name <file>  # gets full path
-    find -cmin -5
+    find -cmin 1  # files whos status changed in last minute
     find -regex ".*a.*\|.*b.*"
     find . ! -wholename '*/.git/*' -printf %TY%Tm%Td-%TH:%TM:%.2TS\ %p\\n | sort  # excluding contents of  .git
     find . -maxdepth 1 -mindepth 1 -type f -name "*"  # those in working directory
@@ -574,9 +585,13 @@ find(1)
     locate -c <target>  # --count
     locate -h
 
+### most recent
+    find . -type f -printf '%TY-%Tm-%Td-%TH:%TM:%.2TS %p\n' | sort -k1,1r | head -5
+    ls -At | head -n5
+
 ### sizes
     diskonaut -h
-    dust  # graphical size representation
+    dust -x /  # graphical size representation of root, not descending into mounts
 
 #### listed
     ls -1Rhs | sed -e "s/^ *//" | grep "^[0-9]" | sort -hr | head -n50  # neat recursive list of largest
@@ -589,7 +604,11 @@ find(1)
     du -hs <glob>
     du -s **/.git
 
-du(1)
+- `-c` = grand `--total` of list
+- `-h` = `--human-readable`
+- `-s` - `--summarize`, don't recurse
+- `-x` = `--one-file-system`
+- du(1)
 
 #### ncdu
     ncdu [<directory>]
@@ -622,7 +641,7 @@ tree(1)
     dircolors --help
     dircolors --version
     dircolors -p  # --print-database
-    ls -l
+    ls -l  # show permissions, owners, exact sizes, and date-time
 
 - `-d` (= `--directory`)
 - ls(1)
@@ -640,7 +659,7 @@ tree(1)
 > /usr/bin/rsnapshot sync: completed successfully
 
 ## rsync
-    rsync -irtv --delete $TeNo/ $Drpbx/Play1/TextNotes
+    rsync -irtv --delete $TeNo/ $Drpbx/Play1/TextNotes 2>&1 | tee $Drpbx/Play1/TextNotes_rsync.log
     rsync -inrtv --delete --progress path1/large_file_dir1/ path2/large_file_dir2
 
 output info: `YXcstpoguax`
@@ -660,13 +679,14 @@ output info: `YXcstpoguax`
 
 #### for system files
 - `-A` (`--acls`) keep ACLs, implies `-p`
-- `-a` (`--archive` = `-Dgloprt`) handles symlinks with no reference
+- `-a` (`--archive` = `-Dgloprt`, no `-A`, `-H`, `-X`) handles symlinks with no reference
     - `-D` (`--devices --specials`)
         - `--devices` keep device files
         - `--specials` keep special files
     - `-g` (`--group`)
     - `-o` (`--owner`) if super-user
     - `-p` (`--perms`) keep permissions
+- `-H` (`--hard-links`)
 - `-X` (`--xattrs`) keep extended attributes
 
 ## touch
@@ -679,6 +699,8 @@ output info: `YXcstpoguax`
 
 # Flatpak
     du -sh /var/lib/flatpak/.removed
+    flatpak -h  # --help
+    flatpak --installations  # prints paths
     flatpak config -h
     flatpak config --list
     flatpak info -h
@@ -806,25 +828,6 @@ up/down => zoom in/out
 - recursive
 - shows size in status bar tab
 
-### commands
-    esc/q => quit
-    f => toggle full screen
-    h => flip horizontally
-    i => toggle info box
-    j => file selection dialogue
-    m => toggle montage
-    n => negative
-    s => toggle slideshow
-        c-r => toggle shuffle
-    <space> <backspace> => next previous
-
-#### montage mode
-    g => goto
-    m => montage mode
-
-#### navigating
-    mouse
-    backspace/space => previous/next
 
 ## scanimage
     scanimage -A  => --all-options => lists all available options
@@ -836,9 +839,53 @@ up/down => zoom in/out
 - can't send to printer
 - Simple X Image Viewer
 
+### commands
+thumbnail mode: `R` reload all
+
+#### image mode
+- `n` `p` next previous
+- `[` `]` 10x backwards forwards
+- `|` `_` flip horizontal vertical
+- changes aren't saved
+
+##### pan
+- `h` `left`
+- `j` `down`
+- `k` `up`
+- `l` `right`
+
+##### rotate
+- `<` 90° ccw
+- `>` 90° cw
+- `?` 180°
+
+##### scroll
+- `H` to left
+- `J` to down
+- `K` to up
+- `L` to right
+- `z` to center
+
+##### zoom
+- `=` by 100%
+- `e` `E` fit width height
+- `F` fill (often getting only part of the image)
+- `w` fit or 100%
+- `W` fit (the default)
+
+#### general
+- `q` quit
+- `return` toggle image/thumbnail
+- `f` toggle fullscreen
+- `b` toggle statusbar
+- `g` `G` first last
+- `r` reload
+- `+` `-` zoom in out
+
 ### nsxiv
     i nsxiv
     nsxiv *
+    nsxiv <path_to_dir>
     nsxiv -c  # --clean-cache
     tree ~/.cache/nsxiv
 
@@ -1009,6 +1056,7 @@ pass(1)
     lsof -i
     pidof init  # process id of  init, which is always 1
     sudo iotop -o
+    time sleep 1
     xprop  # WM_CLASS(STRING) = "instance", "class"
 
 niceness: `-20` = highest priority, `19` = lowest
@@ -1019,6 +1067,7 @@ niceness: `-20` = highest priority, `19` = lowest
 
 ## list
     ps -ef | grep yt-dlp
+    ps -ef | grep hp-
     ps -efjH
     pstree -C age
 
@@ -1033,9 +1082,9 @@ niceness: `-20` = highest priority, `19` = lowest
 
 ## Bash
     $misc/linux/QR/script.sh
+    $culLB/colours
     $culLB/Scratch0.sh
     /etc/profile
-    <somecommand> | xcol <keyword1> <keyword2> ... # for highlighting
     bash --help
     bash --version
     bind -P
@@ -1053,9 +1102,9 @@ niceness: `-20` = highest priority, `19` = lowest
     shopt
     shopt dotglob  # reports back its status
     shopt -u nullglob  # incase  t=$'\?'; echo $t
+    spectroterm -h
     tail -n 1 <file>  # last line
-    xdg-open $cIThul/linux/bash.pdf
-    za $ITscr/unix-like/linux/bash.pdf
+    za $cITcr/unix-like/linux/GNUOS/bash.pdf
     ~/.bash_history
 
 ```bash
@@ -1095,6 +1144,7 @@ esac
     [ true ] && echo y
     [ "y" ] && echo y
     c=1; [[ $c == 1 ]] && echo "true"
+    if true; then echo 'not false'; fi
     if <condition1>; then <action1>; elif ... else ... fi
     if [ "$a" ]; then echo '$a is defined'; fi
     t="y"; if [ $t ]; then echo $t; fi
@@ -1298,6 +1348,7 @@ don't export them
     s=12345; echo $s | awk '{print substr($1,length($1)-2) }'
     s=12345; echo $s | cut -c $((${#s}-2))-
     s=yes; s+=no; o $s
+    s=start; o $s'-end'
     s+=new; o $s
     ${x}and$y
 
@@ -1346,13 +1397,14 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     openbox --reconfigure
     passwd jo  # then re-login
     ps $(pgrep Xorg)  # shows which tty X is on
+    shutdown now
     swapon --show
     w  # list users and load on system
     whereis <executable>
     xrdb -query -all  # shows loaded X resources
     xset q  # shows a variety of IO settings
 
-- awesomewm: floating window: `winkey+left_mouse_drag`
+- `awesomewm`: floating window: `winkey+left_mouse_drag`
 - lsmod(8) show what kernel modules are currently loaded
 - maximum 255 bytes per filename & 4096 per path
 
@@ -1362,6 +1414,10 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
 -`modkey+right_mouse_drag` resize
 -`modkey+s` awful.hotkeys_popup
 - on top clients are indicated by a caret
+
+## boot
+    bootctl -h  # --help
+    find /dev/disk/by-designator -type l -ls  # recursively list all symlinks with their references
 
 ## CPU-X
     cpu-x -h
@@ -1433,8 +1489,7 @@ if no luck, can also kill the `Xfce Notify Daemon`
     notify-send 'test of notify-send'
     notify-send --help
     notify-send -u critical "test of critical notification"
-    notify-send -u low "test of low urgency notification"
-    notify-send -t 5000 -u low "Hello World"
+    notify-send -t 5000 -u low "low urgency 5s notification"
 
 ## Plasma
     Ctrl+Alt+Shift+Del -> exit KDE without saving
@@ -1453,6 +1508,9 @@ if no luck, can also kill the `Xfce Notify Daemon`
     systemctl suspend
     systemd-analyze --system unit-paths
     systemd-analyze --user unit-paths
+    systemd-analyze calendar "*-*-* *:00:00"
+
+journalctl(1)
 
 ### info
     systemctl --failed
@@ -1462,6 +1520,22 @@ if no luck, can also kill the `Xfce Notify Daemon`
     systemctl list-timers
     systemctl list-unit-files --no-pager
     systemd-analyze blame  # time taken for boot processes
+
+### journalctl
+    journalctl --disk-usage
+    journalctl --list-boots
+    journalctl --verify
+
+- `-n`, `--lines=` (default 10) most recent events
+- `-u` (`--unit=UNIT|PATTERN`)
+- `-r` (= `--reverse`) output
+
+#### messages, paged
+    journalctl -b  # for this boot
+    journalctl -b -1  # for previous boot
+    journalctl -b -1 -e  # shows end of  -n1000
+    journalctl -b -1 -r  # newest first
+    journalctl -b -g 'EFI v'  # shows EFI version
 
 ## uname
 `uname -a` (= `--all`) handy line of system info
@@ -1517,13 +1591,22 @@ if no luck, can also kill the `Xfce Notify Daemon`
 - `Ctrl+Fn` = goto workspace n
 
 ### Thunar
-    ~/.config/Thunar
     ~/.config/xfce4/xfconf/xfce-perchannel-xml/thunar.xml
+
+Custom Actions: `~/.config/Thunar/uca.xml`
+
+#### keyboard accelerators
+- `~/.config/Thunar/accels.scm` accelerator map dump
+- `Ctrl+Shift+n` = `create-folder
 
 ### Xfce Notify Daemon
     pkill xfce4-notifyd  # might clears all old notifications - if not use dunstctl
     systemctl --user status xfce4-notifyd
     xfce4-notifyd-config &
+
+# SystemRescue
+    setkmap fr
+    startx
 
 # term
     sudo fgconsole  # reports tty number
@@ -1596,67 +1679,11 @@ if no luck, can also kill the `Xfce Notify Daemon`
     :joinp -s 2 [-t 1 ]  # join-pane, joining pane in window 2 [to that in window 1]
     :set synchronize-panes  # (set-option)
 
-### key binds
-    $OSL/nodes/terminal-tmux/tmux.conf
-    C-a :  # command prompt
-    C-a ?  # list-keys -Na
-    C-a [  # copy-mode
-    C-a <  # display-menu
-    C-a >  # display-menu
-    C-a ~  # show-messages (q to quit)
-    C-a t  # time (q to quit)
-
-- `a-m` begins `set mouse`
-- `c-a c-s` begins `easycopy` (`tmux-copy-toolkit`)
-- `send-keys` can't decode a Bash environment variable
-
-#### buffers
-    C-a ]  # paste-buffer -p
-    C-a #  # list-buffers
-    C-a =  # choose-buffer -Z
-
-#### copy mode
-    C-a [  # copy-mode
-    C-a e  # easycopy
-    C-a P (C-p)  # quickopen (abspath, URL)
-    Enter  # quits
-    Pg Up/Dn
-    S  # copytk mode
-    s  # easymotion
-
-##### copytk mode
-    j  # easymotion forward
-    k  # easymotion backward
-    n  # easymotion lines
-    s  # easymotion
-
-#### session window pane
-    M-PgDn/PgUp  # (= C-a (/) ) previous/next session
-
-##### panes
-    C-a C-o  # Rotate through the panes
-    C-a M-1  # switch to even-horizontal layout
-    C-a M-2  # switch to even-vertical layout
-    C-a M-3  # switch to main-horizontal layout
-    C-a M-4  # switch to main-vertical layout
-    C-a M+arrow  # resize by 5
-    C-a q  # show numbers
-    C-a {  # swap-pane -U
-    C-a }  # swap-pane -D
-    C-a z  # toggle zoom
-    C-a q  # display-panes
-    C-a { / }  # swap-pane -U / -D
-    C-a Space  # next-layout (of 5 defaults)
-
-##### windows
-    C-a w  # choose window from a list
-    M-n  # (= C-a n ) select window n
-
 ## tput
+    (x=`tput op` y=`printf %76s`;for i in {0..256};do o=00$i;echo -e ${o:${#o}-3:3} `tput setaf $i;tput setab $i`${y// /=}$x;done) # 256 lines of colour
+    tput bold; tput setaf 3; tput setab 4; echo 'bold yellow on blue'
     tput colors
     tput cuu 2; tput el  # move back a line and clear it
-
-tput(1)
 
 ## urxvt
     urxvt --help

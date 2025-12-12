@@ -2,12 +2,8 @@
 
 ;; $misc/CP/Emacs/init.el
 ;; ------------------------
-;; linux:
-;;  handled in  $OSAB/nodes-set/jo-2-whenWM-0.sh
-;; MSwin10:
-;;  cpi $MSWin10\user\Emacs\init.el $Env:AppData\.emacs.d\init.el
-;;  or symlink to  ~\AppData\Roaming\.emacsd\init.el  ($MSWin10\symlinks.ps1)
-;;  or can be called by  $MSWin10\user\Emacs\initPoint.el
+;; linux: handled in  $OSAB/nodes-set/jo-2-whenWM-0.sh
+;; MSwin10: handled in  $MSn/set/3.ps1
 
 ;; notes for the curious
 ;; ---------------------
@@ -15,7 +11,7 @@
 ;; don't symlink it from Dropbox - some packages will fail to load
 ;;  just let it get populated from your  ~/.emacs.d/init.el
 ;;   (If using  straight.el  this takes a long time...)
-;; robocopy /mir $Env:AppData\.emacs.d $coreIT\MSwin-emacsd/RC /NP
+;; robocopy /mir $Env:AppData\.emacs.d $cITCP/Emacs/MSwin-emacsd/RC /np
 
 ;; I began here by adapting code from
 ;;  literatemacs  https://github.com/joseph8th/literatemacs - with thanks
@@ -24,6 +20,9 @@
 ;; so I'm managing this file from gVim with code folding implemented by
 ;; $vimfiles/ftplugin/lisp.vim
 ;;  https://github.com/harriott/vimfiles/blob/master/ftplugin/lisp.vim
+
+;;;; 1 package management 0 loadhist.el
+(require 'loadhist) ;; permitting, eg the query  M+: (file-dependents (feature-file 'cl))
 
 ;;;; 1 package management option 1 bootstrap  straight.el
 ;; 0 requires  $Env:AppData\.emacs.d\early-init.el  to undefine  package-enable-at-startup
@@ -34,7 +33,7 @@
 (setq package-enable-at-startup nil)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 6))
+      (bootstrap-version 7))
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
         (url-retrieve-synchronously
@@ -92,7 +91,7 @@
 
 ;;;; 3 Paradox
 ;; for alternative package searches
-(use-package paradox)
+(use-package paradox) ; (require 'cl)
 (setq paradox-github-token t) ; don't bother with integrated GitHub starring
 
 ;;;; 4 Custom auto-created
