@@ -44,6 +44,7 @@ framebuffer device settings
     xmodmap -pke | grep Brightness
 
 # printing - CUPS
+    lnav /var/log/cups
     lpadmin
     lpq  # show printer queue status
     lpstat -p -d  # show status of printers, including which is set as default
@@ -106,7 +107,11 @@ mount(8)
     df -h /mnt/*
     df -h [<disk>]
     du -sh [<bigDirectory>]
-    sudo wipefs [-a] /dev/sdx  # [wipe] signatures
+
+### burn ISO image
+1. (optional) `sudo wipefs [-a] /dev/sdx` wipes signatures
+1. burn: `sudo pv image.iso -Yo /dev/sdx` with nice progress line, but doesn't report bytes
+1. check: `dd if=/dev/sdg | cmp 'image.iso'` shouldn't see "dd: error reading..."
 
 ### permissions
     ---------- 	0000  no permissions
@@ -183,10 +188,7 @@ gdisk(8)
     cd-drive  # info
     cdrecord dev=/dev/sr0 -checkdrive  # Vendor_info etc
     cdrecord -v -sao dev=/dev/sr0 linux.iso
-
-### burn ISO image
     growisofs -dvd-compat -speed=n -Z /dev/sr0=image.iso  # n x 1385 KB/s
-    sudo pv image.iso -Yo /dev/sdx  # nice progress line, but doesn't report bytes
 
 ### tray
     eject  # opens tray

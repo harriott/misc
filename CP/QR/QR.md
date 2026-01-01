@@ -359,18 +359,21 @@ style `\textnormal`
 - `shift+ctrl+S` = `Fichier > Enregistre sous` / `File > Save As...`
     - `Document texte ODF XML plat (*.fodt)`
     - (only if changes to `.ods` already saved) select `Text CSV (.csv)`
-- open a `.csv` with `Calc` and numbers get prefixed with apostrophe, so
+
+## AZERTY
+- `alt+o > l` = `Modules complémentaires et thèmes`
+- `alt-t` (= `Format`) `> p` (= `Style de page...` = `alt+P`)
+
+## Calc
+    fd -H ods#
+
+- open a `.csv` and numbers get prefixed with apostrophe, so
     1. select the range
     1. `ctrl+h`
         1. Find: `.+`
         1. Replace: `$0`
         1. other options: Current selection only, Regular expressions
         1. `Replace All`
-- Writer: right-click on a hyperlink for `Remove Hyperlink`
-
-## AZERTY
-- `alt+o > l` = `Modules complémentaires et thèmes`
-- `alt-t` (= `Format`) `> p` (= `Style de page...` = `alt+P`)
 
 ## Draw
 - curve: `left-click > [shift] move > left-click > move > double-left-click`
@@ -387,6 +390,9 @@ style `\textnormal`
     ~\AppData\Roaming\LibreOffice\4\user\registrymodifications.xcu
 
 ## Writer - margins
+right-click on a hyperlink for `Remove Hyperlink`
+
+### margins
 1. save as `*.fodt`
 2. open that `*.fodt` in a `Vim` variant
     1. `/orientation` - there might be more than one
@@ -736,6 +742,7 @@ convert mp4's first to MPEG-2 transport streams (`ffmhb -i 1.mp4 -c copy 1.ts`) 
     git version
     onefetch -h
 
+- `git-merge`
 - GitLab Markdown
 - <https://ndpsoftware.com/git-cheatsheet.html>
 
@@ -819,6 +826,7 @@ Tig Manual
 ## Go
     go env
     go version
+    lazyjournal -h
 
 ### Hugo
     hugo mod graph  # dependencies
@@ -916,6 +924,7 @@ package manager
     perl -?
 
 - command prompt, `set TERM=dumb` allows Perl stuff to run without Terminal Size warnings
+- `perldoc perlrun` explains `-e` & `-p`
 - `q(a b c)` = `a b c`
 - `qq(a b c)` = `"a b c"`
 - `qw(a b c)` = `('a', 'b', 'c')`
@@ -1019,6 +1028,7 @@ arrays containing tabbed values can get messy: `perl -e 'my @tabbedArray = ( "sh
     perl -e 'print reverse <>' <file_to_reverse>
     perl -le 'print a..z'
     perl -ne 'print if $. == 2' <file> # line 2
+    perl -pe 's/\n/ /' <file_to_return_as_one_line>
     time perl -e 'sleep(1)'
 
 ## Pygments
@@ -1245,6 +1255,11 @@ by gokcehan
 - `y` (`copy`)
 - `zh` (`set hidden!`) toggles
 
+## lnav
+- `f`/`F` next/previous file
+- `f1` LNAV(1)
+- `q` quit
+
 ## The Platinum Searcher
     pt
     pt /version
@@ -1253,6 +1268,11 @@ by gokcehan
 ## sharkdp/bat
     bat --list-themes
     bat -h
+
+## toolong
+    tl $TeNo/md-JH-Private/Private.md
+
+no refresh
 
 ## Vifm help
 - can't quit to current directory
@@ -1406,6 +1426,11 @@ Sony Xperia 10 II: 1080x2520 = 21:9
 
 imagemagick.org/Color
 
+### gravity
+    magick -list gravity
+
+`-gravity northwest`  the default
+
 ### magick
     -background <color>
     -border 20x20
@@ -1426,11 +1451,6 @@ imagemagick.org/Color
     label:"some text"
 
 can convert from WebP
-
-### gravity
-    magick -list gravity
-
-`-gravity northwest`  the default
 
 ### resize
     magick <image> -resize wxh! <image_forced>  # anisotropic resize (ignore original aspect ratio)

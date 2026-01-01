@@ -310,17 +310,20 @@ defines variables for `kpathsea`
     sk --ansi -i -c 'rg --color=always --line-number "{}"'
     sort -ro <file> <file>  # reverse sort in place
     wc -l <file>  # counts lines
+    xargs < <file_to_return_as_one_line>
 
 - sharkdp/bat
 - `uniq -c` (`--count`) prefix lines by counts
 
 ## awk
+    awk '{print $0}' # prints all columns - doesn't work with  OFS
+    awk '{print $1}' ORS='\t' <file_with_column_to_print_tsv>
     awk -f script.awk input.txt
+    awk -F, '{print sprintf("%02d",NR),NF}' file_to_check_field_counts.csv
     awk -h  # --help
     awk -i inplace -F, '{print $3,$2,$1}' OFS='┊' toReorder.csv
     awk -V  # --version
-    awk '{print $0}' # prints all columns - doesn't work with  OFS
-    awk '{print $1}' ORS='\t' <file_with_column_to_print_tsv>
+    awk 1 ORS=' ' <file_to_return_as_one_line>
     v=variable; awk -v var="$v" 'BEGIN {print var}'
     za $cIThul/gawk.pdf
     {print $1,sprintf("%08d",$2)} # 2nd field is 0-padded to length 8
@@ -335,7 +338,7 @@ defines variables for `kpathsea`
 ### built-in variables
 - `FILENAME` name of the current input-file
 - `FS` input field separator character (default = any space and tab characters)
-- `NR` number of input records
+- `NR` number of input records seen so far
 - `NF` number of fields in an input record
 - `OFMT` format for numeric output (default = `%.6g`)
 - `OFS` output field separator (default = <space>)
@@ -416,6 +419,7 @@ defines variables for `kpathsea`
 
 - `-E`/`-r` (`--regexp-extended`) extended regular expressions
 - GNU sed
+- linewise, so don't try to replace newline
 - stream editor
 
 ### bracket expressions
@@ -475,6 +479,7 @@ defines variables for `kpathsea`
 - `chmod 755 file` - `drwxr-xr-x`
 - `chmod 777 file` - all can read, write and execute
 - FILE(1)
+- `fsearch`: `Ctrl+p` = Preferences
 - install(1)
 - rm(1)
 
@@ -1123,15 +1128,24 @@ esac
     unalias
 
 ### Atuin
+    atuin
+    atuin stats
+    atuin stats last friday
+    atuin stats yesterday
     ~/.config/atuin/config.toml
     ~/.local/share/atuin
 
-### ble.sh - Vim mode
+SQLite database of commands
+
+### ble.sh
+Bash Line Editor
+
+#### Vim mode
     ble-bind -P  # --print  the keybinds
 
-- `f1` = `command-help`
 - insert-mode: `Ctrl-x Ctrl-v` = `display-shell-version`
 - normal-mode: `K` = `command-help`
+- once begun, `f1` = `command-help`
 
 ### clear screen (saving scrollback)
     clear -x  # erase the all lines not in scrollback
@@ -1213,10 +1227,11 @@ esac
 
 ### job control
     ctrl+c
+    bg
     fg %n
-    jobs -l  # then  kill %n
-
-jobs(1p)
+    jobs -l
+    kill %n
+    kill -9 %n
 
 ### Login shell?
     echo $0  # "-bash" = login shell, "bash" = non-login shell
@@ -1225,6 +1240,7 @@ jobs(1p)
 ### loops
     break  # breaks out of loop
     continue  # to next iteration of loop
+    c=5; for i in $(seq $c); do echo $i; done
     for d in */; do echo $d; done
     for d in /mnt/*; do echo $d; done
     for f in **/*; do echo $f; done
@@ -1303,6 +1319,7 @@ don't export them
 
 ##### from file
     aff=$(<$f); aff=(${aff//'\n'/,}) # array from file  $f
+    mapfile --help
     mapfile -t found < <(find .)
     mapfile -t array < <(cat file)
     mapfile -t GreekArray < <(printf "Alpha\nBeta\nGamma"); echo ${GreekArray[@]}
@@ -1364,7 +1381,7 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     ${string:position:length}
     a=12345; o ${a:0:2}; o ${a:2}; o ${a:1:2}; o ${a:2:1}
     b="a(b(c(d"; o ${b##*\(}
-    s=12345; echo ${s::-2}
+    s=12345; echo ${s::-2}; echo ${s: -2}
     t=lkj; echo ${t:0:${#t}-1}
 
     name=polish.ostrich.racing.champion; o ${name#*.}; o ${name##*.}; o ${name%%.*}; o ${name%.*}
@@ -1407,6 +1424,15 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
 - `awesomewm`: floating window: `winkey+left_mouse_drag`
 - lsmod(8) show what kernel modules are currently loaded
 - maximum 255 bytes per filename & 4096 per path
+
+## lnav
+    journalctl -f | lnav
+    journalctl -f -o json --output-fields=MESSAGE,PRIORITY,_PID,SYSLOG_IDENTIFIER,_SYSTEMD_UNIT | lnav
+    journalctl -f -o json | lnav
+    journalctl -f -o short-iso | lnav  # handling year changes
+
+- hit `Esc` to get out of weird edit mode
+- The Logfile Navigator
 
 ## awesome wm
 - maximized (horizontally or vertically) are indicated by (horizontal or vertical) double arrow, and break tiling
@@ -1510,8 +1536,6 @@ if no luck, can also kill the `Xfce Notify Daemon`
     systemd-analyze --user unit-paths
     systemd-analyze calendar "*-*-* *:00:00"
 
-journalctl(1)
-
 ### info
     systemctl --failed
     systemctl --user --no-pager  # list running Systemd units
@@ -1522,16 +1546,24 @@ journalctl(1)
     systemd-analyze blame  # time taken for boot processes
 
 ### journalctl
+    :Man journalctl
     journalctl --disk-usage
     journalctl --list-boots
     journalctl --verify
 
+- `-f`, `--follow`
 - `-n`, `--lines=` (default 10) most recent events
 - `-u` (`--unit=UNIT|PATTERN`)
 - `-r` (= `--reverse`) output
+- journalctl(1)
+
+#### latest
+- `journalctl -f | lazyjournal` I don't get...
+- with `lnav`
 
 #### messages, paged
     journalctl -b  # for this boot
+    journalctl -b | tl  # (toolong) a little slow, but easier to read
     journalctl -b -1  # for previous boot
     journalctl -b -1 -e  # shows end of  -n1000
     journalctl -b -1 -r  # newest first
@@ -1615,7 +1647,7 @@ Custom Actions: `~/.config/Thunar/uca.xml`
 - `^c` = `SIGINT`
 - `^q` resume output to screen
 - `^s` pause output to screen
-- w(1)
+- w(1) logged on info
 
 ## Alacritty
     alacritty -h  # --help
@@ -1675,9 +1707,13 @@ Custom Actions: `~/.config/Thunar/uca.xml`
 ### internal commands
     :bind  # alias for  bind-key
     :choose-tree  # put a pane into tree mode, can kill and select
-    :join-pane -s 2 -t 1  # move w2 as a pane to w1
-    :joinp -s 2 [-t 1 ]  # join-pane, joining pane in window 2 [to that in window 1]
     :set synchronize-panes  # (set-option)
+
+#### join-pane
+    :j-s 2.1 [-t 1.0 ]  # src-pane W2P2 [to dst-pane W1P0]
+
+- `:joinp` is the only abbreviation I can find in the manual
+- from another pane, `:j-hs 2.1` pulls in src-pane W2P2 alongside
 
 ## tput
     (x=`tput op` y=`printf %76s`;for i in {0..256};do o=00$i;echo -e ${o:${#o}-3:3} `tput setaf $i;tput setab $i`${y// /=}$x;done) # 256 lines of colour
@@ -1767,7 +1803,7 @@ https://packages.ubuntu.com/
 - vim-like
 
 ## email - clm
-    $AjB/bashrc-clm
+    $OSL/nodes/bashrc-clm
     mbsync -v
 
 ### msmtp

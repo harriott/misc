@@ -101,6 +101,8 @@ d-CP/d-Vim-Vim/r-lilydjwg-vim-foldtree https://github.com/lilydjwg/vim-foldtree
 d-CP/d-Vim-Vim/r-nblock-vim-dokuwiki https://github.com/nblock/vim-dokuwiki
 d-CP/d-Vim-Vim/r-preservim-tagbar https://github.com/preservim/tagbar
 d-CP/d-Vim-Vim/r-rhysd-vim-gfm-syntax https://github.com/rhysd/vim-gfm-syntax
+d-CP/d-Vim-Vim/r-thoughtstream-Damian-Conway-s-Vim-Setup  https://github.com/thoughtstream/Damian-Conway-s-Vim-Setup
+d-CP/d-Vim-Vim/r-thoughtstream-Damian-Conway-s-Vim-Setup https://github.com/thoughtstream/Damian-Conway-s-Vim-Setup
 d-CP/d-Vim-Vim/r-tmhedberg-SimpylFold https://github.com/tmhedberg/SimpylFold
 d-CP/d-Vim-Vim/r-vim-utils-vim-troll-stopper https://github.com/vim-utils/vim-troll-stopper
 d-CP/d-Vim-Vim/r-vim-vim https://github.com/vim/vim
@@ -116,8 +118,6 @@ d-CP/d-WAN/d-npm-Astro/r-zeon-studio-astroplate https://github.com/zeon-studio/a
 d-CP/d-WAN/r-email-mozilla-releases-comm-central https://github.com/mozilla/releases-comm-central
 d-CP/d-WAN/r-email-thunderbird-autoconfig https://github.com/thunderbird/autoconfig
 d-CP/r-catppuccin-latex https://github.com/catppuccin/latex
-d-CP/r-CLI-sharkdp-bat https://github.com/sharkdp/bat
-d-CP/r-CLI-wfxr-code-minimap https://github.com/wfxr/code-minimap
 d-CP/r-craftzdog-dotfiles-public https://github.com/craftzdog/dotfiles-public
 d-CP/r-erikflowers-weather-icons https://github.com/erikflowers/weather-icons
 d-CP/r-jgm-pandoc https://github.com/jgm/pandoc
@@ -125,10 +125,11 @@ d-CP/r-nomacs-nomacs https://github.com/nomacs/nomacs
 d-CP/r-omerxx-dotfiles https://github.com/omerxx/dotfiles
 d-CP/r-tjdevries-config_manager https://github.com/tjdevries/config_manager
 d-CP/r-wezterm-wezterm https://github.com/wezterm/wezterm
+d-MSWin/d-PowerShell/r-dahlbyk-posh-git https://github.com/dahlbyk/posh-git
+d-MSWin/d-PowerShell/r-dukes-PowerShellModules https://github.com/bdukes/PowerShellModules
+d-MSWin/d-PowerShell/r-fleschutz-PowerShell https://github.com/fleschutz/PowerShell
+d-MSWin/d-PowerShell/r-jdhitsolutions-PSScriptTools https://github.com/jdhitsolutions/PSScriptTools
 d-MSWin/r-amrali-eg-EncodingChecker https://github.com/amrali-eg/EncodingChecker
-d-MSWin/r-dahlbyk-posh-git https://github.com/dahlbyk/posh-git
-d-MSWin/r-dukes-PowerShellModules https://github.com/bdukes/PowerShellModules
-d-MSWin/r-jdhitsolutions-PSScriptTools https://github.com/jdhitsolutions/PSScriptTools
 d-MSWin/r-microsoft-terminal https://github.com/microsoft/terminal
 d-MSWin/r-Windos-BurntToast https://github.com/Windos/BurntToast
 d-unix/d-linux/d-Arch/d-gitlab_archlinux_org-archlinux-packaging-packages/r-pacman https://gitlab.archlinux.org/archlinux/packaging/packages/pacman

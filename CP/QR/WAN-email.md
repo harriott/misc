@@ -29,6 +29,7 @@ delete: `right-click on email selection > Attachment Extractor > Delete attachme
 
 ### keyboard shortcuts
 - `ctrl+shift+b` = `Address Book`
+- `f8` = toggle Message Pane
 - `f11` = toggle Today Pane
 - mozillamessaging
 

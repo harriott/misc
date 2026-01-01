@@ -1,7 +1,7 @@
 #!/bin/bash
 # vim: set et tw=0:
 
-# bash $misc/linux/daycodes.sh
+# bash $misc/unix_like/linux/daycodes.sh
 
 # https://harriott.github.io/ - Fri 20 Jun 2025
 
