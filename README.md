@@ -7,7 +7,9 @@
 
 nothing special
 
-## nodes - other
+## nodes
+    $misc/unix_like/linux/daycodes.sh
+
 - GRs get/update: `$misc/GRs/cGRs.md`
 - ITr manage: `$misc/ITr/ITr.md`
 

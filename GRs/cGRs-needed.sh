@@ -36,6 +36,9 @@ sed -i 's/\r//' $cITcc/unix-linux/trapd00r-LS_COLORS/lscolors.sh  # ensure no CR
 rsync -irtv --delete $GRs/d-CP/d-mpv/r-mfcc64-mpv-scripts/ $cITcc/unix-linux/mfcc64-mpv-scripts
 # visualizer.lua  symlinked in  $OSAB/nodes/set/jo-2-whenWM-1.sh
 
+#=> msmtp-scripts-vim
+rsync -irtv --delete $cGRs/d-unix/d-linux/r-marlam-msmtp/scripts/vim/ $cITcc/CP/msmtp-scripts-vim
+
 #=> tmux
 # elements of these repositories sourced in  $OSL/nodes/terminal-tmux/tmux.conf
 

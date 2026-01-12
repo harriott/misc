@@ -60,6 +60,9 @@ d-CP/d-encoding/r-Rust/kyoheiu-felix https://github.com/kyoheiu/felix
 d-CP/d-encoding/r-rxi-json_lua https://github.com/rxi/json.lua
 d-CP/d-encoding/r-saalen-highlight https://gitlab.com/saalen/highlight
 d-CP/d-encoding/r-tj-git-extras https://github.com/tj/git-extras
+d-CP/d-icons/r-feathericons-feather https://github.com/feathericons/feather
+d-CP/d-icons/r-Keyamoon-IcoMoon-Free https://github.com/Keyamoon/IcoMoon-Free
+d-CP/d-icons/r-twbs-icons https://github.com/twbs/icons
 d-CP/d-mpv/r-mfcc64-mpv-scripts https://github.com/mfcc64/mpv-scripts
 d-CP/d-mpv/r-MikelSotomonte-mpv-waveform https://github.com/MikelSotomonte/mpv-waveform
 d-CP/d-Vim-Nvim/r-albingroen-quick.nvim https://github.com/albingroen/quick.nvim
@@ -132,6 +135,10 @@ d-MSWin/d-PowerShell/r-jdhitsolutions-PSScriptTools https://github.com/jdhitsolu
 d-MSWin/r-amrali-eg-EncodingChecker https://github.com/amrali-eg/EncodingChecker
 d-MSWin/r-microsoft-terminal https://github.com/microsoft/terminal
 d-MSWin/r-Windos-BurntToast https://github.com/Windos/BurntToast
+d-unix/d-cmus/r-AntoineGagne-cmus-notify https://github.com/AntoineGagne/cmus-notify
+d-unix/d-cmus/r-cmus-cmus https://github.com/cmus/cmus
+d-unix/d-cmus/r-Dimithrandir-cmushnotify https://github.com/Dimithrandir/cmushnotify
+d-unix/d-cmus/r-mathieu-lemay-cmus-notify https://github.com/mathieu-lemay/cmus-notify
 d-unix/d-linux/d-Arch/d-gitlab_archlinux_org-archlinux-packaging-packages/r-pacman https://gitlab.archlinux.org/archlinux/packaging/packages/pacman
 d-unix/d-linux/d-Arch/d-gitlab_archlinux_org-archlinux-packaging-packages/r-texlive-core https://gitlab.archlinux.org/archlinux/packaging/packages/texlive-core
 d-unix/d-linux/d-Arch/r-alfunx-_dotfiles https://github.com/alfunx/.dotfiles
@@ -174,6 +181,7 @@ d-unix/d-linux/r-leo-arch-clifm https://github.com/leo-arch/clifm
 d-unix/d-linux/r-lukesmithxyz-voidrice https://github.com/lukesmithxyz/voidrice
 d-unix/d-linux/r-marlam-msmtp https://github.com/marlam/msmtp
 d-unix/d-linux/r-nachoparker-xcol https://github.com/nachoparker/xcol
+d-unix/d-linux/r-PapirusDevelopmentTeam-papirus-icon-theme https://github.com/PapirusDevelopmentTeam/papirus-icon-theme
 d-unix/d-linux/r-ranger-ranger https://github.com/ranger/ranger
 d-unix/d-linux/r-rsnapshot-rsnapshot https://github.com/rsnapshot/rsnapshot
 d-unix/d-linux/r-seebi-dircolors-solarized https://github.com/seebi/dircolors-solarized
@@ -191,7 +199,6 @@ d-unix/d-terminal-urxvt/d-fontSize/r-majutsushi-urxvt-font-size https://github.c
 d-unix/d-terminal-urxvt/d-fontSize/r-simmel-urxvt-resize-font https://github.com/simmel/urxvt-resize-font
 d-unix/d-terminal-urxvt/r-Vifon-autocomplete-ALL-the-things https://github.com/Vifon/autocomplete-ALL-the-things
 d-unix/r-brndnmtthws-conky https://github.com/brndnmtthws/conky
-d-unix/r-cmus-cmus https://github.com/cmus/cmus
 d-unix/r-email-pdobsan-oama https://github.com/pdobsan/oama
 d-unix/r-gsamokovarov-jump https://github.com/gsamokovarov/jump
 d-unix/r-jstkdng-ueberzugpp https://github.com/jstkdng/ueberzugpp

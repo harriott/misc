@@ -2,7 +2,7 @@
 
     $misc/notDr/notDr.md
 
-this file is symlinked in `$MSn/PS/Profile.ps1` & `$OSAB/nodes-set/jo-0.sh`
+this file is symlinked in `$MSn/set/3.ps1` & `$OSAB/nodes-set/jo-0.sh`
 
 # $notDr directory
 - `$notDr` is defined in `$MSn\PS\Env.ps1` & `$OSL/nodes/jo/export`
@@ -37,6 +37,7 @@ this file is symlinked in `$MSn/PS/Profile.ps1` & `$OSAB/nodes-set/jo-0.sh`
 
 #### 0 get clone
     $ find $notDr/ZN-rcl | wc -l
+    PS> (ls $notDr/ZN-rcl -Force -s).count
     rclone sync -P ZCzNc: $notDr/ZN-rcl
 
 #### 1 get  ZN-use

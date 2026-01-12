@@ -187,7 +187,7 @@ VBR quality 4 is closer to the original size
     date -r <fileToGetDateOf>
 
 - `%j` day of year (001..366)
-- date(1)
+- `date -d @$((1767468248734330/1000000))` microseconds, as in sqlite3's `.dump`
 
 # documenting
     aspell dicts
@@ -334,6 +334,7 @@ defines variables for `kpathsea`
 - GNU Awk
 - `gsub(/old/,"new"[,target])` returns the number of substitutions made
 - no backreferences
+- `substr($4,2,length($4)-2)` removes outer characters
 
 ### built-in variables
 - `FILENAME` name of the current input-file
@@ -778,8 +779,13 @@ up/down => zoom in/out
     for i in $(ls); do magick -resize 15% $i r$i; done
     for i in $(ls); do magick -resize 25% $i r$i; done
     for i in $(ls); do magick -resize 50% $i r$i; done
-    for i in *.bmp; do magick $i ${i%.*}.jpg; done  # no spaces in names
-    for i in *.svg; do magick $i ${i%.*}.png; done  # no spaces in names
+    for i in *.bmp; do magick $i ${i%.*}.jpg; done
+    for i in *.png; do magick $i -fill green -colorize 100% ${i%.*}-green.ico; done
+    for i in *.png; do magick $i -fill orange -colorize 100% ${i%.*}-orange.ico; done
+    for i in *.png; do magick $i -fill red -colorize 100% ${i%.*}-red.ico; done
+    for i in *.png; do magick $i -fill yellow -colorize 100% ${i%.*}-yellow.ico; done
+    for i in *.svg; do magick $i ${i%.*}.ico; done
+    for i in *.svg; do magick $i ${i%.*}.png; done
     for i in *.jpeg; do magick $i jpg/${i%.*}.jpg; done  # gets them into subfolder jpg
 
 ## nomacs
@@ -1154,7 +1160,7 @@ Bash Line Editor
 
 ### conditionals
     [ "$a" ] && echo $a
-    [ -z "$a" ] && echo zero_string; [ -n "$a" ] && echo string
+    [ -z "$a" ] && echo zero_string; [ -n "$a" ] && echo string_not_null
     [ true ] && echo y
     [ "y" ] && echo y
     c=1; [[ $c == 1 ]] && echo "true"
@@ -1241,14 +1247,17 @@ Bash Line Editor
     break  # breaks out of loop
     continue  # to next iteration of loop
     c=5; for i in $(seq $c); do echo $i; done
-    for d in */; do echo $d; done
-    for d in /mnt/*; do echo $d; done
-    for f in **/*; do echo $f; done
     for i in {0..9..2}; do echo $i; done
     for i in bee fly wasp; do echo $i; done
     s=2; e=4; for (( c=$s; c<=$e; c++ )); do echo $c; done
     select f in apple pear grape; do echo "you chose $f"; done
     while read line; do echo "$line"; done <file_to_use_line_by_line
+
+#### globs
+    $misc/unix_like/linux/need_for_nullglob.sh
+    for d in */; do echo $d; done
+    for d in /mnt/*; do echo $d; done
+    for f in **/*; do echo $f; done
 
 ### managing commands
     o $?  # exit code of last command, 0 if command succeeded
@@ -1276,10 +1285,6 @@ Bash Line Editor
 ### online code check
 - <https://explainshell.com/>
 - ShellCheck <https://www.shellcheck.net/>
-
-### $PATH
-    echo "${PATH//:/$'\n'}"
-    echo "$PATH" | tr ':' '\n'
 
 ### set
     echo $-  # current options
@@ -1370,6 +1375,14 @@ don't export them
     ${x}and$y
 
 case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
+
+##### $PATH
+    echo "${PATH//:/$'\n'}"
+    echo "$PATH" | tr ':' '\n'
+
+##### script's name
+    DIR=$(dirname "${BASH_SOURCE[0]}")  # get the directory name
+    DIR=$(realpath "${DIR}")  # resolve its full path if need be
 
 ##### parameter expansion
     file=a.b.c; echo ${file##*.}; echo ${file%.*}
@@ -1493,25 +1506,33 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     dool -s  # --swap
     i dool
 
-## notification - Dunst
+## notification
+    zenity --calendar
+
+### Dunst
     dunstctl history-pop  # repeat for previous messages
     dunstify --help
     dunstify -u critical "Read this now!"
     dunstify "First test message."; dunstify "Second test message, which is longer."
+
+`dunstrc` allows tweaks that aren't available with `Xfce Notify Daemon`
+
+#### dunst
+    dunst &
     pgrep dunst
+    pkill dunst
 
-`dunstrc` allows tweaks that I can't see available in `Xfce Notify Daemon`
+- (if `xfce4-notifyd` hasn't taken over `org.freedesktop.Notifications`) any notification reloads `dunst`
+- takes over `org.freedesktop.Notifications` thus incapacitating `xfce4-notifyd`
+- only keeps `history_length` of notifications in memory, nothing persistent
 
-### kill
-    pkill dunst  # and gets rerun whenever a notification is sent
-
-#### close notifications
+##### close notifications
     dunstctl close  # the last one
     dunstctl close-all
 
 if no luck, can also kill the `Xfce Notify Daemon`
 
-## notification - notify-send
+### notify-send
     notify-send 'test of notify-send'
     notify-send --help
     notify-send -u critical "test of critical notification"
@@ -1584,6 +1605,7 @@ if no luck, can also kill the `Xfce Notify Daemon`
     whoami
 
 ## Xfce
+    xfce4-display-settings &
     xfce4-panel -r  # reloads
     xfce4-settings-manager &
 
@@ -1629,12 +1651,15 @@ Custom Actions: `~/.config/Thunar/uca.xml`
 
 #### keyboard accelerators
 - `~/.config/Thunar/accels.scm` accelerator map dump
-- `Ctrl+Shift+n` = `create-folder
+- `Ctrl+Shift+n` = `create-folder`
 
 ### Xfce Notify Daemon
-    pkill xfce4-notifyd  # might clears all old notifications - if not use dunstctl
     systemctl --user status xfce4-notifyd
+    systemctl --user start xfce4-notifyd
+    systemctl --user stop xfce4-notifyd
     xfce4-notifyd-config &
+
+no indication of priority - only distinguishing feature of `critical` notifications is their persistence
 
 # SystemRescue
     setkmap fr

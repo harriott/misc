@@ -9,6 +9,6 @@ tools for GitHub Repositories that I use
     $misc/GRs/cGRs.sh
 
 - `$GRs` contains over 160k files, which overloads my `Dropbox`, so `$misc/notDr/notDr.md`
-- `$misc/GRs/cGRs-needed.sh` for my linux system builds
+- `$misc/GRs/cGRs-needed.sh` for my system builds
 - syncs to external drive: `$misc/ITr/rsync.sh`
 

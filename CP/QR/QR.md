@@ -1395,6 +1395,7 @@ Sony Xperia 10 II: 1080x2520 = 21:9
 
 - 72 dpi = 18.3 dots per mm
 - COLOR TOOLS <http://html-color-codes.info/>
+- HEIF (High Efficiency Image File Format): `.avci`, `.avcs`, `.avif`, `.avifs`, `.heic`, `.heics`, `.heif`, `.heifs`
 - JPEG compression: `.jfif` `.jif` `.jpe` `.jpeg` `.jpg`
 
 ## GIMP
@@ -1443,6 +1444,9 @@ imagemagick.org/Color
     magick -pointsize 72 label:inch_high  inch_high.gif
     magick -flatten img.png img-white.png
     magick -list format  # all of them
+    magick -size 100x100 plasma: plasma1.jpg
+    magick -size 100x100 xc:wheat -annotate +20+10 '100x100mm' 100x100.png
+    magick -size 1000x1000 xc:azure -pointsize 60 -annotate +500+500 'annotate_normal' -annotate 90x90+500+500 'annotate_90x90' -annotate 270x270+500+500 'annotate_270x270' 1000x1000+rotatedTexts.png
     magick -version
     magick <image> -background azure -gravity south -splice 0x80 <SBordered>
     magick rose: -background blue -splice 20x10+40+30 splice.gif
