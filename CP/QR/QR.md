@@ -893,7 +893,6 @@ package manager
 
 ## Lua
     $cITCP/encoding/dpl/scratch.lua
-    $cGRs/CP/Vim/vim-vim/src/testdir/testluaplugin/lua/testluaplugin/hello.lua
     lua -v
 
 ## markdown

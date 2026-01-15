@@ -23,21 +23,20 @@ maybe disable call to `git-prompt.sh` in `$AjB/bashrc-console` before entering t
     rg -l Caskaydia
     rg -l DejaVu
 
-## 1 use - for Arch 0
-    fA="$cITcc/unix-linux-forArch-fonts/NF"
-    pf="$notDr/GR-NF/ryanoasis-nerd-fonts/patched-fonts"
+## 1 use - ryanoasis patched for Arch
+    fA="$cITcc/unix-linux-forArch-fonts/NF" # if I need
+    pf="$notDr/GR-NF/ryanoasis-nerd-fonts/patched-fonts" # the sources
 
-## 1 use - for Arch 1
-    $cITcc/unix-linux-forArch-fonts/readme.md
-
-### patched Arimo
+### Arimo
     cp $pf/Arimo/Regular/ArimoNerdFont-Regular.ttf $fA
+    ttf-arimo-nerd
 
 - from `$pf`, `Arimo/Regular/README.md` v1.33
 - use `$MD4PDF/GNULinux/md4pdf.sh`
 
 ### patched Cascadia Code
     cp $pf/CascadiaCode/CaskaydiaCoveNerdFontMono-Regular.ttf $fA
+    ttf-cascadia-mono-nerd
 
 from `$pf`, `CascadiaCode/README.md` v2407.24
 
@@ -47,28 +46,28 @@ from `$pf`, `CascadiaCode/README.md` v2407.24
 
 ### patched DejaVu Sans Mono
     cp $pf/DejaVuSansMono/Regular/DejaVuSansMNerdFontMono-Regular.ttf $fA
+    ttf-dejavu-nerd
 
-from `$pf`, `DejaVuSansMono/Regular/README.md` v2.37
-
-#### use
-    $machBld/jo/Conky/Xfce
-    $OSAB/nodes-terminal/wezterm.lua
-    $vfv/enter/gvimrc-Arch.vim
+- from `$pf`, `DejaVuSansMono/Regular/README.md` v2.37
+- use: `$vfv/enter/gvimrc-Arch.vim`
 
 ### patched Hack Bold
     cp $pf/Hack/Bold/HackNerdFont-Bold.ttf $fA
+    ttf-hack-nerd
 
 - from `$pf`, `Hack/Bold/README.md` v3.003
 - use: `$ABjo/wm/Xresources/fontNF`
 
 ### patched JetBrains
     cp $pf/JetBrainsMono/Ligatures/Regular/JetBrainsMonoNerdFontMono-Regular.ttf $fA
+    ttf-jetbrains-mono-nerd
 
 - from `$pf`, `JetBrainsMono/Ligatures/Regular/README.md` v2.304
 - use `$vfv/enter/gvimrc-Arch.vim`
 
 ### patched Meslo LG
     cp $pf/Meslo/S/Regular/MesloLGSNerdFontMono-Regular.ttf $fA
+    ttf-meslo-nerd
 
 - from `$pf`, `Meslo/M/Regular/README.md` v1.21
 - use `$vfv/enter/gvimrc-Arch.vim`
@@ -81,6 +80,7 @@ from `$pf`, `DejaVuSansMono/Regular/README.md` v2.37
 
 ### patched UbuntuMono
     cp $pf/UbuntuMono/Regular/UbuntuMonoNerdFontMono-Regular.ttf $fA
+    ttf-ubuntu-mono-nerd
 
 from `$pf`, `UbuntuMono/Regular/README.md` v0.80
 

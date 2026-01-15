@@ -42,6 +42,7 @@ this file is symlinked in `$MSn/set/3.ps1` & `$OSAB/nodes-set/jo-0.sh`
 
 #### 1 get  ZN-use
     $ rsync -irtv --delete $notDr/ZN-rcl/ $CzMa/online/ZNc/ZN-use
+    $ rsync -irtv --delete $notDr/ZN-rcl/ $DJH/work-Cz-manage-online-ZNc/ZN-use
 
     PS> robocopy /mir $notDr/ZN-rcl $notDr/ZN-rcl-RCd
     PS> cd $notDr/ZN-rcl-RCd

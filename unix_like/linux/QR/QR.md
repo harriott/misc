@@ -452,6 +452,7 @@ defines variables for `kpathsea`
 #### delete lines
     sed -i '1,4d' <file>
     sed -i '2d' <file>
+    sed -i '$d' <file_to_lose_last_line>
 
 #### prepend
     sed '1i\nNewFirstLineText' <fileToPrependTo>
@@ -636,7 +637,8 @@ find(1)
     tree -f  # print path
     tree -fi  # print path without indentation lines
 
-tree(1)
+- `-l` follows symbolic links, but still showing `-> <real_path>`
+- tree(1)
 
 ## ln
 - `-s` (`--symbolic`) not hard
@@ -779,14 +781,19 @@ up/down => zoom in/out
     for i in $(ls); do magick -resize 15% $i r$i; done
     for i in $(ls); do magick -resize 25% $i r$i; done
     for i in $(ls); do magick -resize 50% $i r$i; done
+
+### convert
     for i in *.bmp; do magick $i ${i%.*}.jpg; done
+    for i in *.svg; do magick $i ${i%.*}.ico; done
+    for i in *.svg; do magick $i ${i%.*}.png; done
+    for i in *.jpeg; do magick $i jpg/${i%.*}.jpg; done  # gets them into subfolder jpg
+    for i in *.webp; do magick $i ${i%.*}.jpg; done
+
+### recolour
     for i in *.png; do magick $i -fill green -colorize 100% ${i%.*}-green.ico; done
     for i in *.png; do magick $i -fill orange -colorize 100% ${i%.*}-orange.ico; done
     for i in *.png; do magick $i -fill red -colorize 100% ${i%.*}-red.ico; done
     for i in *.png; do magick $i -fill yellow -colorize 100% ${i%.*}-yellow.ico; done
-    for i in *.svg; do magick $i ${i%.*}.ico; done
-    for i in *.svg; do magick $i ${i%.*}.png; done
-    for i in *.jpeg; do magick $i jpg/${i%.*}.jpg; done  # gets them into subfolder jpg
 
 ## nomacs
     nomacs -h
@@ -1422,7 +1429,6 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     gtk-launch --version
     halt -p
     i hier  # detailed description of the filesystem hierarchy
-    killall -SIGUSR1 conky  # brings it back up
     locale
     openbox --reconfigure
     passwd jo  # then re-login
@@ -1438,15 +1444,6 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
 - lsmod(8) show what kernel modules are currently loaded
 - maximum 255 bytes per filename & 4096 per path
 
-## lnav
-    journalctl -f | lnav
-    journalctl -f -o json --output-fields=MESSAGE,PRIORITY,_PID,SYSLOG_IDENTIFIER,_SYSTEMD_UNIT | lnav
-    journalctl -f -o json | lnav
-    journalctl -f -o short-iso | lnav  # handling year changes
-
-- hit `Esc` to get out of weird edit mode
-- The Logfile Navigator
-
 ## awesome wm
 - maximized (horizontally or vertically) are indicated by (horizontal or vertical) double arrow, and break tiling
 -`modkey+left_mouse_drag` move
@@ -1457,6 +1454,10 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
 ## boot
     bootctl -h  # --help
     find /dev/disk/by-designator -type l -ls  # recursively list all symlinks with their references
+
+## conky
+    conky -C  # --print-config
+    killall -SIGUSR1 conky  # brings it back up
 
 ## CPU-X
     cpu-x -h
@@ -1488,6 +1489,15 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     sysctl -a  # display all kernel parameters
     systeroid -A  # list all parameters
     systeroid -T  # list parameters in a tree
+
+## lnav
+    journalctl -f | lnav
+    journalctl -f -o json --output-fields=MESSAGE,PRIORITY,_PID,SYSLOG_IDENTIFIER,_SYSTEMD_UNIT | lnav
+    journalctl -f -o json | lnav
+    journalctl -f -o short-iso | lnav  # handling year changes
+
+- hit `Esc` to get out of weird edit mode
+- The Logfile Navigator
 
 ## monitoring
     atop
