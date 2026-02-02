@@ -241,6 +241,7 @@ functionality included in Memoir
 `titlesec`: `\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}`
 
 ### vertical
+    \parskip=5pt
     \vfill
     \vspace{-1cm}
 
@@ -1213,6 +1214,7 @@ Crate regex: `x?` zero or one of `x` (greedy)
 - `-p`, `--full-path` full path (instead of name only)
 - `-H` (`--hidden`)
 - `-I` = `--no-ignore` = don't respect `.(fd|git)ignore`
+- `-i`, `--ignore-case` (default: smart case)
 - `-L` follow links into symlinked directories
 - `-td` type dir
 - `-te` type empty file
@@ -1433,16 +1435,16 @@ imagemagick.org/Color
 
 ### magick
     -background <color>
-    -border 20x20
+    -bordercolor white -border 90x90
     -draw 'text xpixels,ypixels "label"'
     -fill blue -draw 'rectangle x1,y1 x2,y2'  - the coordinates are diagonal opposites
     -font Arcon
     -gravity center
     -size 640x480
 
-    magick -pointsize 72 label:inch_high  inch_high.gif
     magick -flatten img.png img-white.png
     magick -list format  # all of them
+    magick -pointsize 72 label:inch_high  inch_high.gif
     magick -size 100x100 plasma: plasma1.jpg
     magick -size 100x100 xc:wheat -annotate +20+10 '100x100mm' 100x100.png
     magick -size 1000x1000 xc:azure -pointsize 60 -annotate +500+500 'annotate_normal' -annotate 90x90+500+500 'annotate_90x90' -annotate 270x270+500+500 'annotate_270x270' 1000x1000+rotatedTexts.png
@@ -1453,7 +1455,7 @@ imagemagick.org/Color
 
     label:"some text"
 
-can convert from WebP
+can convert from `heic`, `WebP`
 
 ### resize
     magick <image> -resize wxh! <image_forced>  # anisotropic resize (ignore original aspect ratio)
@@ -1845,6 +1847,8 @@ Keyboard shortcuts for YouTube
 ## yt-dlp
     yt-dlp --dump-json video_ID_or_URL | jq --raw-output ".chapters[].title"
 
+desideratus
+
 ### Linux
     $AjB/bashrc-wm
     yt-dlp -f best <videoURL>
@@ -1852,8 +1856,6 @@ Keyboard shortcuts for YouTube
     yt-dlp -f ba <videoURL>  # bestaudio (= best*[vcodec=none])
     yt-dlp -h
     yt-dlp --version
-
-desideratus
 
 ### MSWin10
     $MSn\PS\Profile.ps1

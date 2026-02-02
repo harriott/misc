@@ -80,7 +80,7 @@ automatically selects the best orientation for filling the page
 # printing - HPLIP
     hp-info  # reports version and pops up info
     hp-levels  # takes a little while to show the ink levels (after "Using device : ...")
-    hp-printsettings  # dialog pop-up
+    hp-printsettings  # dialog pop-up, but no dpi's
     hp-setup -h
     hp-setup -r  # GUI to remove printer
     hp-systray & disown  # HPLIP Status Service tray icon (access to HP Device Manager)
@@ -186,9 +186,19 @@ gdisk(8)
 
 ## optical
     cd-drive  # info
+    growisofs -dvd-compat -speed=n -Z /dev/sr0=image.iso  # n x 1385 KB/s
+
+### cdrtools - cdrecord
     cdrecord dev=/dev/sr0 -checkdrive  # Vendor_info etc
     cdrecord -v -sao dev=/dev/sr0 linux.iso
-    growisofs -dvd-compat -speed=n -Z /dev/sr0=image.iso  # n x 1385 KB/s
+
+- `-sao` Session At Once, good for data
+- `-v` verbose
+
+### cdrtools - mkisofs
+    mkisofs -V 'max32charVolName' -J -r -o <file.iso> <directory>
+
+`-r` = `-rational-rock`
 
 ### tray
     eject  # opens tray

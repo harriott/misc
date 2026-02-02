@@ -305,6 +305,7 @@ defines variables for `kpathsea`
     cat
     diff <file1> <file2>
     enca -l surfaces
+    printf "line terminated with CRLF\r\n" > crlf.txt
     tac
     shuf
     sk --ansi -i -c 'rg --color=always --line-number "{}"'
@@ -312,6 +313,7 @@ defines variables for `kpathsea`
     wc -l <file>  # counts lines
     xargs < <file_to_return_as_one_line>
 
+- "CRLF line terminators"
 - sharkdp/bat
 - `uniq -c` (`--count`) prefix lines by counts
 
@@ -380,8 +382,7 @@ defines variables for `kpathsea`
 ## file
     fd -Itf -x file
 
-- "CRLF line terminators"
-- Vim fileencoding utf8 reported as ASCII
+Vim fileencoding utf8 reported as ASCII
 
 ## grepping
     grep -c '^PatternAtStartOfLine' <file>  # returns count of occurances
@@ -800,7 +801,7 @@ up/down => zoom in/out
     nomacs -v
 
 - can only fill page for printing
-- can't open `avif`, `webp`
+- can't open `avif`, `heic`, `webp`
 - PrintPreview-PageSetup-Landscape
 
 ### keybindings
@@ -947,6 +948,7 @@ list open files
 # multimedia
     ffprobe -i <avfile> -show_format -v quiet | sed -n 's/duration=//p'  # fractional seconds
     mediainfo <avfile> | grep Encoded
+    mediainfo <avfile> | grep Title
 
 ## mpv
     mpv av://v4l2:/dev/video0
@@ -1608,7 +1610,7 @@ if no luck, can also kill the `Xfce Notify Daemon`
     [[ $(uname -r) =~ 'microsoft' ]] && echo 'WSL2'
 
 ## users
-    echo $EUID
+    [[ $EUID > 0 ]] && echo "not root"
     id -u
     su -
     who  # lists users active on terminals
