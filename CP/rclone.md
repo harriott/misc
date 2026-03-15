@@ -7,8 +7,8 @@
     s ~/.config/rclone/rclone.conf  # should report 600, to protect  pass
 
 # rclone.conf - Windows
-    cpi $Enc/Secure1/rclone.conf $Env:AppData\rclone\rclone.conf
+    cpi $Enc/Secure1/rclone.conf $HADR\rclone\rclone.conf
 
 # Zourit Nextcloud
-    $misc/notDr/notDr.md
+    $coreIT/notDr/readme.md
     $TeNo/md-JH-DailyLife/roles/Cafezoide/online/cc.md

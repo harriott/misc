@@ -23,6 +23,11 @@ vim: nospell:
     \Blindtext[5]
     \usepackage[bible]{blindtext}
 
+# chngcntr
+    \counterwithout{section}{section} % (chngcntr) removes unneeded Chapter number for Sections
+
+functionality included in Memoir
+
 # Currvita
     $JHw/CV/LaTeX/JH-CV.tex
 
@@ -30,8 +35,9 @@ vim: nospell:
     \setlength{\cvlabelwidth}{50mm} % defaults to that of "88/8888-88/8888"
 
 # fontspec
-    \setmainfont{...}
-    \setmonofont{...}
+    \usepackage{fontspec}
+        \setmainfont{...}
+        \setmonofont{...}
 
 # geometry
     \usepackage[hmargin=21mm,vmargin={24mm,26mm}]{geometry}
@@ -92,10 +98,14 @@ vim: nospell:
             \Huge  17pt  20pt  25pt  30pt  36pt  48pt  60pt  72pt  84pt   96pt  108pt  120pt
             \HUGE  20pt  25pt  30pt  36pt  48pt  60pt  72pt  84pt  96pt  108pt  120pt  132pt
 
+`4pt` & `26pt` up require option `extrafontsizes`
+
 ### margins
     \setlrmarginsandblock{30mm}{20mm}{*} % left and right margin
     \setulmarginsandblock{13mm}{25mm}{*} % upper and lower margin
     \checkandfixthelayout
+    ...
+    \begin{document}
 
 ### sectioning
     \chapterstyle{article}
@@ -142,6 +152,8 @@ might require `[article]`
     \includepdf[pages=-]{<pdf3_basename>} % all pages
     ...
     \includepdf[pages=last-1]{<pdf4_basename>} % reverse order
+    ...
+    \includepdfmerge[nup=2x1,scale=0.9]{<pdf5_basename>, 1-2,4-5,7,9}
 
     rg -ttex '\\usepackage\{pdfpages\}' -l > rg-tex-pdfpages.fetl
 

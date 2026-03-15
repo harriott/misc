@@ -4,22 +4,26 @@ vim: nospell:
 
 commands here are generic, except for those under the Ubuntu heading, see also `$OSAB/QR/QR.md`
 
-    dotnet --list-runtimes
-    dotnet --list-sdks
-    info info
-    wcsf=$(wc -l <samplefile>); echo $wcsf
     $cITcr/unix-like/usr_lib_X11_rgb.txt  # colours
     $misc/GRs/DCGRs.sh
     $OSL/bashrc-generic
+    dotnet --list-runtimes
+    dotnet --list-sdks
+    info info
+    rainbow -h | mo  # nicoulaj/rainbow
+    wcsf=$(wc -l <samplefile>); echo $wcsf
 
 Pipe Viewer
 
-# audio - ALSA
+# audio
+    kew -h
+
+## ALSA
     alsamixer -V all
     speaker-test -c 2
     sudo alsactl store
 
-# audio - cmus
+## cmus
     :Man cmus
     cmus --help
     cmus --plugins
@@ -28,7 +32,7 @@ Pipe Viewer
 - C* Music Player
 - sends low urgency notifications
 
-## commands
+### commands
     7        settings
 
     ^c       echo Type :quit<enter> to exit cmus.
@@ -56,11 +60,11 @@ Pipe Viewer
     -        vol -10%
     + =      vol +10%
 
-## media
+### media
 - can play: `mka`, `ogg`, `opus`
 - can't play: `m4a`, `oma`, `omv`, `rmj`, `wma`
 
-# audio - convert
+## convert
     f=sox.flac; ffi $f -c:a libvorbis -aq 4 ${f%.*}.ogg
     for f in *.flac; do ffi "$f" -c:a libvorbis -aq 4 "${f%.*}.ogg" ; done
     for f in *.oma; do ffi "$f" -c:a libvorbis "${f%.*}.ogg" ; done  # at default VBR quality 3
@@ -68,15 +72,15 @@ Pipe Viewer
     for f in *.wav; do ffi "$f" -c:a libvorbis -aq 4 "${f%.*}.ogg"; rm "$f"; done
     for f in *; do ffi "$f" -b:a 128K -vn "${f%.*}.mp3" ; done
 
-## m4a
+### m4a
     for f in *.m4a; do ffi "$f" -c:a libvorbis -aq 4 "${f%.*}.ogg" ; done
 
 VBR quality 4 is closer to the original size
 
-# audio - gst123
+## gst123
     gst123 -Z .  # play random audio files recursively forever
 
-## control
+### control
     left/right -> seek 10 seconds
     down/up -> seek 1 minute
     PgDn/Up -> seek 10 minute
@@ -87,7 +91,7 @@ VBR quality 4 is closer to the original size
     q -> quit
     ? -> help
 
-# audio - MPD
+## MPD
     mpd
     mpd --kill
     pgrep mpd
@@ -95,13 +99,13 @@ VBR quality 4 is closer to the original size
 - can play: `m4a`, `mka`, `ogg`, `opus`, `wma`
 - Music Player Daemon
 
-## vimpc - normal mode
+### vimpc - normal mode
 - `-`/`+` decrease/increase volume
 - `ZZ` quits completely
 - `space` start/stop
 - `backspace`/`s` stop playlist
 
-### song
+#### song
 - `f`/`F` scroll to current song
 - `e` toggle info
 - `E` toggle repeat
@@ -110,7 +114,7 @@ VBR quality 4 is closer to the original size
 - `S` toggle single
 - `<`/`>` previous/next song
 
-# audio - playerctl
+## playerctl
     playerctl  # quick guide
     playerctl -l  # (--list-all) available players - firefox, mpd
     playerctl metadata  # from the current player
@@ -120,7 +124,7 @@ VBR quality 4 is closer to the original size
     playerctl status
     playerctl stop
 
-# audio - PulseAudio
+## PulseAudio
     pactl -h
     pactl info
     pactl list short
@@ -128,7 +132,7 @@ VBR quality 4 is closer to the original size
     pulseaudio -k  # --kill
     pulsemixer
 
-## libpulse
+### libpulse
     pacat --list-file-formats
     pactl list sinks short
     pactl list sources short
@@ -139,7 +143,7 @@ VBR quality 4 is closer to the original size
     parecord -d 16 parecord.flac
     pavucontrol
 
-# audio - SoX
+## SoX
     rec -c 2 sox.flac  # record in stereo
     soxi <audioFile>  # info, including duration
 
@@ -309,7 +313,7 @@ defines variables for `kpathsea`
     tac
     shuf
     sk --ansi -i -c 'rg --color=always --line-number "{}"'
-    sort -ro <file> <file>  # reverse sort in place
+    sort <file> | uniq -d  # prints only duplicate lines
     wc -l <file>  # counts lines
     xargs < <file_to_return_as_one_line>
 
@@ -330,7 +334,8 @@ defines variables for `kpathsea`
     za $cIThul/gawk.pdf
     {print $1,sprintf("%08d",$2)} # 2nd field is 0-padded to length 8
 
-- `'{if($1==2){if(gsub(/┊/,"┊")<1){$3=$3"┊"}}}{print $1,$2,$3}'` adds a ┊ if there aren't 2
+- `'{if($1==2){if(gsub(/┊/,"┊")<1){$3=$3"┊"}}}{print $1,$2,$3}'` adds a `┊` if there aren't 2
+- `'{if($1~/^$/)print $0}` # print row if nothing in column 1
 - `-F` = `--field-separator`
 - `-i` = `--include`
 - GNU Awk
@@ -340,6 +345,7 @@ defines variables for `kpathsea`
 
 ### built-in variables
 - `FILENAME` name of the current input-file
+- `FNR` input record number in the current input file
 - `FS` input field separator character (default = any space and tab characters)
 - `NR` number of input records seen so far
 - `NF` number of fields in an input record
@@ -372,6 +378,7 @@ defines variables for `kpathsea`
 ### select lines
     awk 'FNR==2 {print}' <file>  # line 2
     awk '{if(NR>=2){print}}' <file>  # lines from 2
+    awk -i inplace 'FNR==1 {print tolower($0)}' $1  # only line 1
 
 ## dos2unix
     dos2unix -i *
@@ -420,6 +427,7 @@ Vim fileencoding utf8 reported as ASCII
     sed G <file>  # double-spaced
 
 - `-E`/`-r` (`--regexp-extended`) extended regular expressions
+- `[0-9]` = `[[:digit:]]`
 - GNU sed
 - linewise, so don't try to replace newline
 - stream editor
@@ -484,7 +492,6 @@ Vim fileencoding utf8 reported as ASCII
 - FILE(1)
 - `fsearch`: `Ctrl+p` = Preferences
 - install(1)
-- rm(1)
 
 ## compressed
     :Man gzip
@@ -563,6 +570,7 @@ find(1)
 ## investigations
     diff --no-dereference -qr dir1 dir2
     find . -name '.?*'  #  recursively list hidden files
+    for n in *; do find "$n" | echo "$n"; done
     stat -c '%a %n' *  # show octal permissions
 
 ### by extension
@@ -576,16 +584,21 @@ find(1)
     echo `find . -type d | wc -l`-1 | bc  # counts all subdirectories
     find . -name "*" -type f -path '*/.git/*' | wc
     for d in $(fd -d1 -td); do find "$d" | o "$(wc -l) : $d"; done  # files in directories
-    for n in *; do find "$n" | echo "$n"; done
     isutf8 **/* | wc -l  # non UTF-8 files (fails when too many)
 
 #### including hidden
     find . | wc -l  # very fast in $Drpbx
-    ls **/* | wc -l  # all of the files
+    find . -type f | sed 's/\.\/.*\.//' | sort | uniq -c  # by extension
 
-##### by extension
-    find . -type f | sed 's/\.\/.*\.//' | sort | uniq -c
-    ls -ar | rev | cut -d'.' -f1 | rev | sort | uniq -c | sort -r
+### ls
+    dircolors  # LS_COLORS=...
+    dircolors --help
+    dircolors --version
+    dircolors -p  # --print-database
+    ls -l  # show permissions, owners, exact sizes, and date-time
+
+- `-d` (= `--directory`)
+- ls(1)
 
 ### mlocate
     locate .asc | grep '\.asc$'
@@ -645,17 +658,10 @@ find(1)
 - `-s` (`--symbolic`) not hard
 - ln(1)
 
-## ls
-    dircolors  # LS_COLORS=...
-    dircolors --help
-    dircolors --version
-    dircolors -p  # --print-database
-    ls -l  # show permissions, owners, exact sizes, and date-time
+## rm
+rm(1)
 
-- `-d` (= `--directory`)
-- ls(1)
-
-## rm with Pipe Viewer
+### with Pipe Viewer
 1. `find <directory> | wc -l  # gets the <filecount>`
 2. `sudo rm -rv <directory> | pv -l -s <filecount> > /dev/null  # shows progress for rm`
 
@@ -668,10 +674,9 @@ find(1)
 > /usr/bin/rsnapshot sync: completed successfully
 
 ## rsync
+    rsync -h  # --help
     rsync -irtv --delete $TeNo/ $Drpbx/Play1/TextNotes 2>&1 | tee $Drpbx/Play1/TextNotes_rsync.log
     rsync -inrtv --delete --progress path1/large_file_dir1/ path2/large_file_dir2
-
-output info: `YXcstpoguax`
 
 ### options
     --exclude=PATTERN
@@ -697,6 +702,38 @@ output info: `YXcstpoguax`
     - `-p` (`--perms`) keep permissions
 - `-H` (`--hard-links`)
 - `-X` (`--xattrs`) keep extended attributes
+
+### output info
+    YXcstpoguax  path/to/file
+    |||||||||||
+    ||||||||||╰- x: The extended attribute information changed
+    |||||||||╰-- a: The ACL information changed
+    ||||||||╰--- u: The u slot is reserved for future use
+    |||||||╰---- g: Group is different
+    ||||||╰----- o: Owner is different
+    |||||╰------ p: Permission are different
+    ||||╰------- t: Modification time is different
+    |||╰-------- s: Size is different
+    ||╰--------- c: Different checksum (for regular files), or
+    ||              changed value (for symlinks, devices, and special files)
+    |╰---------- the file type:
+    |            f: for a file,
+    |            d: for a directory,
+    |            L: for a symlink,
+    |            D: for a device,
+    |            S: for a special file (e.g. named sockets and fifos)
+    ╰----------- the type of update being done::
+                 <: file is being transferred to the remote host (sent)
+                 >: file is being transferred to the local host (received)
+                 c: local change/creation for the item, such as:
+                    - the creation of a directory
+                    - the changing of a symlink,
+                    - etc.
+                 h: the item is a hard link to another item (requires --hard-links).
+                 .: the item is not being updated (though it might have
+                    attributes that are being modified)
+                 *: means that the rest of the itemized-output area contains
+                    a message (e.g. "deleting")
 
 ## touch
 - `-c` (`--no-create`)
@@ -742,6 +779,109 @@ fingerprint: `xxxx xxxx xxxx xxxx xxxx  xxxx xxxx xxxx xxxx xxxx`
     gpg -ao private.asc --export-secret-keys jh
     kbxutil ~/.gnupg/pubring.kbx | moar  # for a more detailed exploration
 
+# hw
+    lsusb
+    solaar show
+    sudo chmod 777 /run/media/jo/TOSHIBA
+    sudo chmod 644 $Obc/autostart/urxvtl.sh
+    uname -m  # reports eg  x86_64
+    xbacklight -set 50
+    :e /run/media/jo
+
+## battery
+    acpi -h
+    batstat
+
+## CPU
+    cpupower frequency-info
+    sudo cpupower frequency-set -u 3400Mhz
+    sudo turbostat --interval 0.1 --num_iterations 1
+    sudo turbostat --interval 2 --quiet
+
+## graphics
+    cat /sys/class/graphics/*/virtual_size
+    xdpyinfo | grep dimensions: | awk '{print $2}' # combined screen resolution
+    xrandr  # all available monitor resolutions
+    xrandr | grep ' connected'
+    xvidtune -show  # Modeline-style information
+
+### fbset
+    fbset -h
+    sudo fbset
+
+framebuffer device settings
+
+### query the card specs
+    echo $(xrandr -q | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f1) $(xrandr -q | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f2)  # screen size
+    GPU=$(lspci | grep VGA | cut -d ":" -f3);RAM=$(cardid=$(lspci | grep VGA |cut -d " " -f1);lspci -v -s $cardid | grep " prefetchable"| cut -d "=" -f2);echo $GPU $RAM
+    lspci | grep -e VGA -e 3D  # gets just the graphics card name
+
+## keyboard
+    xev | awk -F'[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }'  # scancodes
+
+### for XF86 symbols
+    xmodmap -pke | grep Audio
+    xmodmap -pke | grep Brightness
+
+## printing - CUPS
+    lnav /var/log/cups
+    lpadmin
+    lpq  # show printer queue status
+    lpstat -p -d  # show status of printers, including which is set as default
+    lpstat -s  # status, including URL
+    sudo systemctl status cups.service
+
+Command-Line Printing and Options  http://localhost:631/help/options.html
+
+### cancel print jobs
+    cancel -a
+    lprm
+
+### lp
+    lp -n <number_of_copies> <image>
+    lp -o scaling=200 <image>  # prints divided across 4 pages
+
+can't center image on page
+
+#### prints all images in a directory
+    lp *
+    lp *.JPG
+    lp *.png -o ColorModel=KGray  # black cartridge only
+
+#### orientation
+automatically selects the best orientation for filling the page
+
+##### specify
+    -o orientation-requested=3 - portrait orientation (no rotation)
+    -o orientation-requested=4 - landscape orientation (90 degrees)
+    -o orientation-requested=5 - reverse landscape or seascape orientation (270 degrees)
+    -o orientation-requested=6 - reverse portrait or upside-down orientation (180 degrees)
+
+## printing - HPLIP
+    hp-info  # reports version and pops up info
+    hp-levels  # takes a little while to show the ink levels (after "Using device : ...")
+    hp-printsettings  # dialog pop-up, but no dpi's
+    hp-setup -h
+    hp-setup -r  # GUI to remove printer
+    hp-systray & disown  # HPLIP Status Service tray icon (access to HP Device Manager)
+    hp-testpage
+    hp-toolbox &  # HP Device Manager
+
+## webcam
+    cameractrls
+
+### Guvcview
+    guvcview &
+    ~/my_video-n.mkv
+
+`Logitech B525`: `Audio Controls > Audio API > PULSEAUDIO`
+
+### V4l-utils
+    qv4l2 &
+    v4l2-ctl --list-devices
+    v4l2-ctl -d /dev/video0 --list-ctrls
+    v4l2-ctl -d /dev/video1 --list-ctrls
+
 # imagey
     colorpicker --one-shot --preview
     gphoto2 --auto-detect  # list detected cameras
@@ -775,7 +915,6 @@ up/down => zoom in/out
     magick -flatten transparent.png white_background.png
     magick -list
     magick -list gravity
-    magick <colourimage> -colorspace Gray <grayimage>
     magick <people> -paint 9 <people-oil>
     magick <positive> -negate <negative>
     for i in $(ls); do magick -resize 10% $i r$i; done
@@ -795,6 +934,7 @@ up/down => zoom in/out
     for i in *.png; do magick $i -fill orange -colorize 100% ${i%.*}-orange.ico; done
     for i in *.png; do magick $i -fill red -colorize 100% ${i%.*}-red.ico; done
     for i in *.png; do magick $i -fill yellow -colorize 100% ${i%.*}-yellow.ico; done
+    magick <colourimage> -colorspace Gray <grayimage>
 
 ## nomacs
     nomacs -h
@@ -1301,11 +1441,11 @@ Bash Line Editor
     set -v  # show code lines as they're used
     set -x : show commands and arguments
 
-#### unset
-    var1=1; var2=2
-    echo $var1 $var2
-    unset var1 var2
+change `-` to `+` to remove the option
+
+### unset
     unset **<tab> # invokes  fzf (if no  ble.sh)
+    var1=1; var2=2; echo $var1 $var2; unset var1 var2
 
 ### su[do]
     su -  # login shell
@@ -1414,14 +1554,17 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
     - `ctrl+s` stop
 
 # sort
-    sort -o <file> <file>  # in-place
+    sort -or <file> <file>  # reverse sort in place
+    sort -t, -k2,2 -k3.2,3.3 -k4  # sort csv on 2nd column, then on 2nd & 3rd characters of 3rd column, then on text from 4th column on
 
 - `-h` (`--human-numeric-sort`)
 - `-n` (`--numeric-sort`)
 - `-r` (`--reverse`)
 - `-o` (`--output=FILE`)
 - `-u` (`--unique`)
+- `-V` (`--version-sort`) natural sort of (version) numbers within text
 - `--help`
+- ignores `!#%*.`
 - `--version`
 
 # system
@@ -1817,7 +1960,10 @@ https://packages.ubuntu.com/
 
 # WAN
     if wget -q --spider google.com; then echo online; fi
+    ping -c 3 1.1.1.1  # CloudFlare's DNS
     pkill radio; radio -K  # quit & kill instances of  radio-active
+
+avoid Dropbox flexible file names: `fd -u '"|\*|:|<|>|\?|\\|\|'`
 
 ## Carburetor
     flatpak info io.frama.tractor.carburetor
