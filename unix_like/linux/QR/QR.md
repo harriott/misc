@@ -69,6 +69,7 @@ Pipe Viewer
     for f in *.flac; do ffi "$f" -c:a libvorbis -aq 4 "${f%.*}.ogg" ; done
     for f in *.oma; do ffi "$f" -c:a libvorbis "${f%.*}.ogg" ; done  # at default VBR quality 3
     for f in *.rmj; do ffi "$f" -c:a libvorbis -aq 4 "${f%.*}.ogg" ; done
+    for f in *.wma; do ffi "$f" -c:a libvorbis -aq 4 "${f%.*}.ogg" ; done
     for f in *.wav; do ffi "$f" -c:a libvorbis -aq 4 "${f%.*}.ogg"; rm "$f"; done
     for f in *; do ffi "$f" -b:a 128K -vn "${f%.*}.mp3" ; done
 
@@ -78,6 +79,7 @@ Pipe Viewer
 VBR quality 4 is closer to the original size
 
 ## gst123
+    gst123 -h  # --help
     gst123 -Z .  # play random audio files recursively forever
 
 ### control
@@ -492,6 +494,7 @@ Vim fileencoding utf8 reported as ASCII
 - FILE(1)
 - `fsearch`: `Ctrl+p` = Preferences
 - install(1)
+- `lsd`: `-I` (`--ignore-glob`)
 
 ## compressed
     :Man gzip
@@ -569,6 +572,7 @@ find(1)
 
 ## investigations
     diff --no-dereference -qr dir1 dir2
+    find $Drpbx | awk '{print length,$0}' | sort -n  # path lengths
     find . -name '.?*'  #  recursively list hidden files
     for n in *; do find "$n" | echo "$n"; done
     stat -c '%a %n' *  # show octal permissions
@@ -827,7 +831,6 @@ framebuffer device settings
     lnav /var/log/cups
     lpadmin
     lpq  # show printer queue status
-    lpstat -p -d  # show status of printers, including which is set as default
     lpstat -s  # status, including URL
     sudo systemctl status cups.service
 
@@ -1593,7 +1596,7 @@ case conversions: `var=vAlUe; o ${var^^}; o "${var,,}"`
 - maximized (horizontally or vertically) are indicated by (horizontal or vertical) double arrow, and break tiling
 -`modkey+left_mouse_drag` move
 -`modkey+right_mouse_drag` resize
--`modkey+s` awful.hotkeys_popup
+-`modkey+s` = `awful.hotkeys_popup`
 - on top clients are indicated by a caret
 
 ## boot
@@ -1959,6 +1962,8 @@ https://packages.ubuntu.com/
     neovide &
 
 # WAN
+    fping -h
+    gping google.com
     if wget -q --spider google.com; then echo online; fi
     ping -c 3 1.1.1.1  # CloudFlare's DNS
     pkill radio; radio -K  # quit & kill instances of  radio-active
@@ -2060,6 +2065,10 @@ avoid Dropbox flexible file names: `fd -u '"|\*|:|<|>|\?|\\|\|'`
 
 - `-E` (`--adjust-extension`)
 - `-O file` (`--output-document=file`)
+
+## MTR
+- `h`/`?` help
+- `q` quits
 
 ## rdrview
     i rdrview

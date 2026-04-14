@@ -1,7 +1,9 @@
 #!/bin/bash
 
-# Joseph Harriott  Wed 09 Apr 2025
+# https://harriott.github.io/ - Tue 14 Apr 2026
+
 # bash $misc/GRs/cGRs-needed.sh
+# /mnt/SDU3D1TB/Dropbox/JH/core/IT/onGitHub/misc/GRs/cGRs-needed.sh
 # repositories needed for my system builds
 # $GRs, the machine-local directory, is exported in  $machBld/export-GRs ($OSAB > mb-...)
 
@@ -32,12 +34,14 @@ set -e  # terminate on a fail
 # sed -i 's/\r//' $cITcc/unix-linux/trapd00r-LS_COLORS/lscolors.sh  # ensure no CRLFs
 # # lscolors.sh  sourced in  $MSn/WSL/bashrc  $OSAB/nodes/Bash/bashrc-generic
 
-# #=> mpv
-# rsync -irtv --delete $GRs/d-CP/d-mpv/r-mfcc64-mpv-scripts/ $cITcc/unix-linux/mfcc64-mpv-scripts
-# # visualizer.lua  symlinked in  $OSAB/nodes/set/jo-2-whenWM-1.sh
-
-# #=> msmtp-scripts-vim
-# rsync -irtv --delete $cGRs/d-unix-like/d-linux/r-marlam-msmtp/scripts/vim/ $cITcc/CP/msmtp-scripts-vim
+#=> mpv-scripts
+[ -d $cITcc/CP/mpv-scripts ] || mkdir -p $cITcc/CP/mpv-scripts
+# for  $OSAB/nodes-set/jo-2-whenWM-1.sh
+cp $GRs/d-CP/d-mpv/r-ayghub-open-dir/open-dir.lua $cITcc/CP/mpv-scripts
+cp $GRs/d-CP/d-mpv/r-mfcc64-mpv-scripts/visualizer.lua $cITcc/CP/mpv-scripts
+cp $GRs/d-CP/d-mpv/r-mfcc64-mpv-scripts/firequalizer15.lua $cITcc/CP/mpv-scripts
+cp $GRs/d-CP/d-mpv/r-yuukidach-mpv-scripts/show_filename.lua $cITcc/CP/mpv-scripts
+cp $GRs/d-CP/d-mpv/r-CounterPillow-mpv-quack/quack.lua $cITcc/CP/mpv-scripts
 
 #=> tmux
 # elements of these repositories sourced in  $OSL/nodes/terminal-tmux/tmux.conf

@@ -63,8 +63,11 @@ d-CP/d-encoding/r-tj-git-extras https://github.com/tj/git-extras
 d-CP/d-icons/r-feathericons-feather https://github.com/feathericons/feather
 d-CP/d-icons/r-Keyamoon-IcoMoon-Free https://github.com/Keyamoon/IcoMoon-Free
 d-CP/d-icons/r-twbs-icons https://github.com/twbs/icons
+d-CP/d-mpv/r-ayghub-open-dir https://github.com/ayghub/open-dir
+d-CP/d-mpv/r-CounterPillow-mpv-quack https://github.com/CounterPillow/mpv-quack
 d-CP/d-mpv/r-mfcc64-mpv-scripts https://github.com/mfcc64/mpv-scripts
 d-CP/d-mpv/r-MikelSotomonte-mpv-waveform https://github.com/MikelSotomonte/mpv-waveform
+d-CP/d-mpv/r-yuukidach-mpv-scripts https://github.com/yuukidach/mpv-scripts
 d-CP/d-Vim-Nvim/r-albingroen-quick.nvim https://github.com/albingroen/quick.nvim
 d-CP/d-Vim-Nvim/r-alextricity25-nvim_weekly_plugin_configs https://github.com/alextricity25/nvim_weekly_plugin_configs
 d-CP/d-Vim-Nvim/r-Allaman-nvim https://github.com/Allaman/nvim
@@ -85,6 +88,7 @@ d-CP/d-Vim-Nvim/r-molleweide-LuaSnip-snippets_nvim https://github.com/molleweide
 d-CP/d-Vim-Nvim/r-neovim-neovim https://github.com/neovim/neovim
 d-CP/d-Vim-Nvim/r-neovim-nvim-lspconfig https://github.com/neovim/nvim-lspconfig
 d-CP/d-Vim-Nvim/r-nvim-lua-kickstart.nvim https://github.com/nvim-lua/kickstart.nvim
+d-CP/d-Vim-Nvim/r-nvim-treesitter-nvim-treesitter https://github.com/nvim-treesitter/nvim-treesitter
 d-CP/d-Vim-Nvim/r-pgosar-CyberNvim https://github.com/pgosar/CyberNvim
 d-CP/d-Vim-Nvim/r-rafi-vim-config https://github.com/rafi/vim-config
 d-CP/d-Vim-Nvim/r-spatoon-nvim-config https://gitlab.com/spatoon/nvim-config
@@ -109,6 +113,9 @@ d-CP/d-Vim-Vim/r-thoughtstream-Damian-Conway-s-Vim-Setup https://github.com/thou
 d-CP/d-Vim-Vim/r-tmhedberg-SimpylFold https://github.com/tmhedberg/SimpylFold
 d-CP/d-Vim-Vim/r-vim-utils-vim-troll-stopper https://github.com/vim-utils/vim-troll-stopper
 d-CP/d-Vim-Vim/r-vim-vim https://github.com/vim/vim
+d-CP/d-WAN/d-Firefox/r-arkenfox-user_js https://github.com/arkenfox/user.js
+d-CP/d-WAN/d-Firefox/r-pyllyukko-user_js https://github.com/pyllyukko/user.js
+d-CP/d-WAN/d-Firefox/r-yokoffing-Betterfox https://github.com/yokoffing/Betterfox
 d-CP/d-WAN/d-npm-Astro/r-Charca-astro-blog-template https://github.com/Charca/astro-blog-template
 d-CP/d-WAN/d-npm-Astro/r-ihechikara-ihechikara-blog https://github.com/ihechikara/ihechikara-blog
 d-CP/d-WAN/d-npm-Astro/r-johny-astro-photo-gallery-example https://github.com/johny/astro-photo-gallery-example

@@ -36,6 +36,7 @@ syntax of this long file is ensured in `$vfv/filetype.vim`
     $cITcc/forMSWin/AV/mpv-x86_64-v3-20260311-git-24500c5/doc
 
     mpv <audio.ogg>
+    mpv --list-options
     $misc/CP/mpv.conf
 
 - can play omv's
@@ -58,7 +59,8 @@ syntax of this long file is ensured in `$vfv/filetype.vim`
 
 #### OSD
     delete => show progress bar
-    o/O    => show time/total
+    o    => show progress bar
+    O    => show time/total
 
 #### playback speed
     BACKSPACE -> reset
@@ -74,8 +76,8 @@ syntax of this long file is ensured in `$vfv/filetype.vim`
     10 minutes  shift+pgup/pgdwn
 
 #### volume
-- `/` `9` decrease
-- `*` `0` increase
+- `/`,`9`,`wheel_down` -2
+- `*`,`0`,`wheel_up` +2
 
 ### not in PS
     mpv -h  # --help
@@ -204,6 +206,7 @@ E-book viewer
     \the\length  % prints that length
     \title{your title} ... \begin{document} ... \maketitle
     \today
+    \usepackage{<package>}
 
 ### figure environment
 > LaTeX Warning: 'h' float specifier changed to 'ht'.
@@ -232,7 +235,7 @@ E-book viewer
 
 ### sections
     \section*{ unnumbered section }
-    \setcounter{secnumdepth}{3} % default
+    \setcounter{secnumdepth}{3} % = default. 0 turns numbering off.
     \stepcounter{section} % increase section number by 1
 
 `titlesec`: `\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}`
@@ -648,6 +651,80 @@ variables: `system-type`, `window-system`
 
 Spacemacs documentation
 
+# file contents - ripgrep
+    o $RIPGREP_CONFIG_PATH
+    rg -- ---@ $DWp
+    rg -h  # -help
+    rg -V  # --version
+
+## nodes
+- `--no-ignore`
+- `--one-file-system` don't cross file system boundaries
+- `-.` (= `--hidden`)
+- `-d NUM` (= `--max-depth=n`) `0` limits to given paths
+- `-L` (= `--follow`) symlinks
+- `-u (= `--unrestricted) = `--no-ignore`
+- `-uu` = `--no-ignore -.`
+- `-uuu` = `--binary --no-ignore -.`
+
+### file types
+    rg --type-list  # $vfv/syntax/rgtl.vim
+    rg <options> <pattern> [<path>]
+
+- `.dw` not known
+- no group for gitconfigs
+- `-t<type>` (= `--type=<type>`
+- `-T<type>` (= `--type-not=<type>`
+
+### globs
+- `-g` (= `--glob=<glob>`) `'!dir/dir'`
+- `--iglob=<glob>` (like using `--glob-case-insensitive`)
+
+## output
+- `-A n` (= `--after-context=n`)
+- `-B n` (= `--before-context=n`)
+- `-C n` (= `--context=n`)
+- `--field-match-separator=':::'` - avoiding the often ambiguous :
+- `--files-without-match`
+- `-l` (= `--files-with-matches`)
+- `-m n` (= `--max-count=n`) matches/file
+- `-N` (= `--no-line-number`)
+- `-r <replacement>` (= `--replace=<replacement>`) in output
+- `-v` (= `--invert-match`) prints lines that don't match
+- `--sort=<by>` `modified`, `none`, `path`
+- `--sortr=<by>` descending
+- `--trim` leading whitespace
+
+## regex
+- Crate
+- `-i` (= `--ignore-case`)
+- `-U` (= `--multiline`) searching across multiple lines
+    - `--multiline-dotall`  . matches line terminators
+- `-w` (= `--word-regexp`) use word boundaries
+- `-x` (`--line-regexp`) = `^search$`
+
+### case
+- `-i` (= `--ignore-case`)
+- `-s` (= `--case-sensitive`) default
+- `-S` (= `--smart-case`)
+
+## searches
+    rg '<someText>|<otherText>'  # searches recursively in files
+    rg '\.emacs\.d'
+    rg --no-ignore 'sometext'  # allows searching into gitignored places
+    rg -i <case-insensitive>
+    rg -tconfig  # search in *.config's
+    rg -thtml -tcss <webish>
+    rg -tmd '[\p{Devanagari}]'  # finds Devanagari characters
+    rg -tmd '\$Sig'
+    rg -tmd '\{TNW}'
+    rg -ttxt grow
+    rg -uu <someText>  # ignores ignore files, and searches in hidden stuff
+    rg <someText> **/*.ext
+    rg 'url = ' **\*.git\config
+
+in JH: `$DJH/search/searches.md`
+
 # file contents - toolong
     tl $TeNo/md-JH-Private/Private.md
 
@@ -661,7 +738,7 @@ no refresh
 
 `PeaZip`: `Ctrl+l` = `Extract all`
 
-## 7-Zip
+## archive - 7-Zip
     7z  # help
     7z x <pw'd_zip>
 
@@ -670,6 +747,10 @@ no refresh
 ### compression
 - `-mx0` none (copy)
 - `-mx9` ultra
+
+## archive - comic book
+- `.cb7`, `.cbr`, `.cbt`, `.cbz`
+- `Yazi` decompresses them to folder
 
 ## fd
     fd ' \(2\)'  # as created by  Insync
@@ -753,6 +834,21 @@ by gokcehan
 ## sharkdp/bat
     bat --list-themes
     bat -h
+
+## superfile
+    spf
+
+### internal commands
+- `:` command execution bar
+- `?` help
+- `f` toggle preview window
+- `m` metadata toggle focus
+- `n` new file panel
+- `o` sort options
+- `p` processes toggle focus
+- `s` sidebar toggle focus
+- `w` close file panel
+- `<tab>` switch to file panel
 
 ## Vifm help
 - can't quit to current directory
@@ -972,80 +1068,6 @@ can convert from `heic`, `WebP`
 - `1.3∙:1` =`4:3`
 - `1.7∙:1` =`16:9` = `widescreen`
 
-# ripgrep
-    o $RIPGREP_CONFIG_PATH
-    rg -- ---@ $DWp
-    rg -h  # -help
-    rg -V  # --version
-
-## nodes
-- `--no-ignore`
-- `--one-file-system` don't cross file system boundaries
-- `-.` (= `--hidden`)
-- `-d NUM` (= `--max-depth=n`) `0` limits to given paths
-- `-L` (= `--follow`) symlinks
-- `-u (= `--unrestricted) = `--no-ignore`
-- `-uu` = `--no-ignore -.`
-- `-uuu` = `--binary --no-ignore -.`
-
-### file types
-    rg --type-list  # $vfv/syntax/rgtl.vim
-    rg <options> <pattern> [<path>]
-
-- `.dw` not known
-- no group for gitconfigs
-- `-t<type>` (= `--type=<type>`
-- `-T<type>` (= `--type-not=<type>`
-
-### globs
-- `-g` (= `--glob=<glob>`) `'!dir/dir'`
-- `--iglob=<glob>` (like using `--glob-case-insensitive`)
-
-## output
-- `-A n` (= `--after-context=n`)
-- `-B n` (= `--before-context=n`)
-- `-C n` (= `--context=n`)
-- `--field-match-separator=':::'` - avoiding the often ambiguous :
-- `--files-without-match`
-- `-l` (= `--files-with-matches`)
-- `-m n` (= `--max-count=n`) matches/file
-- `-N` (= `--no-line-number`)
-- `-r <replacement>` (= `--replace=<replacement>`) in output
-- `-v` (= `--invert-match`) prints lines that don't match
-- `--sort=<by>` `modified`, `none`, `path`
-- `--sortr=<by>` descending
-- `--trim` leading whitespace
-
-## regex
-- Crate
-- `-i` (= `--ignore-case`)
-- `-U` (= `--multiline`) searching across multiple lines
-    - `--multiline-dotall`  . matches line terminators
-- `-w` (= `--word-regexp`) use word boundaries
-- `-x` (`--line-regexp`) = `^search$`
-
-### case
-- `-i` (= `--ignore-case`)
-- `-s` (= `--case-sensitive`) default
-- `-S` (= `--smart-case`)
-
-## searches
-    rg '<someText>|<otherText>'  # searches recursively in files
-    rg '\.emacs\.d'
-    rg --no-ignore 'sometext'  # allows searching into gitignored places
-    rg -i <case-insensitive>
-    rg -tconfig  # search in *.config's
-    rg -thtml -tcss <webish>
-    rg -tmd '[\p{Devanagari}]'  # finds Devanagari characters
-    rg -tmd '\$Sig'
-    rg -tmd '\{TNW}'
-    rg -ttxt grow
-    rg -uu <someText>  # ignores ignore files, and searches in hidden stuff
-    rg <someText> **/*.ext
-    rg 'url = ' **\*.git\config
-
-in JH: `$DJH/search/searches.md`
-
 # sqlite3
     sqlite3 <db.db>
     sqlite3 -help
@@ -1147,6 +1169,7 @@ messes up if terminal is resized
 - carriage return (U+000D) returns the cursor to the left of the line (usually just before line feed on MSWin)
 - `chmln.sd`
 - finding characters
+- Tree-sitter CLI: `tree-sitter -h`
 
 ## Vim
     $HOME/_viminfo
@@ -1168,6 +1191,7 @@ messes up if terminal is resized
     PS> gvim -c "set columns=217 lines=54"  # maximum on a 1600x900 screen with rhs taskbar
 
 # WAN
+    curl -h
     curl ifconfig.co/city
     curl ifconfig.co/country
     librespeed-cli -h

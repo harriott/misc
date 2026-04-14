@@ -24,7 +24,7 @@ vim: nospell:
     \usepackage[bible]{blindtext}
 
 # chngcntr
-    \counterwithout{section}{section} % (chngcntr) removes unneeded Chapter number for Sections
+    \counterwithout{section}{Chapter} % removes unneeded Chapter number from section headings
 
 functionality included in Memoir
 
@@ -70,7 +70,7 @@ functionality included in Memoir
     \ding{80}  % a little star
     \ding{220}  % a fat arrow
 
-# class
+# classes
     \documentclass[varwidth]{standalone}
 
 ## Memoir
@@ -118,6 +118,7 @@ functionality included in Memoir
 #### lower level headings - section tweaks
     \setsecheadstyle{\color{gray}\Large\bfseries}
     \setsecheadstyle{\raggedright} % avoids margin overruns
+    \setsecnumdepth{subsection} % = \setcounter{secnumdepth}{2}
 
 ##### sub
     \setaftersubsecskip{0em}  % text follows heading inline
