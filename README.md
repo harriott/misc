@@ -8,8 +8,7 @@
 nothing special
 
 ## nodes
-    $misc/unix_like/linux/daycodes.sh
-
+- my day-codes: `$misc/daycodes/readme.md`
 - GRs get/update: `$misc/GRs/cGRs.md`
 - ITr manage: `$misc/ITr/ITr.md`
 
