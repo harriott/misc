@@ -4,11 +4,11 @@
 # bash $misc/CP/workHours/makeGraphs.sh
 
 set -e
-cd $JHw/hours
+cd $Jwk/hours
 cp $TeNo/md-JH-DailyLife/roles/roles.md roles-copy.md
 perl $misc/CP/workHours/makeDats.pl
-rm "$JHw/hours/roles-copy.md"
-bCcg="$JHw/hours/barChart-chart.gpi"
+rm "$Jwk/hours/roles-copy.md"
+bCcg="$Jwk/hours/barChart-chart.gpi"
 cp $misc/CP/workHours/barChart-y2014.gpi $bCcg
 sed -i '1,4d' $bCcg
 gnuplot $bCcg

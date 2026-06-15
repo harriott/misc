@@ -3,7 +3,7 @@
 # --------------------------------------------------------------------
 # grab my personal WorkLogs into  *.dat  files
 #
-# in  $JHw/hours/  perl $misc/CP/workHours/makeDats.pl
+# in  $Jwk/hours/  perl $misc/CP/workHours/makeDats.pl
 # --------------------------------------------------------------------
 
 use feature 'say';

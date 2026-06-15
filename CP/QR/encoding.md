@@ -1,9 +1,11 @@
 vim: nospell:
 
+    $ITref/CP/encoding/coding/learnfortran.f90
+    $ITref/CP/encoding/learnyaml.yaml
+    $ITref/CP/encoding/learntoml.toml
     /* a single-line CSS comment */
     code-minimap $misc/CP/QR/QR.md
     rustc -V  # --version
-    wiki/JSON
     yj -ty <file.toml >file.yml
     zig version
 
@@ -91,6 +93,7 @@ convert mp4's first to MPEG-2 transport streams (`ffmhb -i 1.mp4 -c copy 1.ts`) 
     git branch --show-current
     git branch -a  # lists local & remote branches
     git branch -m <new_name_of_branch>
+    git checkout main
     git grep <caseSensitiveText>
     git init -b gh  # --initial-branch=<branch_name>
     git push gh +master  # force push to remote
@@ -134,7 +137,6 @@ in `$cITCP/networking/browsers`, `git grep activeInstall $(git rev-list --all) -
     git checkout -q HEAD~9; git rev-parse --short HEAD  # go back 9 commits and print the short hash
     git checkout <commit>  # go back to the commit (hash or tag)
     git checkout master  # return to current state of project
-    git checkout master  # return to current state of project
 
 ## configurations
     :%s#https://github.com/#git@github.com:#g
@@ -171,6 +173,7 @@ no search functionality
 
 ## remotes
     gh repo clone
+    git clone --depth 1 <URL> # doesn't bring in other branches
     git clone https://github.com/... [target_directory] --depth=n  # clones only to commit depth n
     git pull --unshallow
     git remote -v
@@ -190,6 +193,8 @@ git-fetch
 - `j/k/-/space/home/end`  movements
 
 # Go
+    $ITref/CP/encoding/coding/learngo.go
+    go clean -modcache
     go env
     go version
     lazyjournal -h
@@ -206,8 +211,8 @@ git-fetch
 - "Page Not Found" if no theme...
 
 # gnuplot
-    $cITcr/CP/gnuplot
-    $jtCP/gnuplot
+    $ITref/CP/gnuplot
+    $ITmCP/gnuplot
     gnuplot -e 'set terminal'  # lists those available
     gnuplot -e 'show datafile commentschars'
     gnuplot -e 'show loadpath'
@@ -223,41 +228,13 @@ git-fetch
     q[uit]
 
 # Java
+    $ITref/CP/encoding/coding/LearnJava.java
     java -?
     java -version
     PS> where.exe java
 
-# JavaScript - Node.js
-    node -h  # --help
-    node -v  # --version
-
-## npm
-    npm install
-    npm ls -g
-    npm un[install] -g [<package>]
-    npm up[date] -g [<package>]
-    npm prefix -g  # =  npm config get prefix
-    npm -v  # --version
-    npx cowsay goodbye!''
-
-package manager
-
-### Astro
-    npm run dev -- -h  # --help
-    npx astro --help
-    npx astro --version
-    npx astro docs  # launches Astro Docs
-    npx astro info  # environment
-
-#### development server
-    http://localhost:4321
-    npm run dev
-    npx astro dev
-
-- gets dev toolbar at bottom
-- HMR ensures instant updates
-
 # Lua
+    $ITref/CP/encoding/coding/learnlua.lua
     $cITCP/encoding/dpl/scratch.lua
     lua -v
 
@@ -273,6 +250,7 @@ package manager
     $cGRs/d-CP/r-jgm-pandoc
     :Man pandoc
     pandoc --version
+    pandoc file.md -o file.tex
 
 ## options
     $MD4PDF/defaults.yaml
@@ -287,8 +265,8 @@ package manager
 - `-t <of>` (= `--to=<of>` = `-w <of>` = `--write=<of>`) output format
 
 ## snags
-    $core/IT/CP/Pandoc/monofont.md
-    $core/IT/CP/Pandoc/weird.gfm
+    $ITcore/CP/Pandoc/monofont.md
+    $ITcore/CP/Pandoc/weird.gfm
 
 ## verbose
     [makePDF] Source:
@@ -297,9 +275,10 @@ package manager
 
 # Perl
     $cITCP/encoding/dpl/Perl/scratch0.pl
-    $jtCP/coding/Perl
+    $ITref/CP/encoding/coding/Perl/learnperl.pl
+    $ITmCP/coding/Perl
     cpanm --help
-    perl -?
+    perl -h
 
 - command prompt, `set TERM=dumb` allows Perl stuff to run without Terminal Size warnings
 - `perldoc perlrun` explains `-e` & `-p`
@@ -397,11 +376,16 @@ arrays containing tabbed values can get messy: `perl -e 'my @tabbedArray = ( "sh
     cpan -l > $machine\troin\cpanList.txt
     instmodsh  # followed by l
 
+#### utf8::all
+    perl -e 'use utf8::all; print("éèçà");'
+    perl -e 'use utf8::all; print length "føø bār";'
+
 ## one-liners
     $ echo sample_text | perl -pe 's/(sample).*/$1/'  # double quotes wouldn't work here
     echo "my_string" | perl -pe 's/my/your/g'
     echo 'hello  there' | perl -pe 's/ +/ /'
     echo hello | perl -nle 'print uc'
+    echo 'É' | perl -pe 's/É/E/'
     perl -de 0  # debug
     perl -e 'print reverse <>' <file_to_reverse>
     perl -le 'print a..z'
@@ -416,6 +400,7 @@ arrays containing tabbed values can get messy: `perl -e 'my @tabbedArray = ( "sh
 
 # Python
     $cITCP/encoding/dpl/Python/scratch.py
+    $ITref/CP/encoding/coding/Python/learnpython.py
     python -h  # --help
     python -V
     scriptfilename = (os.path.basename(os.path.splitext(sys.argv[0])[0])) # without extension
@@ -437,6 +422,8 @@ print(sys.argv[0])  # the full pathname of the program
 ## modules
     python -m <module>
     yaml2toml <yaml> <toml>
+
+in a directory, `python -m http.server` then <http://127.0.0.1:8000> to see
 
 ### csvkit
     csvcut -n data.csv  # lists the headings, numbered
@@ -463,6 +450,7 @@ print(sys.argv[0])  # the full pathname of the program
     pipx install -h
     pipx list
     pipx run pycowsay moo
+    pipx reinstall-all
     pipx uninstall -h
     pipx upgrade-all
 
@@ -495,16 +483,35 @@ print(sys.argv[0])  # the full pathname of the program
     which python
     workon  # activate (or list all)
 
+# Raku
+    $ITref/CP/encoding/coding/Raku/multi-paradigm.raku
+    o "fuck" | raku -ne 'say S:g/f/l/'
+    raku -v
+    raku [<script.raku>]
+
+## REPL
+    raku ... exit
+
+No command history...
+
+## Learn X in Y minutes
+    $ITref/CP/encoding/coding-Raku/learnpod.pod6
+    $ITref/CP/encoding/coding-Raku/learnraku.raku
+
 # Ruby
     ruby -v
+    $ITref/CP/encoding/coding/learnruby.rb
 
 ## gems
-    gem cl -d  # cleanup --dry-run
-    gem e -h  # environment
+    gem cl -d  # cleanup (remove old versions) from $GEM_HOME --dry-run
+    gem help install
+    gem en -h  # environment
     gem ou  # outdated
-    gem li [<gem> -d  # list --details]
-    gem uni [<gem>]  # unistall
-    gem up  # update
+    gem li [<gem>] -d  # list --details
+    gem uni [<gem>]  # uninstall
+    r ~/.local/share/gem/ruby/
+    rdoc -h  # --help
+    rdoc -v  # --version
     rougify -h
 
 `minima` builds out the original repository copy of images that are less than 1024x512!
@@ -513,12 +520,13 @@ print(sys.argv[0])  # the full pathname of the program
     bundle exec github-pages versions
     bundle install  # recreates Gemfile.lock from Gemfile
     bundle ou  # outdated
-    bundle show
+    bundle show  ## the gems
     bundle update --all
+    bundle version
 
 ### update
     fd -p "$GEM_HOME/gems" --changed-within 1d --max-depth 1  # lists recently updated
-    gem update  # updates all
+    gem up  # updates all
 
 ## IRB
     $onGH\misc\irbrc
@@ -526,6 +534,8 @@ print(sys.argv[0])  # the full pathname of the program
 `irb` is quit with `exit` or `ctrl+d`
 
 # Rust
+    $ITref/CP/encoding/coding/learnrust.rs
+    rustc -V
     rustup help
     rustup update
 
@@ -543,16 +553,73 @@ Crate regex: `x?` zero or one of `x` (greedy)
 - What topics can I ask about here?
 
 # webish
+    $ITref/CP/web/languages/learnphp.php
+    $ITref/CP/web/languages/learnxml.xml
+    $ITref/CP/web/wikitext.mediawiki
     js-beautify -f obfuscated.html -o beautiful.html
 
-## HTML Elements
+https://dabblet.com/
+
+## CSS
+    $ITref/CP/web/languages/CSS/learncss.css
+    $ITref/CP/web/languages/CSS/learnless.less
+
+## HTML
+    $ITref/CP/web/languages/learnhtml.html
+    $jtIT/WAN/WebDesign/scratch.html
+
+### elements
     <!-- a comment -->
     <a>anchor_link<a>
+
+## JavaScript
+    $ITref/CP/web/languages/JavaScript/javascript.js
+
+### JSON
+    $ITref/CP/web/JavaScript/learnjson.json
+    wiki/JSON
+
+no comments allowed
+
+### Node.js
+    node -h  # --help
+    node -v  # --version
+
+#### npm
+    npm install
+    npm ls -g
+    npm un[install] -g [<package>]
+    npm up[date] -g [<package>]
+    npm prefix -g  # =  npm config get prefix
+    npm -v  # --version
+    npx cowsay goodbye!''
+
+package manager
+
+##### Astro
+    npm run dev -- -h  # --help
+    npx astro --help
+    npx astro --version
+    npx astro docs  # launches Astro Docs
+    npx astro info  # environment
+
+###### development server
+    http://localhost:4321
+    npm run dev
+    npx astro dev
+
+- gets dev toolbar at bottom
+- HMR ensures instant updates
 
 ## LiquidJS
     {% comment %}
     multi-line comment
     {% endcomment %}
+
+## PHP
+    $jtIT/WAN/WebDesign/info.php
+    php -h
+    php -v
 
 ## ssg - Hugo
     hugo mod graph

@@ -1,8 +1,8 @@
 #!/usr/bin/perl
 
 # ----------------------------------------------------------------------
-# perl $onGH/misc/CP/PerlTools/mysmsMD.pl $JHt/phonish/mysmsScrape0.md
-# PS> perl $onGH\misc\CP\PerlTools\mysmsMD.pl $JHt\phonish\mysmsScrape0.md
+# perl $onGH/misc/CP/PerlTools/mysmsMD.pl $Jotech/phonish/mysmsScrape0.md
+# PS> perl $onGH\misc\CP\PerlTools\mysmsMD.pl $Jotech\phonish\mysmsScrape0.md
 # when you want to convert screen-scrape from mysms into markdown format
 # ----------------------------------------------------------------------
 #  used in  $vimfiles/vim/ftplugin/md.vim

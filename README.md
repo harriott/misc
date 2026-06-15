@@ -13,7 +13,7 @@ nothing special
 - ITr manage: `$misc/ITr/ITr.md`
 
 ### other
-- `$coreIT/ulAndroid/phones.md`
+- `$ITcore/ulAndroid/phones.md`
 - `Cop-IT` (`$onGH/FM-rsync-drives/rsync0-WD30EZRZ.sh`)
 
 # possible Desktop arts

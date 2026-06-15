@@ -10,5 +10,6 @@
     cpi $Enc/Secure1/rclone.conf $HADR\rclone\rclone.conf
 
 # Zourit Nextcloud
-    $coreIT/notDr/readme.md
+    $ITcore/notDr/readme.md
     $TeNo/md-JH-DailyLife/roles/Cafezoide/online/cc.md
+

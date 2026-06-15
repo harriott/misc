@@ -4,7 +4,7 @@ vim: nospell:
 
 syntax of this long file is ensured in `$vfv/filetype.vim`
 
-    $JHt/IT/CP/fonts-SE595756-fontcharlist
+    $ITmore/CP/fonts-SE595756-fontcharlist
     fzf -h
     fzf --version
 
@@ -116,8 +116,6 @@ crossfades are created in overlaps
 - need to `Restart` `OpenShot` when changed
 
 ### Profiles
-    $core/IT_stack/OpenShot
-
 `*assets` folders can be deleted
 
 #### Choose Profile
@@ -128,6 +126,7 @@ crossfades are created in overlaps
 - `VGA NTSC (640x480)` 29.97fps
 
 ### projects
+    $ITcore/OpenShot
     pkill openshot  # when it's struggling to find project files...
 
 fix `path` in the `*.osp`
@@ -174,29 +173,39 @@ fix `path` in the `*.osp`
 - web colors
 - X11 color names
 
-# documenting - ebook
+# documenting
+    $cITcr/CP/documenting/asciidoc.adoc
+
+## ebook
     7z x document.epub
 
-## Calibre
+### Calibre
     ~/CalibreLibrary
 
 E-book viewer
 
-### keyboard shortcuts
+#### keyboard shortcuts
 - `<esc>`/`<right_click>` brings up the controls
 - `Ctrl+Q` Quit calibre
 
-# documenting - LaTeX
-    $DJH/search/dts-tex.ffl  # for my files
-    $JHt/IT/CP/TeX/LaTeX/  # for example code
+## LaTeX
+    $cITcr/CP/TeX/LaTeX/learn-latex.tex
+    $Drpbx/search/dts-tex.ffl  # for my files
+    $ITmore/CP/TeX/LaTeX/  # for example code
     :s/μ/\\mu{}/g
     albatross -a a256 ┊ # coloured output
     albatross -b 0 ┊ # no box
     arara
     xc
 
-## commands
+### commands
+    \begin{itemize}
+      \tightlist
+      \item stuff
+    \end{itemize}
+
     \documentclass[a5paper]{article} % smallest
+    \documentclass[12pt,twoside,a4paper]{article}
     \listfiles  in preamble gets package versions in  .log
     \newenvironment{<envName>}[<n>][<default>]{<beginEnv>}{<endEnv>}
     \overfullrule=2mm  % adds a black bar to locate an overfull hbox
@@ -208,7 +217,7 @@ E-book viewer
     \today
     \usepackage{<package>}
 
-### figure environment
+#### figure environment
 > LaTeX Warning: 'h' float specifier changed to 'ht'.
 
     \begin{figure}[h] ... \end{figure}
@@ -216,52 +225,52 @@ E-book viewer
 - `h` place (approximately) here
 - `t` place at top of page
 
-### horizontal - alignements
+#### horizontal - alignements
     \centred{\rule{9cm}{0.4pt}}  % horizontal line
     \centering
     {\raggedleft{SomeText}\par}
 
-### horizontal - indents
+#### horizontal - indents
     \noindent
     \setlength{\parindent}{0pt}
     \setlength{\parindent}{-3em}  % starts left of margin
     \leftskip=1cm ... \leftskip=0cm
     \rightskip=1cm ... \rightskip=0cm
 
-### horizontal - spaces in text or math mode
+#### horizontal - spaces in text or math mode
     \enspace =>.5em
     \quad => 1em
     \qquad => 2em
 
-### sections
+#### sections
     \section*{ unnumbered section }
     \setcounter{secnumdepth}{3} % = default. 0 turns numbering off.
     \stepcounter{section} % increase section number by 1
 
 `titlesec`: `\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}`
 
-### vertical
+#### vertical
     \parskip=5pt
     \vfill
     \vspace{-1cm}
 
-### fonts & glyphs
+#### fonts & glyphs
     \textnumero
 
 style `\textnormal`
 
-#### Indic
+##### Indic
     FreeFont
 
 `Lohit` used by Wikipedia
 
-#### styles
+##### styles
     \textit{...}
 
 `\textbf{...}` = `{\bfseries ...}` = bold
 `\texttt{...}` = `{\ttfamily ...}` = monospaced
 
-#### sizes
+##### sizes
     \tiny
     \scriptsize
     \footnotesize
@@ -273,18 +282,16 @@ style `\textnormal`
     \huge
     \Huge
 
-### maths environments
+#### maths environments
     \longrightarrow
     \rightarrow
 
-### page
+#### page
     \pagebreak
-    \pagestyle{empty}  % no headers or footers from here
+    \pagestyle{empty}  % no headers or footers from here (can be in the preamble)
     \thepage
 
-in the preamble, `\pagestyle{empty}`
-
-#### columns
+##### columns
     \documentclass[...twocolumn...]{<class>}
     ...
     \setlength{\columnsep}{1cm}
@@ -293,7 +300,7 @@ in the preamble, `\pagestyle{empty}`
     ...
     \twocolumn  % triggers newpage
 
-##### multicols
+###### multicols
     \usepackage{multicol}
     ...
     \begin{document}
@@ -301,42 +308,42 @@ in the preamble, `\pagestyle{empty}`
     ...
     \end{multicols}
 
-### special characters
+#### special characters
 - `-`, `--`, `---`
 - `\#`, `\$`, `\%`, `\&`, `\_`, `\{`, `\}`
 - `\^{}` because `\^a` rends â
 - `\~{}` because `\^n` rends ñ
 - `\textbackslash{}` because `\\`
 
-## distro - MiKTeX
+### distro - MiKTeX
     initexmf --report
     miktex --version
 
-### FNDB
+#### FNDB
     initexmf --update-fndb
     miktex --verbose fndb refresh
     MiKTeX Console > Tasks > Refresh file name database
 
 after filename changes in `$tex`
 
-### MiKTeX Package Manager
+#### MiKTeX Package Manager
     C:\Users\troin\AppData\Local\MiKTeX\miktex\log\mpmcli.log
-    mpm --list > "$coreIT\MSWin\MiKTeX\$Cn-packages-$(Get-Date -f yyMMdd-hhmm).txt"
+    mpm --list > "$ITcore\MSWin\MiKTeX\$Cn-packages-$(Get-Date -f yyMMdd-hhmm).txt"
     miktex --verbose packages check-update
     miktex packages list | measure | select -expand Count
 
-## distro - TeX Live
+### distro - TeX Live
     fmtutil --all
     fmtutil --help
 
-## engines
+### engines
     pdflatex --version
     pdflatex <path>/<texfile>  # outputs compilation results in  <path>/
 
-## tables
-    $jtCP/TeX/LaTeX/Memoir/tabular_in_twocolumn.tex
+### tables
+    $ITmCP/TeX/LaTeX/Memoir/tabular_in_twocolumn.tex
 
-### tabular environment
+#### tabular environment
     \multicolumn{num_cols}{alignment}{contents}
     \renewcommand{\arraystretch}{1.5}  % tabular (default 1.0)
 
@@ -347,11 +354,11 @@ after filename changes in `$tex`
 \end{tabular}
 ```
 
-### multirow
+#### multirow
     \multirow{<num_rows>}{<width>}{<contents>} % * for default width
     \usepackage{multirow}
 
-# documenting - LibreOffice
+## LibreOffice
     $cITCP/documenting/LibreOffice/Buildup.txt
     r ~/.config/libreoffice/4/user/
 
@@ -364,11 +371,11 @@ after filename changes in `$tex`
     - `Document texte ODF XML plat (*.fodt)`
     - (only if changes to `.ods` already saved) select `Text CSV (.csv)`
 
-## AZERTY
+### AZERTY
 - `alt+o > l` = `Modules complémentaires et thèmes`
 - `alt-t` (= `Format`) `> p` (= `Style de page...` = `alt+P`)
 
-## Calc
+### Calc
     fd -H ods
 
 - open a `.csv` and numbers get prefixed with apostrophe, so
@@ -379,27 +386,27 @@ after filename changes in `$tex`
         1. other options: Current selection only, Regular expressions
         1. `Replace All`
 
-## Draw
+### Draw
 - curve: `left-click > [shift] move > left-click > move > double-left-click`
 - `F2` (= `Insert > Text Box`)
 
-## page style
+### page style
 - `alt+o` (= `Format`) `> p` (= `Page style...`)
     - `Page` is where can set borders
 - `alt+t` (= `Format`) `> p` (= `Style de page...`)
 - No icon for the toolbars...
 
-## porting
+### porting
     \user\config
     ~\AppData\Roaming\LibreOffice\4\user\registrymodifications.xcu
 
-## Writer
+### Writer
 `alt+v t x` = `View > Toolbars > Text Object` which doesn't persist...
 
-### margins
+#### margins
 right-click on a hyperlink for `Remove Hyperlink`
 
-#### margins
+##### margins
 1. save as `*.fodt`
 2. open that `*.fodt` in a `Vim` variant
     1. `/orientation` - there might be more than one
@@ -407,41 +414,42 @@ right-click on a hyperlink for `Remove Hyperlink`
     3. `:w`
 3. back in `Writer`, `alt+f` (= `Fichier`) > `r` (= `Recharger`)
 
-# documenting - PDFs
+## PDFs
     pdf-crop-margins pdf.pdf  # silently makes  pdf-cropped.pdf
 
-use Google Chrome to break out just some pages into a reduced copy
+- `pdftl`
+- use Google Chrome to break out just some pages into a reduced copy
 
-## pdfimages
+### pdfimages
     pdfimages -h
     pdfimages [-j/-png] pdfNam3.pdf imageName  # pulls out images (default ppm) separated (if there are any)
 
 from `poppler-utils`
 
-## PDFtk
+### PDFtk
     pdftk in.pdf burst  # breaks into individual pages
     pdftk in*.pdf cat output out.pdf  # concatenate a sequence of PDFs
     pdftk secure.pdf input_pw <password> output normal.pdf
 
 can't focus on pages
 
-## fix rotations
+### fix rotations
     pdftk leftRotated.pdf cat 1-endeast output horizontal.pdf
     pdftk leftRotated-rightRotated.pdf cat 1east 2west output horizontal.pdf
 
-# documenting - spelling
+## spelling
     dict -D
     typos -h
     typos -*  # in a directory
     typos --files
 
-## Hunspell
+### Hunspell
     hunspell -h
     hunspell -D
     hunspell -l <file>
     nuspell -D
 
-# documenting - Unicode
+## Unicode
 - finding characters
 - Wingdings
 
@@ -723,7 +731,7 @@ Spacemacs documentation
     rg <someText> **/*.ext
     rg 'url = ' **\*.git\config
 
-in JH: `$DJH/search/searches.md`
+in JH: `$Drpbx/search/searches.md`
 
 # file contents - toolong
     tl $TeNo/md-JH-Private/Private.md
@@ -759,6 +767,7 @@ no refresh
     fd -H Ruby $home
 
 - case insensitive until a capital is included
+- in JH: `$Drpbx/search/searches.md`
 - recursive by default
 - sharkdp/fd
 - Ubuntu: `fdfind -V`
@@ -780,15 +789,17 @@ no refresh
 - `-tl` type symlink
 - `-tx` type executable
 - `-u` (not listed in `-h`) = `--unrestricted` = `-HI`
-- `-x` (= `--exec`) <cmd>  # for each search result
-- `-X` (= `--exec-batch`) <cmd>  # all search results at once
+
+#### exec
+- `-x` (= `--exec`) <cmd> for each search result
+- `-X` (= `--exec-batch`) <cmd> all search results at once
+- `{}` path of the search result
+- `{.}` without the file extension
 
 ### recents
     fd --changed-within 3h
     fd -H --changed-within 9m
     fd -tf --changed-within 2d
-
-in JH: `$DJH/search/searches.md`
 
 ### symlinks
     fd --max-depth 1 -Hl -tl
@@ -970,13 +981,14 @@ Sony Xperia 10 II: 1080x2520 = 21:9
     $cITcc/CP/svg-flags-flat-png
     fd -utf -e bmp -e gif -e jpeg -e jpg -e png -e svg -e tiff -e webp > images.fetl
     mmdc --version
-    qrtool encode "https://harriott.github.io" > $JHw/IT/going_faster.png
+    qrtool encode "https://harriott.github.io" > $Jwk/IT/going_faster.png
     qrtool -h
 
 - 72 dpi = 18.3 dots per mm
 - COLOR TOOLS <http://html-color-codes.info/>
 - HEIF (High Efficiency Image File Format): `.avci`, `.avcs`, `.avif`, `.avifs`, `.heic`, `.heics`, `.heif`, `.heifs`
 - JPEG compression: `.jfif` `.jif` `.jpe` `.jpeg` `.jpg`
+- OpenEXR: `.exr`
 
 ## GIMP
 `t` (= `Tools` > `Text`) can then select a rectangle for a text layer
@@ -1107,6 +1119,11 @@ can convert from `heic`, `WebP`
     chafa --version
     chafa <image>
 
+# terminal - glow
+    glow -v
+
+in a directory, `glow` for navigating in & out of md's
+
 # terminal - less
 greenwoodsoftware
 
@@ -1169,7 +1186,7 @@ messes up if terminal is resized
 - carriage return (U+000D) returns the cursor to the left of the line (usually just before line feed on MSWin)
 - `chmln.sd`
 - finding characters
-- Tree-sitter CLI: `tree-sitter -h`
+- Tree-sitter CLI: `tree-sitter -h` (`--help`)
 
 ## Vim
     $HOME/_viminfo
@@ -1236,12 +1253,14 @@ if aborted, `for f in *; do sed -i "/$f/d" zips; done`
 
 ### chromium-based
     chrome://apps/
+    chrome://flags
     chrome://on-device-internals
     chrome://plugins/
     chrome://settings/cookies > See all site data and permissions
 
 - `chrome://system > extensions > Expand` a list of Extensions
 - `Ctrl+Shift+o` (= `Bookmarks`) `> Organise > Export`
+- `Ctrl+Shft+r` hard refresh, overriding the cache
 - `Ctrl+u` view page source in new tab
 - Google Chrome: `Ctrl+h` (= `chrome://history`)
 - no way to stop autoplay of videos
@@ -1268,6 +1287,7 @@ if aborted, `for f in *; do sed -i "/$f/d" zips; done`
 - `Ctrl+Shft+a` (= `Add-ons and themes`)
 - `Ctrl+Shft+b` (= `toggle Bookmarks Toolbar`)
 - `Ctrl+Shft+o` (= `Library`)
+- `Ctrl+Shft+r` hard refresh, overriding the cache
 - `F12` (= `Web Developer Tools`)
 
 ### lynx
@@ -1288,6 +1308,10 @@ they're immediately recreated if Deleted
 ## cloud storage - rclone
     $misc/CP/rclone.md
     rclone config file  # shows path
+    rclone ls <far> # detailed recursive
+    rclone lsd <far> # top-level directories
+    rclone lsf <far> # top-level nodes
+    rclone sync -cinPvv <near> <far> # detailed check
 
 - `-c` (`--checksum`) & size
 - `-i` (`--interactive`) gets a question for each file
@@ -1386,4 +1410,26 @@ desideratus
 ### MSWin10
     $MSn\PS\Profile.ps1
     y --version
+
+# web serving - Caddy
+    $jtIT/WAN/WebDesign/Caddy
+    caddy  # help
+    caddy version
+    localhost:2019  # default for the API
+
+## Caddyfile
+- `caddy adapt` outputs JSON from a Caddyfile
+- `caddy fmt -d` (`--diff`)
+- `caddy fmt -h` (`--help`)
+- `caddy fmt -w` (`--overwrite`) corrects to tabs
+
+- no leading or trailing empty lines
+
+## serve
+    caddy reload
+    caddy stop
+    pgrep caddy
+    pkill caddy
+
+`caddy start` prefer over `caddy run &`
 

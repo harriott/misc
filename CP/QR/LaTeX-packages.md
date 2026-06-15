@@ -5,15 +5,15 @@ vim: nospell:
     \raisebox{<len>}{<box>}
     \usepackage{adjustbox} % can more precisely position than graphicx
     \usepackage[dvipsnames]{xcolor}
-    \usepackage{soul}  % Hyphenation for letterspacing, underlining, and more
+    \usepackage{soul} % hyphenation for letterspacing, underlining, and more
     \usepackage{tikz}
-    \usepackage{titlesec}  % incompatible with memoir
+    \usepackage{titlesec} % incompatible with memoir
     \usepackage{url}
     tlmgr info pgfplots
     tlmgr update --list
 
 - `datetime2`: `\DTMnow{}`
-- `enumitem`: `\begin{description}` used in `$JHw/CV-LaTeX/parts/*.tex`
+- `enumitem`: `\begin{description}` used in `$Jwk/CV-LaTeX/parts/*.tex`
 - `ifplatform`: `\ifwindows ... \else ... \fi`
 
 # blindtext
@@ -29,7 +29,7 @@ vim: nospell:
 functionality included in Memoir
 
 # Currvita
-    $JHw/CV/LaTeX/JH-CV.tex
+    $Jwk/CV-LaTeX/CV.tex
 
     \UsePackage[LabelsAligned]{currvita}
     \setlength{\cvlabelwidth}{50mm} % defaults to that of "88/8888-88/8888"
@@ -75,10 +75,11 @@ functionality included in Memoir
 
 ## Memoir
     \defaultlists
+    \tightlists
+
     \documentclass[20pt,a4paper,article,extrafontsizes,twocolumn]{memoir}
     \newcommand{\maketitle}
     \nonzeroparskip
-    \tightlists
 
 - `\the\columnsep` reports `10.0pt`
 - `\the\parskip` reports `5.0pt plus 1.00006pt minus 1.00006pt`
