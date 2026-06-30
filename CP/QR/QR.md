@@ -13,6 +13,7 @@ syntax of this long file is ensured in `$vfv/filetype.vim`
 
 # audio
     exiftool -ver  # https://sno.phy.queensu.ca/~phil/exiftool/
+    spectroterm -h
 
 ## AAC
 - Advanced Audio Coding
@@ -26,15 +27,14 @@ syntax of this long file is ensured in `$vfv/filetype.vim`
     espeak -v fr+f2 "Bonjour tout le monde"
 
 # AV
-    $cITcr/HW/audio/BTHeadphones/JBLTune720BT
+    $ITref/HW/audio/BT_headphones/JBLTune720BT
 
 ## mediainfo
     mediainfo --Inform='Video;%FrameCount%' $the_file
     mediainfo --Output='General;%Duration%' <avfile>  # milliseconds
 
 ## mpv
-    $cITcc/forMSWin/AV/mpv-x86_64-v3-20260311-git-24500c5/doc
-
+    $ITcop/forMSWin/AV > mpv-*/doc
     mpv <audio.ogg>
     mpv --list-options
     $misc/CP/mpv.conf
@@ -174,7 +174,7 @@ fix `path` in the `*.osp`
 - X11 color names
 
 # documenting
-    $cITcr/CP/documenting/asciidoc.adoc
+    $ITref/CP/documenting/asciidoc.adoc
 
 ## ebook
     7z x document.epub
@@ -189,7 +189,7 @@ E-book viewer
 - `Ctrl+Q` Quit calibre
 
 ## LaTeX
-    $cITcr/CP/TeX/LaTeX/learn-latex.tex
+    $ITref/CP/documenting/TeX/LaTeX/learn-latex.tex
     $Drpbx/search/dts-tex.ffl  # for my files
     $ITmore/CP/TeX/LaTeX/  # for example code
     :s/μ/\\mu{}/g
@@ -639,7 +639,7 @@ variables: `system-type`, `window-system`
 - `C-x o`  other-window
 
 # Emacs - Evil
-- `$cGRs/emacs/emacs-evil-evil/evil-maps.el`
+- `$nDrGRs/emacs/emacs-evil-evil/evil-maps.el`
 - `C-z`  toggles it
 
 # Emacs - reference sheets
@@ -744,19 +744,23 @@ no refresh
     zoxide -V  # --version
     zoxide edit  # <esc>
 
-`PeaZip`: `Ctrl+l` = `Extract all`
+- `felix`: `ZZ` quits
+- `PeaZip`: `Ctrl+l` = `Extract all`
 
-## archive - 7-Zip
+## archive
+    ouch help
+
+### 7-Zip
     7z  # help
     7z x <pw'd_zip>
 
     7z.exe a -mx0 -p"password" passworded.zip node_to_pw_zip
 
-### compression
+#### compression
 - `-mx0` none (copy)
 - `-mx9` ultra
 
-## archive - comic book
+### comic book
 - `.cb7`, `.cbr`, `.cbt`, `.cbz`
 - `Yazi` decompresses them to folder
 
@@ -953,10 +957,10 @@ The GNU Privacy Handbook
 
 # HW
     duf (--all)  # storage devices info
-    y $cITcr/HW/cbh-keyboards
+    y $ITref/HW/cbh-keyboards
 
 ## for paper - Epson EcoTank ET-5170 - feed tray
-    $cITcr/HW/EpsonEcoTankET5170
+    "$ITref/HW/forPaper EpsonEcoTankET5170"
 
 - downside is printed
 - landscape top is to right
@@ -978,7 +982,7 @@ Sony Xperia 10 II: 1080x2520 = 21:9
 - 1920x1080
 
 # imagey
-    $cITcc/CP/svg-flags-flat-png
+    $ITcop/CP/svg-flags-flat-png
     fd -utf -e bmp -e gif -e jpeg -e jpg -e png -e svg -e tiff -e webp > images.fetl
     mmdc --version
     qrtool encode "https://harriott.github.io" > $Jwk/IT/going_faster.png
@@ -1258,6 +1262,7 @@ if aborted, `for f in *; do sed -i "/$f/d" zips; done`
     chrome://plugins/
     chrome://settings/cookies > See all site data and permissions
 
+- `about:gpu` -> `chrome:gpu`
 - `chrome://system > extensions > Expand` a list of Extensions
 - `Ctrl+Shift+o` (= `Bookmarks`) `> Organise > Export`
 - `Ctrl+Shft+r` hard refresh, overriding the cache

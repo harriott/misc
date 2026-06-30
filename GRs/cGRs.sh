@@ -4,7 +4,7 @@
 
 # manage my downloaded collection of  Git  repositories
 
-# $cGRs  exported in  $OSL/nodes/jo/export
+# $nDrGRs  exported in  $OSL/nodes/jo/export
 #  $GRs, the machine-local directory, is exported in  $machBld/export-GRs ($OSAB > mb-...)
 #   cd $GRs; bash $misc/GRs/cGRs.sh
 #   du -hs $GRs

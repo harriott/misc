@@ -85,6 +85,7 @@ d-CP/d-Vim-Nvim/r-jdhao-nvim-config https://github.com/jdhao/nvim-config
 d-CP/d-Vim-Nvim/r-kevinfengcs88-nvim https://github.com/kevinfengcs88/nvim
 d-CP/d-Vim-Nvim/r-LazyVim-LazyVim  https://github.com/LazyVim/LazyVim
 d-CP/d-Vim-Nvim/r-LazyVim-LazyVim https://github.com/LazyVim/LazyVim
+d-CP/d-Vim-Nvim/r-leath-dub-bufs_nvim https://github.com/leath-dub/bufs.nvim
 d-CP/d-Vim-Nvim/r-LunarVim-LunarVim https://github.com/LunarVim/LunarVim
 d-CP/d-Vim-Nvim/r-mason-org-mason-lspconfig_nvim https://github.com/mason-org/mason-lspconfig.nvim
 d-CP/d-Vim-Nvim/r-mason-org-mason_nvim https://github.com/mason-org/mason.nvim
@@ -162,8 +163,10 @@ d-unix-like/d-cmus/r-Dimithrandir-cmushnotify https://github.com/Dimithrandir/cm
 d-unix-like/d-cmus/r-mathieu-lemay-cmus-notify https://github.com/mathieu-lemay/cmus-notify
 d-unix-like/d-linux/d-Arch/d-gitlab_archlinux_org-archlinux-packaging-packages/r-pacman https://gitlab.archlinux.org/archlinux/packaging/packages/pacman
 d-unix-like/d-linux/d-Arch/d-gitlab_archlinux_org-archlinux-packaging-packages/r-texlive-core https://gitlab.archlinux.org/archlinux/packaging/packages/texlive-core
+d-unix-like/d-linux/d-Arch/r-actionless-pikaur https://github.com/actionless/pikaur
 d-unix-like/d-linux/d-Arch/r-alfunx-_dotfiles https://github.com/alfunx/.dotfiles
 d-unix-like/d-linux/d-Arch/r-archlinux-packaging-packages-thunderbird https://gitlab.archlinux.org/archlinux/packaging/packages/thunderbird
+d-unix-like/d-linux/d-Arch/r-c78-contrib-cleanup-aur-blacklist https://github.com/c78-contrib/cleanup-aur-blacklist
 d-unix-like/d-linux/d-Arch/r-denisse-dev-dotfiles https://github.com/denisse-dev/dotfiles
 d-unix-like/d-linux/d-Arch/r-Eredarion-dotfiles https://github.com/Eredarion/dotfiles
 d-unix-like/d-linux/d-Arch/r-folke-dot https://github.com/folke/dot
@@ -204,7 +207,6 @@ d-unix-like/d-linux/r-marlam-msmtp https://github.com/marlam/msmtp
 d-unix-like/d-linux/r-nachoparker-xcol https://github.com/nachoparker/xcol
 d-unix-like/d-linux/r-PapirusDevelopmentTeam-papirus-icon-theme https://github.com/PapirusDevelopmentTeam/papirus-icon-theme
 d-unix-like/d-linux/r-ranger-ranger https://github.com/ranger/ranger
-d-unix-like/d-linux/r-rsnapshot-rsnapshot https://github.com/rsnapshot/rsnapshot
 d-unix-like/d-linux/r-seebi-dircolors-solarized https://github.com/seebi/dircolors-solarized
 d-unix-like/d-linux/r-shell-color-scripts https://gitlab.com/dwt1/shell-color-scripts
 d-unix-like/d-linux/r-tats-w3m https://github.com/tats/w3m
@@ -233,4 +235,6 @@ d-unix-like/r-jstkdng-ueberzugpp https://github.com/jstkdng/ueberzugpp
 d-unix-like/r-neomutt-neomutt https://github.com/neomutt/neomutt
 d-unix-like/r-ohmybash-oh-my-bash https://github.com/ohmybash/oh-my-bash
 d-unix-like/r-ranger-ranger https://github.com/ranger/ranger
+d-unix-like/r-rsnapshot-rsnapshot https://github.com/rsnapshot/rsnapshot
 d-unix-like/r-skim-rs-skim https://github.com/lotabout/skim
+d-unix-like/r-sudo-project-sudo https://github.com/sudo-project/sudo

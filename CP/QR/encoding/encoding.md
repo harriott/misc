@@ -247,7 +247,7 @@ git-fetch
 - <https://www.markdownguide.org/extended-syntax/>
 
 # Pandoc
-    $cGRs/d-CP/r-jgm-pandoc
+    $nDrGRs/d-CP/r-jgm-pandoc
     :Man pandoc
     pandoc --version
     pandoc file.md -o file.tex
@@ -447,6 +447,7 @@ in a directory, `python -m http.server` then <http://127.0.0.1:8000> to see
 (`--upgrade`)
 
 ### pipx
+    o 'John is very unique.' | proselint check
     pipx install -h
     pipx list
     pipx run pycowsay moo
@@ -571,45 +572,6 @@ https://dabblet.com/
 ### elements
     <!-- a comment -->
     <a>anchor_link<a>
-
-## JavaScript
-    $ITref/CP/web/languages/JavaScript/javascript.js
-
-### JSON
-    $ITref/CP/web/JavaScript/learnjson.json
-    wiki/JSON
-
-no comments allowed
-
-### Node.js
-    node -h  # --help
-    node -v  # --version
-
-#### npm
-    npm install
-    npm ls -g
-    npm un[install] -g [<package>]
-    npm up[date] -g [<package>]
-    npm prefix -g  # =  npm config get prefix
-    npm -v  # --version
-    npx cowsay goodbye!''
-
-package manager
-
-##### Astro
-    npm run dev -- -h  # --help
-    npx astro --help
-    npx astro --version
-    npx astro docs  # launches Astro Docs
-    npx astro info  # environment
-
-###### development server
-    http://localhost:4321
-    npm run dev
-    npx astro dev
-
-- gets dev toolbar at bottom
-- HMR ensures instant updates
 
 ## LiquidJS
     {% comment %}

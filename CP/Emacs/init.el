@@ -153,7 +153,7 @@
 (setq calendar-longitude 2.4)
 (setq calendar-location-name "Paris, France")
 
-;; tweaks to  $cGRs/emacs/emacs-mirror-emacs/lisp/calendar/calendar.el
+;; tweaks to  $nDrGRs/emacs/emacs-mirror-emacs/lisp/calendar/calendar.el
 (defun bright-diary-day ()
   (face-remap-add-relative 'diary '(:weight ultra-bold)))
 (add-hook 'calendar-mode-hook 'bright-diary-day)

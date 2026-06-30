@@ -5,8 +5,8 @@
 
 # Recursively find all  *.git  directories, remove them and re-clone   --depth 1
 
-# reduced my  $cGRs  from  8.6G  down to  3.7G
-# reduced my  $cGRs (--filter=blob:none)  from  5.0G  down to  1.2G
+# reduced my  $nDrGRs  from  8.6G  down to  3.7G
+# reduced my  $nDrGRs (--filter=blob:none)  from  5.0G  down to  1.2G
 # reduced my  $vimfiles  from  206M  down to  152M
 
 # rsync -irtv --delete $vimfiles/ $Storage/Play0/vf
