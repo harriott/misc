@@ -21,7 +21,7 @@ no comments allowed
     npm up[date] -g [<package>]
     npm prefix -g  # =  npm config get prefix
     npm -v  # --version
-    npx cowsay goodbye!''
+    npx cowsay Moooooooo!
 
 - package manager
 - `prettier` (= `prettier -h` (`--help`))

@@ -1,7 +1,7 @@
 ; vim: ft=gitconfig
 
 ; $misc/CP/gitconfig
-;  sourced by  ~/.gitconfig  ( $machBld/jo/gitconfig  $MSn/gitconfig )
+;  sourced by  ~/.gitconfig  ( $ABjo/gitconfig  $MSn/gitconfig )
 
 [alias]
 	hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short

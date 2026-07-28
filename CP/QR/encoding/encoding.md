@@ -500,10 +500,12 @@ No command history...
     $ITref/CP/encoding/coding-Raku/learnraku.raku
 
 # Ruby
+    lolcat -h
     ruby -v
     $ITref/CP/encoding/coding/learnruby.rb
 
 ## gems
+    gem -v  # (--version) of RubyGems
     gem cl -d  # cleanup (remove old versions) from $GEM_HOME --dry-run
     gem help install
     gem en -h  # environment
@@ -528,6 +530,8 @@ No command history...
 ### update
     fd -p "$GEM_HOME/gems" --changed-within 1d --max-depth 1  # lists recently updated
     gem up  # updates all
+    gem up --system  # update RubyGems
+    gem up -h
 
 ## IRB
     $onGH\misc\irbrc

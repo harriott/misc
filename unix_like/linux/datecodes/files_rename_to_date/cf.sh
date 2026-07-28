@@ -1,10 +1,10 @@
 #!/bin/bash
 # vim: set et sw=2 tw=0:
 
-# $misc/unix_like/linux/daycodes/cf.sh
+# $mull/daycodes/cf.sh
 #  common functionality for
-#   $misc/unix_like/linux/daycodes/simple.sh
-#   $misc/unix_like/linux/daycodes/with_description.sh
+#   $mull/daycodes/simple.sh
+#   $mull/daycodes/with_description.sh
 
 # https://harriott.github.io/ - Mon 12 Jan 2026
 
@@ -63,5 +63,5 @@ fdc1 () {
   mv $fdc $md$fmd
 }
 
-shopt -s nullglob  # see  $misc/unix_like/linux/need_for_nullglob.sh
+shopt -s nullglob  # see  $mull/need_for_nullglob.sh
 

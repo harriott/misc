@@ -1,7 +1,7 @@
 #!/bin/bash
 # vim: set et sw=2 tw=0:
 
-# bash $misc/unix_like/linux/daycodes/simple.sh
+# bash $mull/daycodes/simple.sh
 
 # https://harriott.github.io/ - Mon 12 Jan 2026
 

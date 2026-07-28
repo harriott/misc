@@ -228,6 +228,7 @@ d-unix-like/d-terminal-urxvt/d-fontSize/r-majutsushi-urxvt-font-size https://git
 d-unix-like/d-terminal-urxvt/d-fontSize/r-simmel-urxvt-resize-font https://github.com/simmel/urxvt-resize-font
 d-unix-like/d-terminal-urxvt/r-Vifon-autocomplete-ALL-the-things https://github.com/Vifon/autocomplete-ALL-the-things
 d-unix-like/r-brndnmtthws-conky https://github.com/brndnmtthws/conky
+d-unix-like/r-BrodieRobertson-scripts https://github.com/BrodieRobertson/scripts
 d-unix-like/r-email-pdobsan-oama https://github.com/pdobsan/oama
 d-unix-like/r-gsamokovarov-jump https://github.com/gsamokovarov/jump
 d-unix-like/r-hackerb9/fonttable https://github.com/hackerb9/fonttable

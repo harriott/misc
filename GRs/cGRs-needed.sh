@@ -5,22 +5,15 @@
 # bash $misc/GRs/cGRs-needed.sh
 # /mnt/SDU3D1TB/Dropbox/JH/core/IT/onGitHub/misc/GRs/cGRs-needed.sh
 # repositories needed for my system builds
-# $GRs, the machine-local directory, is exported in  $machBld/export-GRs ($OSAB > mb-...)
+# $GRs, the machine-local directory, is exported in  $OSL/nodes/jo/export
 
 set -e  # terminate on a fail
-
-# #=> awesome
-# # elements of these repositories symlinked in  $OSAB/nodes-set/jo-1-awesome.sh
-
-# rsync -irtv --delete $GRs/d-CP/d-encoding/r-rxi-json_lua/ $ITccl/CP/rxi-json_lua
-# rsync -irtv --delete $GRs/d-unix-like/d-linux/d-wm-awesome/r-stefano-m-awesome-capslock_widget/ $ITccl/unix-linux/awesome-stefano-m-awesome-capslock_widget
-# rsync -irtv --delete $GRs/d-unix-like/d-linux/d-wm-awesome/r-streetturtle-awesome-wm-widgets/ $ITccl/unix-linux/awesome-streetturtle-awesome-wm-widgets
 
 # #=> code-minimap
 # rsync -irtv --delete $GRs/d-CP/d-CLI/r-wfxr-code-minimap/ $ITccl/CP/wfxr-code-minimap
 # sed -i 's/\r//' $ITccl/CP/wfxr-code-minimap/completions/bash/code-minimap.bash  # ensure no CRLFs
 # # resourced from  $MSn/PS/Profile.ps1
-# # sourced in  $OSAB/nodes-Bash/bashrc-generic
+# # sourced in  $ABno/Bash/bashrc-generic
 
 # #=> emacs
 # rsync -irtv --delete $GRs/d-CP/d-emacs/r-domtronn-all-the-icons.el/ $ITccl/CP/Emacs-domtronn-all-the-icons.el
@@ -78,5 +71,5 @@ sed -i '/n-match-0-1/ s/^/# /' $ITccl/unix-tmux/CrispyConductor-tmux-copy-toolki
 # cp $ITccl/CP/Vim-vim-foldtree/foldtree.vim $vfv/plugin/foldtree.vim
 
 #=> Vim-msmtp-scripts-vim
-rsync -irtv --delete $GRs/d-unix-like/d-linux/r-marlam-msmtp/scripts/vim/ $vfvp/packs-cp-full/opt/msmtp-scripts-vim
+rsync -irtv --delete $GRs/d-unix-like/d-linux/r-marlam-msmtp/scripts/vim/ $ITccl/CP/msmtp-scripts-vim
 

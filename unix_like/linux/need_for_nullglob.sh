@@ -1,7 +1,7 @@
 #!/bin/bash
 # vim: set et sw=2 tw=0:
 
-# bash $misc/unix_like/linux/need_for_nullglob.sh
+# bash $mull/need_for_nullglob.sh
 
 # https://harriott.github.io/ - Mon 12 Jan 2026
 

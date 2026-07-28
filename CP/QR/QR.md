@@ -765,6 +765,7 @@ no refresh
 - `Yazi` decompresses them to folder
 
 ## fd
+    $Drpbx/search/searches.md
     fd ' \(2\)'  # as created by  Insync
     fd 'Chris Rea'
     fd [flags/options] [<pattern>] [<path>...]
@@ -800,7 +801,7 @@ no refresh
 - `{}` path of the search result
 - `{.}` without the file extension
 
-### recents
+### recent changes
     fd --changed-within 3h
     fd -H --changed-within 9m
     fd -tf --changed-within 2d
@@ -903,7 +904,15 @@ by gokcehan
     gpg --send-keys <key-id>  # then can never be deleted from the keyserver
     gpg --verify file.asc [file]
 
-my currently active key is `13F327EF`
+GNU Privacy Guard
+
+## 13F327EF
+- my currently active key
+- passphrase in `$TeNo/md-JH-Private/Private.md`
+
+### in $Enc/Secure1/GnuPG/13F327EF
+    gpg --list-packets sprbMbArch-ob8-private.asc
+    gpg --show-keys sprbMbArch-ob8-public.asc
 
 ## command options
 `-s` (`--sign`) sign a message
@@ -981,6 +990,12 @@ Sony Xperia 10 II: 1080x2520 = 21:9
 ### widescreen 16:9
 - 1920x1080
 
+## Sony WH-CH520
+    $ITref/HW/audio/BT_headphones/SonyWHCH520/print.pdf
+
+- 5s press of `Power/Bluetooth` button resets into pairing, Passkey `0000`
+- factory reset: plug in 5V power & press `vol+` & `vol-`
+
 # imagey
     $ITcop/CP/svg-flags-flat-png
     fd -utf -e bmp -e gif -e jpeg -e jpg -e png -e svg -e tiff -e webp > images.fetl
@@ -994,7 +1009,16 @@ Sony Xperia 10 II: 1080x2520 = 21:9
 - JPEG compression: `.jfif` `.jif` `.jpe` `.jpeg` `.jpg`
 - OpenEXR: `.exr`
 
-## GIMP
+## aspect ratios
+- `1.3∙:1` =`4:3`
+- `1.7∙:1` =`16:9` = `widescreen`
+
+## GIMP fr
+`Alt+i` (= `Image`) > `n` (= `Transformer`)
+    - `a` (= `Rotation 90° sens anti-horaire`)
+    - `h` (= `Rotation 90° sens horaire`)
+
+## GIMP gb
 `t` (= `Tools` > `Text`) can then select a rectangle for a text layer
 
 ### crop
@@ -1063,6 +1087,12 @@ can convert from `heic`, `WebP`
 - `z` = undo
 - `Save` pads out right & bottom images that aren't up to 1024x512...
 
+## Oculante
+- can't send to printer
+- nice looping through folder
+- no crop
+- `q` to exit
+
 ## resolutions
     resolution |              name |    FFmpeg | aspect ratio
        480x270 |                   |           |         16:9
@@ -1080,9 +1110,11 @@ can convert from `heic`, `WebP`
      1920×1440 |                   |           |          4:3
      2560x1440 |                   |           |         16:9
 
-## aspect ratios
-- `1.3∙:1` =`4:3`
-- `1.7∙:1` =`16:9` = `widescreen`
+## XnView MP
+- `Enter` toggles Explorer
+- `F12` = `Tools > Settings...`
+- "Multi-Platform"
+- no easy invert
 
 # sqlite3
     sqlite3 <db.db>
@@ -1101,6 +1133,7 @@ can convert from `heic`, `WebP`
 
 # system
     btm
+    fastfetch -c neofetch.jsonc
     fastfetch -h
 
 # terminal - Alacritty
@@ -1128,6 +1161,10 @@ can convert from `heic`, `WebP`
 
 in a directory, `glow` for navigating in & out of md's
 
+# terminal - kitty
+    kitten choose-fonts
+    kitten icat <image>
+
 # terminal - less
 greenwoodsoftware
 
@@ -1154,37 +1191,65 @@ messes up if terminal is resized
 - `/ ?`  search forward backward
 - `n N`  next previous
 
-# terminal - WezTerm - key assignents
+# terminal - mcat
+    mcat -h
+    mcat ls  # shows image thumbnails
+
+can show first page of a PDF
+
+# terminal - rainbow
+    cat $ITsto/diskUsage.build | rainbow
+    rainbow some atrociously long text
+    whereis rainbow
+
+# terminal - tdf
+    $AjB/bashrc-wm
+    tdf -h
+
+in an image-capable terminal, `tdf <pdf>`
+
+# terminal - WezTerm
+    wezterm -h
+    wezterm -V
+
+`wezterm -n` (`--skip-config`)
+
+## key assignents
 - `alt+enter` = `ToggleFullScreen`
 - `ctrl -/+` = `DecreaseFontSize`/`IncreaseFontSize`
 - `shift PageDown` = `ScrollByPage=1`
 - `shift PageUp` = `ScrollByPage=-1`
 
-## copy/paste
+### copy/paste
 - `ctrl shift c` = `CopyTo="Clipboard"`
 - `ctrl shift v` = `CopyFrom="Clipboard"`
 - `ctrl shift x` = `ActivateCopyMode`
 - mouse select
 
-## panes
+### panes
 - `ctrl alt "` = `SplitVertical...` down
 - `ctrl alt %` = `SplitHorizontal...` right
 - `ctrl alt shift arrow` = resize pane
 - `ctrl shift arrow` = move to pane
 - `ctrl shift z` = `TogglePaneZoomState` get `[Z]` prefixed in window title
 
-## tabs
+### tabs
 - `ctrl PageDown` = `ActivateTabRelative=-1`
 - `ctrl PageUp` = `ActivateTabRelative=1`
 - `ctrl shift t` = `SpawnTab="CurrentPaneDomain"`
 - `ctrl shift tab` = `ActivateTabRelative=-1`
 - `ctrl tab` = `ActivateTabRelative=1`
 
+## panes
+- `wezterm cli move-pane-to-new-tab` defaults to current pane
+- `wezterm cli spawn --cwd $PWD --new-window` spawn using cwd
+
 # text wrangling
     ! " # $ % & ' ( ) * + , - . /
     ----10--------20--------30--------40--------50--------60--------70--------80--------90-------10
     ----10--------20--------30--------40--------50--------60--------70--------80--------90-------100-------110-------120-------130-------140-------150-------160
     ansifilter <file_to_strip_of_ANSI_terminal_escape_codes>
+    textidote -h
 
 - ASCII Table
 - carriage return (U+000D) returns the cursor to the left of the line (usually just before line feed on MSWin)
@@ -1255,7 +1320,7 @@ if aborted, `for f in *; do sed -i "/$f/d" zips; done`
 - `ctrl+c` to exit
 - images are crudely represented
 
-### chromium-based
+### chromium-based - Google Chrome
     chrome://apps/
     chrome://flags
     chrome://on-device-internals
@@ -1264,13 +1329,23 @@ if aborted, `for f in *; do sed -i "/$f/d" zips; done`
 
 - `about:gpu` -> `chrome:gpu`
 - `chrome://system > extensions > Expand` a list of Extensions
+- `Ctrl+h` (= `chrome://history`)
 - `Ctrl+Shift+o` (= `Bookmarks`) `> Organise > Export`
 - `Ctrl+Shft+r` hard refresh, overriding the cache
 - `Ctrl+u` view page source in new tab
-- Google Chrome: `Ctrl+h` (= `chrome://history`)
 - no way to stop autoplay of videos
 
-#### Microsoft Edge
+#### text size - gb
+- `Ctrl+0` reset
+- `Ctrl+-` smaller
+- `Ctrl++` bigger
+
+#### text size - fr
+- `Ctrl+à` reset
+- `Ctrl+)` smaller, but not working on Arch
+- `Ctrl+=` bigger
+
+### chromium-based - Microsoft Edge
     edge://favorites/
     edge://history/all
     edge://settings/profiles
@@ -1279,6 +1354,9 @@ if aborted, `for f in *; do sed -i "/$f/d" zips; done`
 - `mouse hover over an image > ctr ctrl` = `right-click > magnify`
 
 ### Firefox
+fr: `clique droit sur un onglet > Ajouter un vue scindée`
+
+#### gb
     about:config > caret
     about:addons
     about:preferences#general
