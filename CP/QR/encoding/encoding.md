@@ -500,9 +500,11 @@ No command history...
     $ITref/CP/encoding/coding-Raku/learnraku.raku
 
 # Ruby
+    $cITCP/encoding/dpl/scratch.rb
+    $ITref/CP/encoding/coding/learnruby.rb
     lolcat -h
     ruby -v
-    $ITref/CP/encoding/coding/learnruby.rb
+    ruby -e "puts 'from ruby'"
 
 ## gems
     gem -v  # (--version) of RubyGems
@@ -546,6 +548,7 @@ No command history...
 
 ## Cargo
     cargo --list
+    cargo cache -a  ## (--autoclean)
     cargo install --list
     cargo search
     cargo version

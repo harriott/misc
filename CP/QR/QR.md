@@ -250,9 +250,16 @@ E-book viewer
 `titlesec`: `\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}`
 
 #### vertical
-    \parskip=5pt
     \vfill
     \vspace{-1cm}
+
+##### parskip
+    \parskip=5pt  % slightly more than usual from here on
+    \the\parskip
+
+    \newlength{\defaultparskip} \setlength{\defaultparskip}{\parskip} \setlength{\parskip}{5pt}
+    ...
+    \setlength{\parskip}{\defaultparskip} % back to normal
 
 #### fonts & glyphs
     \textnumero
@@ -339,6 +346,12 @@ after filename changes in `$tex`
 ### engines
     pdflatex --version
     pdflatex <path>/<texfile>  # outputs compilation results in  <path>/
+
+### lengths
+- `1cm` = `28.4pt`
+- `1pt` = `.35146mm`
+- `em` ~ width of M
+- `ex` ~ height of x
 
 ### tables
     $ITmCP/TeX/LaTeX/Memoir/tabular_in_twocolumn.tex
@@ -980,7 +993,7 @@ The GNU Privacy Handbook
 - printed pages come out head first (= upside down, printed face up)
 
 ## for paper - HP Envy Inspire 7220e
-- 300gsm occasionally jams
+- 300gsm loses 5mm from during feed in, occasionally jams, pulls right end in more causing 2mm tilt
 - landscape top is to right
 - Paper jams cause a reprint from the beginning of a series!
 
@@ -991,10 +1004,11 @@ Sony Xperia 10 II: 1080x2520 = 21:9
 - 1920x1080
 
 ## Sony WH-CH520
-    $ITref/HW/audio/BT_headphones/SonyWHCH520/print.pdf
+    za $ITref/HW/audio/SonyWHCH520/print.pdf
 
 - 5s press of `Power/Bluetooth` button resets into pairing, Passkey `0000`
-- factory reset: plug in 5V power & press `vol+` & `vol-`
+- (p110) Resetting the headset: plug in 5V power & press `vol+` & `vol-`
+- (p110) Initializing the headset to restore factory settings: 10s press of `power` & `vol-`
 
 # imagey
     $ITcop/CP/svg-flags-flat-png
@@ -1120,6 +1134,7 @@ can convert from `heic`, `WebP`
     sqlite3 <db.db>
     sqlite3 -help
     sqlite3 -version
+    sqlite3 some.db .dump > some.sql  # which can then be grepped
 
 ## internal commands
     .exit
@@ -1289,6 +1304,7 @@ in an image-capable terminal, `tdf <pdf>`
 
 
 - GPS Coordinates <https://www.gps-coordinates.net>
+- RustDesk: ID is persistent, 6-letter pw renews on each launch
 - Webmasters
 
 ## aria2

@@ -2,79 +2,19 @@ vim: nospell:
 
     $misc/CrossPlatform/QR; m4ps 0 1
 
-    \raisebox{<len>}{<box>}
-    \usepackage{adjustbox} % can more precisely position than graphicx
     \usepackage[dvipsnames]{xcolor}
-    \usepackage{soul} % hyphenation for letterspacing, underlining, and more
-    \usepackage{tikz}
-    \usepackage{titlesec} % incompatible with memoir
-    \usepackage{url}
     tlmgr info pgfplots
     tlmgr update --list
 
-- `datetime2`: `\DTMnow{}`
-- `enumitem`: `\begin{description}` used in `$Jwk/CV-LaTeX/parts/*.tex`
-- `ifplatform`: `\ifwindows ... \else ... \fi`
-
-# blindtext
-    \blinddocument
-    \Blinddocument
-    \blindtext
-    \Blindtext[5]
-    \usepackage[bible]{blindtext}
-
-# chngcntr
-    \counterwithout{section}{Chapter} % removes unneeded Chapter number from section headings
-
-functionality included in Memoir
-
-# Currvita
-    $Jwk/CV-LaTeX/CV.tex
-
-    \UsePackage[LabelsAligned]{currvita}
-    \setlength{\cvlabelwidth}{50mm} % defaults to that of "88/8888-88/8888"
-
-# fontspec
-    \usepackage{fontspec}
-        \setmainfont{...}
-        \setmonofont{...}
-
-# geometry
-    \usepackage[hmargin=21mm,vmargin={24mm,26mm}]{geometry}
-    \usepackage[margin=1.4cm]{geometry}
-    \usepackage[top=1cm,bottom=8mm,left=5mm,right=1cm,paperwidth=21cm,paperheight=120mm]{geometry}
-
-# graphicx
-    \usepackage{graphicx}
-    \graphicspath{<path>}
-    \includegraphics[width=8cm]{plot}
-
-# hyperref
-    \pdfstringdefDisableCommands{...}  % to fix "token not allowed"
-
-## URLs
-    \url{https://www.wikibooks.org}
-    \href{https://www.wikibooks.org}{Wikibooks home}
-
-# pifont
-    \ding{80}  % a little star
-    \usepackage{pifont}
-
-# Polyglossia
-    \usepackage{polyglossia}
-    \setdefaultlanguage[variant=uk]{english}
-    \setdefaultlanguage{french}
-
-# psnfss
-    \usepackage{pifont}
-    \ding{80}  % a little star
-    \ding{220}  % a fat arrow
+`ifplatform`: `\ifwindows ... \else ... \fi`
 
 # classes
     \documentclass[varwidth]{standalone}
 
 ## Memoir
     \defaultlists
+    \firmlists  % less between
+    \firmlists*  % less around
     \tightlists
 
     \documentclass[20pt,a4paper,article,extrafontsizes,twocolumn]{memoir}
@@ -144,30 +84,49 @@ functionality included in Memoir
 
 might require `[article]`
 
-# pdfpages
-    \usepackage{pdfpages}
-    ...
-    \includepdf[nup=2x3, pages=1-7]{<pdf1_basename>} % 2 columns, 3 rows
-    ...
-    \includepdf[pages=4,{},5]{<pdf2_basename>} % empty page between 4 & 5
-    ...
-    \includepdf[pages=-]{<pdf3_basename>} % all pages
-    ...
-    \includepdf[pages=last-1]{<pdf4_basename>} % reverse order
-    ...
-    \includepdfmerge[nup=2x1,scale=0.9]{<pdf5_basename>, 1-2,4-5,7,9}
+# font - psnfss
+    \usepackage{pifont}
+    \ding{80}  % a little star
+    \ding{220}  % a fat arrow
 
-    rg -ttex '\\usepackage\{pdfpages\}' -l > rg-tex-pdfpages.fetl
+# fontspec
+    \usepackage{fontspec}
+        \setmainfont{...}
+        \setmonofont{...}
 
-- doesn't respect `geometry` margins, so `\includepdfset{offset=<fromInnerEdge> <fromTop>}`
-- if business cards aren't sized right, go through images
+# images
+    \usepackage{adjustbox} % can more precisely position than graphicx
+    \usepackage{tikz}
 
-# scalerel
+## graphicx
+    \usepackage{graphicx}
+    \graphicspath{<path>}
+    \includegraphics[width=8cm]{plot}
+
+# layout
+    \raisebox{<len>}{<box>}
+    \usepackage{titlesec} % incompatible with memoir
+
+- `\usepackage{showframe}` (geometry option is neater)
+- `enumitem`: `\begin{description}` used in `$Jwk/CV-LaTeX/parts/*.tex`
+
+## Currvita
+    $Jwk/CV-LaTeX/CV.tex
+
+    \UsePackage[LabelsAligned]{currvita}
+    \setlength{\cvlabelwidth}{50mm} % defaults to that of "88/8888-88/8888"
+
+## geometry
+    \usepackage[hmargin=21mm,vmargin={24mm,26mm}]{geometry}
+    \usepackage[margin=1.4cm,showframe]{geometry}
+    \usepackage[top=1cm,bottom=8mm,left=5mm,right=1cm,paperwidth=21cm,paperheight=120mm]{geometry}
+
+## scalerel
     \usepackage{scalerel}
     ...
     \scaleto[max_width]{object}{height}
 
-# verse
+## verse
 ```tex
 \renewcommand{\poemtitlefont}{\normalfont\bfseries\large}  % removed \centering
 
@@ -191,4 +150,52 @@ zero indent
 
 \end{verse}
 ```
+
+# pdfpages
+    \usepackage{pdfpages}
+    ...
+    \includepdf[nup=2x3, pages=1-7]{<pdf1_basename>} % 2 columns, 3 rows
+    ...
+    \includepdf[pages=4,{},5]{<pdf2_basename>} % empty page between 4 & 5
+    ...
+    \includepdf[pages=-]{<pdf3_basename>} % all pages
+    ...
+    \includepdf[pages=last-1]{<pdf4_basename>} % reverse order
+    ...
+    \includepdfmerge[nup=2x1,scale=0.9]{<pdf5_basename>, 1-2,4-5,7,9}
+
+    rg -ttex '\\usepackage\{pdfpages\}' -l > rg-tex-pdfpages.fetl
+
+- doesn't respect `geometry` margins, so `\includepdfset{offset=<fromInnerEdge> <fromTop>}`
+- if business cards aren't sized right, go through images
+
+# text
+    \usepackage{soul} % hyphenation for letterspacing, underlining, and more
+    \usepackage{url}
+
+`datetime2`: `\DTMnow{}`
+
+## blindtext
+    \blinddocument
+    \Blinddocument
+    \blindtext
+    \Blindtext[5]
+    \usepackage[bible]{blindtext}
+
+## chngcntr
+    \counterwithout{section}{Chapter} % removes unneeded Chapter number from section headings
+
+functionality included in Memoir
+
+## hyperref
+    \pdfstringdefDisableCommands{...}  % to fix "token not allowed"
+
+### URLs
+    \url{https://www.wikibooks.org}
+    \href{https://www.wikibooks.org}{Wikibooks home}
+
+## Polyglossia
+    \usepackage{polyglossia}
+    \setdefaultlanguage[variant=uk]{english}
+    \setdefaultlanguage{french}
 
