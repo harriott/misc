@@ -372,9 +372,9 @@ after filename changes in `$tex`
     \usepackage{multirow}
 
 ## LibreOffice
-    $cITCP/documenting/LibreOffice/Buildup.txt
     r ~/.config/libreoffice/4/user/
 
+- `$cITCP/documenting/LibreOffice/` for `Buildup.txt` & `scratch.odt`
 - `alt+f12` = `Outils`/`Tools > Options`
     - `Apparence`
 - `alt+t > e` = `Tools > Extensions` (= `ctrl+alt+e`)
@@ -979,7 +979,11 @@ The GNU Privacy Handbook
 
 # HW
     duf (--all)  # storage devices info
+
+## keyboard
     y $ITref/HW/cbh-keyboards
+
+dead keys circumflex/diaresis (between `P` & `$`): press before letter to be decorated
 
 ## for paper - Epson EcoTank ET-5170 - feed tray
     "$ITref/HW/forPaper EpsonEcoTankET5170"
