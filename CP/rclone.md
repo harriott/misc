@@ -4,6 +4,7 @@
 
 # rclone.conf - Arch
     cp $Enc/Secure1/rclone.conf ~/.config/rclone/rclone.conf
+    chmod 600 ~/.config/rclone/rclone.conf
     s ~/.config/rclone/rclone.conf  # should report 600, to protect  pass
 
 # rclone.conf - Windows

@@ -157,6 +157,8 @@ d-MSWin/d-PowerShell/r-jdhitsolutions-PSScriptTools https://github.com/jdhitsolu
 d-MSWin/r-amrali-eg-EncodingChecker https://github.com/amrali-eg/EncodingChecker
 d-MSWin/r-microsoft-terminal https://github.com/microsoft/terminal
 d-MSWin/r-Windos-BurntToast https://github.com/Windos/BurntToast
+d-unix-like/d-Bash/r-HalFrgrd-flyline https://github.com/HalFrgrd/flyline
+d-unix-like/d-Bash/r-ohmybash-oh-my-bash https://github.com/ohmybash/oh-my-bash
 d-unix-like/d-cmus/r-AntoineGagne-cmus-notify https://github.com/AntoineGagne/cmus-notify
 d-unix-like/d-cmus/r-cmus-cmus https://github.com/cmus/cmus
 d-unix-like/d-cmus/r-Dimithrandir-cmushnotify https://github.com/Dimithrandir/cmushnotify
@@ -234,7 +236,6 @@ d-unix-like/r-gsamokovarov-jump https://github.com/gsamokovarov/jump
 d-unix-like/r-hackerb9/fonttable https://github.com/hackerb9/fonttable
 d-unix-like/r-jstkdng-ueberzugpp https://github.com/jstkdng/ueberzugpp
 d-unix-like/r-neomutt-neomutt https://github.com/neomutt/neomutt
-d-unix-like/r-ohmybash-oh-my-bash https://github.com/ohmybash/oh-my-bash
 d-unix-like/r-ranger-ranger https://github.com/ranger/ranger
 d-unix-like/r-rsnapshot-rsnapshot https://github.com/rsnapshot/rsnapshot
 d-unix-like/r-skim-rs-skim https://github.com/lotabout/skim

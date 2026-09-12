@@ -731,6 +731,7 @@ Spacemacs documentation
 
 ## searches
     rg '<someText>|<otherText>'  # searches recursively in files
+    rg '^    \$TeNo'
     rg '\.emacs\.d'
     rg --no-ignore 'sometext'  # allows searching into gitignored places
     rg -i <case-insensitive>
@@ -1373,10 +1374,11 @@ if aborted, `for f in *; do sed -i "/$f/d" zips; done`
 - `Importer les données du navigateur maintenant`
 - `mouse hover over an image > ctr ctrl` = `right-click > magnify`
 
-### Firefox
-fr: `clique droit sur un onglet > Ajouter un vue scindée`
+### Firefox fr
+- `clique droit sur un onglet > Ajouter un vue scindée`
+- `Ctrl+Maj+o` (= `Bibliothèque`)
 
-#### gb
+### Firefox gb
     about:config > caret
     about:addons
     about:preferences#general
@@ -1387,10 +1389,10 @@ fr: `clique droit sur un onglet > Ajouter un vue scindée`
     ctrl+p > Destination > Save to PDF > Save
 
 - `alt+e` (= `Edit`) `> n` (= `Settings`) `> Privacy & Security > Cookies and Site Data > Manage Data...`
-- `Ctrl+Shft+a` (= `Add-ons and themes`)
-- `Ctrl+Shft+b` (= `toggle Bookmarks Toolbar`)
-- `Ctrl+Shft+o` (= `Library`)
-- `Ctrl+Shft+r` hard refresh, overriding the cache
+- `Ctrl+Shift+a` (= `Add-ons and themes`)
+- `Ctrl+Shift+b` (= `toggle Bookmarks Toolbar`)
+- `Ctrl+Shift+o` (= `Library`)
+- `Ctrl+Shift+r` hard refresh, overriding the cache
 - `F12` (= `Web Developer Tools`)
 
 ### lynx

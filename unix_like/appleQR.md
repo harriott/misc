@@ -2,7 +2,8 @@ vim: fdl=1 nospell:
 
     $misc/unix_like/appleQR.md
 
-Apple > Préférences Système
+- `.DS_Store` folder attributes
+- Apple > Préférences Système
 
 # keyboard shortcuts
 - `Cmd-q` = quit current app
@@ -15,3 +16,4 @@ Mac keyboard shortcuts
 ## Copy 'Em
 - `Cmd+n` = new list
 - `Shift+Cmd+v` = launch
+
