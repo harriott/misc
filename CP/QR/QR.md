@@ -1297,9 +1297,6 @@ in an image-capable terminal, `tdf <pdf>`
     PS> gvim -c "set columns=217 lines=54"  # maximum on a 1600x900 screen with rhs taskbar
 
 # WAN
-    curl -h
-    curl ifconfig.co/city
-    curl ifconfig.co/country
     librespeed-cli -h
     librespeed-cli --secure
     ssh-keygen -lv -f ssh_host_rsa_key.pub  # shows fingerprint & ASCII art
@@ -1423,6 +1420,13 @@ they're immediately recreated if Deleted
 - `-n` (`--dry-run`)
 - `-P` (`--progress`)
 
+## cURL
+    curl -h
+    curl ifconfig.co/city
+    curl ifconfig.co/country
+
+`-s` (= `--silent`) add `-S` (= `--show-error`) to disable progress meter
+
 ## GitHub
 `$HOME/.ssh/known_hosts`: `AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa`
 
@@ -1432,6 +1436,7 @@ they're immediately recreated if Deleted
     gh --version
     gh -?
     gh api -X PUT /notifications  # cleared my ghost notifications
+    gh auth login
     gh auth status
     gh browse  # opens the repository root in web browser
     gh config list

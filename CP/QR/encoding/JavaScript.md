@@ -24,7 +24,7 @@ no comments allowed
     npx cowsay Moooooooo!
 
 - package manager
-- `prettier` (= `prettier -h` (`--help`))
+- `prettier` (= `prettier -h` (`--help`)) `$ABno/Bash/bashrc-generic`
 
 ### serve
     htmlhint $ITcore/serve/Caddy/index.html

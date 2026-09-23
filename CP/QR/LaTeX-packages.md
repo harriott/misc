@@ -12,17 +12,16 @@ vim: nospell:
     \documentclass[varwidth]{standalone}
 
 ## Memoir
-    \defaultlists
-    \firmlists  % less between
-    \firmlists*  % less around
-    \tightlists
-
     \documentclass[20pt,a4paper,article,extrafontsizes,twocolumn]{memoir}
     \newcommand{\maketitle}
     \nonzeroparskip
 
-- `\the\columnsep` reports `10.0pt`
-- `\the\parskip` reports `5.0pt plus 1.00006pt minus 1.00006pt`
+`\the\columnsep` reports `10.0pt`
+
+### paragraphs
+    \parskip=5pt
+
+`\the\parskip` reports `5.0pt plus 1.00006pt minus 1.00006pt`
 
 ### font sizes
      Class option   9pt  10pt  11pt  12pt  14pt  17pt  20pt  25pt  30pt   36pt   48pt   60pt
@@ -40,6 +39,12 @@ vim: nospell:
             \HUGE  20pt  25pt  30pt  36pt  48pt  60pt  72pt  84pt  96pt  108pt  120pt  132pt
 
 `4pt` & `26pt` up require option `extrafontsizes`
+
+### lists
+    \defaultlists
+    \firmlists  % less between
+    \firmlists*  % less around
+    \tightlists
 
 ### margins
     \setlrmarginsandblock{30mm}{20mm}{*} % left and right margin

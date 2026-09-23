@@ -79,24 +79,13 @@ delete: `right-click on email selection > Attachment Extractor > Delete attachme
 ### keys for Menu Bar
 `alt+f` (= `File`) `> f` = `Compact Folders`
 
-#### Affichage
-- `alt+a` (= `Affichage`) `> o` (= `Corps de message en`)
-    - `h` (= `HTML original`)
-    - `x` (= `Texte seul`)
-
 #### Edit
     alt+e
 
 - `e` (= `Settings`) `> Config Editor...` = `Advanced Preferences`
 - `f` (= `Find`) `> m` (= `Search Messages`)
 
-#### Tools
-    alt+t > alt+a (= Add-ons and Themes)
-    alt+t > e (= Edit) > a a (= Account Settings)
-
-`alt+o (= Outils) > m > m (= Paramètres des comptes)` can then drag account folders into order
-
-#### View
+#### En - View
 - `alt+v > l` (= `Layout`) `> f` (= `Folder Pane`) to toggle it
 - `alt+v > s` (= `Sort by`) `> h` (= `Unthreaded`)
 
@@ -106,6 +95,17 @@ delete: `right-click on email selection > Attachment Extractor > Delete attachme
     - `p` (= `Plain Text`)
 
 view as plain text allows deletion of inline images
+
+#### Fr - Affichage
+- `alt+a` (= `Affichage`) `> o` (= `Corps de message en`)
+    - `h` (= `HTML original`)
+    - `x` (= `Texte seul`)
+
+#### Tools
+    alt+t > alt+a (= Add-ons and Themes)
+    alt+t > e (= Edit) > a a (= Account Settings)
+
+`alt+o (= Outils) > m > m (= Paramètres des comptes)` can then drag account folders into order
 
 ### tbkeys-lite Main key bindings
     j: cmd:cmd_nextMsg
@@ -118,6 +118,11 @@ view as plain text allows deletion of inline images
     x: cmd:cmd_archive
     c: func:MsgNewMessage
     u: tbkeys:closeMessageAndRefresh
+
+## lock
+- `Linux`: `readlink $thb/jo/lock` shows it weirdly links to the current internal IP address
+- `Mac OS X`: `.parentlock`
+- `Windows`: `parent.lock`
 
 ## profile
 - `$DrThb/compatibility.ini` for LastVersion
