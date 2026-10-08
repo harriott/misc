@@ -91,5 +91,5 @@ echo "- removed"
 # done
 
 #=> 8 suggest sync to external drive
-echo 'now maybe  tweak & run  $misc/ITr/rsync.sh'
+echo 'now maybe  tweak & run  $ITcore/notDr/rsync.sh'
 

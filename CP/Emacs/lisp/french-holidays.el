@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 
 ;; french-holidays.el
 ;; https://www.emacswiki.org/emacs/french-holidays.el

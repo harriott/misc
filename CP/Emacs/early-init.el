@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 
 ;; $misc/CP/Emacs/early-init.el
 ;;  linux: handled in  $OSAB/nodes-set/jo-2-whenWM-0.sh

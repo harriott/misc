@@ -1,8 +1,8 @@
-;; vim: se ft=lisp:
+;; -*- lexical-binding: t; -*-
 
 ;; $misc/CP/Emacs/init.el
 ;; ------------------------
-;; linux: handled in  $OSAB/nodes-set/jo-2-whenWM-0.sh
+;; linux: handled in  $OSAB/nodes-set/jo-1-encoding.sh
 ;; MSwin10: handled in  $MSn/set/3.ps1
 
 ;; notes for the curious
@@ -22,7 +22,7 @@
 ;;  https://github.com/harriott/vimfiles/blob/master/ftplugin/lisp.vim
 
 ;;;; 1 package management 0 loadhist.el
-(require 'loadhist) ;; permitting, eg the query  M+: (file-dependents (feature-file 'cl))
+(require 'loadhist) ;; permitting, eg the query  M-: (file-dependents (feature-file 'cl))
 
 ;;;; 1 package management option 1 bootstrap  straight.el
 ;; 0 requires  $Env:AppData\.emacs.d\early-init.el  to undefine  package-enable-at-startup
@@ -122,7 +122,7 @@
 (prefer-coding-system 'utf-8)
 
 ;;; auto-save backup lock
-;; auto-save filess (= /home/user/#foo.txt#)
+;; auto-save files (= /home/user/#foo.txt#)
 (when (eq system-type 'gnu/linux)
     (setq auto-save-file-name-transforms '(("\\`/.*/\\([^/]+\\)\\'" "~/.emacs_autosave/\\1" t))))
 (when (eq system-type 'windows-nt)
@@ -407,7 +407,7 @@
 ;;; layout - GUI frame size
 (if (display-graphic-p) (when (string= (system-name) "sbMb")
         ; (progn (setq default-frame-alist '( (height . 59) (width . 106)))))) ; for default font
-        (progn (setq default-frame-alist '( (height . 72) (width . 106)))))) ; for Ubuntu 100
+        (progn (setq default-frame-alist '( (height . 70) (width . 106)))))) ; for Ubuntu 100
 
 (if (display-graphic-p) (when (string= (system-name) "HPEB840G36")
         (progn (setq default-frame-alist '( (height . 48) (width . 106))))))
@@ -433,8 +433,8 @@
 (setq zenburn-use-variable-pitch t) ;; use variable-pitch fonts for some headings and titles
 (setq zenburn-scale-org-headlines t) ;; scale headings in org-mode
 (setq zenburn-scale-outline-headlines t) ;; scale headings in outline-mode
-(use-package zenburn-theme)  ; gets the original
-; (require 'zenburn-theme)  ; gets my version
+; (use-package zenburn-theme)  ; gets the original
+(require 'zenburn-theme)  ; gets my version
   (load-theme 'zenburn t)
 
 ;;; minibuffer - Consult

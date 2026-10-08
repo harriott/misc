@@ -34,7 +34,7 @@ syntax of this long file is ensured in `$vfv/filetype.vim`
     mediainfo --Output='General;%Duration%' <avfile>  # milliseconds
 
 ## mpv
-    $ITcop/forMSWin/AV > mpv-*/doc
+    $ITcopfMSW/AV > mpv-*/doc
     mpv <audio.ogg>
     mpv --list-options
     $misc/CP/mpv.conf
@@ -167,11 +167,19 @@ fix `path` in the `*.osp`
     [url=https://en.wikipedia.org]English Wikipedia[/url]
 
 # colours
-- Closest Named Web Colors
 - CSS Colors
 - Shades of black
 - web colors
 - X11 color names
+
+## rainbow
+    cat $ITsto/diskUsage.build | rainbow
+    rainbow --print-path
+    rainbow --print-config-names
+
+- colourise command output
+- nicoulaj/rainbow
+- `rainbow -h` (= `--help`)
 
 # documenting
     $ITref/CP/documenting/asciidoc.adoc
@@ -192,6 +200,7 @@ E-book viewer
     $ITref/CP/documenting/TeX/LaTeX/learn-latex.tex
     $Drpbx/search/dts-tex.ffl  # for my files
     $ITmore/CP/TeX/LaTeX/  # for example code
+    $LTXj/
     :s/μ/\\mu{}/g
     albatross -a a256 ┊ # coloured output
     albatross -b 0 ┊ # no box
@@ -466,28 +475,37 @@ can't focus on pages
 - finding characters
 - Wingdings
 
+# Emacs
+    emacs --help | mo
+
 # Emacs - commands
     $misc/CP/Emacs/init.el
+    $TeNo/Emacs/org/org.org
 
+- copes with large JSON's
 - `C-*`  calc-dispatch
 - `C-g`  keyboard-quit
 - `C-x C-c`  quit
 - `M` = `Alt` on Windows keyboards
+- `M-:`  Eval
 - `M-w`  copy
 - `M-x display-time-world`  times around the world
+- `M-x eglot` Eglot LSP client
 - `M-x kill-emacs`  force quit
 - `W`  browse-url-of-dired-file
 
 ## buffers
 - `C-x b`  switch buffer
 - `C-x C-b`  list buffers
+- `C-x C-s`  save file
 - `C-x k`  kill buffer
+- `C-x s`  save all files
 - `M-x minimap-mode`
 
 ## calendar
 - `C-@`  set mark
+- `C-x c`, `M-x calendar`
 - `M-=`  days to or from mark
-- `M-x calendar`
 - `q`  quit
 
 ### diary
@@ -551,18 +569,22 @@ can't focus on pages
 
 ## help
 - `C-h b`  describe-bindings
-- `C-h i`  info
+- `C-h e`  messages
+- `C-h i`  = info, then `m` selects a book, `?` shows shortcuts
 - `C-h f`  describe-function
 - `C-h k`  describe-key
 - `C-h m`  describe-mode
 - `C-h p`  finder-by-keyword
 - `C-h r`  info-emacs-manual
-- `C-h v`  describe-variable
 - `C-h a`  apropos-command
 - `C-h w`  where-is
 - `M-x help m`
 
-variables: `system-type`, `window-system`
+Emacs Docs
+
+### variables
+- `C-h v`  describe-variable
+- `system-type`, `window-system`
 
 ## fonts in GUI
 - `C-u C-x <equals>`  details of face under cursor
@@ -580,6 +602,7 @@ variables: `system-type`, `window-system`
 - `C-x C-+/-/0`  grow/shrink/reset font
 
 ## minibuffer
+- `C-]` seems to quit
 - `C-h v command-history`
 - `C-x ESC ESC`  repeat-complex-command
 - `M-x list-command-history`
@@ -609,8 +632,8 @@ variables: `system-type`, `window-system`
     M-x describe-package <package>
 
 ### straight.el
-- can deleted `~/.emacs.d/straight/*` - it'll be rebuilt
-- can deleted `build` - it'll be rebuilt from `repos`
+- `rm -r ~/.emacs.d/straight/*` - it'll be rebuilt
+    - or can deleted `build` - it'll be rebuilt from `repos`
 - no built in documentation
 
 ### list-packages
@@ -671,6 +694,43 @@ variables: `system-type`, `window-system`
 - `sp f e e`  ~/.spacemacs.env
 
 Spacemacs documentation
+
+# file contents - glow
+    glow -v
+
+in a directory, `glow` for navigating in & out of md's
+
+# file contents - less
+greenwoodsoftware
+
+## commands
+    /pattern
+    ?pattern
+
+- `h` help
+- `n`/`N` next/previous
+
+## PS>
+    less --help
+
+messes up if terminal is resized
+
+## commands
+`h`  help
+
+### move
+- `b`  back one window
+- `space`  forward one window
+
+### search
+- `/ ?`  search forward backward
+- `n N`  next previous
+
+# file contents - mcat
+    mcat -h
+    mcat ls  # shows image thumbnails
+
+can show first page of a PDF
 
 # file contents - ripgrep
     o $RIPGREP_CONFIG_PATH
@@ -1016,7 +1076,7 @@ Sony Xperia 10 II: 1080x2520 = 21:9
 - (p110) Initializing the headset to restore factory settings: 10s press of `power` & `vol-`
 
 # imagey
-    $ITcop/CP/svg-flags-flat-png
+    $ITcopCP/svg-flags-flat-png
     fd -utf -e bmp -e gif -e jpeg -e jpg -e png -e svg -e tiff -e webp > images.fetl
     mmdc --version
     qrtool encode "https://harriott.github.io" > $Jwk/IT/going_faster.png
@@ -1031,6 +1091,11 @@ Sony Xperia 10 II: 1080x2520 = 21:9
 ## aspect ratios
 - `1.3∙:1` =`4:3`
 - `1.7∙:1` =`16:9` = `widescreen`
+
+## Chafa
+    chafa -h  # --help
+    chafa --version
+    chafa <image>
 
 ## GIMP fr
 `Alt+i` (= `Image`) > `n` (= `Transformer`)
@@ -1171,56 +1236,9 @@ can convert from `heic`, `WebP`
 - `Shift+PageDown/Up` = `ScrollPageDown/Up`
 - `Shift+End/Home` = `ScrollToBottom/Top`
 
-# terminal - Chafa
-    chafa -h  # --help
-    chafa --version
-    chafa <image>
-
-# terminal - glow
-    glow -v
-
-in a directory, `glow` for navigating in & out of md's
-
 # terminal - kitty
     kitten choose-fonts
     kitten icat <image>
-
-# terminal - less
-greenwoodsoftware
-
-## commands
-    /pattern
-    ?pattern
-
-- `h` help
-- `n`/`N` next/previous
-
-## PS>
-    less --help
-
-messes up if terminal is resized
-
-## commands
-`h`  help
-
-### move
-- `b`  back one window
-- `space`  forward one window
-
-### search
-- `/ ?`  search forward backward
-- `n N`  next previous
-
-# terminal - mcat
-    mcat -h
-    mcat ls  # shows image thumbnails
-
-can show first page of a PDF
-
-# terminal - rainbow
-    cat $ITsto/diskUsage.build | rainbow
-    rainbow some atrociously long text
-    whereis rainbow
 
 # terminal - tdf
     $AjB/bashrc-wm
@@ -1308,6 +1326,7 @@ in an image-capable terminal, `tdf <pdf>`
 - GPS Coordinates <https://www.gps-coordinates.net>
 - RustDesk: ID is persistent, 6-letter pw renews on each launch
 - Webmasters
+- zalgo (cursed text)
 
 ## aria2
     aria2c -h

@@ -1,7 +1,7 @@
 vim: nospell:
 
- email
-`HTML` messages can include `.gif`, `.jpeg`, `.png`
+- `csplit -n5 emails.mbox '/^From /' '{*}'` # split into one mbox per email
+- `HTML` messages can include `.gif`, `.jpeg`, `.png`
 
 # Thunderbird
     $cITCP/WAN/email-Thunderbird/builds.txt

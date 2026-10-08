@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 
 ;;; sr-speedbar.el --- Same frame speedbar
 

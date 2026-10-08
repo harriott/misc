@@ -1,7 +1,6 @@
 vim: nospell:
 
     $ITref/CP/encoding/coding/learnfortran.f90
-    $ITref/CP/encoding/learnyaml.yaml
     $ITref/CP/encoding/learntoml.toml
     /* a single-line CSS comment */
     code-minimap $misc/CP/QR/QR.md
@@ -91,8 +90,9 @@ convert mp4's first to MPEG-2 transport streams (`ffmhb -i 1.mp4 -c copy 1.ts`) 
 # Git
     git -P <command>  # --no-pager
     git branch --show-current
-    git branch -a  # lists local & remote branches
+    git branch -a  # (--all) lists local & remote branches
     git branch -m <new_name_of_branch>
+    git branch -r  # (--remotes) lists remote branches only
     git checkout main
     git grep <caseSensitiveText>
     git init -b gh  # --initial-branch=<branch_name>
@@ -138,21 +138,26 @@ in `$cITCP/networking/browsers`, `git grep activeInstall $(git rev-list --all) -
     git checkout <commit>  # go back to the commit (hash or tag)
     git checkout master  # return to current state of project
 
-## configurations
-    :%s#https://github.com/#git@github.com:#g
-
-### gitconfig
+## gitconfig
     $cITCP/encoding/gitconfig-JH
     $misc/CP/gitconfig
+    :%s#https://github.com/#git@github.com:#g
     fd -tf -u -E .git gitignore
     git config -l  # --list
     git config -l --global
     git hist
     git lg
 
+`git config --get remote.origin.fetch` shows value of `.git/config` > `[remote 'origin']` > `fetch`
+
 ### lf
 - `autocrlf = input`  warning: CRLF will be replaced by LF
 - `eol = lf`
+
+### remote.<remote>.fetch
+    git config --get remote.origin.fetch
+
+in a shallow clone, `git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"` then `git pull`
 
 ## the index
     git checkout-index -f <somefile>  # overwrite from the index's copy
@@ -191,6 +196,15 @@ git-fetch
 - `q`  quit
 - `t`  tree view
 - `j/k/-/space/home/end`  movements
+
+# GitHub Copilot CLI
+`$Drpbx/copilot` an empty directory
+
+### copilot
+- `/compact` history, to free up space
+- `/context` visual overview
+- `/login` gets  ~/.copilot/config.json
+- `/usage` credits, duration, lines of code, tokens
 
 # Go
     $ITref/CP/encoding/coding/learngo.go
@@ -401,14 +415,24 @@ arrays containing tabbed values can get messy: `perl -e 'my @tabbedArray = ( "sh
 # Python
     $cITCP/encoding/dpl/Python/scratch.py
     $ITref/CP/encoding/coding/Python/learnpython.py
+    python -c "import sys; print (sys.path)"
+    python -c "print(__import__('sys').version)"
+    python -c "print(__import__('platform').python_version())"
     python -h  # --help
-    python -V
-    scriptfilename = (os.path.basename(os.path.splitext(sys.argv[0])[0])) # without extension
+    ruff check  # for errors
+    ruff check --select I --fix  # nicely formats the import blocks
+    ruff format  # files inplace
+
+## black
+    black --version
+    black -c "print ( 'hello' )"
+    black .  # reformats files inplace
+
+`black -h` (= `--help`)
 
 ## code
     quit()
-    python -c "print(__import__('sys').version)"
-    python -c "print(__import__('platform').python_version())"
+    scriptfilename = (os.path.basename(os.path.splitext(sys.argv[0])[0])) # without extension
     shutil.copyfile ( src , dest )
 
 ### sys
@@ -431,20 +455,12 @@ in a directory, `python -m http.server` then <http://127.0.0.1:8000> to see
     csvlook data.csv | less -S
 
 ### pip
-    pip -h  # --help
     pip -V  # --version
+    pip cache purge  # ~/.cache/pip
     pip list --outdated
     pip show <package>
 
-#### updating
-    pip-review -a  # --auto  install updates
-    pip-review -h  # --help
-
-##### update pip
-    py -m pip install -U pip
-    python -m pip install -U pip
-
-(`--upgrade`)
+`pip -h` (= `--help`) = `pip help`
 
 ### pipx
     o 'John is very unique.' | proselint check
@@ -463,6 +479,28 @@ in a directory, `python -m http.server` then <http://127.0.0.1:8000> to see
     python -c "import os; print(os.path.dirname(os.__file__) + '/site-packages')"
     python -c 'import site; print(site.getsitepackages())'
     python -c 'import sysconfig; print(sysconfig.get_paths()["purelib"])'
+
+## uv
+    $cITCP/encoding/dpl/Python/uv/
+    /mnt/SDU3D1TB/uv/
+    source .venv/bin/activate
+    uv pip list  # modules installed
+    uv python list
+
+`uv venv` creates a virtual environment, held in `.venv/`
+
+### directories - cache
+    uv cache clean
+    uv cache dir  # dependencies
+
+### directories - Python
+    uv python dir  # python versions
+    uv python dir --bin  # python executables
+
+### directories - tools
+    uv tool dir
+    uv tool dir --bin
+    uvx <tool> # uv tool run
 
 ## versions
     pyenv rehash
@@ -604,4 +642,8 @@ https://dabblet.com/
 - `[description of a post]({% post_url 20xx-xx-xx-name-of-post %})` provides a clickable link
 - <https://github.com/rouge-ruby/rouge/wiki/List-of-supported-languages-and-lexers>
 - YAML front matter
+
+# YAML
+    $ITref/CP/encoding/learnyaml.yaml
+    $ITmUL/xterm-256color.yaml
 
