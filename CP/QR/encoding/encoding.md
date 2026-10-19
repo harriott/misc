@@ -645,5 +645,5 @@ https://dabblet.com/
 
 # YAML
     $ITref/CP/encoding/learnyaml.yaml
-    $ITmUL/xterm-256color.yaml
+    $ITmUl/xterm-256color.yaml
 

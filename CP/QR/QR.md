@@ -471,10 +471,6 @@ can't focus on pages
     hunspell -l <file>
     nuspell -D
 
-## Unicode
-- finding characters
-- Wingdings
-
 # Emacs
     emacs --help | mo
 
@@ -487,11 +483,10 @@ can't focus on pages
 - `C-g`  keyboard-quit
 - `C-x C-c`  quit
 - `M` = `Alt` on Windows keyboards
-- `M-:`  Eval
-- `M-w`  copy
-- `M-x display-time-world`  times around the world
+- `M-x display-time-world` times around the world
 - `M-x eglot` Eglot LSP client
-- `M-x kill-emacs`  force quit
+- `M-x kill-emacs` force quit
+- `M-x menu-set-font` mousable selector
 - `W`  browse-url-of-dired-file
 
 ## buffers
@@ -501,6 +496,7 @@ can't focus on pages
 - `C-x k`  kill buffer
 - `C-x s`  save all files
 - `M-x minimap-mode`
+- `Shift-left-click` change font
 
 ## calendar
 - `C-@`  set mark
@@ -554,6 +550,7 @@ can't focus on pages
 ### files
 - `C-x C-r`  recentf-open-files
 - `C-x C-s`  save-some-buffers
+- `M-x find-file-at-point`
 
 ### VC Directory Mode
 - `C-x v d`  vc-directory
@@ -565,26 +562,27 @@ can't focus on pages
     (font-family-list)
 
 - `C-u C-x C-e`  evaluate expression and insert result at point
-- `M-:`  M-x eval-expression
+- `Emacs Lisp`
+- `M-:` = `M-x eval-expression`
 
 ## help
-- `C-h b`  describe-bindings
-- `C-h e`  messages
-- `C-h i`  = info, then `m` selects a book, `?` shows shortcuts
-- `C-h f`  describe-function
-- `C-h k`  describe-key
-- `C-h m`  describe-mode
-- `C-h p`  finder-by-keyword
-- `C-h r`  info-emacs-manual
-- `C-h a`  apropos-command
-- `C-h w`  where-is
+- `C-h b` = `M-x describe-bindings`
+- `C-h e` messages
+- `C-h i` = info, then `m` selects a book, `?` shows shortcuts
+- `C-h f` = `M-x describe-function`
+- `C-h k` = `M-x describe-key`
+- `C-h m` = `M-x describe-mode`
+- `C-h p` = `M-x finder-by-keyword`
+- `C-h r` = `M-x info-emacs-manual`
+- `C-h a` = `M-x apropos-command`
+- `C-h w` = `M-x where-is`
 - `M-x help m`
 
 Emacs Docs
 
-### variables
+### variabes
 - `C-h v`  describe-variable
-- `system-type`, `window-system`
+- `system-name`, `system-type`, `window-system`
 
 ## fonts in GUI
 - `C-u C-x <equals>`  details of face under cursor
@@ -595,7 +593,6 @@ Emacs Docs
 - `M-x describe-font`  narrowable list of ISO font names
 - `M-x menu-set-font`  interactive Pick a font popup
 - `M-x set-frame-font`  narrowable list of ISO font names
-- `M-x variable-pitch-mode`  toggles it
 
 ### size
 - `C-mouse wheel`
@@ -609,6 +606,16 @@ Emacs Docs
 
 ## modes
     C-h v minor-mode-list
+
+### Lisp Interaction mode
+- `*scratch*` buffer normally has it
+- `M-x lisp-interaction-mode`
+
+can enter some `elisp` then on next line `C-j` (= `eval-print-last-sexp`)
+
+#### font
+    (buffer-face-set :family "DejaVu Sans")
+    (face-attribute 'default :font)
 
 ### Markdown Mode
 - `S-tab`  rotate buffer visibility
@@ -661,6 +668,7 @@ Emacs Docs
 - `C-_`  undo
 - `C-k`  kill-line
 - `C-x h`  mark entire buffer
+- `M-w`  copy
 - `M-y`  yank-pop
 
 ### search & replace
@@ -670,9 +678,10 @@ Emacs Docs
 - `M-s o (= M-x occur) > regex`  buffer shows lines containing regex
 
 ## windows
-- `C-x 0`  delete-window
-- `C-x 1`  delete-other-windows
-- `C-x o`  other-window
+- `C-x 0` = `M-x delete-window`
+- `C-x 1` = `M-x delete-other-windows`
+- `C-x 2` = `M-x Split window`
+- `C-x o` = `M-x other-window`
 
 # Emacs - Evil
 - `$nDrGRs/emacs/emacs-evil-evil/evil-maps.el`
@@ -974,6 +983,7 @@ by gokcehan
     <key-id> can be the short key id = the last 8 characters, or part of the email
     echo "encrypt me this" | gpg -ase -r 13F327EF -o gpg.asc
     gpg --delete-key <key-id>
+    gpg --recv-keys <key-id>
     gpg --refresh-keys  # from keyservers - useful if I've updated on another machine
     gpg --send-keys <key-id>  # then can never be deleted from the keyserver
     gpg --verify file.asc [file]
@@ -1292,7 +1302,6 @@ in an image-capable terminal, `tdf <pdf>`
 - ASCII Table
 - carriage return (U+000D) returns the cursor to the left of the line (usually just before line feed on MSWin)
 - `chmln.sd`
-- finding characters
 - Tree-sitter CLI: `tree-sitter -h` (`--help`)
 
 ## Vim
@@ -1313,6 +1322,11 @@ in an image-capable terminal, `tdf <pdf>`
 #### window size
     gvim -geometry 200x55
     PS> gvim -c "set columns=217 lines=54"  # maximum on a 1600x900 screen with rhs taskbar
+
+# Unicode
+- finding characters
+- some specials
+- Wingdings
 
 # WAN
     librespeed-cli -h

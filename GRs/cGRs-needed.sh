@@ -24,11 +24,11 @@ set -e  # terminate on a fail
 # # elements are symlinked in  $OSAB/nodes-set/root.sh
 
 # #=> <esc> <esc> prefixes sudo
-# cp $GRs/d-unix-like/r-ohmybash-oh-my-bash/plugins/sudo/sudo.plugin.sh $ITccl/CP/ohmybash-sudo.plugin.sh
+# cp $GRs/d-Ul/d-Bash/r-ohmybash-oh-my-bash/plugins/sudo/sudo.plugin.sh $ITccl/Ul-linux/ohmybash-sudo.plugin.sh
 
 # #=> LS_COLORS
 # tLl="$ITccl/unix-linux/trapd00r-LS_COLORS-lscolors.sh"
-# cp $GRs/d-unix-like/d-linux/r-trapd00r-LS_COLORS/lscolors.sh $tLl
+# cp $GRs/d-Ul/d-linux/r-trapd00r-LS_COLORS/lscolors.sh $tLl
 #     sed -i 's/\r//' $tLl  # ensure no CRLF's
 # # lscolors.sh  sourced in  $MSn/WSL/bashrc  $OSAB/nodes/Bash/bashrc-generic
 
@@ -46,12 +46,12 @@ set -e  # terminate on a fail
 
 # sudo rm -r $ITccl/unix-tmux/*
 
-# rsync -irtv --delete $GRs/d-unix-like/d-terminal-tmux/r-tmux-plugins-tmux-logging/ $ITccl/unix-tmux/tmux-plugins-tmux-logging
-# rsync -irtv --delete $GRs/d-unix-like/d-terminal-tmux/r-tmux-plugins-tmux-prefix-highlight/ $ITccl/unix-tmux/tmux-plugins-tmux-prefix-highlight
-# rsync -irtv --delete $GRs/d-unix-like/d-terminal-tmux/r-tmux-plugins-tmux-resurrect/ $ITccl/unix-tmux/tmux-plugins-tmux-resurrect
+# rsync -irtv --delete $GRs/d-Ul/d-terminal-tmux/r-tmux-plugins-tmux-logging/ $ITccl/unix-tmux/tmux-plugins-tmux-logging
+# rsync -irtv --delete $GRs/d-Ul/d-terminal-tmux/r-tmux-plugins-tmux-prefix-highlight/ $ITccl/unix-tmux/tmux-plugins-tmux-prefix-highlight
+# rsync -irtv --delete $GRs/d-Ul/d-terminal-tmux/r-tmux-plugins-tmux-resurrect/ $ITccl/unix-tmux/tmux-plugins-tmux-resurrect
 
 # #==> tmux-copy-toolkit
-# rsync -irtv --delete $GRs/d-unix-like/d-terminal-tmux/r-CrispyConductor-tmux-copy-toolkit/ $ITccl/unix-tmux/CrispyConductor-tmux-copy-toolkit  # copytk.tmux  run from  $OSL/nodes/terminal-tmux/tmux.conf
+# rsync -irtv --delete $GRs/d-Ul/d-terminal-tmux/r-CrispyConductor-tmux-copy-toolkit/ $ITccl/unix-tmux/CrispyConductor-tmux-copy-toolkit  # copytk.tmux  run from  $OSL/nodes/terminal-tmux/tmux.conf
 
 # #===> tweak
 # # my preferred entry:
@@ -72,6 +72,6 @@ set -e  # terminate on a fail
 # sed -i '/n-match-0-1/ s/^/# /' $ITccl/unix-tmux/CrispyConductor-tmux-copy-toolkit/copytk.tmux
 
 #=> Vim-msmtp-scripts-vim
-rsync -irtv --delete $GRs/d-unix-like/d-linux/r-marlam-msmtp/scripts/vim/ $ITccl/CP/msmtp-scripts-vim
+rsync -irtv --delete $GRs/d-Ul/d-linux/r-marlam-msmtp/scripts/vim/ $ITccl/CP/msmtp-scripts-vim
 # - then managed in  $vimfiles/repos-get/unix.sh
 

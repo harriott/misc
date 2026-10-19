@@ -121,6 +121,10 @@
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
+;; variable pitch, eg for *.emdr
+(general-define-key "C-x v" 'variable-pitch-mode)
+;; `M-x variable-pitch-mode`  toggles it
+
 ;;; auto-save backup lock
 ;; auto-save files (= /home/user/#foo.txt#)
 (when (eq system-type 'gnu/linux)
@@ -407,7 +411,7 @@
 ;;; layout - GUI frame size
 (if (display-graphic-p) (when (string= (system-name) "sbMb")
         ; (progn (setq default-frame-alist '( (height . 59) (width . 106)))))) ; for default font
-        (progn (setq default-frame-alist '( (height . 70) (width . 106)))))) ; for Ubuntu 100
+        (progn (setq default-frame-alist '( (height . 64) (width . 106)))))) ; for Ubuntu 100
 
 (if (display-graphic-p) (when (string= (system-name) "HPEB840G36")
         (progn (setq default-frame-alist '( (height . 48) (width . 106))))))

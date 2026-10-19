@@ -175,10 +175,13 @@ zero indent
 - if business cards aren't sized right, go through images
 
 # text
+    \usepackage{datetime2}
+    \DTMsetstyle{en-GB}
+    ...
+    \DTMnow{}
+
     \usepackage{soul} % hyphenation for letterspacing, underlining, and more
     \usepackage{url}
-
-`datetime2`: `\DTMnow{}`
 
 ## blindtext
     \blinddocument
