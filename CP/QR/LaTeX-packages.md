@@ -181,6 +181,17 @@ zero indent
     \DTMnow{}
 
     \usepackage{soul} % hyphenation for letterspacing, underlining, and more
+    ...
+    \ul{underlined}
+
+    \usepackage{soul-ori}
+    ...
+    \st{strikethrough}
+
+    \usepackage{ulem} % underlining for emphasis
+    ...
+    \sout{strikethrough}
+
     \usepackage{url}
 
 ## blindtext

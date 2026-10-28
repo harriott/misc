@@ -7,7 +7,7 @@
 # -----------------------------------------------------------------------------------
 #  used in  $vimfiles/ftplugin/md.vim
 
-# perl $misc/PerlTools/MessengerMd.pl $jtIT/InterNetworking/comms/Facebook/MessengerScrape1.md
+# perl $misc/PerlTools/MessengerMd.pl $ITmore/WAN/comms/Facebook/MessengerScrape1.md
 # I store my archived messages as  FBM.md
 
 use strict;  use warnings;

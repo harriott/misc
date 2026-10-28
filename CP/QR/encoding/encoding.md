@@ -29,7 +29,7 @@ vim: nospell:
 - no `csv`
 
 # FFmpeg
-    $cITCP/encoding/x264_fullhelp.txt
+    $CPenc/x264_fullhelp.txt
     ffi <audio_to_fade> -af 'afade=t=out:st=<seconds_to_start>:d=<seconds_duration>' -t <seconds_to_end> -y <audio_faded_out>  # <seconds_to_start> + <seconds_duration> = <seconds_to_end>
     ffi <video> -vf 'scale=iw/2:ih/2' <same_video_with_half_the_frame_size>
     ffi <video> -vframes 1 frame.jpg  # extracts a single frame
@@ -139,7 +139,7 @@ in `$cITCP/networking/browsers`, `git grep activeInstall $(git rev-list --all) -
     git checkout master  # return to current state of project
 
 ## gitconfig
-    $cITCP/encoding/gitconfig-JH
+    $CPenc/gitconfig-JH
     $misc/CP/gitconfig
     :%s#https://github.com/#git@github.com:#g
     fd -tf -u -E .git gitignore
@@ -249,7 +249,7 @@ git-fetch
 
 # Lua
     $ITref/CP/encoding/coding/learnlua.lua
-    $cITCP/encoding/dpl/scratch.lua
+    $CPenc/dpl/scratch.lua
     lua -v
 
 # markdown
@@ -288,7 +288,7 @@ git-fetch
     \end{document}
 
 # Perl
-    $cITCP/encoding/dpl/Perl/scratch0.pl
+    $CPenc/dpl/Perl/scratch0.pl
     $ITref/CP/encoding/coding/Perl/learnperl.pl
     $ITmCP/coding/Perl
     cpanm --help
@@ -413,7 +413,7 @@ arrays containing tabbed values can get messy: `perl -e 'my @tabbedArray = ( "sh
     pygmentize -O style=<style> <code_file>
 
 # Python
-    $cITCP/encoding/dpl/Python/scratch.py
+    $CPenc/dpl/Python/scratch.py
     $ITref/CP/encoding/coding/Python/learnpython.py
     python -c "import sys; print (sys.path)"
     python -c "print(__import__('sys').version)"
@@ -481,7 +481,7 @@ in a directory, `python -m http.server` then <http://127.0.0.1:8000> to see
     python -c 'import sysconfig; print(sysconfig.get_paths()["purelib"])'
 
 ## uv
-    $cITCP/encoding/dpl/Python/uv/
+    $CPenc/dpl/Python/uv/
     /mnt/SDU3D1TB/uv/
     source .venv/bin/activate
     uv pip list  # modules installed
@@ -538,7 +538,7 @@ No command history...
     $ITref/CP/encoding/coding-Raku/learnraku.raku
 
 # Ruby
-    $cITCP/encoding/dpl/scratch.rb
+    $CPenc/dpl/scratch.rb
     $ITref/CP/encoding/coding/learnruby.rb
     lolcat -h
     ruby -v
@@ -599,7 +599,6 @@ Crate regex: `x?` zero or one of `x` (greedy)
 - What topics can I ask about here?
 
 # webish
-    $ITref/CP/web/languages/learnphp.php
     $ITref/CP/web/languages/learnxml.xml
     $ITref/CP/web/wikitext.mediawiki
     js-beautify -f obfuscated.html -o beautiful.html
@@ -612,7 +611,7 @@ https://dabblet.com/
 
 ## HTML
     $ITref/CP/web/languages/learnhtml.html
-    $jtIT/WAN/WebDesign/scratch.html
+    $ITmore/WAN/WebDesign/scratch.html
 
 ### elements
     <!-- a comment -->
@@ -624,7 +623,8 @@ https://dabblet.com/
     {% endcomment %}
 
 ## PHP
-    $jtIT/WAN/WebDesign/info.php
+    $ITmore/WAN/WebDesign/info.php
+    $ITref/CP/web/languages/learnphp.php
     php -h
     php -v
 

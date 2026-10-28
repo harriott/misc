@@ -24,7 +24,7 @@ set -e  # terminate on a fail
 # # elements are symlinked in  $OSAB/nodes-set/root.sh
 
 # #=> <esc> <esc> prefixes sudo
-# cp $GRs/d-Ul/d-Bash/r-ohmybash-oh-my-bash/plugins/sudo/sudo.plugin.sh $ITccl/Ul-linux/ohmybash-sudo.plugin.sh
+# cp $GRs/d-Ul/d-Bash/r-ohmybash-oh-my-bash/plugins/sudo/sudo.plugin.sh $ITccl/Ul/Linux/ohmybash-sudo.plugin.sh
 
 # #=> LS_COLORS
 # tLl="$ITccl/unix-linux/trapd00r-LS_COLORS-lscolors.sh"

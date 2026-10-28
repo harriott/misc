@@ -4,7 +4,7 @@ vim: nospell:
 
 syntax of this long file is ensured in `$vfv/filetype.vim`
 
-    $ITmore/CP/fonts-SE595756-fontcharlist
+    $ITmCP/fonts-SE595756-fontcharlist
     fzf -h
     fzf --version
 
@@ -199,7 +199,7 @@ E-book viewer
 ## LaTeX
     $ITref/CP/documenting/TeX/LaTeX/learn-latex.tex
     $Drpbx/search/dts-tex.ffl  # for my files
-    $ITmore/CP/TeX/LaTeX/  # for example code
+    $ITmCP/TeX/LaTeX/  # for example code
     $LTXj/
     :s/μ/\\mu{}/g
     albatross -a a256 ┊ # coloured output
@@ -224,7 +224,8 @@ E-book viewer
     \the\length  % prints that length
     \title{your title} ... \begin{document} ... \maketitle
     \today
-    \usepackage{<package>}
+
+`\usepackage{<package>,...}` after `\documentclass` = `\RequirePackage{<package>,...}` (anywhere)
 
 #### figure environment
 > LaTeX Warning: 'h' float specifier changed to 'ht'.
@@ -459,13 +460,16 @@ can't focus on pages
     pdftk leftRotated.pdf cat 1-endeast output horizontal.pdf
     pdftk leftRotated-rightRotated.pdf cat 1east 2west output horizontal.pdf
 
-## spelling
+## words
+    $ITref/CP/documenting/moby-thesaurus-words.txt
+
+### spelling
     dict -D
     typos -h
     typos -*  # in a directory
     typos --files
 
-### Hunspell
+#### Hunspell
     hunspell -h
     hunspell -D
     hunspell -l <file>
@@ -987,6 +991,7 @@ by gokcehan
     gpg --refresh-keys  # from keyservers - useful if I've updated on another machine
     gpg --send-keys <key-id>  # then can never be deleted from the keyserver
     gpg --verify file.asc [file]
+    gpg --verify linux.iso.sig
 
 GNU Privacy Guard
 
@@ -1336,7 +1341,6 @@ in an image-capable terminal, `tdf <pdf>`
     whois 1.1.1.1
     whois 8.8.8.8
 
-
 - GPS Coordinates <https://www.gps-coordinates.net>
 - RustDesk: ID is persistent, 6-letter pw renews on each launch
 - Webmasters
@@ -1407,6 +1411,10 @@ if aborted, `for f in *; do sed -i "/$f/d" zips; done`
 ### Firefox fr
 - `clique droit sur un onglet > Ajouter un vue scindée`
 - `Ctrl+Maj+o` (= `Bibliothèque`)
+
+#### text size
+- `Ctrl+à` reset
+- `Ctrl+=` bigger
 
 ### Firefox gb
     about:config > caret
@@ -1490,6 +1498,10 @@ they're immediately recreated if Deleted
 
 `Share > General access > Restricted` change to `Anyone with the link`
 
+## Grok
+- `Ctrl+d`/`Ctrl+d` = quit
+- in `Firefox`, it uselessly kills `Ctrl+Shift+o`
+
 ## radio-active
     radio --last  # run playing last station
     radio --list  # list favourites
@@ -1555,7 +1567,8 @@ desideratus
     y --version
 
 # web serving - Caddy
-    $jtIT/WAN/WebDesign/Caddy
+    $ITcore/serve/DokuWiki/serve.md
+    $ITmore/WAN/WebDesign/Caddy
     caddy  # help
     caddy version
     localhost:2019  # default for the API
